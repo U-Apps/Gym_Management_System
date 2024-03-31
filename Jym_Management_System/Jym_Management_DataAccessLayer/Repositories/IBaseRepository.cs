@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jym_Management_DataAccessLayer.Repositories
 {
-    internal interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T> where T : class
     {
         void Add(T entity);
         void AddRange(IEnumerable<T> entity);
