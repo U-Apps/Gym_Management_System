@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jym_Management_DataAccessLayer.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,49 +9,58 @@ namespace Jym_Management_DataAccessLayer.Repositories
 {
     internal class BaseRepository<T> : IBaseRepository<T> where T : class
     {
+        private readonly AppDbContext _context;
+
+        public BaseRepository(AppDbContext context)
+        {
+            _context = context;
+        }
         public void Add(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Add(entity);
         }
+
+
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(entity);
         }
 
-        public void DeleteAll()
+        public void DeleteRange(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().RemoveRange(entities);
+
         }
 
         public void DeleteById(int id)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(GetById(id));
         }
 
         public T Find(Func<T, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Find(predicate);
         }
 
         public IEnumerable<T> FindAll(Func<T, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Where(predicate);
         }
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().ToList();
         }
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Find(id);
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            _context.Update(entity);
         }
     }
 }
