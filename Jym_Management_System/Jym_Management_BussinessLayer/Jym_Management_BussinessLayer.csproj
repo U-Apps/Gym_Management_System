@@ -1,4 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Jym_Management_DataAccessLayer\Jym_Management_DataAccessLayer.csproj" />
