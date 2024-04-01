@@ -13,8 +13,8 @@ namespace Jym_Management_DataAccessLayer.Repositories
         private readonly AppDbContext _context;
 
         public IBaseRepository<TbMember> Members { get; private set; }
-        public IBaseRepository<TbUser> Users { get;  set; }
-        public IBaseRepository<TbEmployee> Employees { get; private set; }
+        public IBaseRepository<TbUser> Users { get;private set; }
+        public IBaseRepository<TbEmployee> Employees { get;  private set; }
 
         public UnitOfWork(AppDbContext context)
         {
