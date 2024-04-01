@@ -9,12 +9,18 @@ namespace Jym_Management_BussinessLayer.SingleUnitOFWork
 {
     public sealed class UnitOfWorkBuissness
     {
-        private static UnitOfWork _instance = null; 
+        public readonly UnitOfWork UnitOfWork = null;
+        private static UnitOfWorkBuissness _instance = null;
         private static AppDbContext _appDbContext= null;
         private static readonly object _lock = new object();
-        private UnitOfWorkBuissness() { }
+        private UnitOfWorkBuissness()
+        {
+            _appDbContext = new AppDbContext();
+            UnitOfWork = new UnitOfWork(_appDbContext);
+        }
+        
        
-        public static UnitOfWork getInstenece()
+        public static UnitOfWorkBuissness getInstenece()
         {
             if(_instance == null) 
             { 
@@ -22,8 +28,7 @@ namespace Jym_Management_BussinessLayer.SingleUnitOFWork
                 {
                     if (_instance == null)
                     {
-                        _appDbContext = new AppDbContext();
-                        _instance = new UnitOfWork(_appDbContext);
+                        _instance = new UnitOfWorkBuissness();
                         return _instance;
                     }
                         
