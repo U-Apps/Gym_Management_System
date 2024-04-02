@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Jym_Management_DataAccessLayer.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Jym_Management_DataAccessLayer.Entities.Authentication;
+using Jym_Management_DataAccessLayer.Config;
 
 namespace Jym_Management_DataAccessLayer.Data
 {
-    public partial class AppDbContext : DbContext
+    public partial class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext()
         {
@@ -338,38 +341,38 @@ namespace Jym_Management_DataAccessLayer.Data
                     .HasConstraintName("FK_tbSubscriptionPayments_tbSubscriptions");
             });
 
-            modelBuilder.Entity<TbUser>(entity =>
-            {
-                entity.HasKey(e => e.UserId);
+            // modelBuilder.Entity<TbUser>(entity =>
+            // {
+            //     entity.HasKey(e => e.UserId);
 
-                entity.ToTable("tbUsers");
+            //     entity.ToTable("tbUsers");
 
-                entity.HasIndex(e => e.UserName, "UniqueUserName")
-                    .IsUnique();
+            //     entity.HasIndex(e => e.UserName, "UniqueUserName")
+            //         .IsUnique();
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.Password)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
 
-                entity.Property(e => e.PermissionsId).HasColumnName("permissionsID");
+            //     entity.Property(e => e.PermissionsId).HasColumnName("permissionsID");
 
-                entity.Property(e => e.UserName)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.UserName)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
 
-                entity.HasOne(d => d.Permissions)
-                    .WithMany(p => p.TbUsers)
-                    .HasForeignKey(d => d.PermissionsId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbUsers");
+            //     entity.HasOne(d => d.Permissions)
+            //         .WithMany(p => p.TbUsers)
+            //         .HasForeignKey(d => d.PermissionsId)
+            //         .OnDelete(DeleteBehavior.ClientSetNull)
+            //         .HasConstraintName("FK_tbUsers");
 
-                entity.HasOne(d => d.Person)
-                    .WithMany(p => p.TbUsers)
-                    .HasForeignKey(d => d.PersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbUsers_tbPerson");
-            });
-
+            //     entity.HasOne(d => d.Person)
+            //         .WithMany(p => p.User)
+            //         .HasForeignKey(d => d.PersonId)
+            //         .OnDelete(DeleteBehavior.ClientSetNull)
+            //         .HasConstraintName("FK_tbUsers_tbPerson");
+            // });
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppUserConfig).Assembly);
             OnModelCreatingPartial(modelBuilder);
         }
 
