@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jym_Management_DataAccessLayer.Entities.Authentication;
+using System;
 using System.Collections.Generic;
 
 namespace Jym_Management_DataAccessLayer.Entities
@@ -9,7 +10,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         {
             TbEmployees = new HashSet<TbEmployee>();
             TbMembers = new HashSet<TbMember>();
-            TbUsers = new HashSet<TbUser>();
+            //User = new HashSet<TbUser>();
         }
 
         public int PersonId { get; set; }
@@ -21,6 +22,6 @@ namespace Jym_Management_DataAccessLayer.Entities
 
         public virtual ICollection<TbEmployee> TbEmployees { get; set; }
         public virtual ICollection<TbMember> TbMembers { get; set; }
-        public virtual ICollection<TbUser> TbUsers { get; set; }
+        public virtual AppUser? User { get; set; }
     }
 }
