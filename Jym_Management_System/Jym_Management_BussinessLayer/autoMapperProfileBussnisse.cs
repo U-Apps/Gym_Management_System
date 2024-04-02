@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Jym_Management_DataAccessLayer.Repositories;
 
-namespace Jym_Management_BussinessLayer.Services
+namespace Jym_Management_BussinessLayer
 {
-    public interface IBaseServices
+    internal class autoMapperProfileBussnisse
     {
-
     }
 }

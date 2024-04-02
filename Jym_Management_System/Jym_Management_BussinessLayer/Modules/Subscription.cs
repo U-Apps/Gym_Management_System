@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace Jym_Management_BussinessLayer.Modules
 {
-    public partial class TbSubscription
+    public class Subscription
     {
         public int SubscriptionId { get; set; }
         public int MemberId { get; set; }
@@ -19,7 +19,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         public virtual JobHistory CreatedByReceptionist { get; set; } = null!;
         public virtual ExerciseType ExcerciseType { get; set; } = null!;
         public virtual Member Member { get; set; } = null!;
-        public virtual TbPeriod Period { get; set; } = null!;
-        public virtual TbSubsciptionPeriod SubscriptionPeriod { get; set; } = null!;
+        public virtual Period Period { get; set; } = null!;
+        public virtual SubsciptionPeriod SubscriptionPeriod { get; set; } = null!;
     }
 }

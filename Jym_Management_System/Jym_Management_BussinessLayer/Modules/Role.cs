@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace Jym_Management_BussinessLayer.Modules
 {
-    public partial class TbRole
+    public  class Role
     {
-        public TbRole()
-        {
-            TbPermssions = new HashSet<Permssion>();
-        }
+      
 
         public byte RoleId { get; set; }
         public string RoleName { get; set; } = null!;
 
-        public virtual ICollection<Permssion> TbPermssions { get; set; }
+        public virtual ICollection<Permssion> Permssions { get; set; }
     }
 }

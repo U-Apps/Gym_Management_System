@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace Jym_Management_BussinessLayer.Modules
 {
-    public partial class TbEmployee
+    public class Employee
     {
-        public TbEmployee()
-        {
-            TbPayrollPayments = new HashSet<TbPayrollPayment>();
-        }
-
+       
         public int EmployeeId { get; set; }
         public int PersonId { get; set; }
         public DateTime HireDate { get; set; }
         public DateTime ResignationDate { get; set; }
         public decimal Salary { get; set; }
 
-        public virtual TbPerson Person { get; set; } = null!;
-        public virtual ICollection<TbPayrollPayment> TbPayrollPayments { get; set; }
+        public virtual Person Person { get; set; } = null!;
+        public virtual ICollection<PayrollPayment> PayrollPayments { get; set; }
     }
 }

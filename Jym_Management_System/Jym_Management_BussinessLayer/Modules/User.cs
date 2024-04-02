@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace Jym_Management_BussinessLayer.Modules
 {
-    public partial class TbUser
+    public class User
     {
         public short UserId { get; set; }
         public string UserName { get; set; } = null!;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace Jym_Management_BussinessLayer.Modules
 {
-    public partial class TbSubscriptionPayment
+    public class SubscriptionPayment
     {
         public int? PaymentId { get; set; }
         public int? SubscriptionId { get; set; }
@@ -11,7 +11,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         public decimal? PaymentAmount { get; set; }
         public short? CreatedByUserId { get; set; }
 
-        public virtual TbUser? CreatedByUser { get; set; }
+        public virtual User? CreatedByUser { get; set; }
         public virtual Subscription? Subscription { get; set; }
     }
 }

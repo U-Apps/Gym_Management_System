@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace Jym_Management_BussinessLayer.Modules
 {
-    public partial class TbJob
+    public class Job
     {
-        public TbJob()
-        {
-            TbJobHistories = new HashSet<TbJobHistory>();
-        }
+      
 
         public byte JobId { get; set; }
         public string JobTitle { get; set; } = null!;
 
-        public virtual ICollection<TbJobHistory> TbJobHistories { get; set; }
+        public virtual ICollection<JobHistory> JobHistories { get; set; }
     }
 }

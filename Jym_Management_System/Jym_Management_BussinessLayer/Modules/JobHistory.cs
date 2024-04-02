@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace Jym_Management_BussinessLayer.Modules 
 {
-    public partial class TbJobHistory
+    public class JobHistory
     {
-        public TbJobHistory()
-        {
-            TbSubscriptionCoaches = new HashSet<TbSubscription>();
-            TbSubscriptionCreatedByReceptionists = new HashSet<TbSubscription>();
-        }
+      
 
         public int Id { get; set; }
         public byte JobId { get; set; }
@@ -18,7 +14,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         public DateTime? EndDate { get; set; }
 
         public virtual Job Job { get; set; } = null!;
-        public virtual ICollection<TbSubscription> TbSubscriptionCoaches { get; set; }
-        public virtual ICollection<TbSubscription> TbSubscriptionCreatedByReceptionists { get; set; }
+        public virtual ICollection<Subscription> SubscriptionCoaches { get; set; }
+        public virtual ICollection<Subscription> SubscriptionCreatedByReceptionists { get; set; }
     }
 }

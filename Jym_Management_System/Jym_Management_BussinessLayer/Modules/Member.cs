@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace Jym_Management_BussinessLayer.Modules
 {
-    public partial class TbMember
+    public class Member
     {
-        public TbMember()
-        {
-            TbSubscriptions = new HashSet<TbSubscription>();
-        }
+       
 
         public int MemberId { get; set; }
         public int PersonId { get; set; }
         public decimal? MemberWeight { get; set; }
         public bool? IsActive { get; set; }
 
-        public virtual TbPerson Person { get; set; } = null!;
-        public virtual ICollection<TbSubscription> TbSubscriptions { get; set; }
+        public virtual Person Person { get; set; } = null!;
+        public virtual ICollection<Subscription> Subscriptions { get; set; }
     }
 }
