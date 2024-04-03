@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jym_Management_BussinessLayer
+namespace Jym_Management_BussinessLayer.AutoMapper
 {
-    public class MapperProfile:Profile
+    public class MapperProfile : Profile
     {
         public MapperProfile()
         {
 
-            CreateMap<TbEmployee,Employee>()
-                .ForMember(dust=>dust.PayrollPayments , src=>src.MapFrom(src=>src.TbPayrollPayments))
+            CreateMap<TbEmployee, Employee>()
+                .ForMember(dust => dust.PayrollPayments, src => src.MapFrom(src => src.TbPayrollPayments))
                 .ReverseMap();
 
 
@@ -73,7 +73,7 @@ namespace Jym_Management_BussinessLayer
             CreateMap<TbUser, User>().ReverseMap();
 
         }
-        
+
 
     }
 }

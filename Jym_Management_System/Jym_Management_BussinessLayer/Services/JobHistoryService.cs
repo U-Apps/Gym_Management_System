@@ -1,27 +1,26 @@
-﻿
-using Jym_Management_BussinessLayer.Modules;
+﻿using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services.Base;
 using Jym_Management_BussinessLayer.SingleUnitOFWork;
 using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_BussinessLayer.Services
+namespace Jym_Management_BussinessLayer.Services 
 {
-    public class ExerciseTypeService : IBaseServices<ExerciseType>
+    public class JobHistoryService : IBaseServices<JobHistory>
     {
-        public UnitOfWorkBuissness _unitOfWork => UnitOfWorkBuissness.getInstenece();
+        public UnitOfWorkBuissness _unitOfWork => throw new NotImplementedException();
 
-        public void Add(ExerciseType module)
+        public void Add(JobHistory module)
         {
             throw new NotImplementedException();
         }
 
-        public void AddRange(IEnumerable<ExerciseType> module)
+        public void AddRange(IEnumerable<JobHistory> module)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(ExerciseType module)
+        public void Delete(JobHistory module)
         {
             throw new NotImplementedException();
         }
@@ -31,32 +30,32 @@ namespace Jym_Management_BussinessLayer.Services
             throw new NotImplementedException();
         }
 
-        public void DeleteRange(IEnumerable<ExerciseType> modules)
+        public void DeleteRange(IEnumerable<JobHistory> modules)
         {
             throw new NotImplementedException();
         }
 
-        public ExerciseType Find(Func<ExerciseType, bool> predicate)
+        public JobHistory Find(Func<JobHistory, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ExerciseType> FindAll(Func<ExerciseType, bool> predicate)
+        public IEnumerable<JobHistory> FindAll(Func<JobHistory, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ExerciseType> GetAll()
+        public IEnumerable<JobHistory> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public ExerciseType GetById(int id)
+        public JobHistory GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ExerciseType module)
+        public void Update(JobHistory module)
         {
             throw new NotImplementedException();
         }

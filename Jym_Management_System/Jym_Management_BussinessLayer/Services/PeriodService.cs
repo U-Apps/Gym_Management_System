@@ -1,5 +1,4 @@
-﻿
-using Jym_Management_BussinessLayer.Modules;
+﻿using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services.Base;
 using Jym_Management_BussinessLayer.SingleUnitOFWork;
 using System;
@@ -7,21 +6,21 @@ using System.Collections.Generic;
 
 namespace Jym_Management_BussinessLayer.Services
 {
-    public class ExerciseTypeService : IBaseServices<ExerciseType>
+    public class PeriodService : IBaseServices<Period>
     {
-        public UnitOfWorkBuissness _unitOfWork => UnitOfWorkBuissness.getInstenece();
+        public UnitOfWorkBuissness _unitOfWork => throw new NotImplementedException();
 
-        public void Add(ExerciseType module)
+        public void Add(Period module)
         {
             throw new NotImplementedException();
         }
 
-        public void AddRange(IEnumerable<ExerciseType> module)
+        public void AddRange(IEnumerable<Period> module)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(ExerciseType module)
+        public void Delete(Period module)
         {
             throw new NotImplementedException();
         }
@@ -31,32 +30,32 @@ namespace Jym_Management_BussinessLayer.Services
             throw new NotImplementedException();
         }
 
-        public void DeleteRange(IEnumerable<ExerciseType> modules)
+        public void DeleteRange(IEnumerable<Period> modules)
         {
             throw new NotImplementedException();
         }
 
-        public ExerciseType Find(Func<ExerciseType, bool> predicate)
+        public Period Find(Func<Period, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ExerciseType> FindAll(Func<ExerciseType, bool> predicate)
+        public IEnumerable<Period> FindAll(Func<Period, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ExerciseType> GetAll()
+        public IEnumerable<Period> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public ExerciseType GetById(int id)
+        public Period GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ExerciseType module)
+        public void Update(Period module)
         {
             throw new NotImplementedException();
         }

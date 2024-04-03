@@ -1,8 +1,9 @@
-﻿using AutoMapper;
+﻿
+using Jym_Management_BussinessLayer.AutoMapper;
 using Jym_Management_BussinessLayer.Modules;
+using Jym_Management_BussinessLayer.Services.Base;
 using Jym_Management_BussinessLayer.SingleUnitOFWork;
 using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Repositories;
 using System;
 using System.Collections.Generic;
 

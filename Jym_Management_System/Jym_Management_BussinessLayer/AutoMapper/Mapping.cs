@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jym_Management_BussinessLayer
+namespace Jym_Management_BussinessLayer.AutoMapper
 {
     public static class Mapping
     {
         private static readonly Lazy<IMapper> Lazy = new Lazy<IMapper>(() =>
         {
-            var config = new MapperConfiguration(cfg => {
-              
+            var config = new MapperConfiguration(cfg =>
+            {
+
                 cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
                 cfg.AddProfile<MapperProfile>();
             });
