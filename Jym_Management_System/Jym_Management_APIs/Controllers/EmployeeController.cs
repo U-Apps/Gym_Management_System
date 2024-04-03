@@ -25,5 +25,24 @@ namespace Jym_Management_APIs.Controllers
             return Ok(employee.EmployeeId);
         }
 
+        [HttpPut]
+        [Route("")]
+        public ActionResult UpdateEmployee(Employee employee)
+        {
+            var existingEmployee = _employeeService.GetById(employee.EmployeeId);
+            if (existingEmployee == null)
+                return NotFound();
+
+            existingEmployee.HireDate = employee.HireDate;
+            existingEmployee.ResignationDate = employee.ResignationDate;
+            existingEmployee.Salary = employee.Salary;
+            existingEmployee.PersonId = employee.PersonId;
+
+            _employeeService.Update(existingEmployee);
+            return Ok();
+        }
+
+
+
     }
 }
