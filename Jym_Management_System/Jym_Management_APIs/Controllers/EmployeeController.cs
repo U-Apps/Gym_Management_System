@@ -43,6 +43,22 @@ namespace Jym_Management_APIs.Controllers
         }
 
 
+        [HttpGet]
+        [Route("")]
+        public ActionResult<IEnumerable<Employee>> Get()
+        {
+            IEnumerable<Employee> employees = _employeeService.GetAll();
+            return Ok(employees);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult<Employee> GetById(int id)
+        {
+            Employee employee = _employeeService.GetById(id);
+            return employee is null ? NotFound() : Ok(employee);
+        }
+
 
     }
 }
