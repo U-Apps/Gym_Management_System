@@ -11,7 +11,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         public decimal? PaymentAmount { get; set; }
         public short? CreatedByUserId { get; set; }
 
-        public virtual TbUser? CreatedByUser { get; set; }
+        public virtual AppUser? CreatedByUser { get; set; }
         public virtual TbSubscription? Subscription { get; set; }
     }
 }
