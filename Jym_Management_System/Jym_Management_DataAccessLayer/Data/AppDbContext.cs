@@ -27,13 +27,13 @@ namespace Jym_Management_DataAccessLayer.Data
         public virtual DbSet<TbMember> TbMembers { get; set; } = null!;
         public virtual DbSet<TbPayrollPayment> TbPayrollPayments { get; set; } = null!;
         public virtual DbSet<TbPeriod> TbPeriods { get; set; } = null!;
-        public virtual DbSet<TbPermssion> TbPermssions { get; set; } = null!;
+        //public virtual DbSet<TbPermssion> TbPermssions { get; set; } = null!;
         public virtual DbSet<TbPerson> TbPeople { get; set; } = null!;
-        public virtual DbSet<TbRole> TbRoles { get; set; } = null!;
+        //public virtual DbSet<TbRole> TbRoles { get; set; } = null!;
         public virtual DbSet<TbSubsciptionPeriod> TbSubsciptionPeriods { get; set; } = null!;
         public virtual DbSet<TbSubscription> TbSubscriptions { get; set; } = null!;
         public virtual DbSet<TbSubscriptionPayment> TbSubscriptionPayments { get; set; } = null!;
-        public virtual DbSet<TbUser> TbUsers { get; set; } = null!;
+        //public virtual DbSet<TbUser> TbUsers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -182,23 +182,23 @@ namespace Jym_Management_DataAccessLayer.Data
                 entity.Property(e => e.StartTime).HasColumnType("time(0)");
             });
 
-            modelBuilder.Entity<TbPermssion>(entity =>
-            {
-                entity.ToTable("tbPermssions");
+            // modelBuilder.Entity<TbPermssion>(entity =>
+            // {
+            //     entity.ToTable("tbPermssions");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+            //     entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .HasColumnName("name");
+            //     entity.Property(e => e.Name)
+            //         .HasMaxLength(50)
+            //         .HasColumnName("name");
 
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            //     entity.Property(e => e.RoleId).HasColumnName("RoleID");
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.TbPermssions)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_permissions");
-            });
+            //     entity.HasOne(d => d.Role)
+            //         .WithMany(p => p.TbPermssions)
+            //         .HasForeignKey(d => d.RoleId)
+            //         .HasConstraintName("FK_permissions");
+            // });
 
             modelBuilder.Entity<TbPerson>(entity =>
             {
@@ -229,16 +229,16 @@ namespace Jym_Management_DataAccessLayer.Data
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<TbRole>(entity =>
-            {
-                entity.HasKey(e => e.RoleId);
+            // modelBuilder.Entity<TbRole>(entity =>
+            // {
+            //     entity.HasKey(e => e.RoleId);
 
-                entity.ToTable("tbRoles");
+            //     entity.ToTable("tbRoles");
 
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            //     entity.Property(e => e.RoleId).HasColumnName("RoleID");
 
-                entity.Property(e => e.RoleName).HasMaxLength(50);
-            });
+            //     entity.Property(e => e.RoleName).HasMaxLength(50);
+            // });
 
             modelBuilder.Entity<TbSubsciptionPeriod>(entity =>
             {
