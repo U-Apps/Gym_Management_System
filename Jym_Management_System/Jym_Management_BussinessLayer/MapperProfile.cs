@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Jym_Management_BussinessLayer
 {
-    internal class autoMapperProfileBussnisse:Profile
+    public class MapperProfile:Profile
     {
-        public autoMapperProfileBussnisse()
+        public MapperProfile()
         {
 
             CreateMap<TbEmployee,Employee>()
@@ -73,6 +73,7 @@ namespace Jym_Management_BussinessLayer
             CreateMap<TbUser, User>().ReverseMap();
 
         }
+        
 
     }
 }
