@@ -59,6 +59,18 @@ namespace Jym_Management_APIs.Controllers
             return employee is null ? NotFound() : Ok(employee);
         }
 
+        [HttpDelete]
+        [Route("{id}")]
+        public ActionResult Delete(int id)
+        {
+            Employee employee = _employeeService.GetById(id);
 
+            if (employee is null)
+                return NotFound();
+
+            _employeeService.DeleteById(employee.EmployeeId);
+            //_employeeService.Delete(employee);
+            return Ok();
+        }
     }
 }
