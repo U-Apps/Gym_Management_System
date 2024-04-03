@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Jym_Management_BussinessLayer.Modules
+{
+    public class Employee
+    {
+       
+        public int EmployeeId { get; set; }
+        public int PersonId { get; set; }
+        public DateTime HireDate { get; set; }
+        public DateTime ResignationDate { get; set; }
+        public decimal Salary { get; set; }
+
+        public virtual Person Person { get; set; } = null!;
+        public virtual ICollection<PayrollPayment> PayrollPayments { get; set; }
+    }
+}
