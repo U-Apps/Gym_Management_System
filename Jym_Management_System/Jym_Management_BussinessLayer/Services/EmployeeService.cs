@@ -34,6 +34,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
            _unitOfWork.UnitOfWork.Employees.DeleteById(id);
+            int x=_unitOfWork.UnitOfWork.Complete();
 
         }
 
