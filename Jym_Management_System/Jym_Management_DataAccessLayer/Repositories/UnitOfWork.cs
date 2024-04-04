@@ -15,6 +15,18 @@ namespace Jym_Management_DataAccessLayer.Repositories
         public IBaseRepository<TbMember> Members { get; private set; }
         public IBaseRepository<TbUser> Users { get;private set; }
         public IBaseRepository<TbEmployee> Employees { get;  private set; }
+        public IBaseRepository<TbExerciseType> ExerciseTypes { get; private set; }
+        public IBaseRepository<TbJob> Jobs { get; private set; }
+        public IBaseRepository<TbPayrollPayment> PayrollPayments { get; private set; }
+        public IBaseRepository<TbJobHistory> JobHistories { get; private set; }
+        public IBaseRepository<TbPeriod> Periods { get; private set; }
+        public IBaseRepository<TbPermssion> Permssions { get; private set; }
+        public IBaseRepository<TbPerson> Persons { get; private set; }
+        public IBaseRepository<TbRole> Roles { get; private set; }
+        public IBaseRepository<TbSubsciptionPeriod> SubsciptionPeriods { get; private set; }
+        public IBaseRepository<TbSubscription> Subscriptions { get; private set; }
+        public IBaseRepository<TbSubscriptionPayment> SubscriptionPayments { get; private set; }
+
 
         public UnitOfWork(AppDbContext context)
         {
@@ -22,7 +34,17 @@ namespace Jym_Management_DataAccessLayer.Repositories
             Members = new BaseRepository<TbMember>(_context);
             Users = new BaseRepository<TbUser>(_context);
             Employees = new BaseRepository<TbEmployee>(_context);
-
+            ExerciseTypes = new BaseRepository<TbExerciseType>(_context);
+            Jobs = new BaseRepository<TbJob>(_context);
+            PayrollPayments = new BaseRepository<TbPayrollPayment>(_context); 
+            JobHistories = new BaseRepository<TbJobHistory>(_context);
+            Periods = new BaseRepository<TbPeriod>(_context); 
+            Permssions = new BaseRepository<TbPermssion>(_context);
+            Persons = new BaseRepository<TbPerson>(_context);
+            Roles = new BaseRepository<TbRole>(_context);
+            SubsciptionPeriods = new BaseRepository<TbSubsciptionPeriod>(_context);
+            Subscriptions = new BaseRepository<TbSubscription>(_context);
+            SubscriptionPayments = new BaseRepository<TbSubscriptionPayment>(_context);
         }
 
         //this method saves changes in database
