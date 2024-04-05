@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jym_Management_DataAccessLayer.Entities.Authentication;
+using System;
 using System.Collections.Generic;
 
 namespace Jym_Management_DataAccessLayer.Entities
@@ -9,7 +10,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         public int? SubscriptionId { get; set; }
         public DateTime? PaymentDate { get; set; }
         public decimal? PaymentAmount { get; set; }
-        public short? CreatedByUserId { get; set; }
+        public int? CreatedByUserId { get; set; }
 
         public virtual AppUser? CreatedByUser { get; set; }
         public virtual TbSubscription? Subscription { get; set; }

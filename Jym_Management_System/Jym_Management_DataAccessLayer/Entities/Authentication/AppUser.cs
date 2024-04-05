@@ -2,7 +2,7 @@
 
 namespace Jym_Management_DataAccessLayer.Entities.Authentication;
 
-public class AppUser : IdentityUser
+public class AppUser : IdentityUser<int>
 {
         public int PersonId { get; set; }
         public bool IsActive { get; set; }
