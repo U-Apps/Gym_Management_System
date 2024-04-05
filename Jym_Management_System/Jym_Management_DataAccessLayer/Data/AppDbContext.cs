@@ -6,10 +6,11 @@ using Jym_Management_DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Jym_Management_DataAccessLayer.Entities.Authentication;
 using Jym_Management_DataAccessLayer.Config;
+using Microsoft.AspNetCore.Identity;
 
 namespace Jym_Management_DataAccessLayer.Data
 {
-    public partial class AppDbContext : IdentityDbContext<AppUser>
+    public partial class AppDbContext : IdentityDbContext<AppUser,IdentityRole<int>,int>
     {
         public AppDbContext()
         {
@@ -46,6 +47,7 @@ namespace Jym_Management_DataAccessLayer.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<TbEmployee>(entity =>
