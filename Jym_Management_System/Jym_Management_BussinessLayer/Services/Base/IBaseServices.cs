@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Jym_Management_BussinessLayer.SingleUnitOFWork;
+using Jym_Management_DataAccessLayer.Data;
 using Jym_Management_DataAccessLayer.Repositories;
 
 namespace Jym_Management_BussinessLayer.Services.Base
 {
     public interface IBaseServices<T> where T : class
     {
-        UnitOfWorkBuissness _unitOfWork { get; }
+
+        IUnitOfWork _unit {  get; }
 
 
         void Add(T module);
