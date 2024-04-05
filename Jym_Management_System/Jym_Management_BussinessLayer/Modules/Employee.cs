@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Jym_Management_BussinessLayer.Modules
 {
@@ -11,8 +13,9 @@ namespace Jym_Management_BussinessLayer.Modules
         public DateTime HireDate { get; set; }
         public DateTime ResignationDate { get; set; }
         public decimal Salary { get; set; }
-
-        public virtual Person Person { get; set; } = null!;
+    
+        public virtual Person Person { get; set; }
+        
         public virtual ICollection<PayrollPayment> PayrollPayments { get; set; }
     }
 }
