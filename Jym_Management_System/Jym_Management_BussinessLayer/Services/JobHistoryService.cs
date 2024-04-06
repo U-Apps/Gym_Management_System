@@ -12,65 +12,82 @@ namespace Jym_Management_BussinessLayer.Services
     public class JobHistoryService : IBaseServices<JobHistory>
     {
  
-     
-
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
-
         public void Add(JobHistory module)
         {
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
             var tbJobHistory = Mapping.Mapper.Map<TbJobHistory>(module);
-            _unit.JobHistories.Add(tbJobHistory);
+            repo.Add(tbJobHistory);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void AddRange(IEnumerable<JobHistory> module)
         {
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
             var tbJobHistory = Mapping.Mapper.Map<IEnumerable<TbJobHistory>>(module);
-            _unit.JobHistories.AddRange(tbJobHistory);
+            repo.AddRange(tbJobHistory);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void Delete(JobHistory module)
         {
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
             var tbJobHistory = Mapping.Mapper.Map<TbJobHistory>(module);
-            _unit.JobHistories.Delete(tbJobHistory);
+            repo.Delete(tbJobHistory);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void DeleteById(int id)
         {
-            _unit.JobHistories.DeleteById(id);
-            int x = _unit.Complete();
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
+            repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void DeleteRange(IEnumerable<JobHistory> modules)
         {
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
             var tbJobHistory = Mapping.Mapper.Map<IEnumerable<TbJobHistory>>(modules);
-            _unit.JobHistories.DeleteRange(tbJobHistory);
+            repo.DeleteRange(tbJobHistory);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public JobHistory Find(Func<JobHistory, bool> predicate)
         {
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbJobHistory, bool>>(predicate);
-            return Mapping.Mapper.Map<JobHistory>(_unit.JobHistories.Find(exp));
+            return Mapping.Mapper.Map<JobHistory>(repo.Find(exp));
         }
 
         public IEnumerable<JobHistory> FindAll(Func<JobHistory, bool> predicate)
         {
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbJobHistory, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<JobHistory>>(_unit.JobHistories.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<JobHistory>>(repo.FindAll(exp));
         }
 
         public IEnumerable<JobHistory> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<JobHistory>>(_unit.JobHistories.GetAll());
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
+            return Mapping.Mapper.Map<IEnumerable<JobHistory>>(repo.GetAll());
         }
 
         public JobHistory GetById(int id)
         {
-            return Mapping.Mapper.Map<JobHistory>(_unit.JobHistories.GetById(id));
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
+            return Mapping.Mapper.Map<JobHistory>(repo.GetById(id));
         }
 
         public void Update(JobHistory module)
         {
-            _unit.JobHistories.Update(Mapping.Mapper.Map<TbJobHistory>(module));
+            IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
+            repo.Update(Mapping.Mapper.Map<TbJobHistory>(module));
+            repo.SaveChanges();
+            repo.Dispose();
         }
     }
 }

@@ -4,6 +4,7 @@ using Jym_Management_BussinessLayer.Services.Base;
 using Jym_Management_DataAccessLayer.Data;
 using Jym_Management_DataAccessLayer.Entities;
 using Jym_Management_DataAccessLayer.Repositories;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 
@@ -11,75 +12,91 @@ namespace Jym_Management_BussinessLayer.Services
 {
     public class PeriodService : IBaseServices<Period>
     {
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
+       
 
         public void Add(Period module)
         {
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
             var tbPeriod = Mapping.Mapper.Map<TbPeriod>(module);
-            _unit.Periods.Add(tbPeriod);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Add(tbPeriod);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void AddRange(IEnumerable<Period> module)
         {
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
             var tbPeriod = Mapping.Mapper.Map<IEnumerable<TbPeriod>>(module);
-            _unit.Periods.AddRange(tbPeriod);
-            if (_unit.Complete() == 0)
-                return;
+            repo.AddRange(tbPeriod);
+            repo.SaveChanges();
+              repo.Dispose();
+
+            
         }
 
         public void Delete(Period module)
         {
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
             var tbPeriod = Mapping.Mapper.Map<TbPeriod>(module);
-            _unit.Periods.Delete(tbPeriod);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Delete(tbPeriod);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteById(int id)
         {
-            _unit.Periods.DeleteById(id);
-            if (_unit.Complete() == 0)
-                return;
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
+            repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteRange(IEnumerable<Period> modules)
         {
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
             var tbPeriod = Mapping.Mapper.Map<IEnumerable<TbPeriod>>(modules);
-            _unit.Periods.DeleteRange(tbPeriod);
-            if (_unit.Complete() == 0)
-                return;
+            repo.DeleteRange(tbPeriod);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public Period Find(Func<Period, bool> predicate)
         {
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbPeriod, bool>>(predicate);
-            return Mapping.Mapper.Map<Period>(_unit.Periods.Find(exp));
+            return Mapping.Mapper.Map<Period>(repo.Find(exp));
         }
 
         public IEnumerable<Period> FindAll(Func<Period, bool> predicate)
         {
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbPeriod, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<Period>>(_unit.Periods.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<Period>>(repo.FindAll(exp));
         }
 
         public IEnumerable<Period> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<Period>>(_unit.Periods.GetAll());
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
+            return Mapping.Mapper.Map<IEnumerable<Period>>(repo.GetAll());
         }
 
         public Period GetById(int id)
         {
-            return Mapping.Mapper.Map<Period>(_unit.Periods.GetById(id));
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
+            return Mapping.Mapper.Map<Period>(repo.GetById(id));
         }
 
         public void Update(Period module)
         {
+            IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
             TbPeriod tbPeriod = Mapping.Mapper.Map<TbPeriod>(module);
-            _unit.Periods.Update(tbPeriod);
-            if (_unit.Complete() == 0)
-                return;
+           repo.Update(tbPeriod);
+           repo.SaveChanges();
+            repo.Dispose();
         }
     }
 }

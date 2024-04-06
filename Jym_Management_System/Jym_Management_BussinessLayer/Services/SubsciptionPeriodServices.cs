@@ -11,75 +11,89 @@ namespace Jym_Management_BussinessLayer.Services
 {
     public class SubsciptionPeriodServices : IBaseServices<SubsciptionPeriod>
     {
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
+        
 
         public void Add(SubsciptionPeriod module)
         {
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
-            _unit.SubsciptionPeriods.Add(tbSubsciptionPeriod);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Add(tbSubsciptionPeriod);
+            repo.SaveChanges(); 
+            repo.Dispose();
         }
 
         public void AddRange(IEnumerable<SubsciptionPeriod> module)
         {
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<IEnumerable<TbSubsciptionPeriod>>(module);
-            _unit.SubsciptionPeriods.AddRange(tbSubsciptionPeriod);
-            if (_unit.Complete() == 0)
-                return;
+            repo.AddRange(tbSubsciptionPeriod);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void Delete(SubsciptionPeriod module)
         {
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
-            _unit.SubsciptionPeriods.Delete(tbSubsciptionPeriod);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Delete(tbSubsciptionPeriod);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void DeleteById(int id)
         {
-            _unit.SubsciptionPeriods.DeleteById(id);
-            if (_unit.Complete() == 0)
-                return;
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
+           repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteRange(IEnumerable<SubsciptionPeriod> modules)
         {
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<IEnumerable<TbSubsciptionPeriod>>(modules);
-            _unit.SubsciptionPeriods.DeleteRange(tbSubsciptionPeriod);
-            if (_unit.Complete() == 0)
-                return;
+           repo.DeleteRange(tbSubsciptionPeriod);
+            repo.SaveChanges(); 
+            repo.Dispose();
+            
         }
 
         public SubsciptionPeriod Find(Func<SubsciptionPeriod, bool> predicate)
         {
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbSubsciptionPeriod, bool>>(predicate);
-            return Mapping.Mapper.Map<SubsciptionPeriod>(_unit.SubsciptionPeriods.Find(exp));
+            return Mapping.Mapper.Map<SubsciptionPeriod>(repo.Find(exp));
         }
 
         public IEnumerable<SubsciptionPeriod> FindAll(Func<SubsciptionPeriod, bool> predicate)
         {
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbSubsciptionPeriod, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<SubsciptionPeriod>>(_unit.SubsciptionPeriods.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<SubsciptionPeriod>>(repo.FindAll(exp));
         }
 
         public IEnumerable<SubsciptionPeriod> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<SubsciptionPeriod>>(_unit.SubsciptionPeriods.GetAll());
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
+            return Mapping.Mapper.Map<IEnumerable<SubsciptionPeriod>>(repo.GetAll());
         }
 
         public SubsciptionPeriod GetById(int id)
         {
-            return Mapping.Mapper.Map<SubsciptionPeriod>(_unit.SubsciptionPeriods.GetById(id));
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
+            return Mapping.Mapper.Map<SubsciptionPeriod>(repo.GetById(id));
         }
 
         public void Update(SubsciptionPeriod module)
         {
+            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
-            _unit.SubsciptionPeriods.Update(tbSubsciptionPeriod);
-            if (_unit.Complete() == 0)
-                return;
+           repo.Update(tbSubsciptionPeriod);
+            repo.SaveChanges();
+            repo.Dispose();
+           
         }
     }
 }

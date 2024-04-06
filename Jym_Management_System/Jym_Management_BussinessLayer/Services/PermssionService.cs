@@ -11,75 +11,90 @@ namespace Jym_Management_BussinessLayer.Services
 {
     public class PermssionService : IBaseServices<Permssion>
     {
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
+        
 
         public void Add(Permssion module)
         {
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
             var tbPermssion = Mapping.Mapper.Map<TbPermssion>(module);
-            _unit.Permssions.Add(tbPermssion);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Add(tbPermssion);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void AddRange(IEnumerable<Permssion> module)
         {
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
             var tbPermssion = Mapping.Mapper.Map<IEnumerable<TbPermssion>>(module);
-            _unit.Permssions.AddRange(tbPermssion);
-            if (_unit.Complete() == 0)
-                return;
+            repo.AddRange(tbPermssion);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void Delete(Permssion module)
         {
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
             var tbPermssion = Mapping.Mapper.Map<TbPermssion>(module);
-            _unit.Permssions.Delete(tbPermssion);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Delete(tbPermssion);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteById(int id)
         {
-            _unit.Permssions.DeleteById(id);
-            if (_unit.Complete() == 0)
-                return;
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
+           repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteRange(IEnumerable<Permssion> modules)
         {
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
             var tbPermssion = Mapping.Mapper.Map<IEnumerable<TbPermssion>>(modules);
-            _unit.Permssions.DeleteRange(tbPermssion);
-            if (_unit.Complete() == 0)
-                return;
+           repo.DeleteRange(tbPermssion);
+            repo.SaveChanges(); 
+            repo.Dispose();
+            
         }
 
         public Permssion Find(Func<Permssion, bool> predicate)
         {
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbPermssion, bool>>(predicate);
-            return Mapping.Mapper.Map<Permssion>(_unit.Permssions.Find(exp));
+            return Mapping.Mapper.Map<Permssion>(repo.Find(exp));
         }
 
         public IEnumerable<Permssion> FindAll(Func<Permssion, bool> predicate)
         {
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbPermssion, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<Permssion>>(_unit.Permssions.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<Permssion>>(repo.FindAll(exp));
         }
 
         public IEnumerable<Permssion> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<Permssion>>(_unit.Permssions.GetAll());
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
+            return Mapping.Mapper.Map<IEnumerable<Permssion>>(repo.GetAll());
         }
 
         public Permssion GetById(int id)
         {
-            return Mapping.Mapper.Map<Permssion>(_unit.Permssions.GetById(id));
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
+            return Mapping.Mapper.Map<Permssion>(repo.GetById(id));
         }
 
         public void Update(Permssion module)
         {
+            IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
             TbPermssion tbPermssion = Mapping.Mapper.Map<TbPermssion>(module);
-            _unit.Permssions.Update(tbPermssion);
-            if (_unit.Complete() == 0)
-                return;
+           repo.Update(tbPermssion);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
     }
 }

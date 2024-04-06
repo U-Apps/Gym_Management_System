@@ -1,8 +1,11 @@
 ﻿using Jym_Management_APIs.DTO_modules;
 using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Jym_Management_BussinessLayer.Services.Base;
+using System.Xml.Linq;
 
 namespace Jym_Management_APIs.Controllers
 {
@@ -10,16 +13,19 @@ namespace Jym_Management_APIs.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly EmployeeService _employeeService;
+        private readonly IBaseServices<Employee> _employeeService;
 
-        public EmployeeController(EmployeeService employeeService)
+
+        public EmployeeController(IBaseServices<Employee> employeeService)
         {
             _employeeService = employeeService;
+           
         }
 
 
         [HttpPost]
         [Route("")]
+
         public ActionResult<int> CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
             var employee = new Employee();
@@ -35,6 +41,7 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpPut]
         [Route("")]
+
         public ActionResult UpdateEmployee(UpdateEmployeeDTO updateEmployeeDTO)
         {
             var existingEmployee = _employeeService.GetById(updateEmployeeDTO.EmployeeId);
@@ -45,7 +52,6 @@ namespace Jym_Management_APIs.Controllers
             existingEmployee.ResignationDate = updateEmployeeDTO.ResignationDate;
             existingEmployee.Salary = updateEmployeeDTO.Salary;
             existingEmployee.PersonId = updateEmployeeDTO.PersonId;
-
             _employeeService.Update(existingEmployee);
             return Ok();
         }
@@ -55,6 +61,7 @@ namespace Jym_Management_APIs.Controllers
         [Route("")]
         public ActionResult<IEnumerable<ReadEmployeeDTO>> Get()
         {
+
             var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
             return Ok(employees);
         }

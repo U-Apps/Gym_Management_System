@@ -11,75 +11,89 @@ namespace Jym_Management_BussinessLayer.Services
 {
     public class SubscriptionPaymentServices : IBaseServices<SubscriptionPayment>
     {
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
+       
 
         public void Add(SubscriptionPayment module)
         {
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var tbSubscriptionPayment = Mapping.Mapper.Map<TbSubscriptionPayment>(module);
-            _unit.SubscriptionPayments.Add(tbSubscriptionPayment);
-            if (_unit.Complete() == 0)
-                return;
+             repo.Add(tbSubscriptionPayment);
+            repo.SaveChanges(); 
+            repo.Dispose();
         }
 
         public void AddRange(IEnumerable<SubscriptionPayment> module)
         {
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var tbSubscriptionPayment = Mapping.Mapper.Map<IEnumerable<TbSubscriptionPayment>>(module);
-            _unit.SubscriptionPayments.AddRange(tbSubscriptionPayment);
-            if (_unit.Complete() == 0)
-                return;
+            repo.AddRange(tbSubscriptionPayment);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void Delete(SubscriptionPayment module)
         {
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var tbSubscriptionPayment = Mapping.Mapper.Map<TbSubscriptionPayment>(module);
-            _unit.SubscriptionPayments.Delete(tbSubscriptionPayment);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Delete(tbSubscriptionPayment);
+            repo.SaveChanges();
+            repo.Dispose(); 
         }
 
         public void DeleteById(int id)
         {
-            _unit.SubscriptionPayments.DeleteById(id);
-            if (_unit.Complete() == 0)
-                return;
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
+           repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteRange(IEnumerable<SubscriptionPayment> modules)
         {
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var tbSubscriptionPayment = Mapping.Mapper.Map<IEnumerable<TbSubscriptionPayment>>(modules);
-            _unit.SubscriptionPayments.DeleteRange(tbSubscriptionPayment);
-            if (_unit.Complete() == 0)
-                return;
+            repo.DeleteRange(tbSubscriptionPayment);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public SubscriptionPayment Find(Func<SubscriptionPayment, bool> predicate)
         {
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbSubscriptionPayment, bool>>(predicate);
-            return Mapping.Mapper.Map<SubscriptionPayment>(_unit.SubscriptionPayments.Find(exp));
+            return Mapping.Mapper.Map<SubscriptionPayment>(repo.Find(exp));
         }
 
         public IEnumerable<SubscriptionPayment> FindAll(Func<SubscriptionPayment, bool> predicate)
         {
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbSubscriptionPayment, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<SubscriptionPayment>>(_unit.SubscriptionPayments.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<SubscriptionPayment>>(repo.FindAll(exp));
         }
 
         public IEnumerable<SubscriptionPayment> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<SubscriptionPayment>>(_unit.SubscriptionPayments.GetAll());
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
+            return Mapping.Mapper.Map<IEnumerable<SubscriptionPayment>>(repo.GetAll());
         }
 
         public SubscriptionPayment GetById(int id)
         {
-            return Mapping.Mapper.Map<SubscriptionPayment>(_unit.SubscriptionPayments.GetById(id));
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
+            return Mapping.Mapper.Map<SubscriptionPayment>(repo.GetById(id));
         }
 
         public void Update(SubscriptionPayment module)
         {
+            IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var tbSubscriptionPayment = Mapping.Mapper.Map<TbSubscriptionPayment>(module);
-            _unit.SubscriptionPayments.Update(tbSubscriptionPayment);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Update(tbSubscriptionPayment);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
     }
 }

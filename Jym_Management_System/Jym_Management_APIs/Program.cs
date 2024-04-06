@@ -1,4 +1,7 @@
+using AutoMapper;
+using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services;
+using Jym_Management_BussinessLayer.Services.Base;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<EmployeeService>();
+builder.Services.AddScoped<IBaseServices<Employee>,EmployeeService>();
+builder.Services.AddScoped<IBaseServices<Person>, PersonService>();
 
 var app = builder.Build();
 

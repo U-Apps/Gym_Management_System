@@ -16,7 +16,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         public DateTime ResignationDate { get; set; }
         public decimal Salary { get; set; }
 
-        public virtual TbPerson Person { get; set; } = null!;
+        public virtual TbPerson Person { get; set; }
         public virtual ICollection<TbPayrollPayment> TbPayrollPayments { get; set; }
     }
 }

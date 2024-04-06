@@ -11,76 +11,88 @@ namespace Jym_Management_BussinessLayer.Services
 {
     public class UserServices : IBaseServices<User>
     {
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
-
 
         public void Add(User module)
         {
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
             var tbUser = Mapping.Mapper.Map<TbUser>(module);
-            _unit.Users.Add(tbUser);
-            if (_unit.Complete() == 0)
-                return;
+           repo.Add(tbUser);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void AddRange(IEnumerable<User> module)
         {
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
             var tbUser = Mapping.Mapper.Map<IEnumerable<TbUser>>(module);
-            _unit.Users.AddRange(tbUser);
-            if (_unit.Complete() == 0)
-                return;
+            repo.AddRange(tbUser);
+            repo.SaveChanges(); 
+            repo.Dispose();
+           
         }
 
         public void Delete(User module)
         {
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
             var tbUser = Mapping.Mapper.Map<TbUser>(module);
-            _unit.Users.Delete(tbUser);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Delete(tbUser);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteById(int id)
         {
-            _unit.Users.DeleteById(id);
-            if (_unit.Complete() == 0)
-                return;
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
+           repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteRange(IEnumerable<User> modules)
         {
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
             var tbUser = Mapping.Mapper.Map<IEnumerable<TbUser>>(modules);
-            _unit.Users.DeleteRange(tbUser);
-            if (_unit.Complete() == 0)
-                return;
+            repo.DeleteRange(tbUser);
+            repo.SaveChanges(); 
+            repo.Dispose();
+            
         }
 
         public User Find(Func<User, bool> predicate)
         {
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbUser, bool>>(predicate);
-            return Mapping.Mapper.Map<User>(_unit.Users.Find(exp));
+            return Mapping.Mapper.Map<User>(repo.Find(exp));
         }
 
         public IEnumerable<User> FindAll(Func<User, bool> predicate)
         {
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbUser, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<User>>(_unit.Users.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<User>>(repo.FindAll(exp));
         }
 
         public IEnumerable<User> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<User>>(_unit.Users.GetAll());
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
+            return Mapping.Mapper.Map<IEnumerable<User>>(repo.GetAll());
         }
 
         public User GetById(int id)
         {
-            return Mapping.Mapper.Map<User>(_unit.Users.GetById(id));
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
+            return Mapping.Mapper.Map<User>(repo.GetById(id));
         }
 
         public void Update(User module)
         {
+            IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
             var tbUser = Mapping.Mapper.Map<TbUser>(module);
-            _unit.Users.Update(tbUser);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Update(tbUser);
+            repo.SaveChanges(); 
+            repo.Dispose();
         }
     }
 }
