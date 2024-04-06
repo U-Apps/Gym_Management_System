@@ -1,5 +1,4 @@
 ﻿using Jym_Management_APIs.DTO_modules;
-using Jym_Management_BussinessLayer.AutoMapper;
 using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services;
 using System.Threading.Tasks;
@@ -26,35 +25,33 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpPost]
         [Route("")]
-        public ActionResult CreateEmployee(CreateEmployeeDTO employee)
+
+        public ActionResult<int> CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
-            var emp = new Employee
-            {
-                PersonId = employee.PersonId,
-                HireDate = employee.HireDate,
-                ResignationDate = employee.ResignationDate,
-                Salary = employee.Salary,
-               
-            };
+            var employee = new Employee();
 
+            employee.PersonId = createEmployeeDTO.PersonId;
+            employee.ResignationDate = createEmployeeDTO.ResignationDate;
+            employee.HireDate = createEmployeeDTO.HireDate;
+            employee.Salary = createEmployeeDTO.Salary;
+            _employeeService.Add(employee);
 
-            _employeeService.Add(emp);
-            return Ok();
+            return Ok(employee.EmployeeId);
         }
 
         [HttpPut]
         [Route("")]
-        public ActionResult UpdateEmployee(UpdateEmployeeDTO employee)
+
+        public ActionResult UpdateEmployee(UpdateEmployeeDTO updateEmployeeDTO)
         {
-            if(!ModelState.IsValid) {return BadRequest(); }
-            var existingEmployee = _employeeService.GetById(employee.Id);
+            var existingEmployee = _employeeService.GetById(updateEmployeeDTO.EmployeeId);
             if (existingEmployee == null)
                 return NotFound();
 
-            existingEmployee.HireDate = employee.HireDate;
-            existingEmployee.ResignationDate = employee.ResignationDate;
-            existingEmployee.Salary = employee.Salary;
-            existingEmployee.PersonId = employee.PersonId;
+            existingEmployee.HireDate = updateEmployeeDTO.HireDate;
+            existingEmployee.ResignationDate = updateEmployeeDTO.ResignationDate;
+            existingEmployee.Salary = updateEmployeeDTO.Salary;
+            existingEmployee.PersonId = updateEmployeeDTO.PersonId;
             _employeeService.Update(existingEmployee);
             return Ok();
         }
@@ -64,37 +61,17 @@ namespace Jym_Management_APIs.Controllers
         [Route("")]
         public ActionResult<IEnumerable<ReadEmployeeDTO>> Get()
         {
-            IEnumerable<Employee> employees = _employeeService.GetAll();
-            var result = employees.Select(x => new ReadEmployeeDTO
-            {
-                Id = x.EmployeeId,
-                PersonId = x.PersonId,
-                HireDate = x.HireDate,
-                ResignationDate = x.ResignationDate,
-                Salary = x.Salary,
-                person = new ReadPersonDTO
-                {
-                    PersonId = x.PersonId,
-                    Idcard = x.Person.Idcard,
-                    Name = x.Person.Name,
-                    PhoneNumber = x.Person.PhoneNumber,
-                    BirthDate = x.Person.BirthDate,
-                    Email = x.Person.Email,
-                }
-                         
-            }); 
-            
 
-
-            return Ok(result);
+            var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
+            return Ok(employees);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<Employee> GetById(int id)
+        public ActionResult<ReadEmployeeDTO> GetById(int id)
         {
             Employee employee = _employeeService.GetById(id);
-            return employee is null ? NotFound() : Ok(employee);
+            return employee is null ? NotFound() : Ok(employee.AsDTO());
         }
 
         [HttpDelete]

@@ -6,7 +6,8 @@ namespace Jym_Management_APIs.DTO_modules
 {
     public record ReadEmployeeDTO
     {
-        public int Id { get; set; }
+
+       public int EmployeeId { get; set; }
         public int PersonId { get; set; }
         public DateTime HireDate { get; set; }
         public DateTime ResignationDate { get; set; }
@@ -18,7 +19,7 @@ namespace Jym_Management_APIs.DTO_modules
     public record UpdateEmployeeDTO
     {
         [Required]
-        public int Id { get; set; }
+        public int EmployeeId { get; set; }
         [Required]
         public int PersonId { get; set; }
         public DateTime HireDate { get; set; }
