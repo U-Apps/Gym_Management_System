@@ -26,7 +26,7 @@ namespace Jym_Management_APIs.Controllers
         [HttpPost]
         [Route("")]
 
-        public ActionResult<int> CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
+        public ActionResult CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
             var employee = new Employee();
 
@@ -35,8 +35,7 @@ namespace Jym_Management_APIs.Controllers
             employee.HireDate = createEmployeeDTO.HireDate;
             employee.Salary = createEmployeeDTO.Salary;
             _employeeService.Add(employee);
-
-            return Ok(employee.EmployeeId);
+            return Ok();
         }
 
         [HttpPut]

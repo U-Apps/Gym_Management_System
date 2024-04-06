@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Jym_Management_APIs.DTO_modules
 {
@@ -20,7 +21,7 @@ namespace Jym_Management_APIs.DTO_modules
     public record CreateUserDTO
        (
 
-             string UserName, 
+             string UserName,
              string Password ,
 
              bool IsActive,
