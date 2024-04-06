@@ -13,75 +13,88 @@ namespace Jym_Management_BussinessLayer.Services
     {
 
 
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
+        
 
         public void Add(PayrollPayment module)
         {
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var tbPayrollPayment = Mapping.Mapper.Map<TbPayrollPayment>(module);
-            _unit.PayrollPayments.Add(tbPayrollPayment);
-            if (_unit.Complete() == 0)
-                return;
+           repo.Add(tbPayrollPayment);
+           repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void AddRange(IEnumerable<PayrollPayment> module)
         {
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var tbPayrollPayment = Mapping.Mapper.Map<IEnumerable<TbPayrollPayment>>(module);
-            _unit.PayrollPayments.AddRange(tbPayrollPayment);
-            if (_unit.Complete() == 0)
-                return;
+            repo.AddRange(tbPayrollPayment);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void Delete(PayrollPayment module)
         {
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var tbPayrollPayment = Mapping.Mapper.Map<TbPayrollPayment>(module);
-            _unit.PayrollPayments.Delete(tbPayrollPayment);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Delete(tbPayrollPayment);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void DeleteById(int id)
         {
-            _unit.PayrollPayments.DeleteById(id);
-            if (_unit.Complete() == 0)
-                return;
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
+            repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void DeleteRange(IEnumerable<PayrollPayment> modules)
         {
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var tbPayrollPayment = Mapping.Mapper.Map<IEnumerable<TbPayrollPayment>>(modules);
-            _unit.PayrollPayments.DeleteRange(tbPayrollPayment);
-            if (_unit.Complete() == 0)
-                return;
+            repo.DeleteRange(tbPayrollPayment);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public PayrollPayment Find(Func<PayrollPayment, bool> predicate)
         {
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbPayrollPayment, bool>>(predicate);
-            return Mapping.Mapper.Map<PayrollPayment>(_unit.PayrollPayments.Find(exp));
+            return Mapping.Mapper.Map<PayrollPayment>(repo.Find(exp));
         }
 
         public IEnumerable<PayrollPayment> FindAll(Func<PayrollPayment, bool> predicate)
         {
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbPayrollPayment, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<PayrollPayment>>(_unit.PayrollPayments.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<PayrollPayment>>(repo.FindAll(exp));
         }
 
         public IEnumerable<PayrollPayment> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<PayrollPayment>>(_unit.PayrollPayments.GetAll());
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
+
+            return Mapping.Mapper.Map<IEnumerable<PayrollPayment>>(repo.GetAll());
         }
 
         public PayrollPayment GetById(int id)
         {
-            return Mapping.Mapper.Map<PayrollPayment>(_unit.PayrollPayments.GetById(id));
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
+
+            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(id));
         }
 
         public void Update(PayrollPayment module)
         {
+            IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
+
             TbPayrollPayment tbPayrollPayment = Mapping.Mapper.Map<TbPayrollPayment>(module);
-            _unit.PayrollPayments.Update(tbPayrollPayment);
-            if (_unit.Complete() == 0)
-                return;
+           repo.Update(tbPayrollPayment);
+            repo.SaveChanges();
+            repo.Dispose();
         }
     }
 }

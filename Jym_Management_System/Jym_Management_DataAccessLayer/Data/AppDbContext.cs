@@ -11,6 +11,7 @@ namespace Jym_Management_DataAccessLayer.Data
     {
         public AppDbContext()
         {
+            
         }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
@@ -38,7 +39,7 @@ namespace Jym_Management_DataAccessLayer.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=FMSI\\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;");
-              
+            
             }
         }
 

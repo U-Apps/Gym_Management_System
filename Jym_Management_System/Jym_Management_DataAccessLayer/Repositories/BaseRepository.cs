@@ -1,4 +1,5 @@
 ﻿using Jym_Management_DataAccessLayer.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jym_Management_DataAccessLayer.Repositories
 {
-    internal class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly AppDbContext _context;
 
@@ -18,15 +19,17 @@ namespace Jym_Management_DataAccessLayer.Repositories
         public void Add(T entity)
         {
             _context.Set<T>().Add(entity);
+            
         }
         public void AddRange(IEnumerable<T> entities)
         {
-            _context.AddRange(entities);
+           _context.AddRange(entities);
         }
 
         public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
+           
         }
 
         public void DeleteRange(IEnumerable<T> entities)
@@ -42,12 +45,13 @@ namespace Jym_Management_DataAccessLayer.Repositories
 
         public T Find(Func<T, bool> predicate)
         {
-            return _context.Set<T>().Find(predicate);
+           return _context.Set<T>().Find(predicate);
         }
 
         public IEnumerable<T> FindAll(Func<T, bool> predicate)
         {
-            return _context.Set<T>().Where(predicate);
+           return _context.Set<T>().Where(predicate);
+
         }
 
         public IEnumerable<T> GetAll()
@@ -63,6 +67,18 @@ namespace Jym_Management_DataAccessLayer.Repositories
         public void Update(T entity)
         {
             _context.Update(entity);
+         
+            
+        }
+
+        public int SaveChanges()
+        {
+           return _context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+          _context.Dispose();
         }
     }
 }

@@ -1,7 +1,11 @@
-﻿using Jym_Management_BussinessLayer.Modules;
+﻿using Jym_Management_APIs.DTO_modules;
+using Jym_Management_BussinessLayer.AutoMapper;
+using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Jym_Management_BussinessLayer.Services.Base;
 
 namespace Jym_Management_APIs.Controllers
 {
@@ -9,27 +13,40 @@ namespace Jym_Management_APIs.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly EmployeeService _employeeService;
+        private readonly IBaseServices<Employee> _employeeService;
 
-        public EmployeeController(EmployeeService employeeService)
+
+        public EmployeeController(IBaseServices<Employee> employeeService)
         {
             _employeeService = employeeService;
+           
         }
 
 
         [HttpPost]
         [Route("")]
-        public ActionResult<int> CreateEmployee(Employee employee)
+        public ActionResult CreateEmployee(CreateEmployeeDTO employee)
         {
-            _employeeService.Add(employee);
-            return Ok(employee.EmployeeId);
+            var emp = new Employee
+            {
+                PersonId = employee.PersonId,
+                HireDate = employee.HireDate,
+                ResignationDate = employee.ResignationDate,
+                Salary = employee.Salary,
+               
+            };
+
+
+            _employeeService.Add(emp);
+            return Ok();
         }
 
         [HttpPut]
         [Route("")]
-        public ActionResult UpdateEmployee(Employee employee)
+        public ActionResult UpdateEmployee(UpdateEmployeeDTO employee)
         {
-            var existingEmployee = _employeeService.GetById(employee.EmployeeId);
+            if(!ModelState.IsValid) {return BadRequest(); }
+            var existingEmployee = _employeeService.GetById(employee.Id);
             if (existingEmployee == null)
                 return NotFound();
 
@@ -37,7 +54,6 @@ namespace Jym_Management_APIs.Controllers
             existingEmployee.ResignationDate = employee.ResignationDate;
             existingEmployee.Salary = employee.Salary;
             existingEmployee.PersonId = employee.PersonId;
-
             _employeeService.Update(existingEmployee);
             return Ok();
         }

@@ -14,63 +14,84 @@ namespace Jym_Management_BussinessLayer.Services
     {
         
 
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
+        
 
         public void Add(ExerciseType module)
         {
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
             var tbExerciseType = Mapping.Mapper.Map<TbExerciseType>(module);
-            _unit.ExerciseTypes.Add(tbExerciseType);
+            repo.Add(tbExerciseType);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void AddRange(IEnumerable<ExerciseType> module)
         {
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
             var tbExerciseType = Mapping.Mapper.Map<IEnumerable<TbExerciseType>>(module);
-            _unit.ExerciseTypes.AddRange(tbExerciseType);
+            repo.AddRange(tbExerciseType);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void Delete(ExerciseType module)
         {
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
             var tbExerciseType = Mapping.Mapper.Map<TbExerciseType>(module);
-            _unit.ExerciseTypes.Delete(tbExerciseType);
+            repo.Delete(tbExerciseType);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void DeleteById(int id)
         {
-            _unit.Employees.DeleteById(id);
-            int x = _unit.Complete();
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
+            repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void DeleteRange(IEnumerable<ExerciseType> modules)
         {
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
             var tbExerciseType = Mapping.Mapper.Map<IEnumerable<TbExerciseType>>(modules);
-            _unit.ExerciseTypes.DeleteRange(tbExerciseType);
+            repo.DeleteRange(tbExerciseType);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public ExerciseType Find(Func<ExerciseType, bool> predicate)
         {
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbExerciseType, bool>>(predicate);
-            return Mapping.Mapper.Map<ExerciseType>(_unit.ExerciseTypes.Find(exp));
+            return Mapping.Mapper.Map<ExerciseType>(repo.Find(exp));
         }
 
         public IEnumerable<ExerciseType> FindAll(Func<ExerciseType, bool> predicate)
         {
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbExerciseType, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<ExerciseType>>(_unit.ExerciseTypes.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<ExerciseType>>(repo.FindAll(exp));
         }
 
         public IEnumerable<ExerciseType> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<ExerciseType>>(_unit.ExerciseTypes.GetAll());
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
+            return Mapping.Mapper.Map<IEnumerable<ExerciseType>>(repo.GetAll());
         }
 
         public ExerciseType GetById(int id)
         {
-            return Mapping.Mapper.Map<ExerciseType>(_unit.ExerciseTypes.GetById(id));
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
+            return Mapping.Mapper.Map<ExerciseType>(repo.GetById(id));
         }
 
         public void Update(ExerciseType module)
         {
-            _unit.ExerciseTypes.Update(Mapping.Mapper.Map<TbExerciseType>(module));
+            IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
+            repo.Update(Mapping.Mapper.Map<TbExerciseType>(module));
+            repo.SaveChanges();
+            repo.Dispose();
         }
     }
 }

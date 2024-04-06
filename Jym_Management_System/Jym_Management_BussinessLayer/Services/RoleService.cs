@@ -11,75 +11,89 @@ namespace Jym_Management_BussinessLayer.Services
 {
     public class RoleService : IBaseServices<Role>
     {
-        public IUnitOfWork _unit => new UnitOfWork(new AppDbContext());
-
+        
         public void Add(Role module)
         {
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
             var tbRole = Mapping.Mapper.Map<TbRole>(module);
-            _unit.Roles.Add(tbRole);
-            if (_unit.Complete() == 0)
-                return;
+           repo.Add(tbRole);
+            repo.SaveChanges();
+            repo.Dispose();
         }
 
         public void AddRange(IEnumerable<Role> module)
         {
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
             var tbRole = Mapping.Mapper.Map<IEnumerable<TbRole>>(module);
-            _unit.Roles.AddRange(tbRole);
-            if (_unit.Complete() == 0)
-                return;
+           repo.AddRange(tbRole);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void Delete(Role module)
         {
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
             var tbRole = Mapping.Mapper.Map<TbRole>(module);
-            _unit.Roles.Delete(tbRole);
-            if (_unit.Complete() == 0)
-                return;
+           repo.Delete(tbRole);
+            repo.SaveChanges() ;
+            repo.Dispose();
+          
         }
 
         public void DeleteById(int id)
         {
-            _unit.Roles.DeleteById(id);
-            if (_unit.Complete() == 0)
-                return;
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
+            repo.DeleteById(id);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public void DeleteRange(IEnumerable<Role> modules)
         {
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
             var tbRole = Mapping.Mapper.Map<IEnumerable<TbRole>>(modules);
-            _unit.Roles.DeleteRange(tbRole);
-            if (_unit.Complete() == 0)
-                return;
+           repo.DeleteRange(tbRole);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
 
         public Role Find(Func<Role, bool> predicate)
         {
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbRole, bool>>(predicate);
-            return Mapping.Mapper.Map<Role>(_unit.Roles.Find(exp));
+            return Mapping.Mapper.Map<Role>(repo.Find(exp));
         }
 
         public IEnumerable<Role> FindAll(Func<Role, bool> predicate)
         {
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbRole, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<Role>>(_unit.Roles.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<Role>>(repo.FindAll(exp));
         }
 
         public IEnumerable<Role> GetAll()
         {
-            return Mapping.Mapper.Map<IEnumerable<Role>>(_unit.Roles.GetAll());
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
+            return Mapping.Mapper.Map<IEnumerable<Role>>(repo.GetAll());
         }
 
         public Role GetById(int id)
         {
-            return Mapping.Mapper.Map<Role>(_unit.Roles.GetById(id));
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
+            return Mapping.Mapper.Map<Role>(repo.GetById(id));
         }
 
         public void Update(Role module)
         {
+            IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
             var tbRole = Mapping.Mapper.Map<TbRole>(module);
-            _unit.Roles.Update(tbRole);
-            if (_unit.Complete() == 0)
-                return;
+            repo.Update(tbRole);
+            repo.SaveChanges();
+            repo.Dispose();
+            
         }
     }
 }
