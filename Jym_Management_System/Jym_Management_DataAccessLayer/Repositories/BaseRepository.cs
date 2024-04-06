@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Jym_Management_DataAccessLayer.Repositories
 {
@@ -57,6 +59,7 @@ namespace Jym_Management_DataAccessLayer.Repositories
         public IEnumerable<T> GetAll()
         {
             return _context.Set<T>().ToList();
+            
         }
 
         public T GetById(int id)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Jym_Management_BussinessLayer.Services.Base;
+using System.Xml.Linq;
 
 namespace Jym_Management_APIs.Controllers
 {
@@ -61,10 +62,31 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult<IEnumerable<Employee>> Get()
+        public ActionResult<IEnumerable<ReadEmployeeDTO>> Get()
         {
             IEnumerable<Employee> employees = _employeeService.GetAll();
-            return Ok(employees);
+            var result = employees.Select(x => new ReadEmployeeDTO
+            {
+                Id = x.EmployeeId,
+                PersonId = x.PersonId,
+                HireDate = x.HireDate,
+                ResignationDate = x.ResignationDate,
+                Salary = x.Salary,
+                person = new ReadPersonDTO
+                {
+                    PersonId = x.PersonId,
+                    Idcard = x.Person.Idcard,
+                    Name = x.Person.Name,
+                    PhoneNumber = x.Person.PhoneNumber,
+                    BirthDate = x.Person.BirthDate,
+                    Email = x.Person.Email,
+                }
+                         
+            }); 
+            
+
+
+            return Ok(result);
         }
 
         [HttpGet]

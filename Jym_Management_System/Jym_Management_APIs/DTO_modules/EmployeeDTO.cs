@@ -6,13 +6,13 @@ namespace Jym_Management_APIs.DTO_modules
 {
     public record ReadEmployeeDTO
     {
-       
+        public int Id { get; set; }
         public int PersonId { get; set; }
         public DateTime HireDate { get; set; }
         public DateTime ResignationDate { get; set; }
         public decimal Salary { get; set; }
 
-        ReadPersonDTO person { get; set; }
+        public ReadPersonDTO person { get; set; }
 
     }
     public record UpdateEmployeeDTO

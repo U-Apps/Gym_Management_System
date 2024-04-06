@@ -5,9 +5,11 @@ using Jym_Management_BussinessLayer.Services.Base;
 using Jym_Management_DataAccessLayer.Data;
 using Jym_Management_DataAccessLayer.Entities;
 using Jym_Management_DataAccessLayer.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+
 
 namespace Jym_Management_BussinessLayer.Services
 {

@@ -52,6 +52,35 @@ namespace Jym_Management_APIs.Controllers
             _personService.Update(existingPerson);
             return Ok();
         }
+        [HttpGet]
+        [Route("")]
+        public ActionResult<IEnumerable<Person>> Get()
+        {
+            IEnumerable<Person> persons = _personService.GetAll();
+            return Ok(persons);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult<Person> GetById(int id)
+        {
+           Person person = _personService.GetById(id);
+            return person is null ? NotFound() : Ok(person);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public ActionResult Delete(int id)
+        {
+            Person person = _personService.GetById(id);
+
+            if (person is null)
+                return NotFound();
+
+            _personService.DeleteById(person.PersonId);
+            //_employeeService.Delete(employee);
+            return Ok();
+        }
 
 
     }
