@@ -1,4 +1,5 @@
-﻿using Jym_Management_BussinessLayer.Modules;
+﻿using Jym_Management_APIs.DTO_modules;
+using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,24 +20,31 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpPost]
         [Route("")]
-        public ActionResult<int> CreateEmployee(Employee employee)
+        public ActionResult<int> CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
+            var employee = new Employee();
+
+            employee.PersonId = createEmployeeDTO.PersonId;
+            employee.ResignationDate = createEmployeeDTO.ResignationDate;
+            employee.HireDate = createEmployeeDTO.HireDate;
+            employee.Salary = createEmployeeDTO.Salary;
             _employeeService.Add(employee);
+
             return Ok(employee.EmployeeId);
         }
 
         [HttpPut]
         [Route("")]
-        public ActionResult UpdateEmployee(Employee employee)
+        public ActionResult UpdateEmployee(UpdateEmployeeDTO updateEmployeeDTO)
         {
-            var existingEmployee = _employeeService.GetById(employee.EmployeeId);
+            var existingEmployee = _employeeService.GetById(updateEmployeeDTO.EmployeeId);
             if (existingEmployee == null)
                 return NotFound();
 
-            existingEmployee.HireDate = employee.HireDate;
-            existingEmployee.ResignationDate = employee.ResignationDate;
-            existingEmployee.Salary = employee.Salary;
-            existingEmployee.PersonId = employee.PersonId;
+            existingEmployee.HireDate = updateEmployeeDTO.HireDate;
+            existingEmployee.ResignationDate = updateEmployeeDTO.ResignationDate;
+            existingEmployee.Salary = updateEmployeeDTO.Salary;
+            existingEmployee.PersonId = updateEmployeeDTO.PersonId;
 
             _employeeService.Update(existingEmployee);
             return Ok();
@@ -45,18 +53,18 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult<IEnumerable<Employee>> Get()
+        public ActionResult<IEnumerable<ReadEmployeeDTO>> Get()
         {
-            IEnumerable<Employee> employees = _employeeService.GetAll();
+            var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
             return Ok(employees);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<Employee> GetById(int id)
+        public ActionResult<ReadEmployeeDTO> GetById(int id)
         {
             Employee employee = _employeeService.GetById(id);
-            return employee is null ? NotFound() : Ok(employee);
+            return employee is null ? NotFound() : Ok(employee.AsDTO());
         }
 
         [HttpDelete]
