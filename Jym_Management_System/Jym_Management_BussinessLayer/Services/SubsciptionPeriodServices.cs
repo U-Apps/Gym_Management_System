@@ -44,7 +44,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-           repo.DeleteById(id);
+           repo.DeleteById(c => c.Id == id);
             repo.SaveChanges();
             repo.Dispose();
             
@@ -83,7 +83,7 @@ namespace Jym_Management_BussinessLayer.Services
         public SubsciptionPeriod GetById(int id)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            return Mapping.Mapper.Map<SubsciptionPeriod>(repo.GetById(id));
+            return Mapping.Mapper.Map<SubsciptionPeriod>(repo.GetById(c => c.Id == id));
         }
 
         public void Update(SubsciptionPeriod module)

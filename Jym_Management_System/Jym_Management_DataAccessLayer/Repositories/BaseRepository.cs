@@ -40,9 +40,9 @@ namespace Jym_Management_DataAccessLayer.Repositories
 
         }
 
-        public void DeleteById(int id)
+        public void DeleteById(Func<T, bool> where)
         {
-            _context.Set<T>().Remove(GetById(id));
+            _context.Set<T>().Remove(GetById(where));
         }
 
         public T Find(Func<T, bool> predicate)
@@ -56,15 +56,41 @@ namespace Jym_Management_DataAccessLayer.Repositories
 
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
-            return _context.Set<T>().ToList();
+            List<T> list;
+            using (var context = new AppDbContext())
+            {
+                IQueryable<T> dbQuery = context.Set<T>();
+
+                
+                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
+
+                list = dbQuery
+                    .AsNoTracking()
+                    .ToList<T>();
+            }
+            return list; 
             
         }
 
-        public T GetById(int id)
+        public T GetById(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties)
         {
-            return _context.Set<T>().Find(id);
+            T item;
+            using (var context = new AppDbContext())
+            {
+                IQueryable<T> dbQuery = context.Set<T>();
+
+                //Apply eager loading
+                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
+
+                item = dbQuery
+                    .AsNoTracking()
+                    .FirstOrDefault(where); 
+            }
+            return item;
         }
 
         public void Update(T entity)

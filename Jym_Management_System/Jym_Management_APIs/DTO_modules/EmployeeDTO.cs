@@ -4,10 +4,16 @@ using System.Text.Json.Serialization;
 
 namespace Jym_Management_APIs.DTO_modules
 {
+    public record ReadPaymnetsForEmployee
+    {
+        public int PaymentId { get; set; }
+        public DateTime PaymentDate { get; set; } 
+
+    }
     public record ReadEmployeeDTO
     {
 
-       public int EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public int PersonId { get; set; }
         public DateTime HireDate { get; set; }
         public DateTime ResignationDate { get; set; }
@@ -15,6 +21,8 @@ namespace Jym_Management_APIs.DTO_modules
 
         public ReadPersonDTO person { get; set; }
 
+       
+       public List<ReadPaymnetsForEmployee> payments { get; set; }
     }
     public record UpdateEmployeeDTO
     {

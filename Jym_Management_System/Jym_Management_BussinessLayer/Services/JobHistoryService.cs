@@ -42,7 +42,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
-            repo.DeleteById(id);
+            repo.DeleteById(c=>c.Id==id);
             repo.SaveChanges();
             repo.Dispose();
         }
@@ -79,7 +79,7 @@ namespace Jym_Management_BussinessLayer.Services
         public JobHistory GetById(int id)
         {
             IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
-            return Mapping.Mapper.Map<JobHistory>(repo.GetById(id));
+            return Mapping.Mapper.Map<JobHistory>(repo.GetById(c=>c.Id==id));
         }
 
         public void Update(JobHistory module)

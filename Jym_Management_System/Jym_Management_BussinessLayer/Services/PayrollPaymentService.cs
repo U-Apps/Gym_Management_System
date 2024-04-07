@@ -45,7 +45,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
-            repo.DeleteById(id);
+            repo.DeleteById(c => c.PaymentId == id);
             repo.SaveChanges();
             repo.Dispose();
         }
@@ -84,7 +84,7 @@ namespace Jym_Management_BussinessLayer.Services
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
 
-            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(id));
+            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(c => c.PaymentId == id));
         }
 
         public void Update(PayrollPayment module)

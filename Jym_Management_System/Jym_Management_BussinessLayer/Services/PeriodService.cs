@@ -48,7 +48,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
-            repo.DeleteById(id);
+            repo.DeleteById(c => c.PeriodId == id);
             repo.SaveChanges();
             repo.Dispose();
             
@@ -87,7 +87,7 @@ namespace Jym_Management_BussinessLayer.Services
         public Period GetById(int id)
         {
             IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
-            return Mapping.Mapper.Map<Period>(repo.GetById(id));
+            return Mapping.Mapper.Map<Period>(repo.GetById(c => c.PeriodId == id));
         }
 
         public void Update(Period module)

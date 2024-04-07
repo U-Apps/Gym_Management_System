@@ -45,7 +45,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbSubscription> repo = new BaseRepository<TbSubscription>(new AppDbContext());
-           repo.DeleteById(id);
+           repo.DeleteById(c => c.SubscriptionId == id);
             repo.SaveChanges();
             repo.Dispose();
             
@@ -84,7 +84,7 @@ namespace Jym_Management_BussinessLayer.Services
         public Subscription GetById(int id)
         {
             IBaseRepository<TbSubscription> repo = new BaseRepository<TbSubscription>(new AppDbContext());
-            return Mapping.Mapper.Map<Subscription>(repo.GetById(id));
+            return Mapping.Mapper.Map<Subscription>(repo.GetById(c=>c.SubscriptionId==id));
         }
 
         public void Update(Subscription module)

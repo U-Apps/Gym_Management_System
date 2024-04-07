@@ -46,7 +46,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
-            repo.DeleteById(id);
+            repo.DeleteById(c=>c.ExerciseTypeId==id);
             repo.SaveChanges();
             repo.Dispose();
         }
@@ -83,7 +83,7 @@ namespace Jym_Management_BussinessLayer.Services
         public ExerciseType GetById(int id)
         {
             IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
-            return Mapping.Mapper.Map<ExerciseType>(repo.GetById(id));
+            return Mapping.Mapper.Map<ExerciseType>(repo.GetById(c=>c.ExerciseTypeId==id));
         }
 
         public void Update(ExerciseType module)

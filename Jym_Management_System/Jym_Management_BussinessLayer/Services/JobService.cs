@@ -44,7 +44,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            repo.DeleteById(id);
+            repo.DeleteById(c=>c.JobId==id);
             repo.SaveChanges();
           repo.Dispose();
 
@@ -83,7 +83,7 @@ namespace Jym_Management_BussinessLayer.Services
         public Job GetById(int id)
         {
             IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            return Mapping.Mapper.Map<Job>(repo.GetById(id));
+            return Mapping.Mapper.Map<Job>(repo.GetById(c => c.JobId == id));
 
         }
 

@@ -62,6 +62,7 @@ namespace Jym_Management_APIs.Controllers
         {
 
             var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
+
             return Ok(employees);
         }
 

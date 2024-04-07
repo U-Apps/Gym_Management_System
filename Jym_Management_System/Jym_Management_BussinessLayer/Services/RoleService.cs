@@ -44,7 +44,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
-            repo.DeleteById(id);
+            repo.DeleteById(c => c.RoleId == id);
             repo.SaveChanges();
             repo.Dispose();
             
@@ -83,7 +83,7 @@ namespace Jym_Management_BussinessLayer.Services
         public Role GetById(int id)
         {
             IBaseRepository<TbRole> repo = new BaseRepository<TbRole>(new AppDbContext());
-            return Mapping.Mapper.Map<Role>(repo.GetById(id));
+            return Mapping.Mapper.Map<Role>(repo.GetById(c => c.RoleId == id));
         }
 
         public void Update(Role module)

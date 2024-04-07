@@ -45,7 +45,7 @@ namespace Jym_Management_BussinessLayer.Services
         public void DeleteById(int id)
         {
             IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
-           repo.DeleteById(id);
+           repo.DeleteById(c => c.Id == id);
             repo.SaveChanges();
             repo.Dispose();
             
@@ -84,7 +84,7 @@ namespace Jym_Management_BussinessLayer.Services
         public Permssion GetById(int id)
         {
             IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
-            return Mapping.Mapper.Map<Permssion>(repo.GetById(id));
+            return Mapping.Mapper.Map<Permssion>(repo.GetById(c => c.Id == id));
         }
 
         public void Update(Permssion module)
