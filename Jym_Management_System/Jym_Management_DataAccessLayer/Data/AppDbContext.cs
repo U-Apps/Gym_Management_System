@@ -80,6 +80,10 @@ namespace Jym_Management_DataAccessLayer.Data
             {
                 entity.HasKey(e => e.ExerciseTypeId);
 
+                entity.Property(e => e.ExerciseTypeId)
+                    .UseIdentityColumn(1);
+                
+
                 entity.ToTable("tbExerciseTypes");
 
                 entity.Property(e => e.ExerciseTypeId).HasColumnName("ExerciseTypeID");
@@ -106,10 +110,12 @@ namespace Jym_Management_DataAccessLayer.Data
             {
                 entity.ToTable("tbJobHistories");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
+                entity.HasKey(e => e.Id);
 
+                entity.Property(e => e.Id)
+                    .UseIdentityColumn(1)
+                    .HasColumnName("ID");
+                
                 entity.Property(e => e.EmpoyeeId).HasColumnName("EmpoyeeID");
 
                 entity.Property(e => e.EndDate).HasColumnType("date");
@@ -153,7 +159,7 @@ namespace Jym_Management_DataAccessLayer.Data
                 entity.ToTable("tbPayroll_payments");
 
                 entity.Property(e => e.PaymentId)
-                    .ValueGeneratedNever()
+                    .UseIdentityColumn(1)
                     .HasColumnName("paymentID");
 
                 entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
@@ -175,7 +181,9 @@ namespace Jym_Management_DataAccessLayer.Data
 
                 entity.ToTable("tbPeriods");
 
-                entity.Property(e => e.PeriodId).HasColumnName("PeriodID");
+                entity.Property(e => e.PeriodId)
+                    .UseIdentityColumn(1)
+                    .HasColumnName("PeriodID");
 
                 entity.Property(e => e.EndTime).HasColumnType("time(0)");
 
@@ -246,7 +254,11 @@ namespace Jym_Management_DataAccessLayer.Data
             {
                 entity.ToTable("tbSubsciptionPeriods");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .UseIdentityColumn(1)
+                    .HasColumnName("ID");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
 
@@ -260,7 +272,7 @@ namespace Jym_Management_DataAccessLayer.Data
                 entity.ToTable("tbSubscriptions");
 
                 entity.Property(e => e.SubscriptionId)
-                    .ValueGeneratedNever()
+                    .UseIdentityColumn(1)
                     .HasColumnName("SubscriptionID");
 
                 entity.Property(e => e.CoachId).HasColumnName("CoachID");
@@ -318,7 +330,10 @@ namespace Jym_Management_DataAccessLayer.Data
 
             modelBuilder.Entity<TbSubscriptionPayment>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.PaymentId);
+
+                entity.Property(e => e.PaymentId)
+                    .UseIdentityColumn(1);
 
                 entity.ToTable("tbSubscriptionPayments");
 
@@ -335,7 +350,7 @@ namespace Jym_Management_DataAccessLayer.Data
                 entity.HasOne(d => d.CreatedByUser)
                     .WithMany()
                     .HasForeignKey(d => d.CreatedByUserId)
-                    .HasConstraintName("FK_tbSubscriptionPayments_tbUsers");
+                    .HasConstraintName("FK_tbSubscriptionPayments_AspNetUsers");
 
                 entity.HasOne(d => d.Subscription)
                     .WithMany()
