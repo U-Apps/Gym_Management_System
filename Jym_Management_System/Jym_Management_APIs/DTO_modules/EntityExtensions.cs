@@ -28,26 +28,26 @@ namespace Jym_Management_APIs.DTO_modules
                     Idcard=employee.Person.Idcard
                 },
                 payments = employee.PayrollPayments.Select(employee => new ReadPaymnetsForEmployee { PaymentId=employee.PaymentId , PaymentDate = employee.PaymentDate}).ToList()
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             };
+
+        public static ReadMemberDTO AsDTO(this Member member)
+            => new ReadMemberDTO
+            (
+                member.MemberId,
+                member.PersonId,
+                member.MemberWeight,
+                member.IsActive,
+
+                new ReadPersonDTO()
+                {
+                    Name = member.Person.Name,
+                    PersonId = member.PersonId,
+                    Email = member.Person.Email,
+                    PhoneNumber = member.Person.PhoneNumber,
+                    BirthDate = member.Person.BirthDate,
+                    Idcard = member.Person.Idcard
+                }
+            );
     }
 }
