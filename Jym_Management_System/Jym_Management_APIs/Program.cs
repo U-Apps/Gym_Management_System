@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IBaseServices<Employee>,EmployeeService>();
 builder.Services.AddScoped<IBaseServices<Person>, PersonService>();
 builder.Services.AddScoped<IBaseServices<Member>, MemberService>();
+builder.Services.AddScoped<IBaseServices<User>, UserServices>();
+
 
 var app = builder.Build();
 

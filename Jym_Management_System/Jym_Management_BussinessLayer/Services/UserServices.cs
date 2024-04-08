@@ -77,13 +77,13 @@ namespace Jym_Management_BussinessLayer.Services
         public IEnumerable<User> GetAll()
         {
             IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<User>>(repo.GetAll());
+            return Mapping.Mapper.Map<IEnumerable<User>>(repo.GetAll(perm=>perm.Permissions,prsn=>prsn.Person));
         }
 
         public User GetById(int id)
         {
             IBaseRepository<TbUser> repo = new BaseRepository<TbUser>(new AppDbContext());
-            return Mapping.Mapper.Map<User>(repo.GetById(c=>c.UserId==id));
+            return Mapping.Mapper.Map<User>(repo.GetById(c=>c.UserId==id, perm => perm.Permissions, prsn => prsn.Person));
         }
 
         public void Update(User module)

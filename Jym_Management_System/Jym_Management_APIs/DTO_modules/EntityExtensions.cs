@@ -49,5 +49,35 @@ namespace Jym_Management_APIs.DTO_modules
                     Idcard = member.Person.Idcard
                 }
             );
+
+        public static ReadUserDTO AsDTO(this User user)
+            => new ReadUserDTO
+            (
+                user.UserId,
+                user.UserName,
+                user.Password,
+                user.IsActive,
+                PermissionsId:user.PermissionsId,
+
+               Permissions: new ReadPermssionDTO
+                (
+                    Id :user.Permissions.Id,
+                    Name:user.Permissions.Name,
+                    Role:new ReadRoleDTO(
+                        user.Permissions.Role.RoleId,
+                        user.Permissions.Role.RoleName
+                        )
+                   
+                ),
+               Person: new ReadPersonDTO()
+               {
+                   Name = user.Person.Name,
+                   PersonId = user.PersonId,
+                   Email = user.Person.Email,
+                   PhoneNumber = user.Person.PhoneNumber,
+                   BirthDate = user.Person.BirthDate,
+                   Idcard = user.Person.Idcard
+               }
+            );
     }
 }
