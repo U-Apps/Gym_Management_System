@@ -16,6 +16,9 @@ builder.Services.AddScoped<IBaseServices<Employee>,EmployeeService>();
 builder.Services.AddScoped<IBaseServices<Person>, PersonService>();
 builder.Services.AddScoped<IBaseServices<Member>, MemberService>();
 builder.Services.AddScoped<IBaseServices<User>, UserServices>();
+builder.Services.AddScoped<IBaseServices<Permssion>, PermssionService>();
+builder.Services.AddScoped<IBaseServices<Role>, RoleService>();
+builder.Services.AddScoped<IBaseServices<Job>, JobService>();
 
 
 var app = builder.Build();

@@ -79,5 +79,30 @@ namespace Jym_Management_APIs.DTO_modules
                    Idcard = user.Person.Idcard
                }
             );
+        public static ReadPermssionDTO AsDTO(this Permssion permssion)
+            => new ReadPermssionDTO
+            (
+                    Id: permssion.Id,
+                    Name: permssion.Name,
+
+                    Role: new ReadRoleDTO(
+                        permssion.Role.RoleId,
+                        permssion.Role.RoleName
+                        )
+                );
+
+        public static ReadRoleDTO AsDTO(this Role role)
+           => new ReadRoleDTO
+           (
+                  RoleId: role.RoleId,
+                  RoleName: role.RoleName
+               );
+
+        public static ReadJobDTO AsDTO(this Job job)
+          => new ReadJobDTO
+          (
+                 JobId: job.JobId,
+                 JobTitle: job.JobTitle
+              );
     }
 }
