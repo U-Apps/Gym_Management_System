@@ -38,7 +38,7 @@ namespace Jym_Management_DataAccessLayer.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=FMSI\\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;");
+                optionsBuilder.UseSqlServer("Server=.;Database=JymManagementSystem;Integrated Security=SSPI;");
             
             }
         }
@@ -132,7 +132,7 @@ namespace Jym_Management_DataAccessLayer.Data
 
                 entity.Property(e => e.IsActive).HasColumnName("isActive");
 
-                entity.Property(e => e.MemberWeight).HasColumnType("decimal(2, 2)");
+                entity.Property(e => e.MemberWeight).HasColumnType("decimal(5, 2)");
 
                 entity.Property(e => e.PersonId).HasColumnName("PersonID");
 
@@ -315,7 +315,7 @@ namespace Jym_Management_DataAccessLayer.Data
 
             modelBuilder.Entity<TbSubscriptionPayment>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e=>e.PaymentId);
 
                 entity.ToTable("tbSubscriptionPayments");
 

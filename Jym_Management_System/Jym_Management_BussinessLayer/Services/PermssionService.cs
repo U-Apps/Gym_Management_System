@@ -78,13 +78,13 @@ namespace Jym_Management_BussinessLayer.Services
         public IEnumerable<Permssion> GetAll()
         {
             IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<Permssion>>(repo.GetAll());
+            return Mapping.Mapper.Map<IEnumerable<Permssion>>(repo.GetAll(r=>r.Role));
         }
 
         public Permssion GetById(int id)
         {
             IBaseRepository<TbPermssion> repo = new BaseRepository<TbPermssion>(new AppDbContext());
-            return Mapping.Mapper.Map<Permssion>(repo.GetById(c => c.Id == id));
+            return Mapping.Mapper.Map<Permssion>(repo.GetById(c => c.Id == id,r=>r.Role));
         }
 
         public void Update(Permssion module)

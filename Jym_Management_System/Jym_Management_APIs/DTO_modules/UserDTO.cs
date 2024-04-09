@@ -26,7 +26,9 @@ namespace Jym_Management_APIs.DTO_modules
 
              bool IsActive,
              [Required]
-             byte PermissionsId
+             byte PermissionsId,
+             [Required]
+             int PersonId
 
        );
 
@@ -41,7 +43,9 @@ namespace Jym_Management_APIs.DTO_modules
             bool IsActive,
 
             [Required]
-            byte PermissionsId
+            byte PermissionsId,
+            [Required]
+            int PersonId
 
       );
 }

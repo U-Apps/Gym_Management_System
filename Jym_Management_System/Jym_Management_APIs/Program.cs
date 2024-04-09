@@ -14,6 +14,20 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IBaseServices<Employee>,EmployeeService>();
 builder.Services.AddScoped<IBaseServices<Person>, PersonService>();
+builder.Services.AddScoped<IBaseServices<Member>, MemberService>();
+builder.Services.AddScoped<IBaseServices<User>, UserServices>();
+builder.Services.AddScoped<IBaseServices<Permssion>, PermssionService>();
+builder.Services.AddScoped<IBaseServices<Role>, RoleService>();
+builder.Services.AddScoped<IBaseServices<Job>, JobService>();
+builder.Services.AddScoped<IBaseServices<JobHistory>, JobHistoryService>();
+builder.Services.AddScoped<IBaseServices<Period>, PeriodService>();
+builder.Services.AddScoped<IBaseServices<SubscriptionPeriod>, SubscriptionPeriodServices>();
+builder.Services.AddScoped<IBaseServices<SubscriptionPayment>, SubscriptionPaymentServices>();
+builder.Services.AddScoped<IBaseServices<Subscription>, SubscriptionServices>();
+builder.Services.AddScoped<IBaseServices<ExerciseType>, ExerciseTypeService>();
+builder.Services.AddScoped<IBaseServices<PayrollPayment>, PayrollPaymentService>();
+
+
 
 var app = builder.Build();
 

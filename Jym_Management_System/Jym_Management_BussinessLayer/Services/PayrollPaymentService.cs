@@ -76,15 +76,15 @@ namespace Jym_Management_BussinessLayer.Services
         public IEnumerable<PayrollPayment> GetAll()
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
-
-            return Mapping.Mapper.Map<IEnumerable<PayrollPayment>>(repo.GetAll());
+            
+            return Mapping.Mapper.Map<IEnumerable<PayrollPayment>>(repo.GetAll(prP=>prP.Employee,p=>p.Employee.Person));
         }
 
         public PayrollPayment GetById(int id)
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
 
-            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(c => c.PaymentId == id));
+            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(c => c.PaymentId == id, prP => prP.Employee));
         }
 
         public void Update(PayrollPayment module)

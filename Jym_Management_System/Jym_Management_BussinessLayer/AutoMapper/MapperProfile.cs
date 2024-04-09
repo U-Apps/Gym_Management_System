@@ -59,7 +59,7 @@ namespace Jym_Management_BussinessLayer.AutoMapper
                 .ReverseMap();
 
 
-            CreateMap<TbSubsciptionPeriod, SubsciptionPeriod>()
+            CreateMap<TbSubsciptionPeriod, SubscriptionPeriod>()
                 .ForMember(dust => dust.Subscriptions, src => src.MapFrom(src => src.TbSubscriptions))
                 .ReverseMap();
 

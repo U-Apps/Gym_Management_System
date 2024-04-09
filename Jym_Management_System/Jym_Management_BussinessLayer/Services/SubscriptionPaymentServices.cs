@@ -77,13 +77,44 @@ namespace Jym_Management_BussinessLayer.Services
         public IEnumerable<SubscriptionPayment> GetAll()
         {
             IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<SubscriptionPayment>>(repo.GetAll());
+            return Mapping.Mapper.Map<IEnumerable<SubscriptionPayment>>(repo.GetAll(
+                    sp=>sp.CreatedByUser,
+                    sp=>sp.CreatedByUser.Person,
+                    sp=>sp.CreatedByUser.Permissions,
+                    sp=>sp.CreatedByUser.Permissions.Role,
+                    sp =>sp.Subscription,
+                    sp => sp.Subscription.Coach,
+                    sp => sp.Subscription.Coach.Job,
+                    sp => sp.Subscription.CreatedByReceptionist,
+                    sp => sp.Subscription.CreatedByReceptionist.Job,
+                    sp => sp.Subscription.ExcerciseType,
+                    sp => sp.Subscription.Member,
+                    sp => sp.Subscription.Member.Person,
+                    sp => sp.Subscription.Period,
+                    sp => sp.Subscription.SubscriptionPeriod
+                ));
         }
 
         public SubscriptionPayment GetById(int id)
         {
             IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
-            return Mapping.Mapper.Map<SubscriptionPayment>(repo.GetById(c => c.PaymentId == id));
+            return Mapping.Mapper.Map<SubscriptionPayment>(repo.GetById(
+                    c => c.PaymentId == id,
+                    sp => sp.CreatedByUser,
+                    sp => sp.CreatedByUser.Person,
+                    sp => sp.CreatedByUser.Permissions,
+                    sp => sp.CreatedByUser.Permissions.Role,
+                    sp => sp.Subscription,
+                    sp => sp.Subscription.Coach,
+                    sp => sp.Subscription.Coach.Job,
+                    sp => sp.Subscription.CreatedByReceptionist,
+                    sp => sp.Subscription.CreatedByReceptionist.Job,
+                    sp => sp.Subscription.ExcerciseType,
+                    sp => sp.Subscription.Member,
+                    sp => sp.Subscription.Member.Person,
+                    sp => sp.Subscription.Period,
+                    sp => sp.Subscription.SubscriptionPeriod
+                    ));
         }
 
         public void Update(SubscriptionPayment module)

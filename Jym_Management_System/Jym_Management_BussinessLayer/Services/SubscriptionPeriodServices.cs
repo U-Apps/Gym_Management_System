@@ -9,11 +9,11 @@ using System.Collections.Generic;
 
 namespace Jym_Management_BussinessLayer.Services
 {
-    public class SubsciptionPeriodServices : IBaseServices<SubsciptionPeriod>
+    public class SubscriptionPeriodServices : IBaseServices<SubscriptionPeriod>
     {
         
 
-        public void Add(SubsciptionPeriod module)
+        public void Add(SubscriptionPeriod module)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
@@ -22,7 +22,7 @@ namespace Jym_Management_BussinessLayer.Services
             repo.Dispose();
         }
 
-        public void AddRange(IEnumerable<SubsciptionPeriod> module)
+        public void AddRange(IEnumerable<SubscriptionPeriod> module)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<IEnumerable<TbSubsciptionPeriod>>(module);
@@ -32,7 +32,7 @@ namespace Jym_Management_BussinessLayer.Services
             
         }
 
-        public void Delete(SubsciptionPeriod module)
+        public void Delete(SubscriptionPeriod module)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
@@ -50,7 +50,7 @@ namespace Jym_Management_BussinessLayer.Services
             
         }
 
-        public void DeleteRange(IEnumerable<SubsciptionPeriod> modules)
+        public void DeleteRange(IEnumerable<SubscriptionPeriod> modules)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<IEnumerable<TbSubsciptionPeriod>>(modules);
@@ -60,33 +60,33 @@ namespace Jym_Management_BussinessLayer.Services
             
         }
 
-        public SubsciptionPeriod Find(Func<SubsciptionPeriod, bool> predicate)
+        public SubscriptionPeriod Find(Func<SubscriptionPeriod, bool> predicate)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbSubsciptionPeriod, bool>>(predicate);
-            return Mapping.Mapper.Map<SubsciptionPeriod>(repo.Find(exp));
+            return Mapping.Mapper.Map<SubscriptionPeriod>(repo.Find(exp));
         }
 
-        public IEnumerable<SubsciptionPeriod> FindAll(Func<SubsciptionPeriod, bool> predicate)
+        public IEnumerable<SubscriptionPeriod> FindAll(Func<SubscriptionPeriod, bool> predicate)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var exp = Mapping.Mapper.Map<Func<TbSubsciptionPeriod, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<SubsciptionPeriod>>(repo.FindAll(exp));
+            return Mapping.Mapper.Map<IEnumerable<SubscriptionPeriod>>(repo.FindAll(exp));
         }
 
-        public IEnumerable<SubsciptionPeriod> GetAll()
+        public IEnumerable<SubscriptionPeriod> GetAll()
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<SubsciptionPeriod>>(repo.GetAll());
+            return Mapping.Mapper.Map<IEnumerable<SubscriptionPeriod>>(repo.GetAll());
         }
 
-        public SubsciptionPeriod GetById(int id)
+        public SubscriptionPeriod GetById(int id)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            return Mapping.Mapper.Map<SubsciptionPeriod>(repo.GetById(c => c.Id == id));
+            return Mapping.Mapper.Map<SubscriptionPeriod>(repo.GetById(c => c.Id == id));
         }
 
-        public void Update(SubsciptionPeriod module)
+        public void Update(SubscriptionPeriod module)
         {
             IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
             var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
