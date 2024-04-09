@@ -2,7 +2,7 @@
 
 namespace Jym_Management_APIs.DTO_modules
 {
-    public record ReadSubsciptionPeriodDTO
+    public record ReadSubscriptionPeriodDTO
         (
               byte Id,
               string? Name,
@@ -10,7 +10,7 @@ namespace Jym_Management_APIs.DTO_modules
 
         );
 
-    public record CreateSubsciptionPeriodDTO
+    public record CreateSubscriptionPeriodDTO
        (
               string? Name,
 
@@ -19,7 +19,7 @@ namespace Jym_Management_APIs.DTO_modules
 
        );
 
-    public record UpdateSubsciptionPeriodDTO
+    public record UpdateSubscriptionPeriodDTO
       (
             [Required]
             byte Id,

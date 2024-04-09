@@ -13,7 +13,7 @@ namespace Jym_Management_APIs.DTO_modules
              ReadExerciseTypeDTO ExcerciseType ,
              ReadMemberDTO Member ,
              ReadPeriodDTO Period ,
-             ReadSubsciptionPeriodDTO SubscriptionPeriod 
+             ReadSubscriptionPeriodDTO SubscriptionPeriod 
         
         );
 

@@ -73,13 +73,13 @@ namespace Jym_Management_BussinessLayer.Services
         public IEnumerable<JobHistory> GetAll()
         {
             IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<JobHistory>>(repo.GetAll());
+            return Mapping.Mapper.Map<IEnumerable<JobHistory>>(repo.GetAll(jH => jH.Job));
         }
 
         public JobHistory GetById(int id)
         {
             IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
-            return Mapping.Mapper.Map<JobHistory>(repo.GetById(c=>c.Id==id));
+            return Mapping.Mapper.Map<JobHistory>(repo.GetById(c=>c.Id==id, jH => jH.Job));
         }
 
         public void Update(JobHistory module)

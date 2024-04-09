@@ -20,6 +20,6 @@ namespace Jym_Management_BussinessLayer.Modules
         public virtual ExerciseType ExcerciseType { get; set; } = null!;
         public virtual Member Member { get; set; } = null!;
         public virtual Period Period { get; set; } = null!;
-        public virtual SubsciptionPeriod SubscriptionPeriod { get; set; } = null!;
+        public virtual SubscriptionPeriod SubscriptionPeriod { get; set; } = null!;
     }
 }

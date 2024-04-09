@@ -78,13 +78,34 @@ namespace Jym_Management_BussinessLayer.Services
         public IEnumerable<Subscription> GetAll()
         {
             IBaseRepository<TbSubscription> repo = new BaseRepository<TbSubscription>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<Subscription>>(repo.GetAll());
+            return Mapping.Mapper.Map<IEnumerable<Subscription>>(repo.GetAll(
+                    s=>s.Coach,
+                    s=>s.Coach.Job,
+                    s=>s.CreatedByReceptionist,
+                    s => s.CreatedByReceptionist.Job,
+                    s =>s.ExcerciseType,
+                    s=>s.Member,
+                    s=>s.Member.Person,
+                    s =>s.Period,
+                    s=>s.SubscriptionPeriod
+                ));
         }
 
         public Subscription GetById(int id)
         {
             IBaseRepository<TbSubscription> repo = new BaseRepository<TbSubscription>(new AppDbContext());
-            return Mapping.Mapper.Map<Subscription>(repo.GetById(c=>c.SubscriptionId==id));
+            return Mapping.Mapper.Map<Subscription>(repo.GetById(
+                    c=>c.SubscriptionId==id,
+                    s => s.Coach,
+                    s => s.Coach.Job,
+                    s => s.CreatedByReceptionist,
+                    s => s.CreatedByReceptionist.Job,
+                    s => s.ExcerciseType,
+                    s => s.Member,
+                    s => s.Member.Person,
+                    s => s.Period,
+                    s => s.SubscriptionPeriod
+                ));
         }
 
         public void Update(Subscription module)

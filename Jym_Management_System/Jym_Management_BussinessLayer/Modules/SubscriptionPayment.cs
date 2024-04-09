@@ -5,7 +5,7 @@ namespace Jym_Management_BussinessLayer.Modules
 {
     public class SubscriptionPayment
     {
-        public int? PaymentId { get; set; }
+        public int PaymentId { get; set; }
         public int? SubscriptionId { get; set; }
         public DateTime? PaymentDate { get; set; }
         public decimal? PaymentAmount { get; set; }

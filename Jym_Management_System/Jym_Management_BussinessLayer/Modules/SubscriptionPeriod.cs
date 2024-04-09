@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Jym_Management_BussinessLayer.Modules
 {
-    public class SubsciptionPeriod
+    public class SubscriptionPeriod
     {
        
 

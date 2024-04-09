@@ -4,12 +4,12 @@ namespace Jym_Management_APIs.DTO_modules
 {
     public record ReadSubscriptionPaymentDTO
         (
-             int? PaymentId ,
+             int PaymentId ,
              DateTime? PaymentDate,
              decimal? PaymentAmount,
 
-            ReadUserDTO? CreatedByUser ,
-            ReadSubscriptionDTO? Subscription
+            ReadUserDTO CreatedByUser ,
+            ReadSubscriptionDTO Subscription
 
 
         
@@ -19,7 +19,7 @@ namespace Jym_Management_APIs.DTO_modules
        (
 
              [Required]
-             int? SubscriptionId,
+             int SubscriptionId,
 
              [Required]
              DateTime? PaymentDate,
@@ -33,7 +33,7 @@ namespace Jym_Management_APIs.DTO_modules
     public record UpdateSubscriptionPaymentDTO
       (
              [Required]
-             int? PaymentId,
+             int PaymentId,
 
              [Required]
              int? SubscriptionId,

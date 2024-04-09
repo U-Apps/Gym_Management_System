@@ -54,7 +54,7 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult<IEnumerable<ReadPermssionDTO>> Get()
+        public ActionResult<IEnumerable<ReadRoleDTO>> Get()
         {
 
             var roles = _roleService.GetAll().Select(role => role.AsDTO());
@@ -64,7 +64,7 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<ReadPermssionDTO> GetById(int id)
+        public ActionResult<ReadRoleDTO> GetById(int id)
         {
             Role role = _roleService.GetById(id);
             return role is null ? NotFound() : Ok(role.AsDTO());

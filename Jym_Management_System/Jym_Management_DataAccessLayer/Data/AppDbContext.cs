@@ -315,7 +315,7 @@ namespace Jym_Management_DataAccessLayer.Data
 
             modelBuilder.Entity<TbSubscriptionPayment>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e=>e.PaymentId);
 
                 entity.ToTable("tbSubscriptionPayments");
 
