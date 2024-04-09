@@ -104,5 +104,14 @@ namespace Jym_Management_APIs.DTO_modules
                  JobId: job.JobId,
                  JobTitle: job.JobTitle
               );
+
+        public static ReadPeriodDTO AsDTO(this Period period)
+         => new ReadPeriodDTO
+         (
+               PeriodId: period.PeriodId,
+               PeriodName: period.PeriodName,
+               StartTime: period.StartTime,
+               EndTime: period.EndTime
+             );
     }
 }

@@ -19,6 +19,7 @@ builder.Services.AddScoped<IBaseServices<User>, UserServices>();
 builder.Services.AddScoped<IBaseServices<Permssion>, PermssionService>();
 builder.Services.AddScoped<IBaseServices<Role>, RoleService>();
 builder.Services.AddScoped<IBaseServices<Job>, JobService>();
+builder.Services.AddScoped<IBaseServices<Period>, PeriodService>();
 
 
 var app = builder.Build();
