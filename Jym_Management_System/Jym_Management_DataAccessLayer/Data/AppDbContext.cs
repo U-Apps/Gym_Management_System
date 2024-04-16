@@ -43,7 +43,7 @@ namespace Jym_Management_DataAccessLayer.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(@"Server=MSI\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;");
+                optionsBuilder.UseSqlServer(@"Server=.;Database=JymManagementSystem;Integrated Security=SSPI;");
             }
         }
 
@@ -52,107 +52,9 @@ namespace Jym_Management_DataAccessLayer.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<TbEmployee>(entity =>
-            {
-                entity.HasKey(e => e.EmployeeId)
-                    .HasName("PK_tbk");
 
-                entity.ToTable("tbEmployees");
+        
 
-                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
-
-                entity.Property(e => e.HireDate).HasColumnType("date");
-
-                entity.Property(e => e.PersonId).HasColumnName("PersonID");
-
-                entity.Property(e => e.ResignationDate)
-                    .HasColumnType("date")
-                    .HasColumnName("resignationDate");
-
-                entity.Property(e => e.Salary).HasColumnType("money");
-
-                entity.HasOne(d => d.Person)
-                    .WithMany(p => p.TbEmployees)
-                    .HasForeignKey(d => d.PersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Employees");
-            });
-
-            modelBuilder.Entity<TbExerciseType>(entity =>
-            {
-                entity.HasKey(e => e.ExerciseTypeId);
-
-                entity.Property(e => e.ExerciseTypeId)
-                    .UseIdentityColumn(1);
-                
-
-                entity.ToTable("tbExerciseTypes");
-
-                entity.Property(e => e.ExerciseTypeId).HasColumnName("ExerciseTypeID");
-
-                entity.Property(e => e.Name).HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<TbJob>(entity =>
-            {
-                entity.HasKey(e => e.JobId);
-
-                entity.ToTable("tbJobs");
-
-                entity.Property(e => e.JobId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("JobID");
-
-                entity.Property(e => e.JobTitle)
-                    .HasMaxLength(50)
-                    .HasColumnName("jobTitle");
-            });
-
-            modelBuilder.Entity<TbJobHistory>(entity =>
-            {
-                entity.ToTable("tbJobHistories");
-
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Id)
-                    .UseIdentityColumn(1)
-                    .HasColumnName("ID");
-                
-                entity.Property(e => e.EmpoyeeId).HasColumnName("EmpoyeeID");
-
-                entity.Property(e => e.EndDate).HasColumnType("date");
-
-                entity.Property(e => e.JobId).HasColumnName("JobID");
-
-                entity.Property(e => e.StartDate).HasColumnType("date");
-
-                entity.HasOne(d => d.Job)
-                    .WithMany(p => p.TbJobHistories)
-                    .HasForeignKey(d => d.JobId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbJobHistories_tbJobs");
-            });
-
-            modelBuilder.Entity<TbMember>(entity =>
-            {
-                entity.HasKey(e => e.MemberId);
-
-                entity.ToTable("tbMembers");
-
-                entity.Property(e => e.MemberId).HasColumnName("MemberID");
-
-                entity.Property(e => e.IsActive).HasColumnName("isActive");
-
-                entity.Property(e => e.MemberWeight).HasColumnType("decimal(5, 2)");
-
-                entity.Property(e => e.PersonId).HasColumnName("PersonID");
-
-                entity.HasOne(d => d.Person)
-                    .WithMany(p => p.TbMembers)
-                    .HasForeignKey(d => d.PersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Members");
-            });
 
             modelBuilder.Entity<TbPayrollPayment>(entity =>
             {
