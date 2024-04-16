@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Jym_Management_DataAccessLayer.Authentication
 {
-    internal class AuthenticationManager
+    public class AuthenticationManager
     {
         private UserManager<AppUser> _UserManager { get; }
 
