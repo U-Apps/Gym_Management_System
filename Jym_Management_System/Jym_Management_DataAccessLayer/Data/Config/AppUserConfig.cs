@@ -7,7 +7,7 @@ using Jym_Management_DataAccessLayer.Entities.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Jym_Management_DataAccessLayer.Config
+namespace Jym_Management_DataAccessLayer.Data.Config
 {
     public class AppUserConfig : IEntityTypeConfiguration<AppUser>
     {

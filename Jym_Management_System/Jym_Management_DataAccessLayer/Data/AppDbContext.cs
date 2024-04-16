@@ -6,8 +6,9 @@ using Jym_Management_DataAccessLayer.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Jym_Management_DataAccessLayer.Entities.Authentication;
-using Jym_Management_DataAccessLayer.Config;
+using Jym_Management_DataAccessLayer.Data.Config;
 using Microsoft.AspNetCore.Identity;
+using Jym_Management_DataAccessLayer.Data.Config;
 
 namespace Jym_Management_DataAccessLayer.Data
 {
