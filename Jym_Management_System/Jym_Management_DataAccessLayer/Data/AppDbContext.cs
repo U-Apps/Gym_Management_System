@@ -4,10 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Jym_Management_DataAccessLayer.Entities;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Jym_Management_DataAccessLayer.Entities.Authentication;
+using Jym_Management_DataAccessLayer.Config;
+using Microsoft.AspNetCore.Identity;
 
 namespace Jym_Management_DataAccessLayer.Data
 {
-    public partial class AppDbContext : DbContext
+    public partial class AppDbContext : IdentityDbContext<AppUser,IdentityRole<int>,int>
     {
         public AppDbContext()
         {
@@ -26,25 +30,26 @@ namespace Jym_Management_DataAccessLayer.Data
         public virtual DbSet<TbMember> TbMembers { get; set; } = null!;
         public virtual DbSet<TbPayrollPayment> TbPayrollPayments { get; set; } = null!;
         public virtual DbSet<TbPeriod> TbPeriods { get; set; } = null!;
-        public virtual DbSet<TbPermssion> TbPermssions { get; set; } = null!;
+        //public virtual DbSet<TbPermssion> TbPermssions { get; set; } = null!;
         public virtual DbSet<TbPerson> TbPeople { get; set; } = null!;
-        public virtual DbSet<TbRole> TbRoles { get; set; } = null!;
+        //public virtual DbSet<TbRole> TbRoles { get; set; } = null!;
         public virtual DbSet<TbSubsciptionPeriod> TbSubsciptionPeriods { get; set; } = null!;
         public virtual DbSet<TbSubscription> TbSubscriptions { get; set; } = null!;
         public virtual DbSet<TbSubscriptionPayment> TbSubscriptionPayments { get; set; } = null!;
-        public virtual DbSet<TbUser> TbUsers { get; set; } = null!;
+        //public virtual DbSet<TbUser> TbUsers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.;Database=JymManagementSystem;Integrated Security=SSPI;");
-            
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer(@"Server=MSI\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<TbEmployee>(entity =>
@@ -77,6 +82,10 @@ namespace Jym_Management_DataAccessLayer.Data
             {
                 entity.HasKey(e => e.ExerciseTypeId);
 
+                entity.Property(e => e.ExerciseTypeId)
+                    .UseIdentityColumn(1);
+                
+
                 entity.ToTable("tbExerciseTypes");
 
                 entity.Property(e => e.ExerciseTypeId).HasColumnName("ExerciseTypeID");
@@ -103,10 +112,12 @@ namespace Jym_Management_DataAccessLayer.Data
             {
                 entity.ToTable("tbJobHistories");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
+                entity.HasKey(e => e.Id);
 
+                entity.Property(e => e.Id)
+                    .UseIdentityColumn(1)
+                    .HasColumnName("ID");
+                
                 entity.Property(e => e.EmpoyeeId).HasColumnName("EmpoyeeID");
 
                 entity.Property(e => e.EndDate).HasColumnType("date");
@@ -150,7 +161,7 @@ namespace Jym_Management_DataAccessLayer.Data
                 entity.ToTable("tbPayroll_payments");
 
                 entity.Property(e => e.PaymentId)
-                    .ValueGeneratedNever()
+                    .UseIdentityColumn(1)
                     .HasColumnName("paymentID");
 
                 entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
@@ -172,7 +183,9 @@ namespace Jym_Management_DataAccessLayer.Data
 
                 entity.ToTable("tbPeriods");
 
-                entity.Property(e => e.PeriodId).HasColumnName("PeriodID");
+                entity.Property(e => e.PeriodId)
+                    .UseIdentityColumn(1)
+                    .HasColumnName("PeriodID");
 
                 entity.Property(e => e.EndTime).HasColumnType("time(0)");
 
@@ -181,23 +194,23 @@ namespace Jym_Management_DataAccessLayer.Data
                 entity.Property(e => e.StartTime).HasColumnType("time(0)");
             });
 
-            modelBuilder.Entity<TbPermssion>(entity =>
-            {
-                entity.ToTable("tbPermssions");
+            // modelBuilder.Entity<TbPermssion>(entity =>
+            // {
+            //     entity.ToTable("tbPermssions");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+            //     entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .HasColumnName("name");
+            //     entity.Property(e => e.Name)
+            //         .HasMaxLength(50)
+            //         .HasColumnName("name");
 
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            //     entity.Property(e => e.RoleId).HasColumnName("RoleID");
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.TbPermssions)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_permissions");
-            });
+            //     entity.HasOne(d => d.Role)
+            //         .WithMany(p => p.TbPermssions)
+            //         .HasForeignKey(d => d.RoleId)
+            //         .HasConstraintName("FK_permissions");
+            // });
 
             modelBuilder.Entity<TbPerson>(entity =>
             {
@@ -228,22 +241,26 @@ namespace Jym_Management_DataAccessLayer.Data
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<TbRole>(entity =>
-            {
-                entity.HasKey(e => e.RoleId);
+            // modelBuilder.Entity<TbRole>(entity =>
+            // {
+            //     entity.HasKey(e => e.RoleId);
 
-                entity.ToTable("tbRoles");
+            //     entity.ToTable("tbRoles");
 
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            //     entity.Property(e => e.RoleId).HasColumnName("RoleID");
 
-                entity.Property(e => e.RoleName).HasMaxLength(50);
-            });
+            //     entity.Property(e => e.RoleName).HasMaxLength(50);
+            // });
 
             modelBuilder.Entity<TbSubsciptionPeriod>(entity =>
             {
                 entity.ToTable("tbSubsciptionPeriods");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .UseIdentityColumn(1)
+                    .HasColumnName("ID");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
 
@@ -257,7 +274,7 @@ namespace Jym_Management_DataAccessLayer.Data
                 entity.ToTable("tbSubscriptions");
 
                 entity.Property(e => e.SubscriptionId)
-                    .ValueGeneratedNever()
+                    .UseIdentityColumn(1)
                     .HasColumnName("SubscriptionID");
 
                 entity.Property(e => e.CoachId).HasColumnName("CoachID");
@@ -315,7 +332,10 @@ namespace Jym_Management_DataAccessLayer.Data
 
             modelBuilder.Entity<TbSubscriptionPayment>(entity =>
             {
-                entity.HasKey(e=>e.PaymentId);
+                entity.HasKey(e => e.PaymentId);
+
+                entity.Property(e => e.PaymentId)
+                    .UseIdentityColumn(1);
 
                 entity.ToTable("tbSubscriptionPayments");
 
@@ -332,7 +352,7 @@ namespace Jym_Management_DataAccessLayer.Data
                 entity.HasOne(d => d.CreatedByUser)
                     .WithMany()
                     .HasForeignKey(d => d.CreatedByUserId)
-                    .HasConstraintName("FK_tbSubscriptionPayments_tbUsers");
+                    .HasConstraintName("FK_tbSubscriptionPayments_AspNetUsers");
 
                 entity.HasOne(d => d.Subscription)
                     .WithMany()
@@ -340,38 +360,38 @@ namespace Jym_Management_DataAccessLayer.Data
                     .HasConstraintName("FK_tbSubscriptionPayments_tbSubscriptions");
             });
 
-            modelBuilder.Entity<TbUser>(entity =>
-            {
-                entity.HasKey(e => e.UserId);
+            // modelBuilder.Entity<TbUser>(entity =>
+            // {
+            //     entity.HasKey(e => e.UserId);
 
-                entity.ToTable("tbUsers");
+            //     entity.ToTable("tbUsers");
 
-                entity.HasIndex(e => e.UserName, "UniqueUserName")
-                    .IsUnique();
+            //     entity.HasIndex(e => e.UserName, "UniqueUserName")
+            //         .IsUnique();
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.Password)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
 
-                entity.Property(e => e.PermissionsId).HasColumnName("permissionsID");
+            //     entity.Property(e => e.PermissionsId).HasColumnName("permissionsID");
 
-                entity.Property(e => e.UserName)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.UserName)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
 
-                entity.HasOne(d => d.Permissions)
-                    .WithMany(p => p.TbUsers)
-                    .HasForeignKey(d => d.PermissionsId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbUsers");
+            //     entity.HasOne(d => d.Permissions)
+            //         .WithMany(p => p.TbUsers)
+            //         .HasForeignKey(d => d.PermissionsId)
+            //         .OnDelete(DeleteBehavior.ClientSetNull)
+            //         .HasConstraintName("FK_tbUsers");
 
-                entity.HasOne(d => d.Person)
-                    .WithMany(p => p.TbUsers)
-                    .HasForeignKey(d => d.PersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbUsers_tbPerson");
-            });
-
+            //     entity.HasOne(d => d.Person)
+            //         .WithMany(p => p.User)
+            //         .HasForeignKey(d => d.PersonId)
+            //         .OnDelete(DeleteBehavior.ClientSetNull)
+            //         .HasConstraintName("FK_tbUsers_tbPerson");
+            // });
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppUserConfig).Assembly);
             OnModelCreatingPartial(modelBuilder);
         }
 
