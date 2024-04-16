@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Entities.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +70,7 @@ namespace Jym_Management_BussinessLayer.AutoMapper
             CreateMap<TbSubscriptionPayment, SubscriptionPayment>().ReverseMap();
 
 
-            CreateMap<AppUser, User>().ReverseMap();
+            //CreateMap<TbUser, User>().ReverseMap();
 
         }
 

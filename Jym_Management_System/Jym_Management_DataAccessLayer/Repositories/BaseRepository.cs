@@ -1,4 +1,5 @@
 ﻿using Jym_Management_DataAccessLayer.Data;
+using Jym_Management_DataAccessLayer.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

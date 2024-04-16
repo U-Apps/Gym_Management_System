@@ -4,6 +4,7 @@ using Jym_Management_BussinessLayer.Services.Base;
 using Jym_Management_DataAccessLayer.Data;
 using Jym_Management_DataAccessLayer.Entities;
 using Jym_Management_DataAccessLayer.Repositories;
+using Jym_Management_DataAccessLayer.Repositories.Base;
 using System;
 using System.Collections.Generic;
 
