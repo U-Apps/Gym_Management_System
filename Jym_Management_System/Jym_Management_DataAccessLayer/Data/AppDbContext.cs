@@ -53,49 +53,6 @@ namespace Jym_Management_DataAccessLayer.Data
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
 
-        
-
-
-            modelBuilder.Entity<TbPayrollPayment>(entity =>
-            {
-                entity.HasKey(e => e.PaymentId);
-
-                entity.ToTable("tbPayroll_payments");
-
-                entity.Property(e => e.PaymentId)
-                    .UseIdentityColumn(1)
-                    .HasColumnName("paymentID");
-
-                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
-
-                entity.Property(e => e.PaymentDate)
-                    .HasColumnType("date")
-                    .HasColumnName("paymentDate");
-
-                entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.TbPayrollPayments)
-                    .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Payroll_payments");
-            });
-
-            modelBuilder.Entity<TbPeriod>(entity =>
-            {
-                entity.HasKey(e => e.PeriodId);
-
-                entity.ToTable("tbPeriods");
-
-                entity.Property(e => e.PeriodId)
-                    .UseIdentityColumn(1)
-                    .HasColumnName("PeriodID");
-
-                entity.Property(e => e.EndTime).HasColumnType("time(0)");
-
-                entity.Property(e => e.PeriodName).HasMaxLength(50);
-
-                entity.Property(e => e.StartTime).HasColumnType("time(0)");
-            });
-
             // modelBuilder.Entity<TbPermssion>(entity =>
             // {
             //     entity.ToTable("tbPermssions");
@@ -114,34 +71,7 @@ namespace Jym_Management_DataAccessLayer.Data
             //         .HasConstraintName("FK_permissions");
             // });
 
-            modelBuilder.Entity<TbPerson>(entity =>
-            {
-                entity.HasKey(e => e.PersonId);
-
-                entity.ToTable("tbPerson");
-
-                entity.HasIndex(e => e.PhoneNumber, "UniquePhoneNumber")
-                    .IsUnique();
-
-                entity.Property(e => e.PersonId).HasColumnName("PersonID");
-
-                entity.Property(e => e.BirthDate).HasColumnType("date");
-
-                entity.Property(e => e.Email)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Idcard)
-                    .HasMaxLength(15)
-                    .IsUnicode(false)
-                    .HasColumnName("IDCard");
-
-                entity.Property(e => e.Name).HasMaxLength(255);
-
-                entity.Property(e => e.PhoneNumber)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-            });
+     
 
             // modelBuilder.Entity<TbRole>(entity =>
             // {
@@ -154,113 +84,8 @@ namespace Jym_Management_DataAccessLayer.Data
             //     entity.Property(e => e.RoleName).HasMaxLength(50);
             // });
 
-            modelBuilder.Entity<TbSubsciptionPeriod>(entity =>
-            {
-                entity.ToTable("tbSubsciptionPeriods");
 
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Id)
-                    .UseIdentityColumn(1)
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.Name).HasMaxLength(50);
-
-                entity.Property(e => e.Price).HasColumnType("smallmoney");
-            });
-
-            modelBuilder.Entity<TbSubscription>(entity =>
-            {
-                entity.HasKey(e => e.SubscriptionId);
-
-                entity.ToTable("tbSubscriptions");
-
-                entity.Property(e => e.SubscriptionId)
-                    .UseIdentityColumn(1)
-                    .HasColumnName("SubscriptionID");
-
-                entity.Property(e => e.CoachId).HasColumnName("CoachID");
-
-                entity.Property(e => e.CreatedByReceptionistId).HasColumnName("CreatedByReceptionistID");
-
-                entity.Property(e => e.EndDate).HasColumnType("date");
-
-                entity.Property(e => e.ExcerciseTypeId).HasColumnName("ExcerciseTypeID");
-
-                entity.Property(e => e.MemberId).HasColumnName("MemberID");
-
-                entity.Property(e => e.PeriodId).HasColumnName("PeriodID");
-
-                entity.Property(e => e.StartDate).HasColumnType("date");
-
-                entity.Property(e => e.SubscriptionPeriodId).HasColumnName("SubscriptionPeriodID");
-
-                entity.HasOne(d => d.Coach)
-                    .WithMany(p => p.TbSubscriptionCoaches)
-                    .HasForeignKey(d => d.CoachId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbSubscriptions_tbJobHistories_Coach");
-
-                entity.HasOne(d => d.CreatedByReceptionist)
-                    .WithMany(p => p.TbSubscriptionCreatedByReceptionists)
-                    .HasForeignKey(d => d.CreatedByReceptionistId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbSubscriptions_tbJobHistoriesRecep");
-
-                entity.HasOne(d => d.ExcerciseType)
-                    .WithMany(p => p.TbSubscriptions)
-                    .HasForeignKey(d => d.ExcerciseTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbSubscriptions_tbExerciseType");
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.TbSubscriptions)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbSubscriptions_tbMember");
-
-                entity.HasOne(d => d.Period)
-                    .WithMany(p => p.TbSubscriptions)
-                    .HasForeignKey(d => d.PeriodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbSubscriptions_tbPeriod");
-
-                entity.HasOne(d => d.SubscriptionPeriod)
-                    .WithMany(p => p.TbSubscriptions)
-                    .HasForeignKey(d => d.SubscriptionPeriodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbSubscriptions_tbSubscriptionPeriod");
-            });
-
-            modelBuilder.Entity<TbSubscriptionPayment>(entity =>
-            {
-                entity.HasKey(e => e.PaymentId);
-
-                entity.Property(e => e.PaymentId)
-                    .UseIdentityColumn(1);
-
-                entity.ToTable("tbSubscriptionPayments");
-
-                entity.Property(e => e.CreatedByUserId).HasColumnName("CreatedByUserID");
-
-                entity.Property(e => e.PaymentAmount).HasColumnType("smallmoney");
-
-                entity.Property(e => e.PaymentDate).HasColumnType("date");
-
-                entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
-
-                entity.Property(e => e.SubscriptionId).HasColumnName("SubscriptionID");
-
-                entity.HasOne(d => d.CreatedByUser)
-                    .WithMany()
-                    .HasForeignKey(d => d.CreatedByUserId)
-                    .HasConstraintName("FK_tbSubscriptionPayments_AspNetUsers");
-
-                entity.HasOne(d => d.Subscription)
-                    .WithMany()
-                    .HasForeignKey(d => d.SubscriptionId)
-                    .HasConstraintName("FK_tbSubscriptionPayments_tbSubscriptions");
-            });
+     
 
             // modelBuilder.Entity<TbUser>(entity =>
             // {
