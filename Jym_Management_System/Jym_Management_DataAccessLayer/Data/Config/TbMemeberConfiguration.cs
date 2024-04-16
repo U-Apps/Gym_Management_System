@@ -27,3 +27,4 @@ namespace Jym_Management_DataAccessLayer.Data.Config
                 .HasConstraintName("FK_Members");
         }
     }
+}

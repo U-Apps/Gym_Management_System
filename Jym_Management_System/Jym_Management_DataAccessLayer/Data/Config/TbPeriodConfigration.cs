@@ -13,19 +13,19 @@ namespace Jym_Management_DataAccessLayer.Data.Config
     {
         public void Configure(EntityTypeBuilder<TbPeriod> builder)
         {
-            entity.HasKey(e => e.PeriodId);
+            builder.HasKey(e => e.PeriodId);
 
-            entity.ToTable("tbPeriods");
+            builder.ToTable("tbPeriods");
 
-            entity.Property(e => e.PeriodId)
+            builder.Property(e => e.PeriodId)
                 .UseIdentityColumn(1)
                 .HasColumnName("PeriodID");
 
-            entity.Property(e => e.EndTime).HasColumnType("time(0)");
+            builder.Property(e => e.EndTime).HasColumnType("time(0)");
 
-            entity.Property(e => e.PeriodName).HasMaxLength(50);
+            builder.Property(e => e.PeriodName).HasMaxLength(50);
 
-            entity.Property(e => e.StartTime).HasColumnType("time(0)");
+            builder.Property(e => e.StartTime).HasColumnType("time(0)");
         }
     }
 }
