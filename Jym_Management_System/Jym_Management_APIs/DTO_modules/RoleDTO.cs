@@ -2,9 +2,9 @@
 
 namespace Jym_Management_APIs.DTO_modules
 {
-    public record ReadRoleDTO(byte RoleId ,string RoleName);
+    public record ReadRoleDTO(int RoleId ,string RoleName);
 
-    public record CreateRoleDTO (string RoleName);
+    public record CreateRoleDTO ([Required] string RoleName);
 
-    public record UpdateRoleDTO ([Required] byte RoleId ,string RoleName);
+    public record UpdateRoleDTO ([Required] int RoleId , string RoleName);
 }

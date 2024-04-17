@@ -20,70 +20,78 @@ namespace Jym_Management_APIs.Controllers
         }
 
 
-        [HttpPost]
-        [Route("")]
+        //[HttpPost]
+        //[Route("")]
 
-        public ActionResult CreateUser(CreateUserDTO createUserDTO)
-        {
-            var user = new User();
+        //public ActionResult CreateUser(CreateUserDTO createUserDTO)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new User();
 
-            user.PersonId = createUserDTO.PersonId;
-            user.UserName = createUserDTO.UserName;
-            user.Password = createUserDTO.Password;
-            user.IsActive = createUserDTO.IsActive;
-            user.PermissionsId = createUserDTO.PermissionsId;
- 
-            _userService.Add(user);
-            return Ok();
-        }
+        //        user.PersonId = createUserDTO.PersonId;
+        //        user.UserName = createUserDTO.UserName;
+        //        user.Password = createUserDTO.Password;
+        //        user.IsActive = createUserDTO.IsActive;
+        //        user.PermissionsId = createUserDTO.PermissionsId;
 
-        [HttpPut]
-        [Route("")]
+        //        _userService.Add(user);
+        //        return Ok();
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+        //    }
 
-        public ActionResult UpdateUser(UpdateUserDTO updateUserDTO)
-        {
-            var existingUser = _userService.GetById(updateUserDTO.UserId);
-            if (existingUser == null)
-                return NotFound();
+        //}
 
-            existingUser.UserName = updateUserDTO.UserName;
-            existingUser.Password = updateUserDTO.Password;
-            existingUser.IsActive = updateUserDTO.IsActive;
-            existingUser.PermissionsId = updateUserDTO.PermissionsId;
-            _userService.Update(existingUser);
-            return Ok();
-        }
+        //[HttpPut]
+        //[Route("")]
+
+        //public ActionResult UpdateUser(UpdateUserDTO updateUserDTO)
+        //{
+        //    var existingUser = _userService.GetById(updateUserDTO.UserId);
+        //    if (existingUser == null)
+        //        return NotFound();
+
+        //    existingUser.UserName = updateUserDTO.UserName;
+        //    existingUser.Password = updateUserDTO.Password;
+        //    existingUser.IsActive = updateUserDTO.IsActive;
+        //    existingUser.PermissionsId = updateUserDTO.PermissionsId;
+        //    _userService.Update(existingUser);
+        //    return Ok();
+        //}
 
 
-        [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadUserDTO>> Get()
-        {
+        //[HttpGet]
+        //[Route("")]
+        //public ActionResult<IEnumerable<ReadUserDTO>> Get()
+        //{
 
-            var users = _userService.GetAll().Select(user => user.AsDTO());
+        //    var users = _userService.GetAll().Select(user => user.AsDTO());
 
-            return Ok(users);
-        }
+        //    return Ok(users);
+        //}
 
-        [HttpGet]
-        [Route("{id}")]
-        public ActionResult<ReadUserDTO> GetById(int id)
-        {
-            User user = _userService.GetById(id);
-            return user is null ? NotFound() : Ok(user.AsDTO());
-        }
+        //[HttpGet]
+        //[Route("{id}")]
+        //public ActionResult<ReadUserDTO> GetById(int id)
+        //{
+        //    User user = _userService.GetById(id);
+        //    return user is null ? NotFound() : Ok(user.AsDTO());
+        //}
 
-        [HttpDelete]
-        [Route("{id}")]
-        public ActionResult Delete(int id)
-        {
-            User user = _userService.GetById(id);
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public ActionResult Delete(int id)
+        //{
+        //    User user = _userService.GetById(id);
 
-            if (user is null)
-                return NotFound();
+        //    if (user is null)
+        //        return NotFound();
 
-            _userService.DeleteById(user.UserId);
-            return Ok();
-        }
-    }
+        //    _userService.DeleteById(user.UserId);
+        //    return Ok();
+        //}
+    } 
 }

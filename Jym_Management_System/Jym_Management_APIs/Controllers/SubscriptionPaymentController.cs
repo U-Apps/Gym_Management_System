@@ -23,71 +23,71 @@ namespace Jym_Management_APIs.Controllers
         }
 
 
-        [HttpPost]
-        [Route("")]
+        //[HttpPost]
+        //[Route("")]
 
-        public ActionResult CreateSubscriptionPayment(CreateSubscriptionPaymentDTO createSubscriptionPaymentDTO)
-        {
-            var subscriptionPayment = new SubscriptionPayment();
+        //public ActionResult CreateSubscriptionPayment(CreateSubscriptionPaymentDTO createSubscriptionPaymentDTO)
+        //{
+        //    var subscriptionPayment = new SubscriptionPayment();
 
-            subscriptionPayment.PaymentDate = createSubscriptionPaymentDTO.PaymentDate;
-            subscriptionPayment.PaymentAmount = createSubscriptionPaymentDTO.PaymentAmount;
-            subscriptionPayment.CreatedByUserId = createSubscriptionPaymentDTO.CreatedByUserId;
-            subscriptionPayment.SubscriptionId = createSubscriptionPaymentDTO.SubscriptionId;
+        //    subscriptionPayment.PaymentDate = createSubscriptionPaymentDTO.PaymentDate;
+        //    subscriptionPayment.PaymentAmount = createSubscriptionPaymentDTO.PaymentAmount;
+        //    subscriptionPayment.CreatedByUserId = createSubscriptionPaymentDTO.CreatedByUserId;
+        //    subscriptionPayment.SubscriptionId = createSubscriptionPaymentDTO.SubscriptionId;
 
-            _subscriptionPaymentService.Add(subscriptionPayment);
-            return Ok();
-        }
+        //    _subscriptionPaymentService.Add(subscriptionPayment);
+        //    return Ok();
+        //}
 
-        [HttpPut]
-        [Route("")]
+        //[HttpPut]
+        //[Route("")]
 
-        public ActionResult UpdateSubscriptionPayment(UpdateSubscriptionPaymentDTO updateSubscriptionPaymentDTO)
-        {
-            var existingSubscriptionPayment = _subscriptionPaymentService.GetById(updateSubscriptionPaymentDTO.PaymentId);
-            if (existingSubscriptionPayment == null)
-                return NotFound();
+        //public ActionResult UpdateSubscriptionPayment(UpdateSubscriptionPaymentDTO updateSubscriptionPaymentDTO)
+        //{
+        //    var existingSubscriptionPayment = _subscriptionPaymentService.GetById(updateSubscriptionPaymentDTO.PaymentId);
+        //    if (existingSubscriptionPayment == null)
+        //        return NotFound();
 
-            existingSubscriptionPayment.PaymentDate = updateSubscriptionPaymentDTO.PaymentDate;
-            existingSubscriptionPayment.PaymentAmount = updateSubscriptionPaymentDTO.PaymentAmount;
-            existingSubscriptionPayment.CreatedByUserId = updateSubscriptionPaymentDTO.CreatedByUserId;
-            existingSubscriptionPayment.SubscriptionId = updateSubscriptionPaymentDTO.SubscriptionId;
+        //    existingSubscriptionPayment.PaymentDate = updateSubscriptionPaymentDTO.PaymentDate;
+        //    existingSubscriptionPayment.PaymentAmount = updateSubscriptionPaymentDTO.PaymentAmount;
+        //    existingSubscriptionPayment.CreatedByUserId = updateSubscriptionPaymentDTO.CreatedByUserId;
+        //    existingSubscriptionPayment.SubscriptionId = updateSubscriptionPaymentDTO.SubscriptionId;
 
-            _subscriptionPaymentService.Update(existingSubscriptionPayment);
-            return Ok();
-        }
+        //    _subscriptionPaymentService.Update(existingSubscriptionPayment);
+        //    return Ok();
+        //}
 
 
-        [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadSubscriptionPaymentDTO>> Get()
-        {
+        //[HttpGet]
+        //[Route("")]
+        //public ActionResult<IEnumerable<ReadSubscriptionPaymentDTO>> Get()
+        //{
 
-            var subscriptionPayments = _subscriptionPaymentService.GetAll().Select(subscriptionPayments => subscriptionPayments.AsDTO());
+        //    var subscriptionPayments = _subscriptionPaymentService.GetAll().Select(subscriptionPayments => subscriptionPayments.AsDTO());
 
-            return Ok(subscriptionPayments);
-        }
+        //    return Ok(subscriptionPayments);
+        //}
 
-        [HttpGet]
-        [Route("{id}")]
-        public ActionResult<ReadSubscriptionPaymentDTO> GetById(int id)
-        {
-            SubscriptionPayment subscriptionPayment = _subscriptionPaymentService.GetById(id);
-            return subscriptionPayment is null ? NotFound() : Ok(subscriptionPayment.AsDTO());
-        }
+        //[HttpGet]
+        //[Route("{id}")]
+        //public ActionResult<ReadSubscriptionPaymentDTO> GetById(int id)
+        //{
+        //    SubscriptionPayment subscriptionPayment = _subscriptionPaymentService.GetById(id);
+        //    return subscriptionPayment is null ? NotFound() : Ok(subscriptionPayment.AsDTO());
+        //}
 
-        [HttpDelete]
-        [Route("{id}")]
-        public ActionResult Delete(int id)
-        {
-            SubscriptionPayment subscriptionPayment = _subscriptionPaymentService.GetById(id);
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public ActionResult Delete(int id)
+        //{
+        //    SubscriptionPayment subscriptionPayment = _subscriptionPaymentService.GetById(id);
 
-            if (subscriptionPayment is null)
-                return NotFound();
+        //    if (subscriptionPayment is null)
+        //        return NotFound();
 
-            _subscriptionPaymentService.DeleteById(subscriptionPayment.PaymentId);
+        //    _subscriptionPaymentService.DeleteById(subscriptionPayment.PaymentId);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }

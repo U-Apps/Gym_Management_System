@@ -13,10 +13,10 @@ namespace Jym_Management_APIs.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        private readonly IBaseServices<Role> _roleService;
+        private readonly RoleService _roleService;
 
 
-        public RoleController(IBaseServices<Role> roleService)
+        public RoleController(RoleService roleService)
         {
             _roleService = roleService;
            
@@ -28,12 +28,18 @@ namespace Jym_Management_APIs.Controllers
 
         public ActionResult CreateRole(CreateRoleDTO createRoleDTO)
         {
-            var role = new Role();
+            if(!ModelState.IsValid)
+            {
+               return BadRequest(ModelState);
+            }
+            var role = new Role
+            {
+                RoleName = createRoleDTO.RoleName
+            };
 
-            role.RoleName = createRoleDTO.RoleName;
-  
             _roleService.Add(role);
             return Ok();
+
         }
 
         [HttpPut]
@@ -44,6 +50,7 @@ namespace Jym_Management_APIs.Controllers
             var existingRole = _roleService.GetById(updateRoleDTO.RoleId);
             if (existingRole == null)
                 return NotFound();
+            if(!ModelState.IsValid) { return BadRequest(ModelState); }
 
             existingRole.RoleName = updateRoleDTO.RoleName;
 
@@ -54,7 +61,7 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult<IEnumerable<ReadRoleDTO>> Get()
+        public ActionResult<IEnumerable<ReadRoleDTO>> GetAll()
         {
 
             var roles = _roleService.GetAll().Select(role => role.AsDTO());
@@ -63,7 +70,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public ActionResult<ReadRoleDTO> GetById(int id)
         {
             Role role = _roleService.GetById(id);
@@ -71,7 +78,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public ActionResult Delete(int id)
         {
             Role role = _roleService.GetById(id);
@@ -79,7 +86,7 @@ namespace Jym_Management_APIs.Controllers
             if (role is null)
                 return NotFound();
 
-            _roleService.DeleteById(role.RoleId);
+            _roleService.Delete(role.RoleId);
 
             return Ok();
         }

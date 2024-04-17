@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_DataAccessLayer.Entities;
+using Jym_Management_DataAccessLayer.Entities.Authentication;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,19 +48,6 @@ namespace Jym_Management_BussinessLayer.AutoMapper
                 .ReverseMap();
 
 
-            //CreateMap<TbPermssion, Permssion>().ForMember(dust => dust.Users, src => src.MapFrom(src => src.TbUsers)).ReverseMap();
-            //CreateMap<TbPerson, Person>()
-            //    .ForMember(dust => dust.Employees, src => src.MapFrom(src => src.TbEmployees))
-            //    .ForMember(dust => dust.Members, src => src.MapFrom(src => src.TbMembers))
-            //    .ForMember(dust => dust.Users, src => src.MapFrom(src => src.TbUsers))
-            //    .ReverseMap();
-
-
-            //CreateMap<TbRole, Role>()
-            //    .ForMember(dust => dust.Permssions, src => src.MapFrom(src => src.TbPermssions))
-            //    .ReverseMap();
-
-
             CreateMap<TbSubsciptionPeriod, SubscriptionPeriod>()
                 .ForMember(dust => dust.Subscriptions, src => src.MapFrom(src => src.TbSubscriptions))
                 .ReverseMap();
@@ -69,8 +58,11 @@ namespace Jym_Management_BussinessLayer.AutoMapper
 
             CreateMap<TbSubscriptionPayment, SubscriptionPayment>().ReverseMap();
 
+            CreateMap<AppUser, User>().ReverseMap();
 
-            //CreateMap<TbUser, User>().ReverseMap();
+
+            
+
 
         }
 

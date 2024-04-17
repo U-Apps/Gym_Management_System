@@ -1,27 +1,24 @@
-﻿using System.ComponentModel;
+﻿using Jym_Management_DataAccessLayer.Entities;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Jym_Management_APIs.DTO_modules
 {
     public record ReadUserDTO 
         (
-              short UserId ,
-              string UserName, 
-              string Password ,
+              int PersonId,
+             bool IsActive,
 
-              bool IsActive,
-              byte PermissionsId,
-
-               ReadPermssionDTO Permissions,
-               ReadPersonDTO Person 
+              ReadPersonDTO Person
 
         
         );
 
     public record CreateUserDTO
        (
-
+         [Required]
              string UserName,
+          [Required]
              string Password ,
 
              bool IsActive,
