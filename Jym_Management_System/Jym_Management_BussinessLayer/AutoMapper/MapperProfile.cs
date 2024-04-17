@@ -58,7 +58,7 @@ namespace Jym_Management_BussinessLayer.AutoMapper
 
             CreateMap<TbSubscriptionPayment, SubscriptionPayment>().ReverseMap();
 
-            CreateMap<AppUser, User>().ReverseMap();
+            CreateMap<AppUser, User>().ReverseMap().ForSourceMember(src=>src.Password,src=>src.DoNotValidate());
 
 
             
