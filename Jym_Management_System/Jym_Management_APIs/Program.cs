@@ -17,11 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
 
-// Read appsettings.json
-//var configuration = new ConfigurationBuilder()
-//    .SetBasePath(Directory.GetCurrentDirectory())
-//    .AddJsonFile("appsettings.json")
-//    .Build();
+
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 builder.Services.AddSingleton<JwtOptions>();
 builder.Services.AddScoped<AuthenticationService>();
