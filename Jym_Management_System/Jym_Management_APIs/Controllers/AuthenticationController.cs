@@ -6,17 +6,17 @@ namespace Jym_Management_APIs.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class Authentication : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
         private LoginManager _LoginManager { get; }
-        public Authentication(LoginManager loginManager)
+        public AuthenticationController(LoginManager loginManager)
         {
             _LoginManager = loginManager;
         }
 
 
         [HttpPost]
-        [Route("")]
+        [Route("Login")]
         public ActionResult<LoginResponseDto> Login(LoginDto Credentials)
         {
             return _LoginManager.Login(Credentials);
