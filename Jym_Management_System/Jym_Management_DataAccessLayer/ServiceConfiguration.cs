@@ -31,8 +31,8 @@ namespace Jym_Management_DataAccessLayer
             services.AddDbContext<AppDbContext>();
 
             services.AddIdentityCore<AppUser>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddRoles<IdentityRole<int>>();
+                .AddRoles<IdentityRole<int>>().AddRoleStore<IdentityRole<int>>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<UserRepository>();
             services.AddSingleton<AuthenticationManager>();
