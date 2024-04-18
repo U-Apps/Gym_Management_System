@@ -14,6 +14,7 @@ namespace Jym_Management_APIs.DTO_modules
         (
             [Required]
             bool LoginResult,
+            string Message,
             string? Token
         );
 }
