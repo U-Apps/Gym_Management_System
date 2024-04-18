@@ -76,7 +76,7 @@ namespace Jym_Management_BussinessLayer.Services
 
         public IEnumerable<string> GetUserRoles (string UserName)
         {
-            return userRepository.GetUserRoles(UserName);
+            return _UserRepository.GetUserRoles(UserName);
         }
     }
 }
