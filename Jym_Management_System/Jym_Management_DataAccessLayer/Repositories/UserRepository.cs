@@ -60,5 +60,10 @@ namespace Jym_Management_DataAccessLayer.Repositories
         {
             _UserManager.RemoveFromRolesAsync(user, roles);
         }
+
+        public IEnumerable<string> GetUserRoles(string UserName)
+        {
+            return _UserManager.GetRolesAsync(GetByUserName(UserName)).Result;
+        }
     }
 }

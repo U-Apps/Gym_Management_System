@@ -1,5 +1,6 @@
 ﻿using Jym_Management_BussinessLayer.AutoMapper;
 using Jym_Management_BussinessLayer.Modules;
+using Jym_Management_BussinessLayer.Services.Base;
 using Jym_Management_DataAccessLayer.Entities.Authentication;
 using Jym_Management_DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -72,6 +73,11 @@ namespace Jym_Management_BussinessLayer.Services
         {
             AppUser user = Mapping.Mapper.Map<AppUser>(UserModule);
             userRepository.RemoveUserToRoles(user, roles);
+        }
+
+        public IEnumerable<string> GetUserRoles (string UserName)
+        {
+            return userRepository.GetUserRoles(UserName);
         }
     }
 }
