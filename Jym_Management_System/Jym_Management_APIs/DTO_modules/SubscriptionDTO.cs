@@ -30,8 +30,9 @@ namespace Jym_Management_APIs.DTO_modules
             [Required]
             byte PeriodId,
             [Required]
-
+            [DataType(DataType.DateTime)]
             DateTime? StartDate,
+            [DataType(DataType.DateTime)]
             DateTime? EndDate,
 
             [Required]
@@ -53,8 +54,9 @@ namespace Jym_Management_APIs.DTO_modules
             byte ExcerciseTypeId,
             [Required]
             byte PeriodId,
+            
             [Required]
-
+            [DataType(DataType.DateTime)]
             DateTime? StartDate,
             DateTime? EndDate,
 

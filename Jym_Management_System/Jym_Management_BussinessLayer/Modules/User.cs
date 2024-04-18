@@ -13,6 +13,6 @@ namespace Jym_Management_BussinessLayer.Modules
         public string Password { get; set; }
         public int PersonId { get; set; }
         public bool IsActive { get; set; }
-        public virtual TbPerson Person { get; set; } = null!;
+        public virtual Person Person { get; set; } = null!;
     }
 }

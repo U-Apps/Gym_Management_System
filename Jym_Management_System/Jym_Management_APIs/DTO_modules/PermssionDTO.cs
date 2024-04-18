@@ -14,7 +14,7 @@ namespace Jym_Management_APIs.DTO_modules
 
     public record CreatePermssionDTO
        (
-              
+             
               string? Name,
 
               [Required]

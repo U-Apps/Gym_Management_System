@@ -6,24 +6,23 @@ namespace Jym_Management_APIs.DTO_modules
 {
     public record ReadUserDTO 
         (
+             string UserName,
               int PersonId,
              bool IsActive,
-
               ReadPersonDTO Person
 
-        
         );
 
     public record CreateUserDTO
        (
          [Required]
+         [StringLength(30, MinimumLength = 6)]
              string UserName,
           [Required]
+          [DataType(DataType.Password)]
              string Password ,
 
              bool IsActive,
-             [Required]
-             byte PermissionsId,
              [Required]
              int PersonId
 
@@ -33,14 +32,14 @@ namespace Jym_Management_APIs.DTO_modules
       (
             [Required]
             short UserId ,
-
-            string UserName, 
+            [Required]
+             [StringLength(30, MinimumLength = 6)]
+            string UserName,
+              [Required]
+          [DataType(DataType.Password)]
             string Password ,
 
             bool IsActive,
-
-            [Required]
-            byte PermissionsId,
             [Required]
             int PersonId
 

@@ -14,7 +14,6 @@ namespace Jym_Management_APIs.DTO_modules
     {
 
         public int EmployeeId { get; set; }
-        public int PersonId { get; set; }
         public DateTime HireDate { get; set; }
         public DateTime ResignationDate { get; set; }
         public decimal Salary { get; set; }
@@ -30,7 +29,9 @@ namespace Jym_Management_APIs.DTO_modules
         public int EmployeeId { get; set; }
         [Required]
         public int PersonId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime HireDate { get; set; }
+        [DataType(DataType.Date)]
         public DateTime ResignationDate { get; set; }
         [Required]
 

@@ -6,8 +6,9 @@ namespace Jym_Management_APIs.DTO_modules
         (
              int Id ,
              int EmpoyeeId ,
-
-             DateTime? StartDate, 
+          
+             DateTime? StartDate,
+        
              DateTime? EndDate ,
 
              ReadJobDTO Job 
@@ -21,8 +22,9 @@ namespace Jym_Management_APIs.DTO_modules
 
              [Required]
              byte JobId,
-
+             [DataType(DataType.Date)]
              DateTime? StartDate,
+             [DataType(DataType.Date)]
              DateTime? EndDate
 
        );
@@ -37,8 +39,9 @@ namespace Jym_Management_APIs.DTO_modules
 
             [Required]
             byte JobId,
-
+            [DataType(DataType.Date)]
             DateTime? StartDate,
+            [DataType(DataType.Date)]
             DateTime? EndDate
 
       );

@@ -9,7 +9,20 @@ namespace Jym_Management_APIs.DTO_modules
         
         );
 
-    public record CreateExerciseTypeDTO (string? Name);
+    public record CreateExerciseTypeDTO (
 
-    public record UpdateExerciseTypeDTO([Required] byte ExerciseTypeId, string? Name);
+        [Required]
+        [StringLength(20, MinimumLength = 4)]
+        string? Name
+        
+        
+        );
+
+    public record UpdateExerciseTypeDTO(
+        [Required]
+    
+    byte ExerciseTypeId,
+            [Required]
+         [StringLength(20, MinimumLength = 4)]
+        string? Name);
 }

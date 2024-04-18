@@ -12,9 +12,12 @@ namespace Jym_Management_APIs.DTO_modules
 
     public record CreateSubscriptionPeriodDTO
        (
+        [Required]
+        [StringLength(30, MinimumLength = 6)]
               string? Name,
 
               [Required]
+              [DataType(DataType.Currency)]
               decimal? Price
 
        );
@@ -23,10 +26,12 @@ namespace Jym_Management_APIs.DTO_modules
       (
             [Required]
             byte Id,
-
+            [Required]
+        [StringLength(30, MinimumLength = 6)]
             string? Name,
 
             [Required]
+            [DataType(DataType.Currency)]
             decimal? Price
 
 

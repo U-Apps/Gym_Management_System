@@ -16,6 +16,7 @@ namespace Jym_Management_APIs.DTO_modules
              [Required]
              int EmployeeId,
              [Required]
+             [DataType(DataType.Date)]
              DateTime PaymentDate
 
        );
@@ -27,6 +28,7 @@ namespace Jym_Management_APIs.DTO_modules
             [Required]
             int EmployeeId,
             [Required]
+            [DataType(DataType.Date)]
             DateTime PaymentDate
 
       );

@@ -14,9 +14,12 @@ namespace Jym_Management_APIs.DTO_modules
 
     public record CreatePeriodDTO
        (
+        [Required]
+        [StringLength(10, MinimumLength = 2)]
               string PeriodName,
-
+              [DataType(DataType.Date)]
               TimeSpan StartTime,
+              [DataType(DataType.Date)]
               TimeSpan EndTime
 
        );
@@ -25,10 +28,11 @@ namespace Jym_Management_APIs.DTO_modules
       (
             [Required]
             byte PeriodId,
-
+            [StringLength(10, MinimumLength = 2)]
             string PeriodName,
-
+            [DataType(DataType.Date)]
             TimeSpan StartTime,
+            [DataType(DataType.Date)]
             TimeSpan EndTime
 
       );

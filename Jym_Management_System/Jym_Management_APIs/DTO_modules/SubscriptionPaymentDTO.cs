@@ -22,6 +22,7 @@ namespace Jym_Management_APIs.DTO_modules
              int SubscriptionId,
 
              [Required]
+             [DataType(DataType.DateTime)]
              DateTime? PaymentDate,
              [Required]
              decimal? PaymentAmount,
@@ -39,6 +40,7 @@ namespace Jym_Management_APIs.DTO_modules
              int? SubscriptionId,
 
              [Required]
+             [DataType(DataType.DateTime)]
              DateTime? PaymentDate,
              [Required]
              decimal? PaymentAmount,
