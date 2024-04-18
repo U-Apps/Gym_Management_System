@@ -11,10 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Jym_Management_DataAccessLayer.Entities;
 using Jym_Management_DataAccessLayer.Repositories;
+using Jym_Management_DataAccessLayer.Authentication;
 
 namespace Jym_Management_DataAccessLayer
 {
-    internal static class ServiceConfiguration
+    public static class ServiceConfiguration
     {
         private static IServiceProvider _serviceProvider;
 
@@ -30,10 +31,11 @@ namespace Jym_Management_DataAccessLayer
             services.AddDbContext<AppDbContext>();
 
             services.AddIdentityCore<AppUser>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddRoles<IdentityRole<int>>();
+                .AddRoles<IdentityRole<int>>().AddRoleStore<IdentityRole<int>>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<UserRepository>();
+            services.AddSingleton<AuthenticationManager>();
             return services;
         }
 

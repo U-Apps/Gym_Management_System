@@ -18,16 +18,10 @@ namespace Jym_Management_DataAccessLayer.Authentication
             _UserManager = ServiceConfiguration.GetService<UserManager<AppUser>>();
         }
 
-        public AppUser? Login(string UserName, string Password)
+        public bool Login(string UserName, string Password)
         {
             var User = _UserManager.FindByNameAsync(UserName).Result;
-            if (User == null)
-                return null;
-
-            if (!_UserManager.CheckPasswordAsync(User, Password).Result)
-                return null;
-            
-            return User;
+            return User == null ? false : _UserManager.CheckPasswordAsync(User, Password).Result ? true : false;
         }
     }
 }
