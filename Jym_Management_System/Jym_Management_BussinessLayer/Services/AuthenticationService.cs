@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Jym_Management_BussinessLayer.Services
 {
-    internal class AuthenticationService
+    public class AuthenticationService
     {
         AuthenticationManager Manager { get; }
 
@@ -19,11 +19,9 @@ namespace Jym_Management_BussinessLayer.Services
             Manager = ServiceConfiguration.GetService<AuthenticationManager>();
         }
 
-        public User Login(string UserName, string Password)
+        public bool Login(string UserName, string Password)
         {
-            var user = Manager.Login(UserName, Password);
-
-            return user == null ? null : Mapping.Mapper.Map<User>(user);
+            return Manager.Login(UserName, Password);
         }
     }
 }
