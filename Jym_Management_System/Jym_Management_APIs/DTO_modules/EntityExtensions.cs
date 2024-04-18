@@ -16,7 +16,7 @@ namespace Jym_Management_APIs.DTO_modules
                 Salary = employee.Salary,
                 ResignationDate = employee.ResignationDate,
                 HireDate = employee.HireDate,
-                PersonId = employee.PersonId,
+               
 
                 person = new ReadPersonDTO()
                 {
@@ -50,35 +50,24 @@ namespace Jym_Management_APIs.DTO_modules
                 }
             );
 
-        //public static ReadUserDTO AsDTO(this User user)
-        //    => new ReadUserDTO
-        //    (
-        //        user.UserId,
-        //        user.UserName,
-        //        user.Password,
-        //        user.IsActive,
-        //        PermissionsId: user.PermissionsId,
-
-        //       Permissions: new ReadPermssionDTO
-        //        (
-        //            Id: user.Permissions.Id,
-        //            Name: user.Permissions.Name,
-        //            Role: new ReadRoleDTO(
-        //                user.Permissions.Role.RoleId,
-        //                user.Permissions.Role.RoleName
-        //                )
-
-        //        ),
-            //   Person: new ReadPersonDTO()
-            //   {
-            //       Name = user.Person.Name,
-            //       PersonId = user.PersonId,
-            //       Email = user.Person.Email,
-            //       PhoneNumber = user.Person.PhoneNumber,
-            //       BirthDate = user.Person.BirthDate,
-            //       Idcard = user.Person.Idcard
-            //   }
-            //);
+        public static ReadUserDTO AsDTO(this User user)
+            => new ReadUserDTO
+            (
+               
+                user.UserName,
+                user.IsActive,
+               
+                
+               Person: new ReadPersonDTO()
+               {
+                   Name = user.Person.Name,
+                   PersonId = user.PersonId,
+                   Email = user.Person.Email,
+                   PhoneNumber = user.Person.PhoneNumber,
+                   BirthDate = user.Person.BirthDate,
+                   Idcard = user.Person.Idcard
+               }
+            );
 
         public static ReadPermssionDTO AsDTO(this Permssion permssion)
             => new ReadPermssionDTO
@@ -142,111 +131,103 @@ namespace Jym_Management_APIs.DTO_modules
 
                );
 
-        //public static ReadSubscriptionPaymentDTO AsDTO(this SubscriptionPayment subscriptionPayment
-        //   )
-        //  => new ReadSubscriptionPaymentDTO
-        //  (
-        //        PaymentId: subscriptionPayment.PaymentId,
-        //        PaymentDate: subscriptionPayment.PaymentDate,
-        //        PaymentAmount: subscriptionPayment.PaymentAmount);
-        //       // CreatedByUser: new ReadUserDTO
-        //       // (
-
-                
-        //       // //subscriptionPayment.CreatedByUser.IsActive,
-        //       //,
-
-        //       ////Permissions: new ReadPermssionDTO
-        //       //// (
-        //       ////     Id: subscriptionPayment.CreatedByUser.Permissions.Id,
-        //       ////     Name: subscriptionPayment.CreatedByUser.Permissions.Name,
-        //       ////     Role: new ReadRoleDTO(
-        //       ////         subscriptionPayment.CreatedByUser.Permissions.Role.RoleId,
-        //       ////         subscriptionPayment.CreatedByUser.Permissions.Role.RoleName
-        //       ////         )
-
-        //       //// ),
-        //       //Person: new ReadPersonDTO()
-        //       //{
-        //       //    Name = subscriptionPayment.CreatedByUser.Person.Name,
-        //       //    PersonId = subscriptionPayment.CreatedByUser.PersonId,
-        //       //    Email = subscriptionPayment.CreatedByUser.Person.Email,
-        //       //    PhoneNumber = subscriptionPayment.CreatedByUser.Person.PhoneNumber,
-        //       //    BirthDate = subscriptionPayment.CreatedByUser.Person.BirthDate,
-        //       //    Idcard = subscriptionPayment.CreatedByUser.Person.Idcard
-        //       //}
-        //       //),
-        //       // Subscription: new ReadSubscriptionDTO
-        //       //     (
-        //       //         SubscriptionId: subscriptionPayment.PaymentId,
-        //       //         StartDate: subscriptionPayment.Subscription.StartDate,
-        //       //         EndDate: subscriptionPayment.Subscription.EndDate,
-        //       //         Coach: new ReadJobHistoryDTO
-        //       //         (
-        //       //             subscriptionPayment.Subscription.Coach.Id,
-        //       //             subscriptionPayment.Subscription.Coach.EmpoyeeId,
-        //       //             subscriptionPayment.Subscription.Coach.StartDate,
-        //       //             subscriptionPayment.Subscription.Coach.EndDate,
-        //       //             new ReadJobDTO
-        //       //             (
-        //       //                 subscriptionPayment.Subscription.Coach.Job.JobId,
-        //       //                 subscriptionPayment.Subscription.Coach.Job.JobTitle
-        //       //                 )
-        //       //             ),
-        //       //         CreatedByReceptionist: new ReadJobHistoryDTO
-        //       //         (
-        //       //             subscriptionPayment.Subscription.CreatedByReceptionist.Id,
-        //       //             subscriptionPayment.Subscription.CreatedByReceptionist.EmpoyeeId,
-        //       //             subscriptionPayment.Subscription.CreatedByReceptionist.StartDate,
-        //       //             subscriptionPayment.Subscription.CreatedByReceptionist.EndDate,
-        //       //             new ReadJobDTO
-        //       //             (
-        //       //                 subscriptionPayment.Subscription.CreatedByReceptionist.Job.JobId,
-        //       //                 subscriptionPayment.Subscription.CreatedByReceptionist.Job.JobTitle
-        //       //                 )
-        //       //             ),
-        //       //         ExcerciseType: new ReadExerciseTypeDTO
-        //       //          (
-        //       //             subscriptionPayment.Subscription.ExcerciseType.ExerciseTypeId,
-        //       //             subscriptionPayment.Subscription.ExcerciseType.Name
-        //       //             ),
-        //       //         Member: new ReadMemberDTO
-        //       //         (
-        //       //              subscriptionPayment.Subscription.Member.MemberId,
-        //       //              subscriptionPayment.Subscription.Member.PersonId,
-        //       //              subscriptionPayment.Subscription.Member.MemberWeight,
-        //       //              subscriptionPayment.Subscription.Member.IsActive,
-
-        //       //              new ReadPersonDTO()
-        //       //              {
-        //       //                  Name = subscriptionPayment.Subscription.Member.Person.Name,
-        //       //                  PersonId = subscriptionPayment.Subscription.Member.PersonId,
-        //       //                  Email = subscriptionPayment.Subscription.Member.Person.Email,
-        //       //                  PhoneNumber = subscriptionPayment.Subscription.Member.Person.PhoneNumber,
-        //       //                  BirthDate = subscriptionPayment.Subscription.Member.Person.BirthDate,
-        //       //                  Idcard = subscriptionPayment.Subscription.Member.Person.Idcard
-        //       //              }
-        //       //             ),
-        //       //         Period: new ReadPeriodDTO
-        //       //         (
-        //       //              PeriodId: subscriptionPayment.Subscription.Period.PeriodId,
-        //       //              PeriodName: subscriptionPayment.Subscription.Period.PeriodName,
-        //       //              StartTime: subscriptionPayment.Subscription.Period.StartTime,
-        //       //              EndTime: subscriptionPayment.Subscription.Period.EndTime
-        //       //           ),
-        //       //         SubscriptionPeriod: new ReadSubscriptionPeriodDTO
-        //       //         (
-        //       //             subscriptionPayment.Subscription.SubscriptionPeriod.Id,
-        //       //             subscriptionPayment.Subscription.SubscriptionPeriod.Name,
-        //       //             subscriptionPayment.Subscription.SubscriptionPeriod.Price
-        //       //             )
-
-                    
-
-              
-
-        public static ReadSubscriptionDTO AsDTO(this Subscription subscription
+        public static ReadSubscriptionPaymentDTO AsDTO(this SubscriptionPayment subscriptionPayment
            )
+          => new ReadSubscriptionPaymentDTO
+          (
+                PaymentId: subscriptionPayment.PaymentId,
+                PaymentDate: subscriptionPayment.PaymentDate,
+                PaymentAmount: subscriptionPayment.PaymentAmount,
+        CreatedByUser: new ReadUserDTO
+        (
+            UserName: subscriptionPayment.CreatedByUser.UserName,
+            IsActive: subscriptionPayment.CreatedByUser.IsActive,
+           Person: new ReadPersonDTO
+           {
+
+
+               Name = subscriptionPayment.CreatedByUser.Person.Name,
+               PersonId = subscriptionPayment.CreatedByUser.PersonId,
+               Email = subscriptionPayment.CreatedByUser.Person.Email,
+               PhoneNumber = subscriptionPayment.CreatedByUser.Person.PhoneNumber,
+               BirthDate = subscriptionPayment.CreatedByUser.Person.BirthDate,
+               Idcard = subscriptionPayment.CreatedByUser.Person.Idcard
+
+           }
+
+            ),
+
+         Subscription: new ReadSubscriptionDTO
+             (
+                 SubscriptionId: subscriptionPayment.PaymentId,
+                 StartDate: subscriptionPayment.Subscription.StartDate,
+                 EndDate: subscriptionPayment.Subscription.EndDate,
+                 Coach: new ReadJobHistoryDTO
+                 (
+                     subscriptionPayment.Subscription.Coach.Id,
+                     subscriptionPayment.Subscription.Coach.EmpoyeeId,
+                     subscriptionPayment.Subscription.Coach.StartDate,
+                     subscriptionPayment.Subscription.Coach.EndDate,
+                     new ReadJobDTO
+                     (
+                         subscriptionPayment.Subscription.Coach.Job.JobId,
+                         subscriptionPayment.Subscription.Coach.Job.JobTitle
+                         )
+                     ),
+                 CreatedByReceptionist: new ReadJobHistoryDTO
+                 (
+                     subscriptionPayment.Subscription.CreatedByReceptionist.Id,
+                     subscriptionPayment.Subscription.CreatedByReceptionist.EmpoyeeId,
+                     subscriptionPayment.Subscription.CreatedByReceptionist.StartDate,
+                     subscriptionPayment.Subscription.CreatedByReceptionist.EndDate,
+                     new ReadJobDTO
+                     (
+                         subscriptionPayment.Subscription.CreatedByReceptionist.Job.JobId,
+                         subscriptionPayment.Subscription.CreatedByReceptionist.Job.JobTitle
+                         )
+                     ),
+                 ExcerciseType: new ReadExerciseTypeDTO
+                  (
+                     subscriptionPayment.Subscription.ExcerciseType.ExerciseTypeId,
+                     subscriptionPayment.Subscription.ExcerciseType.Name
+                     ),
+                 Member: new ReadMemberDTO
+                 (
+                      subscriptionPayment.Subscription.Member.MemberId,
+                      subscriptionPayment.Subscription.Member.PersonId,
+                      subscriptionPayment.Subscription.Member.MemberWeight,
+                      subscriptionPayment.Subscription.Member.IsActive,
+
+                      new ReadPersonDTO()
+                      {
+                          Name = subscriptionPayment.Subscription.Member.Person.Name,
+                          PersonId = subscriptionPayment.Subscription.Member.PersonId,
+                          Email = subscriptionPayment.Subscription.Member.Person.Email,
+                          PhoneNumber = subscriptionPayment.Subscription.Member.Person.PhoneNumber,
+                          BirthDate = subscriptionPayment.Subscription.Member.Person.BirthDate,
+                          Idcard = subscriptionPayment.Subscription.Member.Person.Idcard
+                      }
+                     ),
+                 Period: new ReadPeriodDTO
+                 (
+                      PeriodId: subscriptionPayment.Subscription.Period.PeriodId,
+                      PeriodName: subscriptionPayment.Subscription.Period.PeriodName,
+                      StartTime: subscriptionPayment.Subscription.Period.StartTime,
+                      EndTime: subscriptionPayment.Subscription.Period.EndTime
+                   ),
+                 SubscriptionPeriod: new ReadSubscriptionPeriodDTO
+                 (
+                     subscriptionPayment.Subscription.SubscriptionPeriod.Id,
+                     subscriptionPayment.Subscription.SubscriptionPeriod.Name,
+                     subscriptionPayment.Subscription.SubscriptionPeriod.Price
+                     )
+
+             )
+              );
+
+
+
+        public static ReadSubscriptionDTO AsDTO(this Subscription subscription)
           => new ReadSubscriptionDTO
           (
 
@@ -314,7 +295,7 @@ namespace Jym_Management_APIs.DTO_modules
                             )
 
            );
-
+        
         public static ReadExerciseTypeDTO AsDTO(this ExerciseType exerciseType)
        => new ReadExerciseTypeDTO
        (
@@ -333,7 +314,7 @@ namespace Jym_Management_APIs.DTO_modules
                Salary = payrollPayment.Employee.Salary,
                ResignationDate = payrollPayment.Employee.ResignationDate,
                HireDate = payrollPayment.Employee.HireDate,
-               PersonId = payrollPayment.Employee.PersonId,
+            
 
                person = new ReadPersonDTO()
                {

@@ -15,25 +15,24 @@ namespace Jym_Management_BussinessLayer.Services
     public class UserService
     {
         private readonly UserRepository _UserRepository;
-        private readonly User _UserModule;
 
-        public UserService(User userModule)
+        public UserService()
         {
             _UserRepository = new UserRepository();
-            _UserModule = userModule;
+          
         }
-        public void Register()
+        public void Register(User _UserModule)
         {
             AppUser appUser = Mapping.Mapper.Map<AppUser>(_UserModule);
             _UserRepository.Register(appUser, _UserModule.Password);
         }
-        public void Delete()
+        public void Delete(User _UserModule)
         {
             AppUser user = Mapping.Mapper.Map<AppUser>(_UserModule);
             _UserRepository.Delete(user);
         }
 
-        public void Update()
+        public void Update(User _UserModule)
         {
             AppUser user = Mapping.Mapper.Map<AppUser>(_UserModule);
             _UserRepository.Update(user);
@@ -45,30 +44,30 @@ namespace Jym_Management_BussinessLayer.Services
             return Mapping.Mapper.Map<List<User>>(_UserRepository.GetAll());
         }
 
-        public User GetByUserName()
+        public User GetByUserName(string Username)
         {
 
-            return Mapping.Mapper.Map<User>(_UserRepository.GetByUserName(_UserModule.UserName));
+            return Mapping.Mapper.Map<User>(_UserRepository.GetByUserName(Username));
         }
 
-        public void AddUserToRole(string role)
+        public void AddUserToRole(User _UserModule, string role)
         {
             AppUser user = Mapping.Mapper.Map<AppUser>(_UserModule);
             _UserRepository.AddUserToRole(user, role);
         }
 
-        public void AddUserToRoles(IEnumerable<string> roles)
+        public void AddUserToRoles(User _UserModule, IEnumerable<string> roles)
         {
             AppUser user = Mapping.Mapper.Map<AppUser>(_UserModule);
             _UserRepository.AddUserToRoles(user, roles);
         }
-        public void RemoveUserToRole(string role)
+        public void RemoveUserToRole(User _UserModule, string role)
         {
             AppUser user = Mapping.Mapper.Map<AppUser>(_UserModule);
             _UserRepository.RemoveUserToRole(user, role);
         }
 
-        public void RemoveUserToRoles(IEnumerable<string> roles)
+        public void RemoveUserToRoles(User _UserModule, IEnumerable<string> roles)
         {
             AppUser user = Mapping.Mapper.Map<AppUser>(_UserModule);
             _UserRepository.RemoveUserToRoles(user, roles);

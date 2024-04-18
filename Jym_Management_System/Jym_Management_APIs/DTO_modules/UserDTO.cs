@@ -7,7 +7,6 @@ namespace Jym_Management_APIs.DTO_modules
     public record ReadUserDTO 
         (
              string UserName,
-              int PersonId,
              bool IsActive,
               ReadPersonDTO Person
 
@@ -30,8 +29,7 @@ namespace Jym_Management_APIs.DTO_modules
 
     public record UpdateUserDTO
       (
-            [Required]
-            short UserId ,
+           
             [Required]
              [StringLength(30, MinimumLength = 6)]
             string UserName,

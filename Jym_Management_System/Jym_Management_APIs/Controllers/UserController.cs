@@ -36,7 +36,7 @@ namespace Jym_Management_APIs.Controllers
                 user.IsActive = createUserDTO.IsActive;
 
 
-                _userService.Register();
+                _userService.Register(user);
                 return Ok();
             }
             else
@@ -51,14 +51,14 @@ namespace Jym_Management_APIs.Controllers
 
         public ActionResult UpdateUser(UpdateUserDTO updateUserDTO)
         {
-            var existingUser = _userService.GetById(updateUserDTO.UserId);
+            
+            var existingUser = _userService.GetByUserName(updateUserDTO.UserName);
             if (existingUser == null)
                 return NotFound();
 
             existingUser.UserName = updateUserDTO.UserName;
             existingUser.Password = updateUserDTO.Password;
             existingUser.IsActive = updateUserDTO.IsActive;
-            existingUser.PermissionsId = updateUserDTO.PermissionsId;
             _userService.Update(existingUser);
             return Ok();
         }
@@ -76,22 +76,18 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<ReadUserDTO> GetById(int id)
-        {
-            User user = _userService.GetById(id);
-            return user is null ? NotFound() : Ok(user.AsDTO());
-        }
+        
 
         [HttpDelete]
         [Route("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string Username)
         {
-            User user = _userService.GetById(id);
+            User user = _userService.GetByUserName(Username);
 
             if (user is null)
                 return NotFound();
 
-            _userService.DeleteById(user.UserId);
+            _userService.Delete(user);
             return Ok();
         }
     } 
