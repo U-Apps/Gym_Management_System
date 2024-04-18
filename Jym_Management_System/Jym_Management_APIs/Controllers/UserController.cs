@@ -74,12 +74,10 @@ namespace Jym_Management_APIs.Controllers
             return Ok(users);
         }
 
-        [HttpGet]
-        [Route("{id}")]
         
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{Username}")]
         public ActionResult Delete(string Username)
         {
             User user = _userService.GetByUserName(Username);
