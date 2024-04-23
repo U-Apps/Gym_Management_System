@@ -25,7 +25,7 @@ namespace Jym_Management_APIs.Controllers
 
         [HttpPost]
         [Route("")]
-
+        [AllowAnonymous]
         public ActionResult CreateUser(CreateUserDTO createUserDTO)
         {
             if (ModelState.IsValid)
