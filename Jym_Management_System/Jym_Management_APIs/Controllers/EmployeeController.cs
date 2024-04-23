@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Jym_Management_BussinessLayer.Services.Base;
 using System.Xml.Linq;
+using System.Security.Permissions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private readonly IBaseServices<Employee> _employeeService;

@@ -2,6 +2,7 @@
 using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services;
 using Jym_Management_BussinessLayer.Services.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly UserService _userService;
