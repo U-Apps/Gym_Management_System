@@ -9,7 +9,7 @@ namespace Jym_Management_APIs.DTO_modules
         public string? Idcard { get; set; }
         public string Name { get; set; } = null!;
         public string? PhoneNumber { get; set; }
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public string? Email { get; set; }
 
     }
@@ -29,7 +29,7 @@ namespace Jym_Management_APIs.DTO_modules
         public string? PhoneNumber { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         [Required]
         [EmailAddress]
         public string? Email { get; set; }
@@ -49,7 +49,7 @@ namespace Jym_Management_APIs.DTO_modules
         public string? PhoneNumber { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         [Required]
         [EmailAddress]
         public string? Email { get; set; }

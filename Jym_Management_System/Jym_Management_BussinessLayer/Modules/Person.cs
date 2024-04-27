@@ -10,7 +10,7 @@ namespace Jym_Management_BussinessLayer.Modules
         public string? Idcard { get; set; }
         public string Name { get; set; } = null!;
         public string? PhoneNumber { get; set; }
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public string? Email { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }

@@ -18,6 +18,7 @@ namespace Jym_Management_BussinessLayer.AutoMapper
 
             CreateMap<TbEmployee, Employee>()
                 .ForMember(dust => dust.PayrollPayments, src => src.MapFrom(src => src.TbPayrollPayments))
+                .ForMember(dust=> dust.Person, src => src.MapFrom(src => src.Person))
                 .ReverseMap();
 
 
@@ -38,7 +39,9 @@ namespace Jym_Management_BussinessLayer.AutoMapper
             CreateMap<TbMember, Member>()
                 .ForMember(dust => dust.Subscriptions, src => src.MapFrom(src => src.TbSubscriptions))
                 .ReverseMap();
-
+            CreateMap<TbPerson, Person>()
+                .ForMember(dust => dust.BirthDate, src => src.MapFrom(src => src.BirthDate))
+                .ReverseMap();
 
             CreateMap<TbPayrollPayment, PayrollPayment>().ReverseMap();
 
