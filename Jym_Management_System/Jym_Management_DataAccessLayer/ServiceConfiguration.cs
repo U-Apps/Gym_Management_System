@@ -33,7 +33,15 @@ namespace Jym_Management_DataAccessLayer
             services.AddIdentityCore<AppUser>()
                 .AddRoles<IdentityRole<int>>().AddRoleStore<IdentityRole<int>>()
                 .AddEntityFrameworkStores<AppDbContext>();
-
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+            });
             services.AddScoped<UserRepository>();
             services.AddSingleton<AuthenticationManager>();
             return services;
