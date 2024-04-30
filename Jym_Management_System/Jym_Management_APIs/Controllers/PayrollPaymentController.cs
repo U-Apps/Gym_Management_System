@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Jym_Management_BussinessLayer.Services.Base;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Jym_Management_APIs.Authentication;
 
 namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = clsSystemRoles.Admin)]
     public class PayrollPaymentController : ControllerBase
     {
         private readonly IBaseServices<PayrollPayment> _payrollPaymentService;

@@ -1,10 +1,11 @@
 ﻿namespace Jym_Management_APIs.Authentication
 {
-    public record SystemRoles
+    public record clsSystemRoles
     {
-        const string Admin = "Admin";
-        const string User = "User"; // could be Coach or Accountant
-        const string Member = "Member";
+        public const string Admin = "Admin";
+        public const string User = "User"; // could be Coach or Accountant
+        public const string Member = "Member";
 
     }
 }
+    

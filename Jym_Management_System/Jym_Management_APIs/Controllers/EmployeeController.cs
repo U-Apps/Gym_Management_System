@@ -8,12 +8,13 @@ using Jym_Management_BussinessLayer.Services.Base;
 using System.Xml.Linq;
 using System.Security.Permissions;
 using Microsoft.AspNetCore.Authorization;
+using Jym_Management_APIs.Authentication;
 
 namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = clsSystemRoles.Admin)]
     public class EmployeeController : ControllerBase
     {
         private readonly IBaseServices<Employee> _employeeService;

@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Jym_Management_BussinessLayer.Services.Base;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Jym_Management_APIs.Authentication;
 
 namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = clsSystemRoles.User)]
     public class SubscriptionController : ControllerBase
     {
         private readonly IBaseServices<Subscription> _subscriptionService;

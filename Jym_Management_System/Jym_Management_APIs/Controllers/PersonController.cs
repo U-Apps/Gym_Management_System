@@ -1,4 +1,5 @@
-﻿using Jym_Management_APIs.DTO_modules;
+﻿using Jym_Management_APIs.Authentication;
+using Jym_Management_APIs.DTO_modules;
 using Jym_Management_BussinessLayer.Modules;
 using Jym_Management_BussinessLayer.Services;
 using Jym_Management_BussinessLayer.Services.Base;
@@ -10,7 +11,7 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = clsSystemRoles.User)]
     public class PersonController : ControllerBase
     {
        readonly IBaseServices<Person> _personService;
