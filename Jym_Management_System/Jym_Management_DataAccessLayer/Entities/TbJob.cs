@@ -8,11 +8,13 @@ namespace Jym_Management_DataAccessLayer.Entities
         public TbJob()
         {
             TbJobHistories = new HashSet<TbJobHistory>();
+            TbEmployees = new HashSet<TbEmployee>();
         }
 
         public byte JobId { get; set; }
         public string JobTitle { get; set; } = null!;
 
         public virtual ICollection<TbJobHistory> TbJobHistories { get; set; }
+        public virtual ICollection<TbEmployee> TbEmployees { get; set; }
     }
 }
