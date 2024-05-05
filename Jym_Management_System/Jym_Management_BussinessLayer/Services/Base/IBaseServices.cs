@@ -11,7 +11,7 @@ namespace Jym_Management_BussinessLayer.Services.Base
     public interface IBaseServices<T> where T : class
     {
 
-        void Add(T module);
+        int Add(T module);
         void AddRange(IEnumerable<T> module);
         T GetById(int id);
         IEnumerable<T>GetAll();

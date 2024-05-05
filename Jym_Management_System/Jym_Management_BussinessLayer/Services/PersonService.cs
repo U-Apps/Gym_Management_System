@@ -13,14 +13,14 @@ namespace Jym_Management_BussinessLayer.Services
     {
         
 
-        public void Add(Person module)
+        public int Add(Person module)
         {
             BaseRepository<TbPerson> repo = new(new AppDbContext());
             var tbPerson = Mapping.Mapper.Map<TbPerson>(module);
             repo.Add(tbPerson);
             repo.SaveChanges();
             repo.Dispose();
-                
+            return tbPerson.PersonId;
         }
 
         public void AddRange(IEnumerable<Person> module)
@@ -94,7 +94,7 @@ namespace Jym_Management_BussinessLayer.Services
         {
             BaseRepository<TbPerson> repo = new(new AppDbContext());
             TbPerson tbPerson = Mapping.Mapper.Map<TbPerson>(module);
-           repo.Update(tbPerson);
+            repo.Update(tbPerson);
             repo.SaveChanges();
             repo.Dispose();
 

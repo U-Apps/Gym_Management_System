@@ -13,14 +13,14 @@ namespace Jym_Management_BussinessLayer.Services
     public class SubscriptionServices : IBaseServices<Subscription>
     {
 
-        public void Add(Subscription module)
+        public int Add(Subscription module)
         {
             IBaseRepository<TbSubscription> repo = new BaseRepository<TbSubscription>(new AppDbContext());
             var tbSubscription = Mapping.Mapper.Map<TbSubscription>(module);
             repo.Add(tbSubscription);
             repo.SaveChanges();
             repo.Dispose();
-            
+            return tbSubscription.SubscriptionId; 
         }
 
         public void AddRange(IEnumerable<Subscription> module)

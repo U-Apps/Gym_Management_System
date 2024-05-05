@@ -13,13 +13,14 @@ namespace Jym_Management_BussinessLayer.Services
     public class JobHistoryService : IBaseServices<JobHistory>
     {
  
-        public void Add(JobHistory module)
+        public int Add(JobHistory module)
         {
             IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
             var tbJobHistory = Mapping.Mapper.Map<TbJobHistory>(module);
             repo.Add(tbJobHistory);
             repo.SaveChanges();
             repo.Dispose();
+            return tbJobHistory.Id;
         }
 
         public void AddRange(IEnumerable<JobHistory> module)

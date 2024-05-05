@@ -17,13 +17,14 @@ namespace Jym_Management_BussinessLayer.Services
 
         
 
-        public void Add(ExerciseType module)
+        public int Add(ExerciseType module)
         {
             IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
             var tbExerciseType = Mapping.Mapper.Map<TbExerciseType>(module);
             repo.Add(tbExerciseType);
             repo.SaveChanges();
             repo.Dispose();
+            return tbExerciseType.ExerciseTypeId;
         }
 
         public void AddRange(IEnumerable<ExerciseType> module)

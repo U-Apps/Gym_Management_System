@@ -16,13 +16,14 @@ namespace Jym_Management_BussinessLayer.Services
 
         
 
-        public void Add(PayrollPayment module)
+        public int Add(PayrollPayment module)
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var tbPayrollPayment = Mapping.Mapper.Map<TbPayrollPayment>(module);
            repo.Add(tbPayrollPayment);
            repo.SaveChanges();
             repo.Dispose();
+            return tbPayrollPayment.PaymentId;
         }
 
         public void AddRange(IEnumerable<PayrollPayment> module)

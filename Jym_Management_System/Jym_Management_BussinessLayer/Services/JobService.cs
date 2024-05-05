@@ -14,7 +14,7 @@ namespace Jym_Management_BussinessLayer.Services
     {
 
        
-        public void Add(Job module)
+        public int Add(Job module)
         {
             IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
 
@@ -22,7 +22,7 @@ namespace Jym_Management_BussinessLayer.Services
            repo.Add(tbJob);
             repo.SaveChanges();
             repo.Dispose();
-            
+            return tbJob.JobId;
         }
 
         public void AddRange(IEnumerable<Job> module)
