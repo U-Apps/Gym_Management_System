@@ -17,6 +17,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
+        public TbEmployee Employee { get; set; }
         public virtual TbJob Job { get; set; } = null!;
         public virtual ICollection<TbSubscription> TbSubscriptionCoaches { get; set; }
         public virtual ICollection<TbSubscription> TbSubscriptionCreatedByReceptionists { get; set; }

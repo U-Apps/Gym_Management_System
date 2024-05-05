@@ -29,6 +29,12 @@ namespace Jym_Management_DataAccessLayer.Data.Config
                 .HasForeignKey(d => d.JobId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tbJobHistories_tbJobs");
+
+            builder.HasOne(d => d.Employee)
+                .WithMany(e => e.EmployeementHistory)
+                .HasForeignKey(d => d.EmpoyeeId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_tbJobHistories_tbEmployees");
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Jym_Management_DataAccessLayer.Entities
         public TbEmployee()
         {
             TbPayrollPayments = new HashSet<TbPayrollPayment>();
+            EmployeementHistory = new HashSet<TbJobHistory>();
         }
 
         public int EmployeeId { get; set; }
@@ -20,5 +21,6 @@ namespace Jym_Management_DataAccessLayer.Entities
         public virtual TbPerson Person { get; set; }
         public virtual TbJob CurrentJob { get; set; }
         public virtual ICollection<TbPayrollPayment> TbPayrollPayments { get; set; }
+        public virtual ICollection<TbJobHistory> EmployeementHistory { get; set; }
     }
 }
