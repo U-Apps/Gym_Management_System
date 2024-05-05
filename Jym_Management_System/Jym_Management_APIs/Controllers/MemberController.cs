@@ -10,15 +10,17 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = clsSystemRoles.User)]
+    //[Authorize(Roles = clsSystemRoles.User)]
     public class MemberController : ControllerBase
     {
         private readonly IBaseServices<Member> _memberService;
+        private readonly IBaseServices<Person> _personService;
 
 
-        public MemberController(IBaseServices<Member> memberService)
+        public MemberController(IBaseServices<Member> memberService, IBaseServices<Person> personService)
         {
             _memberService = memberService;
+            _personService = personService;
 
         }
 
@@ -28,9 +30,20 @@ namespace Jym_Management_APIs.Controllers
 
         public ActionResult CreateMember(CreateMemberDTO createMemberDTO)
         {
+            var person = new Person()
+            {
+                Name = createMemberDTO.Name,
+                Idcard = createMemberDTO.Idcard,
+                PhoneNumber = createMemberDTO.PhoneNumber,
+                Email = createMemberDTO.Email,
+                BirthDate = createMemberDTO.BirthDate
+            };
+
+            
+
             var member = new Member();
 
-            member.PersonId = createMemberDTO.PersonId;
+            member.PersonId = _personService.Add(person);
             member.MemberWeight = createMemberDTO.MemberWeight;
             member.IsActive = createMemberDTO.IsActive;
 
@@ -47,6 +60,15 @@ namespace Jym_Management_APIs.Controllers
             if (existingMember == null)
                 return NotFound();
 
+            var existingPerson = _personService.GetById(existingMember.PersonId);
+
+            existingPerson.Name = updateMemberDTO.Name;
+            existingPerson.PhoneNumber = updateMemberDTO.PhoneNumber;
+            existingPerson.BirthDate = updateMemberDTO.BirthDate;
+            existingPerson.Email = updateMemberDTO.Email;
+            _personService.Update(existingPerson);
+
+            existingMember.Person = existingPerson;
             existingMember.MemberWeight = updateMemberDTO.MemberWeight;
             existingMember.IsActive = updateMemberDTO.IsActive;
 
