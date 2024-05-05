@@ -85,7 +85,7 @@ namespace Jym_Management_BussinessLayer.Services
         {
 
             IBaseRepository<TbEmployee> repo = new BaseRepository<TbEmployee>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<Employee>>(repo.GetAll(d => d.Person,d=>d.TbPayrollPayments));
+            return Mapping.Mapper.Map<IEnumerable<Employee>>(repo.GetAll(d => d.Person,d=>d.TbPayrollPayments ,d=>d.CurrentJob));
             
                 
         }   

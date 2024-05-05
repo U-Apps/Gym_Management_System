@@ -14,7 +14,7 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = clsSystemRoles.Admin)]
+    //[Authorize(Roles = clsSystemRoles.Admin)]
     public class EmployeeController : ControllerBase
     {
         private readonly IBaseServices<Employee> _employeeService;
@@ -66,6 +66,16 @@ namespace Jym_Management_APIs.Controllers
         {
 
             var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
+
+            return Ok(employees);
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/[action]")]
+        public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployeesBy(string jobTitle)
+        {
+
+            var employees = _employeeService.GetAll().Where(emp=>emp.CurrentJob.JobTitle==jobTitle).Select(employee => employee.AsDTO());
 
             return Ok(employees);
         }
