@@ -18,12 +18,12 @@ namespace Jym_Management_APIs.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IBaseServices<Employee> _employeeService;
+        private readonly IBaseServices<Person> _personService;
 
-
-        public EmployeeController(IBaseServices<Employee> employeeService)
+        public EmployeeController(IBaseServices<Employee> employeeService, IBaseServices<Person> personService)
         {
             _employeeService = employeeService;
-           
+            _personService = personService;
         }
 
 
@@ -32,9 +32,18 @@ namespace Jym_Management_APIs.Controllers
 
         public ActionResult CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
+            var person = new Person()
+            {
+                Name = createEmployeeDTO.Name,
+                Idcard = createEmployeeDTO.Idcard,
+                PhoneNumber = createEmployeeDTO.PhoneNumber,
+                Email = createEmployeeDTO.Email,
+                BirthDate = createEmployeeDTO.BirthDate
+            };
+
             var employee = new Employee();
 
-            employee.PersonId = createEmployeeDTO.PersonId;
+            employee.PersonId = _personService.Add(person);
             employee.ResignationDate = createEmployeeDTO.ResignationDate;
             employee.HireDate = createEmployeeDTO.HireDate;
             employee.Salary = createEmployeeDTO.Salary;
@@ -52,10 +61,20 @@ namespace Jym_Management_APIs.Controllers
             if (existingEmployee == null)
                 return NotFound();
 
+
+            var existingPerson = _personService.GetById(existingEmployee.PersonId);
+
+            existingPerson.Name = updateEmployeeDTO.Name;
+            existingPerson.PhoneNumber = updateEmployeeDTO.PhoneNumber;
+            existingPerson.BirthDate = updateEmployeeDTO.BirthDate;
+            existingPerson.Email = updateEmployeeDTO.Email;
+            _personService.Update(existingPerson);
+
+            existingEmployee.Person = existingPerson;
+
             existingEmployee.HireDate = updateEmployeeDTO.HireDate;
             existingEmployee.ResignationDate = updateEmployeeDTO.ResignationDate;
             existingEmployee.Salary = updateEmployeeDTO.Salary;
-            existingEmployee.PersonId = updateEmployeeDTO.PersonId;
             existingEmployee.JobID = updateEmployeeDTO.CurrentJop;
             _employeeService.Update(existingEmployee);
             return Ok();
