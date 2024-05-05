@@ -8,8 +8,8 @@ namespace Jym_Management_DataAccessLayer.Entities
     {
         public TbPerson()
         {
-            TbEmployees = new HashSet<TbEmployee>();
-            TbMembers = new HashSet<TbMember>();
+            //TbEmployees = new HashSet<TbEmployee>();
+            //TbMembers = new HashSet<TbMember>();
             //User = new HashSet<TbUser>();
         }
 
@@ -20,8 +20,8 @@ namespace Jym_Management_DataAccessLayer.Entities
         public DateTime BirthDate { get; set; }
         public string? Email { get; set; }
 
-        public virtual ICollection<TbEmployee> TbEmployees { get; set; }
-        public virtual ICollection<TbMember> TbMembers { get; set; }
+        public virtual TbEmployee Employee { get; set; }
+        public virtual TbMember Member { get; set; }
         public virtual AppUser? User { get; set; }
     }
 }

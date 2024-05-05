@@ -81,7 +81,7 @@ namespace Jym_Management_BussinessLayer.Services
         public IEnumerable<Person> GetAll()
         {
             BaseRepository<TbPerson> repo = new(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<Person>>(repo.GetAll(c=>c.TbMembers,c=>c.TbEmployees,c=>c.User!));
+            return Mapping.Mapper.Map<IEnumerable<Person>>(repo.GetAll(c=>c.Member,c=>c.Employee,c=>c.User!));
         }
 
         public Person GetById(int id)
