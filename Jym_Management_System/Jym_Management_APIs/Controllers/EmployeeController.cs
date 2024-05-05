@@ -14,7 +14,7 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = clsSystemRoles.Admin)]
+    //[Authorize(Roles = clsSystemRoles.Admin)]
     public class EmployeeController : ControllerBase
     {
         private readonly IBaseServices<Employee> _employeeService;
@@ -38,6 +38,7 @@ namespace Jym_Management_APIs.Controllers
             employee.ResignationDate = createEmployeeDTO.ResignationDate;
             employee.HireDate = createEmployeeDTO.HireDate;
             employee.Salary = createEmployeeDTO.Salary;
+            employee.JobID = createEmployeeDTO.CurrentJop;
             _employeeService.Add(employee);
             return Ok();
         }
@@ -55,6 +56,7 @@ namespace Jym_Management_APIs.Controllers
             existingEmployee.ResignationDate = updateEmployeeDTO.ResignationDate;
             existingEmployee.Salary = updateEmployeeDTO.Salary;
             existingEmployee.PersonId = updateEmployeeDTO.PersonId;
+            existingEmployee.JobID = updateEmployeeDTO.CurrentJop;
             _employeeService.Update(existingEmployee);
             return Ok();
         }
@@ -66,6 +68,16 @@ namespace Jym_Management_APIs.Controllers
         {
 
             var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
+
+            return Ok(employees);
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/[action]")]
+        public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployeesBy(string jobTitle)
+        {
+
+            var employees = _employeeService.GetAll().Where(emp=>emp.CurrentJob.JobTitle==jobTitle).Select(employee => employee.AsDTO());
 
             return Ok(employees);
         }
