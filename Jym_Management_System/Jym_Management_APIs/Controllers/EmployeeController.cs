@@ -38,6 +38,7 @@ namespace Jym_Management_APIs.Controllers
             employee.ResignationDate = createEmployeeDTO.ResignationDate;
             employee.HireDate = createEmployeeDTO.HireDate;
             employee.Salary = createEmployeeDTO.Salary;
+            employee.JobID = createEmployeeDTO.CurrentJop;
             _employeeService.Add(employee);
             return Ok();
         }
@@ -55,6 +56,7 @@ namespace Jym_Management_APIs.Controllers
             existingEmployee.ResignationDate = updateEmployeeDTO.ResignationDate;
             existingEmployee.Salary = updateEmployeeDTO.Salary;
             existingEmployee.PersonId = updateEmployeeDTO.PersonId;
+            existingEmployee.JobID = updateEmployeeDTO.CurrentJop;
             _employeeService.Update(existingEmployee);
             return Ok();
         }

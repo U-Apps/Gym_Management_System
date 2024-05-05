@@ -17,6 +17,7 @@ namespace Jym_Management_APIs.DTO_modules
         public DateTime HireDate { get; set; }
         public DateTime ResignationDate { get; set; }
         public decimal Salary { get; set; }
+        public virtual ReadJobDTO CurrentJob { get; set; }
 
         public ReadPersonDTO person { get; set; }
 
@@ -33,6 +34,7 @@ namespace Jym_Management_APIs.DTO_modules
         public DateTime HireDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime ResignationDate { get; set; }
+        public byte? CurrentJop { get; set; }
         [Required]
 
         public decimal Salary { get; set; }
@@ -49,7 +51,10 @@ namespace Jym_Management_APIs.DTO_modules
 
         public DateTime HireDate { get; set; }
         public DateTime ResignationDate { get; set; }
+
+        public byte? CurrentJop { get; set; }
         [Required]
+
 
         public decimal Salary { get; set; }
 
