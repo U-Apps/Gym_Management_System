@@ -20,10 +20,15 @@ namespace Jym_Management_APIs.Controllers
         private readonly IBaseServices<Employee> _employeeService;
         private readonly IBaseServices<Person> _personService;
 
-        public EmployeeController(IBaseServices<Employee> employeeService, IBaseServices<Person> personService)
+        public IBaseServices<JobHistory> _HistoryService { get; }
+
+        public EmployeeController(IBaseServices<Employee> employeeService, 
+            IBaseServices<Person> personService,
+            IBaseServices<JobHistory> historyService)
         {
             _employeeService = employeeService;
             _personService = personService;
+            _HistoryService = historyService;
         }
 
 
@@ -44,11 +49,20 @@ namespace Jym_Management_APIs.Controllers
             var employee = new Employee();
 
             employee.PersonId = _personService.Add(person);
-            employee.ResignationDate = createEmployeeDTO.ResignationDate;
+            //employee.ResignationDate = createEmployeeDTO.ResignationDate;
             employee.HireDate = createEmployeeDTO.HireDate;
             employee.Salary = createEmployeeDTO.Salary;
             employee.JobID = createEmployeeDTO.CurrentJop;
-            _employeeService.Add(employee);
+
+            var History = new JobHistory()
+            {
+                EmpoyeeId = _employeeService.Add(employee),
+                JobId = employee.JobID.Value,
+                StartDate = employee.HireDate
+            };
+
+            _HistoryService.Add(History);
+            
             return Ok();
         }
 
