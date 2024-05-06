@@ -27,7 +27,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateSubscription(CreateSubscriptionDTO createSubscriptionDTO)
         {
@@ -50,7 +50,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateSubscription(UpdateSubscriptionDTO updateSubscriptionDTO)
         {
@@ -83,8 +83,8 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadSubscriptionDTO>> Get()
+        [Route("[action]")]
+        public ActionResult<IEnumerable<ReadSubscriptionDTO>> GetSubscriptions()
         {
 
             var subscriptions = _subscriptionService.GetAll().Select(subscription => subscription.AsDTO());
@@ -93,7 +93,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadSubscriptionDTO> GetById(int id)
         {
             Subscription subscription = _subscriptionService.GetById(id);
@@ -101,7 +101,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Subscription subscription = _subscriptionService.GetById(id);

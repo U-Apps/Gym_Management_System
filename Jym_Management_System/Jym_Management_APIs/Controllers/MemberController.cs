@@ -26,7 +26,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("api/[controller]/[action]")]
+        [Route("[action]")]
 
         public ActionResult CreateMember(CreateMemberDTO createMemberDTO)
         {
@@ -52,7 +52,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("api/[controller]/[action]")]
+        [Route("[action]")]
 
         public ActionResult UpdateMember(UpdateMemberDTO updateMemberDTO)
         {
@@ -78,7 +78,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("api/[controller]/[action]")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadMemberDTO>> GetMembers()
         {
 
@@ -88,7 +88,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/[action]/{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadMemberDTO> GetById(int id)
         {
             Member member = _memberService.GetById(id);
@@ -96,7 +96,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("api/[controller]/[action]/{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Member member = _memberService.GetById(id);

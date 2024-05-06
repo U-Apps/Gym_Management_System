@@ -27,7 +27,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreatePermission(CreatePermssionDTO createPermissionDTO)
         {
@@ -41,7 +41,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdatePermission(UpdatePermssionDTO updatePermissionDTO)
         {
@@ -58,7 +58,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadPermssionDTO>> Get()
         {
 
@@ -68,7 +68,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadPermssionDTO> GetById(int id)
         {
             Permssion permission = _permissionService.GetById(id);
@@ -76,7 +76,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Permssion permission = _permissionService.GetById(id);
