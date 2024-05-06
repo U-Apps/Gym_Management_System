@@ -59,9 +59,9 @@ namespace Jym_Management_APIs.Controllers
             if (existingSubscription == null)
                 return NotFound();
 
-            if (_jobHistoryService.GetById(updateSubscriptionDTO.CoachId).Job.JobTitle!="Coach")
+            if (_jobHistoryService.GetById(updateSubscriptionDTO.CoachId)?.Job.JobTitle!="Coach")
                 return BadRequest($"this employee {existingSubscription.Coach.Employee.Person.Name} not Coach");
-            if (_jobHistoryService.GetById(updateSubscriptionDTO.CreatedByReceptionistId).Job.JobTitle != "Receptionist")
+            if (_jobHistoryService.GetById(updateSubscriptionDTO.CreatedByReceptionistId)?.Job.JobTitle != "Receptionist")
                 return BadRequest($"this employee {existingSubscription.Coach.Employee.Person.Name} not Receptionist");
 
             existingSubscription.MemberId = updateSubscriptionDTO.MemberId;
