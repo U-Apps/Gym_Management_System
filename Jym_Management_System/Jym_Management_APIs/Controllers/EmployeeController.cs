@@ -14,7 +14,7 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = clsSystemRoles.Admin)]
+    [Authorize(Roles = clsSystemRoles.Admin)]
     public class EmployeeController : ControllerBase
     {
         private readonly IBaseServices<Employee> _employeeService;
@@ -28,7 +28,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("api/[controller]/[action]")]
 
         public ActionResult CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
@@ -53,7 +53,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("api/[controller]/[action]")]
 
         public ActionResult UpdateEmployee(UpdateEmployeeDTO updateEmployeeDTO)
         {
@@ -82,8 +82,8 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadEmployeeDTO>> Get()
+        [Route("api/[controller]/[action]")]
+        public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployees()
         {
 
             var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
@@ -92,7 +92,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/[action]")]
+        [Route("api/[controller]/[action]/{jobTitle}")]
         public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployeesBy(string jobTitle)
         {
 
@@ -102,7 +102,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("api/[controller]/[action]/{id}")]
         public ActionResult<ReadEmployeeDTO> GetById(int id)
         {
             Employee employee = _employeeService.GetById(id);
@@ -110,7 +110,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("api/[controller]/[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Employee employee = _employeeService.GetById(id);
