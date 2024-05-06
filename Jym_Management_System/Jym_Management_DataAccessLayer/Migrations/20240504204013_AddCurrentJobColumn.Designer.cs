@@ -4,6 +4,7 @@ using Jym_Management_DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jym_Management_DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240504204013_AddCurrentJobColumn")]
+    partial class AddCurrentJobColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,7 +122,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("PersonID");
 
-                    b.Property<DateTime?>("ResignationDate")
+                    b.Property<DateTime>("ResignationDate")
                         .HasColumnType("date")
                         .HasColumnName("resignationDate");
 
@@ -132,8 +134,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
                     b.HasIndex("JobID");
 
-                    b.HasIndex("PersonId")
-                        .IsUnique();
+                    b.HasIndex("PersonId");
 
                     b.ToTable("tbEmployees", (string)null);
                 });
@@ -201,8 +202,6 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpoyeeId");
-
                     b.HasIndex("JobId");
 
                     b.ToTable("tbJobHistories", (string)null);
@@ -230,8 +229,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
                     b.HasKey("MemberId");
 
-                    b.HasIndex("PersonId")
-                        .IsUnique();
+                    b.HasIndex("PersonId");
 
                     b.ToTable("tbMembers", (string)null);
                 });
@@ -588,9 +586,8 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .HasConstraintName("FK_Employees_Jobs");
 
                     b.HasOne("Jym_Management_DataAccessLayer.Entities.TbPerson", "Person")
-                        .WithOne("Employee")
-                        .HasForeignKey("Jym_Management_DataAccessLayer.Entities.TbEmployee", "PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany("TbEmployees")
+                        .HasForeignKey("PersonId")
                         .IsRequired()
                         .HasConstraintName("FK_Employees");
 
@@ -601,20 +598,11 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
             modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbJobHistory", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbEmployee", "Employee")
-                        .WithMany("EmployeementHistory")
-                        .HasForeignKey("EmpoyeeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_tbJobHistories_tbEmployees");
-
                     b.HasOne("Jym_Management_DataAccessLayer.Entities.TbJob", "Job")
                         .WithMany("TbJobHistories")
                         .HasForeignKey("JobId")
                         .IsRequired()
                         .HasConstraintName("FK_tbJobHistories_tbJobs");
-
-                    b.Navigation("Employee");
 
                     b.Navigation("Job");
                 });
@@ -622,9 +610,8 @@ namespace Jym_Management_DataAccessLayer.Migrations
             modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbMember", b =>
                 {
                     b.HasOne("Jym_Management_DataAccessLayer.Entities.TbPerson", "Person")
-                        .WithOne("Member")
-                        .HasForeignKey("Jym_Management_DataAccessLayer.Entities.TbMember", "PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany("TbMembers")
+                        .HasForeignKey("PersonId")
                         .IsRequired()
                         .HasConstraintName("FK_Members");
 
@@ -763,8 +750,6 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
             modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbEmployee", b =>
                 {
-                    b.Navigation("EmployeementHistory");
-
                     b.Navigation("TbPayrollPayments");
                 });
 
@@ -799,11 +784,9 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
             modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbPerson", b =>
                 {
-                    b.Navigation("Employee")
-                        .IsRequired();
+                    b.Navigation("TbEmployees");
 
-                    b.Navigation("Member")
-                        .IsRequired();
+                    b.Navigation("TbMembers");
 
                     b.Navigation("User");
                 });

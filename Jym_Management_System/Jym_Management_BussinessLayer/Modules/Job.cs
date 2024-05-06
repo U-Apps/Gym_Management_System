@@ -11,5 +11,6 @@ namespace Jym_Management_BussinessLayer.Modules
         public string JobTitle { get; set; } = null!;
 
         public virtual ICollection<JobHistory> JobHistories { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

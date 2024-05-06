@@ -27,7 +27,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateExerciseType(CreateExerciseTypeDTO createExerciseTypeDTO)
         {
@@ -40,7 +40,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateExerciseType(UpdateExerciseTypeDTO updateExerciseTypeDTO)
         {
@@ -56,7 +56,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadExerciseTypeDTO>> Get()
         {
 
@@ -66,7 +66,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadExerciseTypeDTO> GetById(int id)
         {
             ExerciseType exerciseType = _exerciseTypeService.GetById(id);
@@ -74,7 +74,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             ExerciseType exerciseType = _exerciseTypeService.GetById(id);

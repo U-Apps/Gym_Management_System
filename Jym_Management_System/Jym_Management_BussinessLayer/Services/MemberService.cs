@@ -13,13 +13,14 @@ namespace Jym_Management_BussinessLayer.Services
     public class MemberService : IBaseServices<Member>
     {
        
-        public void Add(Member module)
+        public int Add(Member module)
         {
             IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
             var tbMember = Mapping.Mapper.Map<TbMember>(module);
             repo.Add(tbMember);
            repo.SaveChanges();
             repo.Dispose();
+            return tbMember.MemberId;
         }
 
         public void AddRange(IEnumerable<Member> module)

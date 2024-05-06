@@ -27,7 +27,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateRole(CreateRoleDTO createRoleDTO)
         {
@@ -46,7 +46,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateRole(UpdateRoleDTO updateRoleDTO)
         {
@@ -63,7 +63,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadRoleDTO>> GetAll()
         {
 
@@ -73,7 +73,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("[action]/{id:int}")]
         public ActionResult<ReadRoleDTO> GetById(int id)
         {
             Role role = _roleService.GetById(id);
@@ -81,7 +81,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:int}")]
+        [Route("[action]/{id:int}")]
         public ActionResult Delete(int id)
         {
             Role role = _roleService.GetById(id);

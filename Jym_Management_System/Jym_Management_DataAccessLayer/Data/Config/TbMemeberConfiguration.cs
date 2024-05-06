@@ -21,9 +21,10 @@ namespace Jym_Management_DataAccessLayer.Data.Config
             builder.Property(e => e.PersonId).HasColumnName("PersonID");
 
             builder.HasOne(d => d.Person)
-                .WithMany(p => p.TbMembers)
-                .HasForeignKey(d => d.PersonId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .WithOne(p => p.Member)
+                .HasForeignKey<TbMember>(d => d.PersonId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired()
                 .HasConstraintName("FK_Members");
         }
     }

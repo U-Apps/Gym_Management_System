@@ -14,13 +14,14 @@ namespace Jym_Management_BussinessLayer.Services
     {
        
 
-        public void Add(SubscriptionPayment module)
+        public int Add(SubscriptionPayment module)
         {
             IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var tbSubscriptionPayment = Mapping.Mapper.Map<TbSubscriptionPayment>(module);
              repo.Add(tbSubscriptionPayment);
             repo.SaveChanges(); 
             repo.Dispose();
+            return tbSubscriptionPayment.PaymentId??0;
         }
 
         public void AddRange(IEnumerable<SubscriptionPayment> module)

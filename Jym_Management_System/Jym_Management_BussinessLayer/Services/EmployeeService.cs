@@ -18,7 +18,7 @@ namespace Jym_Management_BussinessLayer.Services
     {
 
 
-        public void Add(Employee module)
+        public int Add(Employee module)
         {
             BaseRepository<TbEmployee> repo = new(new AppDbContext());
 
@@ -26,8 +26,8 @@ namespace Jym_Management_BussinessLayer.Services
             repo.Add(tbEmployee);
             repo.SaveChanges();
             repo.Dispose();
-              
 
+            return tbEmployee.EmployeeId;
         }
         
         public void AddRange(IEnumerable<Employee> module)
@@ -85,7 +85,7 @@ namespace Jym_Management_BussinessLayer.Services
         {
 
             IBaseRepository<TbEmployee> repo = new BaseRepository<TbEmployee>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<Employee>>(repo.GetAll(d => d.Person,d=>d.TbPayrollPayments));
+            return Mapping.Mapper.Map<IEnumerable<Employee>>(repo.GetAll(d => d.Person,d=>d.TbPayrollPayments ,d=>d.CurrentJob));
             
                 
         }   

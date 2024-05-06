@@ -4,6 +4,7 @@ using Jym_Management_DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jym_Management_DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240505101330_AdjustingRelationships")]
+    partial class AdjustingRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,8 +202,6 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .HasColumnType("date");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmpoyeeId");
 
                     b.HasIndex("JobId");
 
@@ -601,20 +601,11 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
             modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbJobHistory", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbEmployee", "Employee")
-                        .WithMany("EmployeementHistory")
-                        .HasForeignKey("EmpoyeeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_tbJobHistories_tbEmployees");
-
                     b.HasOne("Jym_Management_DataAccessLayer.Entities.TbJob", "Job")
                         .WithMany("TbJobHistories")
                         .HasForeignKey("JobId")
                         .IsRequired()
                         .HasConstraintName("FK_tbJobHistories_tbJobs");
-
-                    b.Navigation("Employee");
 
                     b.Navigation("Job");
                 });
@@ -763,8 +754,6 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
             modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbEmployee", b =>
                 {
-                    b.Navigation("EmployeementHistory");
-
                     b.Navigation("TbPayrollPayments");
                 });
 

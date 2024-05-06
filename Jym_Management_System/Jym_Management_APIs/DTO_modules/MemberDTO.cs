@@ -15,8 +15,21 @@ namespace Jym_Management_APIs.DTO_modules
 
     public record CreateMemberDTO
        (
-             [Required]
-             int PersonId,
+            [Required]
+            [DataType(DataType.CreditCard)]
+             string? Idcard,
+            [Required]
+            [StringLength(50, MinimumLength = 6)]
+            string Name,
+            [Required]
+            [DataType(DataType.PhoneNumber)]
+            string? PhoneNumber,
+            [Required]
+            [DataType(DataType.Date)]
+            DateTime BirthDate,
+            [Required]
+            [EmailAddress]
+            string? Email,
              [Range(1,200)]
              decimal? MemberWeight,
              bool? IsActive
@@ -26,9 +39,22 @@ namespace Jym_Management_APIs.DTO_modules
     public record UpdateMemberDTO
       (
             [Required]
-             int MemberId,
+            [DataType(DataType.CreditCard)]
+             string? Idcard,
             [Required]
-             int PersonId,
+            [StringLength(50, MinimumLength = 6)]
+            string Name,
+            [Required]
+            [DataType(DataType.PhoneNumber)]
+            string? PhoneNumber,
+            [Required]
+            [DataType(DataType.Date)]
+            DateTime BirthDate,
+            [Required]
+            [EmailAddress]
+            string? Email,
+            [Required]
+             int MemberId,
             [Range(1,200)]
              decimal? MemberWeight,
             bool? IsActive

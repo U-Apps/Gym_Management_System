@@ -15,14 +15,14 @@ namespace Jym_Management_BussinessLayer.Services
     {
        
 
-        public void Add(Period module)
+        public int Add(Period module)
         {
             IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
             var tbPeriod = Mapping.Mapper.Map<TbPeriod>(module);
             repo.Add(tbPeriod);
             repo.SaveChanges();
             repo.Dispose();
-            
+            return tbPeriod.PeriodId;
         }
 
         public void AddRange(IEnumerable<Period> module)

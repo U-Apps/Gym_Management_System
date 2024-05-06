@@ -14,23 +14,36 @@ namespace Jym_Management_APIs.Controllers
     public class MemberController : ControllerBase
     {
         private readonly IBaseServices<Member> _memberService;
+        private readonly IBaseServices<Person> _personService;
 
 
-        public MemberController(IBaseServices<Member> memberService)
+        public MemberController(IBaseServices<Member> memberService, IBaseServices<Person> personService)
         {
             _memberService = memberService;
+            _personService = personService;
 
         }
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateMember(CreateMemberDTO createMemberDTO)
         {
+            var person = new Person()
+            {
+                Name = createMemberDTO.Name,
+                Idcard = createMemberDTO.Idcard,
+                PhoneNumber = createMemberDTO.PhoneNumber,
+                Email = createMemberDTO.Email,
+                BirthDate = createMemberDTO.BirthDate
+            };
+
+            
+
             var member = new Member();
 
-            member.PersonId = createMemberDTO.PersonId;
+            member.PersonId = _personService.Add(person);
             member.MemberWeight = createMemberDTO.MemberWeight;
             member.IsActive = createMemberDTO.IsActive;
 
@@ -39,7 +52,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateMember(UpdateMemberDTO updateMemberDTO)
         {
@@ -47,6 +60,15 @@ namespace Jym_Management_APIs.Controllers
             if (existingMember == null)
                 return NotFound();
 
+            var existingPerson = _personService.GetById(existingMember.PersonId);
+
+            existingPerson.Name = updateMemberDTO.Name;
+            existingPerson.PhoneNumber = updateMemberDTO.PhoneNumber;
+            existingPerson.BirthDate = updateMemberDTO.BirthDate;
+            existingPerson.Email = updateMemberDTO.Email;
+            _personService.Update(existingPerson);
+
+            existingMember.Person = existingPerson;
             existingMember.MemberWeight = updateMemberDTO.MemberWeight;
             existingMember.IsActive = updateMemberDTO.IsActive;
 
@@ -56,8 +78,8 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadMemberDTO>> Get()
+        [Route("[action]")]
+        public ActionResult<IEnumerable<ReadMemberDTO>> GetMembers()
         {
 
             var members = _memberService.GetAll().Select(member => member.AsDTO());
@@ -66,7 +88,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadMemberDTO> GetById(int id)
         {
             Member member = _memberService.GetById(id);
@@ -74,7 +96,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Member member = _memberService.GetById(id);

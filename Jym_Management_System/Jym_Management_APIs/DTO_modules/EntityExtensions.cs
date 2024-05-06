@@ -17,6 +17,11 @@ namespace Jym_Management_APIs.DTO_modules
                 ResignationDate = employee.ResignationDate,
                 HireDate = employee.HireDate,
                
+                 CurrentJob=new ReadJobDTO(
+
+                      employee.CurrentJob.JobId,
+                      employee.CurrentJob.JobTitle
+                    ) ,
 
                 person = new ReadPersonDTO()
                 {

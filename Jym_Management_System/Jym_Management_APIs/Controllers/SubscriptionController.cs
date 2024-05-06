@@ -17,17 +17,17 @@ namespace Jym_Management_APIs.Controllers
     public class SubscriptionController : ControllerBase
     {
         private readonly IBaseServices<Subscription> _subscriptionService;
+        private readonly IBaseServices<JobHistory> _jobHistoryService;
 
-
-        public SubscriptionController(IBaseServices<Subscription> subscriptionService)
+        public SubscriptionController(IBaseServices<Subscription> subscriptionService, IBaseServices<JobHistory> jobHistoryService)
         {
             _subscriptionService = subscriptionService;
-           
+            _jobHistoryService = jobHistoryService;
         }
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateSubscription(CreateSubscriptionDTO createSubscriptionDTO)
         {
@@ -50,18 +50,26 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateSubscription(UpdateSubscriptionDTO updateSubscriptionDTO)
         {
+            
             var existingSubscription = _subscriptionService.GetById(updateSubscriptionDTO.SubscriptionId);
             if (existingSubscription == null)
                 return NotFound();
 
+            if (_jobHistoryService.GetById(updateSubscriptionDTO.CoachId)?.Job.JobTitle!="Coach")
+                return BadRequest($"this employee {existingSubscription.Coach.Employee.Person.Name} not Coach");
+            if (_jobHistoryService.GetById(updateSubscriptionDTO.CreatedByReceptionistId)?.Job.JobTitle != "Receptionist")
+                return BadRequest($"this employee {existingSubscription.Coach.Employee.Person.Name} not Receptionist");
+
             existingSubscription.MemberId = updateSubscriptionDTO.MemberId;
             existingSubscription.PeriodId = updateSubscriptionDTO.PeriodId;
             existingSubscription.CoachId = updateSubscriptionDTO.CoachId;
+            existingSubscription.Coach= _jobHistoryService.GetById(updateSubscriptionDTO.CoachId);
             existingSubscription.CreatedByReceptionistId = updateSubscriptionDTO.CreatedByReceptionistId;
+            existingSubscription.CreatedByReceptionist = _jobHistoryService.GetById(updateSubscriptionDTO.CreatedByReceptionistId);
             existingSubscription.ExcerciseTypeId = updateSubscriptionDTO.ExcerciseTypeId;
             existingSubscription.SubscriptionPeriodId = updateSubscriptionDTO.SubscriptionPeriodId;
 
@@ -75,8 +83,8 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadSubscriptionDTO>> Get()
+        [Route("[action]")]
+        public ActionResult<IEnumerable<ReadSubscriptionDTO>> GetSubscriptions()
         {
 
             var subscriptions = _subscriptionService.GetAll().Select(subscription => subscription.AsDTO());
@@ -85,7 +93,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadSubscriptionDTO> GetById(int id)
         {
             Subscription subscription = _subscriptionService.GetById(id);
@@ -93,7 +101,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Subscription subscription = _subscriptionService.GetById(id);

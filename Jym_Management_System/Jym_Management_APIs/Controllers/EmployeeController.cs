@@ -18,32 +18,56 @@ namespace Jym_Management_APIs.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IBaseServices<Employee> _employeeService;
+        private readonly IBaseServices<Person> _personService;
 
+        public IBaseServices<JobHistory> _HistoryService { get; }
 
-        public EmployeeController(IBaseServices<Employee> employeeService)
+        public EmployeeController(IBaseServices<Employee> employeeService, 
+            IBaseServices<Person> personService,
+            IBaseServices<JobHistory> historyService)
         {
             _employeeService = employeeService;
-           
+            _personService = personService;
+            _HistoryService = historyService;
         }
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
+            var person = new Person()
+            {
+                Name = createEmployeeDTO.Name,
+                Idcard = createEmployeeDTO.Idcard,
+                PhoneNumber = createEmployeeDTO.PhoneNumber,
+                Email = createEmployeeDTO.Email,
+                BirthDate = createEmployeeDTO.BirthDate
+            };
+
             var employee = new Employee();
 
-            employee.PersonId = createEmployeeDTO.PersonId;
-            employee.ResignationDate = createEmployeeDTO.ResignationDate;
+            employee.PersonId = _personService.Add(person);
+            //employee.ResignationDate = createEmployeeDTO.ResignationDate;
             employee.HireDate = createEmployeeDTO.HireDate;
             employee.Salary = createEmployeeDTO.Salary;
-            _employeeService.Add(employee);
+            employee.JobID = createEmployeeDTO.CurrentJop;
+
+            var History = new JobHistory()
+            {
+                EmpoyeeId = _employeeService.Add(employee),
+                JobId = employee.JobID.Value,
+                StartDate = employee.HireDate
+            };
+
+            _HistoryService.Add(History);
+            
             return Ok();
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateEmployee(UpdateEmployeeDTO updateEmployeeDTO)
         {
@@ -51,18 +75,29 @@ namespace Jym_Management_APIs.Controllers
             if (existingEmployee == null)
                 return NotFound();
 
+
+            var existingPerson = _personService.GetById(existingEmployee.PersonId);
+
+            existingPerson.Name = updateEmployeeDTO.Name;
+            existingPerson.PhoneNumber = updateEmployeeDTO.PhoneNumber;
+            existingPerson.BirthDate = updateEmployeeDTO.BirthDate;
+            existingPerson.Email = updateEmployeeDTO.Email;
+            _personService.Update(existingPerson);
+
+            existingEmployee.Person = existingPerson;
+
             existingEmployee.HireDate = updateEmployeeDTO.HireDate;
             existingEmployee.ResignationDate = updateEmployeeDTO.ResignationDate;
             existingEmployee.Salary = updateEmployeeDTO.Salary;
-            existingEmployee.PersonId = updateEmployeeDTO.PersonId;
+            existingEmployee.JobID = updateEmployeeDTO.CurrentJop;
             _employeeService.Update(existingEmployee);
             return Ok();
         }
 
 
         [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadEmployeeDTO>> Get()
+        [Route("[action]")]
+        public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployees()
         {
 
             var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
@@ -71,7 +106,17 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{jobTitle}")]
+        public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployeesBy(string jobTitle)
+        {
+
+            var employees = _employeeService.GetAll().Where(emp=>emp.CurrentJob.JobTitle==jobTitle).Select(employee => employee.AsDTO());
+
+            return Ok(employees);
+        }
+
+        [HttpGet]
+        [Route("[action]/{id}")]
         public ActionResult<ReadEmployeeDTO> GetById(int id)
         {
             Employee employee = _employeeService.GetById(id);
@@ -79,7 +124,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Employee employee = _employeeService.GetById(id);
