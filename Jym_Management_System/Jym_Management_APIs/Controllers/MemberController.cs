@@ -10,7 +10,7 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = clsSystemRoles.User)]
+    [Authorize(Roles = clsSystemRoles.User)]
     public class MemberController : ControllerBase
     {
         private readonly IBaseServices<Member> _memberService;
@@ -26,7 +26,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("api/[controller]/[action]")]
 
         public ActionResult CreateMember(CreateMemberDTO createMemberDTO)
         {
@@ -52,7 +52,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("api/[controller]/[action]")]
 
         public ActionResult UpdateMember(UpdateMemberDTO updateMemberDTO)
         {
@@ -78,8 +78,8 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadMemberDTO>> Get()
+        [Route("api/[controller]/[action]")]
+        public ActionResult<IEnumerable<ReadMemberDTO>> GetMembers()
         {
 
             var members = _memberService.GetAll().Select(member => member.AsDTO());
@@ -88,7 +88,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("api/[controller]/[action]/{id}")]
         public ActionResult<ReadMemberDTO> GetById(int id)
         {
             Member member = _memberService.GetById(id);
@@ -96,7 +96,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("api/[controller]/[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Member member = _memberService.GetById(id);
