@@ -27,7 +27,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateJobHistory(CreateJobHistoryDTO createJobHistoryDTO)
         {
@@ -44,7 +44,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateJobHistory(UpdateJobHistoryDTO updateJobHistoryDTO)
         {
@@ -63,7 +63,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadJobDTO>> Get()
         {
 
@@ -73,7 +73,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadJobHistoryDTO> GetById(int id)
         {
             JobHistory jobHistory = _jobHistoryService.GetById(id);
@@ -81,7 +81,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             JobHistory jobHistory = _jobHistoryService.GetById(id);

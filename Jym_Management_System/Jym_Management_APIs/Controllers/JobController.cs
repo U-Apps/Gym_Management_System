@@ -27,7 +27,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateJob(CreateJobDTO createJobDTO)
         {
@@ -40,7 +40,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateJob(UpdateJobDTO updateJobDTO)
         {
@@ -56,7 +56,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadJobDTO>> Get()
         {
 
@@ -66,7 +66,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadJobDTO> GetById(int id)
         {
             Job job = _jobService.GetById(id);
@@ -74,7 +74,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Job job = _jobService.GetById(id);

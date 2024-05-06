@@ -33,7 +33,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("api/[controller]/[action]")]
+        [Route("[action]")]
 
         public ActionResult CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
@@ -67,7 +67,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("api/[controller]/[action]")]
+        [Route("[action]")]
 
         public ActionResult UpdateEmployee(UpdateEmployeeDTO updateEmployeeDTO)
         {
@@ -96,7 +96,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("api/[controller]/[action]")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployees()
         {
 
@@ -106,7 +106,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/[action]/{jobTitle}")]
+        [Route("[action]/{jobTitle}")]
         public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployeesBy(string jobTitle)
         {
 
@@ -116,7 +116,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/[action]/{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadEmployeeDTO> GetById(int id)
         {
             Employee employee = _employeeService.GetById(id);
@@ -124,7 +124,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("api/[controller]/[action]/{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Employee employee = _employeeService.GetById(id);

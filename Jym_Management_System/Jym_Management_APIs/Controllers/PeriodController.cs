@@ -27,7 +27,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreatePeriod(CreatePeriodDTO createPeriodDTO)
         {
@@ -42,7 +42,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdatePeriod(UpdatePeriodDTO updatePeriodDTO)
         {
@@ -60,7 +60,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadPermssionDTO>> Get()
         {
 
@@ -70,7 +70,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadPeriodDTO> GetById(int id)
         {
             Period Period = _periodService.GetById(id);
@@ -78,7 +78,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Period period = _periodService.GetById(id);

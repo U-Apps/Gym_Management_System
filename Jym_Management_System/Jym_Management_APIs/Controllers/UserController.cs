@@ -25,7 +25,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
         [AllowAnonymous]
         public ActionResult CreateUser(CreateUserDTO createUserDTO)
         {
@@ -50,7 +50,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateUser(UpdateUserDTO updateUserDTO)
         {
@@ -68,7 +68,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadUserDTO>> Get()
         {
 
@@ -80,7 +80,7 @@ namespace Jym_Management_APIs.Controllers
         
 
         [HttpDelete]
-        [Route("{Username}")]
+        [Route("[action]/{Username}")]
         public ActionResult Delete(string Username)
         {
             User user = _userService.GetByUserName(Username);

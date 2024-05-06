@@ -27,7 +27,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpPost]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult CreateSubscriptionPeriod(CreateSubscriptionPeriodDTO createSubscriptionPeriodDTO)
         {
@@ -41,7 +41,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpPut]
-        [Route("")]
+        [Route("[action]")]
 
         public ActionResult UpdateSubscriptionPeriod(UpdateSubscriptionPeriodDTO updateSubscriptionPeriodDTO)
         {
@@ -58,7 +58,7 @@ namespace Jym_Management_APIs.Controllers
 
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<ReadSubscriptionPeriodDTO>> Get()
         {
 
@@ -68,7 +68,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<ReadSubscriptionPeriodDTO> GetById(int id)
         {
             SubscriptionPeriod subscriptionPeriod = _subscriptionPeriodService.GetById(id);
@@ -76,7 +76,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             SubscriptionPeriod subscriptionPeriod = _subscriptionPeriodService.GetById(id);

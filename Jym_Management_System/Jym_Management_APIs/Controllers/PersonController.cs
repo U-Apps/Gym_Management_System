@@ -23,16 +23,16 @@ namespace Jym_Management_APIs.Controllers
 
      
         [HttpPost]
-        [Route("")]
-        public ActionResult CreateEmployee(CreatePersonDTO employee)
+        [Route("[action]")]
+        public ActionResult CreatePerson(CreatePersonDTO person)
         {
             var emp = new Person
             {
-             Idcard = employee.Idcard,
-             Email = employee.Email,
-             PhoneNumber = employee.PhoneNumber,
-             BirthDate = employee.BirthDate,
-             Name = employee.Name,
+             Idcard = person.Idcard,
+             Email = person.Email,
+             PhoneNumber = person.PhoneNumber,
+             BirthDate = person.BirthDate,
+             Name = person.Name,
             };
 
 
@@ -40,8 +40,8 @@ namespace Jym_Management_APIs.Controllers
             return Ok();
         }
         [HttpPut]
-        [Route("")]
-        public ActionResult UpdateEmployee(UpdatePersonDTO person)
+        [Route("[action]")]
+        public ActionResult UpdatePerson(UpdatePersonDTO person)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
             var existingPerson = _personService.GetById(person.PersonId);
@@ -56,7 +56,7 @@ namespace Jym_Management_APIs.Controllers
             return Ok();
         }
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public ActionResult<IEnumerable<Person>> Get()
         {
             IEnumerable<Person> persons = _personService.GetAll();
@@ -64,7 +64,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult<Person> GetById(int id)
         {
            Person person = _personService.GetById(id);
@@ -72,7 +72,7 @@ namespace Jym_Management_APIs.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("[action]/{id}")]
         public ActionResult Delete(int id)
         {
             Person person = _personService.GetById(id);
