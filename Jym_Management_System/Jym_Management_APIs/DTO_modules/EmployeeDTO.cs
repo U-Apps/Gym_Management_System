@@ -74,7 +74,7 @@ namespace Jym_Management_APIs.DTO_modules
         public string? Email { get; set; }
 
         public DateTime HireDate { get; set; }
-        public DateTime ResignationDate { get; set; }
+        //public DateTime ResignationDate { get; set; }
 
         public byte? CurrentJop { get; set; }
         [Required]
