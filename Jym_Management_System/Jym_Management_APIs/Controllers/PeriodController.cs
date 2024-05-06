@@ -34,8 +34,8 @@ namespace Jym_Management_APIs.Controllers
             var period = new Period();
 
             period.PeriodName = createPeriodDTO.PeriodName;
-            period.StartTime = createPeriodDTO.StartTime;
-            period.EndTime=createPeriodDTO.EndTime;
+            period.StartTime = createPeriodDTO.StartTime.TimeOfDay;
+            period.EndTime=createPeriodDTO.EndTime.TimeOfDay;
   
             _periodService.Add(period);
             return Ok();

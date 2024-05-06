@@ -17,12 +17,12 @@ namespace Jym_Management_APIs.Controllers
     public class SubscriptionController : ControllerBase
     {
         private readonly IBaseServices<Subscription> _subscriptionService;
+        private readonly IBaseServices<JobHistory> _jobHistoryService;
 
-
-        public SubscriptionController(IBaseServices<Subscription> subscriptionService)
+        public SubscriptionController(IBaseServices<Subscription> subscriptionService, IBaseServices<JobHistory> jobHistoryService)
         {
             _subscriptionService = subscriptionService;
-           
+            _jobHistoryService = jobHistoryService;
         }
 
 
@@ -54,14 +54,22 @@ namespace Jym_Management_APIs.Controllers
 
         public ActionResult UpdateSubscription(UpdateSubscriptionDTO updateSubscriptionDTO)
         {
+            
             var existingSubscription = _subscriptionService.GetById(updateSubscriptionDTO.SubscriptionId);
             if (existingSubscription == null)
                 return NotFound();
 
+            if (existingSubscription.Coach.Job.JobTitle!="Coach")
+                return BadRequest($"this employee {existingSubscription.Coach.Employee.Person.Name} not Coach");
+            if (existingSubscription.CreatedByReceptionist.Job.JobTitle != "Receptionist")
+                return BadRequest($"this employee {existingSubscription.Coach.Employee.Person.Name} not Receptionist");
+
             existingSubscription.MemberId = updateSubscriptionDTO.MemberId;
             existingSubscription.PeriodId = updateSubscriptionDTO.PeriodId;
             existingSubscription.CoachId = updateSubscriptionDTO.CoachId;
+            existingSubscription.Coach= _jobHistoryService.GetById(updateSubscriptionDTO.CoachId);
             existingSubscription.CreatedByReceptionistId = updateSubscriptionDTO.CreatedByReceptionistId;
+            existingSubscription.CreatedByReceptionist = _jobHistoryService.GetById(updateSubscriptionDTO.CreatedByReceptionistId);
             existingSubscription.ExcerciseTypeId = updateSubscriptionDTO.ExcerciseTypeId;
             existingSubscription.SubscriptionPeriodId = updateSubscriptionDTO.SubscriptionPeriodId;
 

@@ -98,6 +98,8 @@ namespace Jym_Management_BussinessLayer.Services
             return Mapping.Mapper.Map<Subscription>(repo.GetById(
                     c=>c.SubscriptionId==id,
                     s => s.Coach,
+                    s=>s.Coach.Employee,
+                    s=>s.Coach.Employee.Person,
                     s => s.Coach.Job,
                     s => s.CreatedByReceptionist,
                     s => s.CreatedByReceptionist.Job,
