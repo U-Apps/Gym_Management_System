@@ -18,9 +18,9 @@ namespace Jym_Management_APIs.DTO_modules
         [StringLength(10, MinimumLength = 2)]
               string PeriodName,
               [DataType(DataType.Date)]
-              TimeSpan StartTime,
+              DateTime StartTime,
               [DataType(DataType.Date)]
-              TimeSpan EndTime
+              DateTime EndTime
 
        );
 
