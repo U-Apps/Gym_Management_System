@@ -20,7 +20,8 @@ namespace Jym_Management_BussinessLayer.Services
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var tbPayrollPayment = Mapping.Mapper.Map<TbPayrollPayment>(module);
-           repo.Add(tbPayrollPayment);
+            tbPayrollPayment.PaymentDate = DateTime.Now;
+            repo.Add(tbPayrollPayment);
            repo.SaveChanges();
             repo.Dispose();
             return tbPayrollPayment.PaymentId;
@@ -86,7 +87,7 @@ namespace Jym_Management_BussinessLayer.Services
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
 
-            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(c => c.PaymentId == id, prP => prP.Employee));
+            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(c => c.PaymentId == id, prP => prP.Employee,person=>person.Employee.Person));
         }
 
         public void Update(PayrollPayment module)
@@ -94,6 +95,7 @@ namespace Jym_Management_BussinessLayer.Services
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
 
             TbPayrollPayment tbPayrollPayment = Mapping.Mapper.Map<TbPayrollPayment>(module);
+            tbPayrollPayment.PaymentDate=DateTime.Now;
            repo.Update(tbPayrollPayment);
             repo.SaveChanges();
             repo.Dispose();
