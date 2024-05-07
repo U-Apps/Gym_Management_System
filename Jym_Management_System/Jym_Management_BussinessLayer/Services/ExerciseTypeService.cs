@@ -8,6 +8,7 @@ using Jym_Management_DataAccessLayer.Repositories;
 using Jym_Management_DataAccessLayer.Repositories.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
@@ -62,10 +63,10 @@ namespace Jym_Management_BussinessLayer.Services
             repo.Dispose();
         }
 
-        public ExerciseType Find(Func<ExerciseType, bool> predicate)
+        public ExerciseType Find(Expression<Func<ExerciseType, bool>> predicate)
         {
             IBaseRepository<TbExerciseType> repo = new BaseRepository<TbExerciseType>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbExerciseType, bool>>(predicate);
+            var exp = Mapping.Mapper.Map<Expression<Func<TbExerciseType, bool>>>(predicate);
             return Mapping.Mapper.Map<ExerciseType>(repo.Find(exp));
         }
 

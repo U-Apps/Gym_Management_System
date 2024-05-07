@@ -31,7 +31,7 @@ namespace Jym_Management_DataAccessLayer
         {
             services.AddDbContext<AppDbContext>((options) =>
             {
-                options.UseSqlServer(@"Server=FMSI\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;");
+                options.UseSqlServer(@"Server=.;Database=JymManagementSystem;Integrated Security=SSPI;");
             }
             );
 

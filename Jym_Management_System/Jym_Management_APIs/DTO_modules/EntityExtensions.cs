@@ -55,7 +55,7 @@ namespace Jym_Management_APIs.DTO_modules
                 }
             );
 
-        public static ReadUserDTO AsDTO(this User user)
+        public static ReadUserDTO AsDTO(this User user,Person person)
             => new ReadUserDTO
             (
                
@@ -65,12 +65,12 @@ namespace Jym_Management_APIs.DTO_modules
                 
                Person: new ReadPersonDTO()
                {
-                   Name = user.Person.Name,
-                   PersonId = user.PersonId,
-                   Email = user.Person.Email,
-                   PhoneNumber = user.Person.PhoneNumber,
-                   BirthDate = user.Person.BirthDate,
-                   Idcard = user.Person.Idcard
+                   Name = person.Name,
+                   PersonId = person.PersonId,
+                   Email = person.Email,
+                   PhoneNumber = person.PhoneNumber,
+                   BirthDate = person.BirthDate,
+                   Idcard = person.Idcard
                }
             );
 
@@ -140,7 +140,7 @@ namespace Jym_Management_APIs.DTO_modules
            )
           => new ReadSubscriptionPaymentDTO
           (
-                PaymentId: subscriptionPayment.PaymentId,
+                PaymentId: subscriptionPayment.PaymentId.Value,
                 PaymentDate: subscriptionPayment.PaymentDate,
                 PaymentAmount: subscriptionPayment.PaymentAmount,
         CreatedByUser: new ReadUserDTO
@@ -164,7 +164,7 @@ namespace Jym_Management_APIs.DTO_modules
 
          Subscription: new ReadSubscriptionDTO
              (
-                 SubscriptionId: subscriptionPayment.PaymentId,
+                 SubscriptionId: subscriptionPayment.PaymentId.Value,
                  StartDate: subscriptionPayment.Subscription.StartDate,
                  EndDate: subscriptionPayment.Subscription.EndDate,
                  Coach: new ReadJobHistoryDTO

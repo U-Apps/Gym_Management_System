@@ -46,7 +46,7 @@ namespace Jym_Management_DataAccessLayer.Repositories
             _context.Set<T>().Remove(GetById(where));
         }
 
-        public T Find(Func<T, bool> predicate)
+        public T Find(Expression<Func<T, bool>> predicate)
         {
            return _context.Set<T>().Find(predicate);
         }

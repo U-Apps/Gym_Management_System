@@ -7,6 +7,7 @@ using Jym_Management_DataAccessLayer.Repositories;
 using Jym_Management_DataAccessLayer.Repositories.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
@@ -58,10 +59,10 @@ namespace Jym_Management_BussinessLayer.Services
             repo.Dispose();
         }
 
-        public JobHistory Find(Func<JobHistory, bool> predicate)
+        public JobHistory Find(Expression<Func<JobHistory, bool>> predicate)
         {
             IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbJobHistory, bool>>(predicate);
+            var exp = Mapping.Mapper.Map< Expression<Func<TbJobHistory, bool>>>(predicate);
             return Mapping.Mapper.Map<JobHistory>(repo.Find(exp));
         }
 
@@ -75,7 +76,7 @@ namespace Jym_Management_BussinessLayer.Services
         public IEnumerable<JobHistory> GetAll()
         {
             IBaseRepository<TbJobHistory> repo = new BaseRepository<TbJobHistory>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<JobHistory>>(repo.GetAll(jH => jH.Job));
+            return Mapping.Mapper.Map<IEnumerable<JobHistory>>(repo.GetAll(jH => jH.Job, jH => jH.Employee, jH => jH.Employee.Person));
         }
 
         public JobHistory GetById(int id)

@@ -34,7 +34,7 @@ namespace Jym_Management_APIs.Controllers
             var payrollPayment = new PayrollPayment();
 
             payrollPayment.EmployeeId = createPayrollPaymentDTO.EmployeeId;
-            payrollPayment.PaymentDate = createPayrollPaymentDTO.PaymentDate;
+            
 
             _payrollPaymentService.Add(payrollPayment);
             return Ok();
@@ -50,7 +50,6 @@ namespace Jym_Management_APIs.Controllers
                 return NotFound();
 
             existingPayrollPayment.EmployeeId = updatePayrollPaymentDTO.EmployeeId;
-            existingPayrollPayment.PaymentDate = updatePayrollPaymentDTO.PaymentDate;
 
             _payrollPaymentService.Update(existingPayrollPayment);
             return Ok();

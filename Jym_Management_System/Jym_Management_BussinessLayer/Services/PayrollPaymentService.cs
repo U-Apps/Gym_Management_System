@@ -7,6 +7,7 @@ using Jym_Management_DataAccessLayer.Repositories;
 using Jym_Management_DataAccessLayer.Repositories.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
@@ -20,7 +21,8 @@ namespace Jym_Management_BussinessLayer.Services
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
             var tbPayrollPayment = Mapping.Mapper.Map<TbPayrollPayment>(module);
-           repo.Add(tbPayrollPayment);
+            tbPayrollPayment.PaymentDate = DateTime.Now;
+            repo.Add(tbPayrollPayment);
            repo.SaveChanges();
             repo.Dispose();
             return tbPayrollPayment.PaymentId;
@@ -61,10 +63,10 @@ namespace Jym_Management_BussinessLayer.Services
             repo.Dispose();
         }
 
-        public PayrollPayment Find(Func<PayrollPayment, bool> predicate)
+        public PayrollPayment Find(Expression<Func<PayrollPayment, bool>> predicate)
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbPayrollPayment, bool>>(predicate);
+            var exp = Mapping.Mapper.Map< Expression<Func<TbPayrollPayment, bool>>>(predicate);
             return Mapping.Mapper.Map<PayrollPayment>(repo.Find(exp));
         }
 
@@ -86,7 +88,7 @@ namespace Jym_Management_BussinessLayer.Services
         {
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
 
-            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(c => c.PaymentId == id, prP => prP.Employee));
+            return Mapping.Mapper.Map<PayrollPayment>(repo.GetById(c => c.PaymentId == id, prP => prP.Employee,person=>person.Employee.Person));
         }
 
         public void Update(PayrollPayment module)
@@ -94,6 +96,7 @@ namespace Jym_Management_BussinessLayer.Services
             IBaseRepository<TbPayrollPayment> repo = new BaseRepository<TbPayrollPayment>(new AppDbContext());
 
             TbPayrollPayment tbPayrollPayment = Mapping.Mapper.Map<TbPayrollPayment>(module);
+            tbPayrollPayment.PaymentDate=DateTime.Now;
            repo.Update(tbPayrollPayment);
             repo.SaveChanges();
             repo.Dispose();

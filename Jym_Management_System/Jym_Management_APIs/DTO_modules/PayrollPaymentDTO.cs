@@ -14,10 +14,8 @@ namespace Jym_Management_APIs.DTO_modules
     public record CreatePayrollPaymentDTO
        (
              [Required]
-             int EmployeeId,
-             [Required]
-             [DataType(DataType.Date)]
-             DateTime PaymentDate
+             int EmployeeId
+             
 
        );
 
@@ -26,10 +24,8 @@ namespace Jym_Management_APIs.DTO_modules
             [Required]
             int PaymentId,
             [Required]
-            int EmployeeId,
-            [Required]
-            [DataType(DataType.Date)]
-            DateTime PaymentDate
+            int EmployeeId
+          
 
       );
 }

@@ -10,7 +10,7 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = clsSystemRoles.User)]
+    [Authorize(Roles = (clsSystemRoles.User + "," + clsSystemRoles.Admin))]
     public class MemberController : ControllerBase
     {
         private readonly IBaseServices<Member> _memberService;
