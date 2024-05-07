@@ -140,7 +140,7 @@ namespace Jym_Management_APIs.DTO_modules
            )
           => new ReadSubscriptionPaymentDTO
           (
-                PaymentId: subscriptionPayment.PaymentId,
+                PaymentId: subscriptionPayment.PaymentId.Value,
                 PaymentDate: subscriptionPayment.PaymentDate,
                 PaymentAmount: subscriptionPayment.PaymentAmount,
         CreatedByUser: new ReadUserDTO
@@ -164,7 +164,7 @@ namespace Jym_Management_APIs.DTO_modules
 
          Subscription: new ReadSubscriptionDTO
              (
-                 SubscriptionId: subscriptionPayment.PaymentId,
+                 SubscriptionId: subscriptionPayment.PaymentId.Value,
                  StartDate: subscriptionPayment.Subscription.StartDate,
                  EndDate: subscriptionPayment.Subscription.EndDate,
                  Coach: new ReadJobHistoryDTO

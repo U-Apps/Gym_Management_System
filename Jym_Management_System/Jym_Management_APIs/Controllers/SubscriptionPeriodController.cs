@@ -13,7 +13,7 @@ namespace Jym_Management_APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = clsSystemRoles.User)]
+    [Authorize(Roles = clsSystemRoles.Admin)]
     public class SubscriptionPeriodController : ControllerBase
     {
         private readonly IBaseServices<SubscriptionPeriod> _subscriptionPeriodService;

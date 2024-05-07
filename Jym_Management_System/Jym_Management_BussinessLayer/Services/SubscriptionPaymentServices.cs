@@ -18,7 +18,8 @@ namespace Jym_Management_BussinessLayer.Services
         {
             IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
             var tbSubscriptionPayment = Mapping.Mapper.Map<TbSubscriptionPayment>(module);
-             repo.Add(tbSubscriptionPayment);
+            tbSubscriptionPayment.PaymentDate = DateTime.Now;
+            repo.Add(tbSubscriptionPayment);
             repo.SaveChanges(); 
             repo.Dispose();
             return tbSubscriptionPayment.PaymentId??0;
