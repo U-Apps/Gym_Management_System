@@ -49,6 +49,7 @@ namespace Jym_Management_APIs.Authentication
             {
                 Issuer = _JwtOptions.Issuer,
                 Audience = _JwtOptions.Audience,
+                Expires = DateTime.Now.AddHours(_JwtOptions.Lifetime),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_JwtOptions.SigningKey))
                     , SecurityAlgorithms.HmacSha256),
