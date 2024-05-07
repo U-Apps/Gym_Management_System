@@ -15,12 +15,12 @@ namespace Jym_Management_APIs.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserService _userService;
+        private readonly IBaseServices<Person> _personService;
 
-
-        public UserController(UserService userService)
+        public UserController(UserService userService , IBaseServices<Person> personService)
         {
             _userService = userService;
-
+            _personService = personService;
         }
 
 
@@ -72,7 +72,7 @@ namespace Jym_Management_APIs.Controllers
         public ActionResult<IEnumerable<ReadUserDTO>> Get()
         {
 
-            var users = _userService.GetAll().Select(user => user.AsDTO());
+            var users = _userService.GetAll().Select(user => user.AsDTO(_personService.GetById(user.PersonId)));
 
             return Ok(users);
         }
