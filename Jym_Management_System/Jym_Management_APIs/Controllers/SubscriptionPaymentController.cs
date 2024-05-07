@@ -86,7 +86,7 @@ namespace Jym_Management_APIs.Controllers
             if (subscriptionPayment is null)
                 return NotFound();
 
-            _subscriptionPaymentService.DeleteById(subscriptionPayment.PaymentId);
+            _subscriptionPaymentService.DeleteById(subscriptionPayment.PaymentId.Value);
 
             return Ok();
         }
