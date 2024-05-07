@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-
+using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
@@ -66,10 +66,10 @@ namespace Jym_Management_BussinessLayer.Services
             
         }
 
-        public Employee Find(Func<Employee, bool> predicate)
+        public Employee Find(Expression<Func<Employee, bool>> predicate)
         {
             BaseRepository<TbEmployee> repo = new(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbEmployee, bool>>(predicate);
+            var exp = Mapping.Mapper.Map< Expression<Func<TbEmployee, bool>>>(predicate);
             return Mapping.Mapper.Map<Employee>(repo.Find(exp));
         }
 

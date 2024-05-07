@@ -6,6 +6,7 @@ using Jym_Management_DataAccessLayer.Entities;
 using Jym_Management_DataAccessLayer.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
@@ -61,10 +62,10 @@ namespace Jym_Management_BussinessLayer.Services
             repo.Dispose();
         }
 
-        public Person Find(Func<Person, bool> predicate)
+        public Person Find(Expression<Func<Person, bool>>  predicate)
         {
             BaseRepository<TbPerson> repo = new(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbPerson, bool>>(predicate);
+            var exp = Mapping.Mapper.Map< Expression<Func<TbPerson, bool>>>(predicate);
             return Mapping.Mapper.Map<Person>(repo.Find(exp));
             
         }
