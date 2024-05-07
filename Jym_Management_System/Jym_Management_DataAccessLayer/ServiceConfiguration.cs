@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Jym_Management_DataAccessLayer.Entities;
 using Jym_Management_DataAccessLayer.Repositories;
 using Jym_Management_DataAccessLayer.Authentication;
+using Microsoft.Extensions.Options;
 
 namespace Jym_Management_DataAccessLayer
 {
@@ -28,10 +29,14 @@ namespace Jym_Management_DataAccessLayer
 
         private static IServiceCollection ConfigureServices(this IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>();
+            services.AddDbContext<AppDbContext>((options) =>
+            {
+                options.UseSqlServer(@"Server=FMSI\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;");
+            }
+            );
 
             services.AddIdentityCore<AppUser>()
-                .AddRoles<IdentityRole<int>>().AddRoleStore<IdentityRole<int>>()
+                .AddRoles<IdentityRole<int>>()
                 .AddEntityFrameworkStores<AppDbContext>();
             services.Configure<IdentityOptions>(options =>
             {
