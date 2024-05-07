@@ -13,7 +13,7 @@ namespace Jym_Management_DataAccessLayer.Repositories.Base
         void AddRange(IEnumerable<T> entity);
         T GetById(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);
         IEnumerable<T> GetAll(params Expression<Func<T, object>>[] navigationProperties);
-        T Find(Func<T, bool> predicate);
+        T Find(Expression<Func<T, bool>> predicate);
         IEnumerable<T> FindAll(Func<T, bool> predicate);
         void Delete(T entity);
         void DeleteRange(IEnumerable<T> entities);

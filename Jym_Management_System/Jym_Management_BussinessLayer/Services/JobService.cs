@@ -7,6 +7,7 @@ using Jym_Management_DataAccessLayer.Repositories;
 using Jym_Management_DataAccessLayer.Repositories.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
@@ -61,10 +62,10 @@ namespace Jym_Management_BussinessLayer.Services
 
         }
 
-        public Job Find(Func<Job, bool> predicate)
+        public Job Find(Expression<Func<Job, bool>> predicate)
         {
             IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbJob, bool>>(predicate);
+            var exp = Mapping.Mapper.Map< Expression<Func<TbJob, bool>>>(predicate);
             return Mapping.Mapper.Map<Job>(repo.Find(exp));
         }
 

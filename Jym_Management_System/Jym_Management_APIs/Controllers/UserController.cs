@@ -16,11 +16,13 @@ namespace Jym_Management_APIs.Controllers
     {
         private readonly UserService _userService;
         private readonly IBaseServices<Person> _personService;
+        private readonly IBaseServices<JobHistory> _jobHistoryService;
 
-        public UserController(UserService userService , IBaseServices<Person> personService)
+        public UserController(UserService userService , IBaseServices<Person> personService, IBaseServices<JobHistory> jobHistoryService)
         {
             _userService = userService;
             _personService = personService;
+            _jobHistoryService = jobHistoryService;
         }
 
 
@@ -31,6 +33,13 @@ namespace Jym_Management_APIs.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_jobHistoryService.GetAll().Where(
+
+                    j=>j.Employee.PersonId==createUserDTO.PersonId).FirstOrDefault()?
+                    .Job.JobTitle!= "Receptionist")
+                {
+                    return BadRequest("this Employee is not Receptionist!!");
+                }
                 var user = new User();
 
                 user.PersonId = createUserDTO.PersonId;

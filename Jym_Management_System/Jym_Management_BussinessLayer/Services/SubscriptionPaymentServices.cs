@@ -7,6 +7,7 @@ using Jym_Management_DataAccessLayer.Repositories;
 using Jym_Management_DataAccessLayer.Repositories.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
@@ -62,10 +63,10 @@ namespace Jym_Management_BussinessLayer.Services
             
         }
 
-        public SubscriptionPayment Find(Func<SubscriptionPayment, bool> predicate)
+        public SubscriptionPayment Find(Expression<Func<SubscriptionPayment, bool>> predicate)
         {
             IBaseRepository<TbSubscriptionPayment> repo = new BaseRepository<TbSubscriptionPayment>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbSubscriptionPayment, bool>>(predicate);
+            var exp = Mapping.Mapper.Map< Expression<Func<TbSubscriptionPayment, bool>>>(predicate);
             return Mapping.Mapper.Map<SubscriptionPayment>(repo.Find(exp));
         }
 

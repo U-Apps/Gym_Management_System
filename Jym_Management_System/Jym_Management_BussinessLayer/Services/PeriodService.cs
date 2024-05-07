@@ -8,6 +8,7 @@ using Jym_Management_DataAccessLayer.Repositories.Base;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
@@ -65,10 +66,10 @@ namespace Jym_Management_BussinessLayer.Services
             
         }
 
-        public Period Find(Func<Period, bool> predicate)
+        public Period Find(Expression<Func<Period, bool>> predicate)
         {
             IBaseRepository<TbPeriod> repo = new BaseRepository<TbPeriod>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbPeriod, bool>>(predicate);
+            var exp = Mapping.Mapper.Map< Expression<Func<TbPeriod, bool>>>(predicate);
             return Mapping.Mapper.Map<Period>(repo.Find(exp));
         }
 
