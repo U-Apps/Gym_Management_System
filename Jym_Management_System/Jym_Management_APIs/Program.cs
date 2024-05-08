@@ -86,6 +86,7 @@ builder.Services.AddScoped<IBaseServices<SubscriptionPayment>, SubscriptionPayme
 builder.Services.AddScoped<IBaseServices<Subscription>, SubscriptionServices>();
 builder.Services.AddScoped<IBaseServices<ExerciseType>, ExerciseTypeService>();
 builder.Services.AddScoped<IBaseServices<PayrollPayment>, PayrollPaymentService>();
+builder.Services.AddCors(option => option.AddDefaultPolicy(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
 
 
@@ -97,7 +98,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
