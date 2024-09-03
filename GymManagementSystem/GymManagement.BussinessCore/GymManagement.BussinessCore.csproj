@@ -5,7 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jym_Management_DataAccessLayer\Jym_Management_DataAccessLayer.csproj" />
+    <ProjectReference Include="..\GymManagement.DataAccess\GymManagement.DataAccess.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jym_Management_APIs", "Jym_Management_APIs\Jym_Management_APIs.csproj", "{F360A734-FCA7-4D79-9B37-66FFB4E32029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagement.APIs", "GymManagement.APIs\GymManagement.APIs.csproj", "{F360A734-FCA7-4D79-9B37-66FFB4E32029}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jym_Management_BussinessLayer", "Jym_Management_BussinessLayer\Jym_Management_BussinessLayer.csproj", "{D8D45938-7D80-4340-B9B1-AB311530D7B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagement.BussinessCore", "GymManagement.BussinessCore\GymManagement.BussinessCore.csproj", "{D8D45938-7D80-4340-B9B1-AB311530D7B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jym_Management_DataAccessLayer", "Jym_Management_DataAccessLayer\Jym_Management_DataAccessLayer.csproj", "{B0D96F8A-EE25-4418-BB23-E4F7CF051601}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagement.DataAccess", "GymManagement.DataAccess\GymManagement.DataAccess.csproj", "{B0D96F8A-EE25-4418-BB23-E4F7CF051601}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
