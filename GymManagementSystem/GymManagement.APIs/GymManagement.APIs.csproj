@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GymManagement.BussinessCore\GymManagement.BusinessCore.csproj" />
+    <ProjectReference Include="..\GymManagement.BusinessCore\GymManagement.BusinessCore.csproj" />
+    <ProjectReference Include="..\GymManagement.DataAccess\GymManagement.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
