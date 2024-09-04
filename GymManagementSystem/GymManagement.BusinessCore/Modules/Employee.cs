@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
-namespace Jym_Management_BussinessLayer.Modules
+namespace GymManagement.BussinessCore.Modules
 {
     public class Employee
     {

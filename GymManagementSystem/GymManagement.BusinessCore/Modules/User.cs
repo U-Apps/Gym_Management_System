@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_BussinessLayer.Modules
+namespace GymManagement.BussinessCore.Modules
 {
     public class User
     {
