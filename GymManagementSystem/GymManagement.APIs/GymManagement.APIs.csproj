@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GymManagement.BussinessCore\GymManagement.BussinessCore.csproj" />
+    <ProjectReference Include="..\GymManagement.BussinessCore\GymManagement.BusinessCore.csproj" />
   </ItemGroup>
 
 </Project>

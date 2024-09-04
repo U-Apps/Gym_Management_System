@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagement.APIs", "GymManagement.APIs\GymManagement.APIs.csproj", "{F360A734-FCA7-4D79-9B37-66FFB4E32029}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagement.BussinessCore", "GymManagement.BussinessCore\GymManagement.BussinessCore.csproj", "{D8D45938-7D80-4340-B9B1-AB311530D7B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagement.BusinessCore", "GymManagement.BusinessCore\GymManagement.BusinessCore.csproj", "{D8D45938-7D80-4340-B9B1-AB311530D7B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymManagement.DataAccess", "GymManagement.DataAccess\GymManagement.DataAccess.csproj", "{B0D96F8A-EE25-4418-BB23-E4F7CF051601}"
 EndProject
