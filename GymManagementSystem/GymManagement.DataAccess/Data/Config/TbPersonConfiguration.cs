@@ -1,17 +1,13 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BussinessCore.Modules;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jym_Management_DataAccessLayer.Data.Config
+
+namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbPersonConfiguration : IEntityTypeConfiguration<TbPerson>
+    internal class TbPersonConfiguration : IEntityTypeConfiguration<Person>
     {
-        public void Configure(EntityTypeBuilder<TbPerson> builder)
+        public void Configure(EntityTypeBuilder<Person> builder)
         {
             builder.HasKey(e => e.PersonId);
 

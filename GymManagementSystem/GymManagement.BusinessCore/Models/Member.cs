@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+namespace GymManagement.BussinessCore.Models
 
-namespace GymManagement.BussinessCore.Modules
 {
     public class Member
     {
-       
-
         public int MemberId { get; set; }
         public int PersonId { get; set; }
         public decimal? MemberWeight { get; set; }

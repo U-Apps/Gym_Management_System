@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace GymManagement.BussinessCore.Modules
+﻿
+namespace GymManagement.BussinessCore.Models
 {
     public class Person
     {
@@ -13,8 +11,8 @@ namespace GymManagement.BussinessCore.Modules
         public DateTime BirthDate { get; set; }
         public string? Email { get; set; }
 
-        public virtual ICollection<Employee> Employees { get; set; }
-        public virtual ICollection<Member> Members { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Member Member { get; set; }
+        public virtual User? User { get; set; }
     }
 }

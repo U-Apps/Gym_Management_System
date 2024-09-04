@@ -1,12 +1,12 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BussinessCore.Modules;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Jym_Management_DataAccessLayer.Data.Config
+namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbJobConfiguration : IEntityTypeConfiguration<TbJob>
+    internal class TbJobConfiguration : IEntityTypeConfiguration<Job>
     {
-        public void Configure(EntityTypeBuilder<TbJob> builder)
+        public void Configure(EntityTypeBuilder<Job> builder)
         {
 
                 builder.HasKey(e => e.JobId);

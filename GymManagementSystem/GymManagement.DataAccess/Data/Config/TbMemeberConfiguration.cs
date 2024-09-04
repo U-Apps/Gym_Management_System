@@ -1,12 +1,12 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BussinessCore.Modules;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Jym_Management_DataAccessLayer.Data.Config
+namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbMemeberConfiguration : IEntityTypeConfiguration<TbMember>
+    internal class TbMemeberConfiguration : IEntityTypeConfiguration<Member>
     {
-        public void Configure(EntityTypeBuilder<TbMember> builder)
+        public void Configure(EntityTypeBuilder<Member> builder)
         {
             builder.HasKey(e => e.MemberId);
 
@@ -22,7 +22,7 @@ namespace Jym_Management_DataAccessLayer.Data.Config
 
             builder.HasOne(d => d.Person)
                 .WithOne(p => p.Member)
-                .HasForeignKey<TbMember>(d => d.PersonId)
+                .HasForeignKey<Member>(d => d.PersonId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired()
                 .HasConstraintName("FK_Members");

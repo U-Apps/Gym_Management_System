@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-
-namespace GymManagement.BussinessCore.Modules
+﻿
+namespace GymManagement.BussinessCore.Models
 {
     public class Employee
     {

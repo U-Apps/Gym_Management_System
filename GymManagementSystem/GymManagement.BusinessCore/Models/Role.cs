@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace GymManagement.BussinessCore.Modules
+﻿
+namespace GymManagement.BussinessCore.Models
 {
     public  class Role
     {
