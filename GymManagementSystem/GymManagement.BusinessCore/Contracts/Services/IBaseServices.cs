@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Jym_Management_DataAccessLayer.Data;
-using Jym_Management_DataAccessLayer.Repositories;
+﻿using System.Linq.Expressions;
 
-namespace Jym_Management_BussinessLayer.Services.Base
+namespace GymManagement.BussinessCore.Contracts.Services
 {
     public interface IBaseServices<T> where T : class
     {
