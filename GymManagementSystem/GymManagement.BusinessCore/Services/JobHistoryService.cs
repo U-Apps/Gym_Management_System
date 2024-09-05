@@ -3,7 +3,7 @@ using GymManagement.BussinessCore.Contracts.Services;
 using GymManagement.BussinessCore.Models;
 using System.Linq.Expressions;
 
-namespace Jym_Management_BussinessLayer.Services
+namespace GymManagement.BussinessCore.Services
 {
     public class JobHistoryService : IBaseServices<JobHistory>
     {
