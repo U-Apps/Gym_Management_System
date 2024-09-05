@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Jym_Management_DataAccessLayer.Entities.Authentication;
 using Jym_Management_DataAccessLayer.Data.Config;
 using Microsoft.AspNetCore.Identity;
 using GymManagement.BussinessCore.Models;
