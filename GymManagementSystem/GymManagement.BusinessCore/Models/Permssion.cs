@@ -9,6 +9,6 @@ namespace GymManagement.BussinessCore.Models
         public byte? RoleId { get; set; }
 
         public virtual Role? Role { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<AppUser> Users { get; set; }
     }
 }

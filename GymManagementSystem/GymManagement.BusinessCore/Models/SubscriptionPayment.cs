@@ -9,7 +9,7 @@ namespace GymManagement.BussinessCore.Models
         public decimal? PaymentAmount { get; set; }
         public short? CreatedByUserId { get; set; }
 
-        public virtual User? CreatedByUser { get; set; }
+        public virtual AppUser? CreatedByUser { get; set; }
         public virtual Subscription? Subscription { get; set; }
     }
 }

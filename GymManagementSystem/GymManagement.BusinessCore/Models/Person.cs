@@ -13,6 +13,6 @@ namespace GymManagement.BussinessCore.Models
 
         public virtual Employee Employee { get; set; }
         public virtual Member Member { get; set; }
-        public virtual User? User { get; set; }
+        public virtual AppUser? User { get; set; }
     }
 }
