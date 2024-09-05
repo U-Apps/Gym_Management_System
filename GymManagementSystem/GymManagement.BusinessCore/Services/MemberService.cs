@@ -1,102 +1,66 @@
-﻿using Jym_Management_BussinessLayer.AutoMapper;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_BussinessLayer.Services.Base;
-using Jym_Management_DataAccessLayer.Data;
-using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Repositories;
-using Jym_Management_DataAccessLayer.Repositories.Base;
-using System;
-using System.Collections.Generic;
+﻿using GymManagement.BussinessCore.Contracts.Repositories;
+using GymManagement.BussinessCore.Contracts.Services;
+using GymManagement.BussinessCore.Models;
 using System.Linq.Expressions;
 
 namespace Jym_Management_BussinessLayer.Services
 {
     public class MemberService : IBaseServices<Member>
     {
-       
-        public int Add(Member module)
+        protected readonly IBaseRepository<Member> _Repository;
+        public MemberService(IBaseRepository<Member> repository)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            var tbMember = Mapping.Mapper.Map<TbMember>(module);
-            repo.Add(tbMember);
-           repo.SaveChanges();
-            repo.Dispose();
-            return tbMember.MemberId;
+            _Repository = repository;
+        }
+        public int Add(Member model)
+        {
+            _Repository.Add(model);
+            return model.MemberId;
         }
 
-        public void AddRange(IEnumerable<Member> module)
+        public void AddRange(IEnumerable<Member> model)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            var tbMember = Mapping.Mapper.Map<IEnumerable<TbMember>>(module);
-            repo.AddRange(tbMember);
-            repo.SaveChanges();
-            repo.Dispose();
-            
+            _Repository.AddRange(model);
         }
 
-        public void Delete(Member module)
+        public void Delete(Member model)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            var tbMember = Mapping.Mapper.Map<TbMember>(module);
-            repo.Delete(tbMember);
-            repo.SaveChanges();
-            repo.Dispose();
-            
+            _Repository.Delete(model);            
         }
         public void DeleteById(int id)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            repo.DeleteById(c => c.MemberId == id);
-            repo.SaveChanges();
-            repo.Dispose();
-
-
+            _Repository.DeleteById(c => c.MemberId == id);
         }
 
-        public void DeleteRange(IEnumerable<Member> modules)
+        public void DeleteRange(IEnumerable<Member> model)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            var tbMember = Mapping.Mapper.Map<IEnumerable<TbMember>>(modules);
-            repo.DeleteRange(tbMember);
-             repo.SaveChanges();
-            repo.Dispose();
-
+            _Repository.DeleteRange(model);
         }
 
         public Member Find(Expression<Func<Member, bool>> predicate)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            var exp = Mapping.Mapper.Map< Expression<Func<TbMember, bool>>>(predicate);
-            return Mapping.Mapper.Map<Member>(repo.Find(exp));
+            return _Repository.Find(predicate);
         }
 
         public IEnumerable<Member> FindAll(Func<Member, bool> predicate)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbMember, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<Member>>(repo.FindAll(exp));
+            return _Repository.FindAll(predicate);
         }
 
         public IEnumerable<Member> GetAll()
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<Member>>(repo.GetAll(p=> p.Person));
+            return _Repository.GetAll(p=> p.Person);
         }
 
         public Member GetById(int id)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            return Mapping.Mapper.Map<Member>(repo.GetById(c => c.MemberId == id,p=>p.Person));
+            return _Repository.GetById(c => c.MemberId == id,p=>p.Person);
 
         }
 
-        public void Update(Member module)
+        public void Update(Member model)
         {
-            IBaseRepository<TbMember> repo = new BaseRepository<TbMember>(new AppDbContext());
-            TbMember tbMember = Mapping.Mapper.Map<TbMember>(module);
-            repo.Update(tbMember);
-            repo.SaveChanges();
-            repo.Dispose();
+            _Repository.Update(model);
         }
 
     }
