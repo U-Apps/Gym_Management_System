@@ -1,119 +1,69 @@
-﻿
-using Jym_Management_BussinessLayer.AutoMapper;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_BussinessLayer.Services.Base;
-using Jym_Management_DataAccessLayer.Data;
-using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Repositories;
-using Jym_Management_DataAccessLayer.Repositories.Base;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
+﻿using GymManagement.BussinessCore.Contracts.Repositories;
+using GymManagement.BussinessCore.Contracts.Services;
+using GymManagement.BussinessCore.Models;
 using System.Linq.Expressions;
 
-namespace Jym_Management_BussinessLayer.Services
+namespace GymManagement.BussinessCore.Services
 {
     public class EmployeeService : IBaseServices<Employee>
     {
-
-
-        public int Add(Employee module)
+        protected readonly IBaseRepository<Employee> _Repository;
+        public EmployeeService(IBaseRepository<Employee> repository)
         {
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
+            _Repository = repository;
+        }
 
-            var tbEmployee = Mapping.Mapper.Map<TbEmployee>(module);
-            repo.Add(tbEmployee);
-            repo.SaveChanges();
-            repo.Dispose();
 
-            return tbEmployee.EmployeeId;
+        public int Add(Employee model)
+        {
+
+            _Repository.Add(model);
+            return model.EmployeeId;
         }
         
-        public void AddRange(IEnumerable<Employee> module)
+        public void AddRange(IEnumerable<Employee> model)
         {
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
-            var tbEmployee = Mapping.Mapper.Map<IEnumerable<TbEmployee>>(module);
-            repo.AddRange(tbEmployee);
-            repo.SaveChanges();
-            repo.Dispose();
+            _Repository.AddRange(model);
         }
 
         public void Delete(Employee module)
         {
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
-            var tbEmployee = Mapping.Mapper.Map<TbEmployee>(module);
-            repo.Delete(tbEmployee);
-             repo.SaveChanges();
-             repo.Dispose();   
+            _Repository.Delete(module);
         }
         public void DeleteById(int id)
         {
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
-            repo.DeleteById(c=>c.EmployeeId==id);
-             repo.SaveChanges();
-             repo.Dispose();
-
+            _Repository.DeleteById(c=>c.EmployeeId==id);
         }
 
-        public void DeleteRange(IEnumerable<Employee> modules)
+        public void DeleteRange(IEnumerable<Employee> model)
         {
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
-            var tbEmployee = Mapping.Mapper.Map<IEnumerable<TbEmployee>>(modules);
-            repo.DeleteRange(tbEmployee);
-             repo.SaveChanges();
-             repo.Dispose();
-            
+            _Repository.DeleteRange(model);
         }
 
         public Employee Find(Expression<Func<Employee, bool>> predicate)
         {
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
-            var exp = Mapping.Mapper.Map< Expression<Func<TbEmployee, bool>>>(predicate);
-            return Mapping.Mapper.Map<Employee>(repo.Find(exp));
+            return _Repository.Find(predicate);
         }
 
         public IEnumerable<Employee> FindAll(Func<Employee, bool> predicate)
         {
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
-
-            var exp = Mapping.Mapper.Map <Func<TbEmployee, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<Employee>>(repo.FindAll(exp));
+            return _Repository.FindAll(predicate);
         }
 
         public IEnumerable<Employee> GetAll()
         {
-
-            IBaseRepository<TbEmployee> repo = new BaseRepository<TbEmployee>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<Employee>>(repo.GetAll(d => d.Person,d=>d.TbPayrollPayments ,d=>d.CurrentJob));
-            
-                
+            return _Repository.GetAll(d => d.Person,d=>d.PayrollPayments ,d=>d.CurrentJob);
         }   
 
         public Employee GetById(int id)
         {
-
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
-
-            return Mapping.Mapper.Map<Employee>(repo.GetById(c=>c.EmployeeId==id,c=>c.Person,c=>c.TbPayrollPayments,c=>c.CurrentJob));
+            return _Repository.GetById(c=>c.EmployeeId==id,c=>c.Person,c=>c.PayrollPayments,c=>c.CurrentJob);
        
         }
 
-        public void Update(Employee module)
+        public void Update(Employee model)
         {
-            BaseRepository<TbEmployee> repo = new(new AppDbContext());
-
-            TbEmployee x = Mapping.Mapper.Map<TbEmployee>(module);
-
-            repo.Update(x);
-             repo.SaveChanges();
-             repo.Dispose();   
-
-
-
-
-
-
+            _Repository.Update(model);
         }
     }
 }
