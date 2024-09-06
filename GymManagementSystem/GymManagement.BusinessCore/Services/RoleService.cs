@@ -1,6 +1,6 @@
 ﻿using GymManagement.BusinessCore.Contracts.Services;
-using GymManagement.BussinessCore.Contracts.Repositories;
-using GymManagement.BussinessCore.Models;
+using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.BusinessCore.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace GymManagement.BusinessCore.Services

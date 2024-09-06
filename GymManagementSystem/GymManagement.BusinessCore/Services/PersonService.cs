@@ -1,6 +1,6 @@
-﻿using GymManagement.BussinessCore.Contracts.Repositories;
-using GymManagement.BussinessCore.Contracts.Services;
-using GymManagement.BussinessCore.Models;
+﻿using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.BusinessCore.Contracts.Services;
+using GymManagement.BusinessCore.Models;
 using System.Linq.Expressions;
 
 namespace GymManagement.BusinessCore.Services

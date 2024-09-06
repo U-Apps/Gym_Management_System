@@ -1,5 +1,5 @@
 ﻿using GymManagement.BusinessCore.Contracts.Repositories;
-using GymManagement.BussinessCore.Models;
+using GymManagement.BusinessCore.Models;
 
 namespace GymManagement.BusinessCore.Services
 {

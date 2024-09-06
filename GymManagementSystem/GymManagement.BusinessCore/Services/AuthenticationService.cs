@@ -1,6 +1,4 @@
-﻿
-
-using GymManagement.BussinessCore.Models;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace GymManagement.BusinessCore.Services
