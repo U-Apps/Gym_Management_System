@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using GymManagement.BusinessCore.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using GymManagement.APIs.Authentication;
+using GymManagement.BusinessCore.Services;
 
 namespace GymManagement.APIs.Controllers
 {
@@ -38,15 +39,14 @@ namespace GymManagement.APIs.Controllers
                 {
                     return BadRequest("this Employee is not Receptionist!!");
                 }
-                var user = new User();
+                var user = new AppUser();
 
                 user.PersonId = createUserDTO.PersonId;
                 user.UserName = createUserDTO.UserName;
-                user.Password = createUserDTO.Password;
                 user.IsActive = createUserDTO.IsActive;
 
 
-                _userService.Register(user);
+                _userService.Register(user, createUserDTO.Password);
                 return Ok();
             }
             else
@@ -67,7 +67,7 @@ namespace GymManagement.APIs.Controllers
                 return NotFound();
 
             existingUser.UserName = updateUserDTO.UserName;
-            existingUser.Password = updateUserDTO.Password;
+            //existingUser.Password = updateUserDTO.Password;
             existingUser.IsActive = updateUserDTO.IsActive;
             _userService.Update(existingUser);
             return Ok();
@@ -90,7 +90,7 @@ namespace GymManagement.APIs.Controllers
         [Route("[action]/{Username}")]
         public ActionResult Delete(string Username)
         {
-            User user = _userService.GetByUserName(Username);
+            AppUser user = _userService.GetByUserName(Username);
 
             if (user is null)
                 return NotFound();
