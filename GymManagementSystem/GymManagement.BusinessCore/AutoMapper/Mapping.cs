@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jym_Management_BussinessLayer.AutoMapper
+namespace GymManagement.BusinessCore.AutoMapper
 {
     public static class Mapping
     {
