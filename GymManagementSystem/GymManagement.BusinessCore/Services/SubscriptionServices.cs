@@ -3,7 +3,7 @@ using GymManagement.BussinessCore.Contracts.Services;
 using GymManagement.BussinessCore.Models;
 using System.Linq.Expressions;
 
-namespace GymManagement.BussinessCore.Services
+namespace GymManagement.BusinessCore.Services
 {
     public class SubscriptionServices : IBaseServices<Subscription>
     {

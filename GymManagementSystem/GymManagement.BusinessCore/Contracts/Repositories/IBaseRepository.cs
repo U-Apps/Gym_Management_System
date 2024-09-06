@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 
-namespace GymManagement.BussinessCore.Contracts.Repositories
+namespace GymManagement.BusinessCore.Contracts.Repositories
 {
     public interface IBaseRepository<T> where T : class
     {

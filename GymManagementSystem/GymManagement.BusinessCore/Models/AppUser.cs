@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
 
-namespace GymManagement.BussinessCore.Models
+namespace GymManagement.BusinessCore.Models
 {
     public class AppUser : IdentityUser<int>
     {

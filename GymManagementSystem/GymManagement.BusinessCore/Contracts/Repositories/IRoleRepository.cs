@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace GymManagement.BussinessCore.Contracts.Repositories
+namespace GymManagement.BusinessCore.Contracts.Repositories
 {
     public interface IRoleRepository
     {

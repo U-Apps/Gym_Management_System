@@ -1,5 +1,5 @@
 ﻿
-namespace GymManagement.BussinessCore.Models
+namespace GymManagement.BusinessCore.Models
 {
     public class Period
     {

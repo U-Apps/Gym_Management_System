@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace GymManagement.BussinessCore.Contracts.Services
+namespace GymManagement.BusinessCore.Contracts.Services
 {
     public interface IBaseServices<T> where T : class
     {

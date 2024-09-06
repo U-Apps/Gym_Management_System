@@ -3,7 +3,7 @@
 using GymManagement.BussinessCore.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Jym_Management_BussinessLayer.Services
+namespace GymManagement.BusinessCore.Services
 {
     public class AuthenticationService
     {
