@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Entities.Authentication;
-
+using GymManagement.BusinessCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

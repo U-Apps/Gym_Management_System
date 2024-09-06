@@ -1,12 +1,4 @@
-﻿using Jym_Management_DataAccessLayer.Data;
-using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Repositories.Base;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GymManagement.DataAccess.Repositories.Base;
 
 namespace GymManagement.DataAccess.Repositories
 {

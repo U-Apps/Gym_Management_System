@@ -1,13 +1,7 @@
-﻿using Jym_Management_DataAccessLayer.Data;
-using Jym_Management_DataAccessLayer.Repositories.Base;
+﻿using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GymManagement.DataAccess.Repositories
 {

@@ -1,6 +1,4 @@
-﻿using Jym_Management_DataAccessLayer.Entities.Authentication;
-using System;
-using System.Collections.Generic;
+﻿using GymManagement.DataAccess.Entities.Authentication;
 
 namespace GymManagement.DataAccess.Entities
 {

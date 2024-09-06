@@ -1,13 +1,13 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
 namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbSubscriptionPeriodConfiguration : IEntityTypeConfiguration<SubsciptionPeriod>
+    internal class TbSubscriptionPeriodConfiguration : IEntityTypeConfiguration<SubscriptionPeriod>
     {
-        public void Configure(EntityTypeBuilder<SubsciptionPeriod> builder)
+        public void Configure(EntityTypeBuilder<SubscriptionPeriod> builder)
         {
             builder.ToTable("tbSubsciptionPeriods");
 

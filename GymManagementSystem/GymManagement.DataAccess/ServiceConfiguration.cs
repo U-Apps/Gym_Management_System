@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Jym_Management_DataAccessLayer.Entities.Authentication;
-using Jym_Management_DataAccessLayer.Data;
+﻿using GymManagement.BusinessCore.Models;
+using GymManagement.DataAccess.Authentication;
+using GymManagement.DataAccess.Data;
+using GymManagement.DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Repositories;
-using Jym_Management_DataAccessLayer.Authentication;
-using Microsoft.Extensions.Options;
 
 namespace GymManagement.DataAccess.DependencyInjection
 {

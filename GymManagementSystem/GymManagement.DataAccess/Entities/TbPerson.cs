@@ -1,4 +1,4 @@
-﻿using Jym_Management_DataAccessLayer.Entities.Authentication;
+﻿using GymManagement.BusinessCore.Models;
 using System;
 using System.Collections.Generic;
 

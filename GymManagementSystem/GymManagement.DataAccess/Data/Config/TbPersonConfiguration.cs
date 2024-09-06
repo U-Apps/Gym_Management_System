@@ -1,4 +1,4 @@
-﻿using GymManagement.BussinessCore.Modules;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

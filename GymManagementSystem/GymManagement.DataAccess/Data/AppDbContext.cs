@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Jym_Management_DataAccessLayer.Data.Config;
 using Microsoft.AspNetCore.Identity;
-using GymManagement.BussinessCore.Models;
+using GymManagement.BusinessCore.Models;
+using GymManagement.DataAccess.Data.Config;
 
 namespace GymManagement.DataAccess.Data
 {
