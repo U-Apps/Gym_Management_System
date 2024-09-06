@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Jym_Management_DataAccessLayer.Repositories
+namespace GymManagement.DataAccess.Repositories
 {
     public interface IRoleRepository
     {

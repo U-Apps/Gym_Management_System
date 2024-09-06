@@ -14,7 +14,7 @@ using Jym_Management_DataAccessLayer.Repositories;
 using Jym_Management_DataAccessLayer.Authentication;
 using Microsoft.Extensions.Options;
 
-namespace Jym_Management_DataAccessLayer
+namespace GymManagement.DataAccess.DependencyInjection
 {
     public static class ServiceConfiguration
     {

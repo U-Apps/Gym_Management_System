@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Jym_Management_DataAccessLayer.Entities.Authentication;
+namespace GymManagement.DataAccess.Entities.Authentication;
 
 public class AppUser : IdentityUser<int>
 {

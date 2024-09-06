@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace GymManagement.DataAccess.Entities
 {
     public partial class TbPerson
     {

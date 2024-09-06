@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace Jym_Management_DataAccessLayer.Repositories
+namespace GymManagement.DataAccess.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
