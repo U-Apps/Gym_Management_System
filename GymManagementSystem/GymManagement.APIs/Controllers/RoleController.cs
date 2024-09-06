@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using GymManagement.BusinessCore.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using GymManagement.APIs.Authentication;
+using GymManagement.BusinessCore.Services;
 
 namespace GymManagement.APIs.Controllers
 {
