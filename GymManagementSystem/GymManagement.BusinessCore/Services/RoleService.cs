@@ -3,7 +3,7 @@ using GymManagement.BussinessCore.Contracts.Repositories;
 using GymManagement.BussinessCore.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace GymManagement.BussinessCore.Services
+namespace GymManagement.BusinessCore.Services
 {
     public class RoleService : IRoleService
     {
