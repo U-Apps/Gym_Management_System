@@ -2,7 +2,7 @@
 using Jym_Management_APIs.DTO_modules;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jym_Management_APIs.Controllers
+namespace GymManagement.APIs.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

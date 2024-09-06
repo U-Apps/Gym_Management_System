@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Jym_Management_APIs.DTO_modules
+namespace GymManagement.APIs.DTOs
 {
     public record ReadPaymnetsForEmployee
     {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Collections.Generic;
 using static Jym_Management_APIs.DTO_modules.ReadEmployeeDTO;
 
-namespace Jym_Management_APIs.DTO_modules
+namespace GymManagement.APIs.DTOs
 {
     public static class EntityExtensions
     {

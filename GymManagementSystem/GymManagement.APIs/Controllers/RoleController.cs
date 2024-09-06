@@ -9,7 +9,7 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Jym_Management_APIs.Authentication;
 
-namespace Jym_Management_APIs.Controllers
+namespace GymManagement.APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

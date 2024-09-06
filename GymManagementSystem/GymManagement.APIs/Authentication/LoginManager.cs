@@ -6,7 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Jym_Management_APIs.Authentication
+namespace GymManagement.APIs.Authentication
 {
     public class LoginManager
     {

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Jym_Management_APIs.DTO_modules
+namespace GymManagement.APIs.DTOs
 {
     public record ReadUserDTO 
         (

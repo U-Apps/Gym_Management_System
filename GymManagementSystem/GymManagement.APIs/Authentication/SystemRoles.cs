@@ -1,4 +1,4 @@
-﻿namespace Jym_Management_APIs.Authentication
+﻿namespace GymManagement.APIs.Authentication
 {
     public record clsSystemRoles
     {

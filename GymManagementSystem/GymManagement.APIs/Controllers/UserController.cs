@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jym_Management_APIs.Controllers
+namespace GymManagement.APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
