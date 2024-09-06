@@ -1,13 +1,9 @@
-﻿using Jym_Management_APIs.DTO_modules;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_BussinessLayer.Services;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using GymManagement.APIs.DTOs;
+using GymManagement.BusinessCore.Models;
 using Microsoft.AspNetCore.Mvc;
-using Jym_Management_BussinessLayer.Services.Base;
-using System.Xml.Linq;
-using Jym_Management_APIs.Authentication;
+using GymManagement.BusinessCore.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
+using GymManagement.APIs.Authentication;
 
 namespace GymManagement.APIs.Controllers
 {

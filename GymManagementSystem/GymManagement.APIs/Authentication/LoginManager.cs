@@ -1,5 +1,5 @@
-﻿using Jym_Management_APIs.DTO_modules;
-using Jym_Management_BussinessLayer.Services;
+﻿using GymManagement.APIs.DTOs;
+using GymManagement.BusinessCore.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

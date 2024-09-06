@@ -1,6 +1,4 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GymManagement.APIs.DTOs
 {

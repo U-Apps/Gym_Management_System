@@ -1,7 +1,4 @@
-﻿using Jym_Management_BussinessLayer.Modules;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using System.Collections.Generic;
-using static Jym_Management_APIs.DTO_modules.ReadEmployeeDTO;
+﻿using GymManagement.BusinessCore.Models;
 
 namespace GymManagement.APIs.DTOs
 {
@@ -55,7 +52,7 @@ namespace GymManagement.APIs.DTOs
                 }
             );
 
-        public static ReadUserDTO AsDTO(this User user,Person person)
+        public static ReadUserDTO AsDTO(this AppUser user,Person person)
             => new ReadUserDTO
             (
                
