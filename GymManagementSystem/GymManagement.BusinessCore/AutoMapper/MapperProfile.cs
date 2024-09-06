@@ -1,21 +1,12 @@
 ﻿using AutoMapper;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Entities.Authentication;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jym_Management_BussinessLayer.AutoMapper
+namespace GymManagement.BusinessCore.AutoMapper
 {
     public class MapperProfile : Profile
     {
         public MapperProfile()
         {
-
+            /*
             CreateMap<TbEmployee, Employee>()
                 .ForMember(dust => dust.PayrollPayments, src => src.MapFrom(src => src.TbPayrollPayments))
                 .ForMember(dust=> dust.Person, src => src.MapFrom(src => src.Person))
@@ -68,7 +59,7 @@ namespace Jym_Management_BussinessLayer.AutoMapper
             CreateMap<TbSubscriptionPayment, SubscriptionPayment>().ReverseMap();
 
             CreateMap<AppUser, User>().ReverseMap().ForSourceMember(src=>src.Password,src=>src.DoNotValidate());
-
+            */
 
             
 
