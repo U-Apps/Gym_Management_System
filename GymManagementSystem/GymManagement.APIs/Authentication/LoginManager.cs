@@ -1,12 +1,12 @@
-﻿using Jym_Management_APIs.DTO_modules;
-using Jym_Management_BussinessLayer.Services;
+﻿using GymManagement.APIs.DTOs;
+using GymManagement.BusinessCore.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Jym_Management_APIs.Authentication
+namespace GymManagement.APIs.Authentication
 {
     public class LoginManager
     {

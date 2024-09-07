@@ -1,13 +1,12 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
-namespace Jym_Management_DataAccessLayer.Data.Config
+namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbEmployeeConfigurtion : IEntityTypeConfiguration<TbEmployee>
+    internal class TbEmployeeConfigurtion : IEntityTypeConfiguration<Employee>
     {
-        public void Configure(EntityTypeBuilder<TbEmployee> builder)
+        public void Configure(EntityTypeBuilder<Employee> builder)
         {
 
             builder.HasKey(e => e.EmployeeId)
@@ -34,13 +33,13 @@ namespace Jym_Management_DataAccessLayer.Data.Config
 
             builder.HasOne(d => d.Person)
                 .WithOne(p => p.Employee)
-                .HasForeignKey<TbEmployee>(d => d.PersonId)
+                .HasForeignKey<Employee>(d => d.PersonId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Employees");
 
             builder.HasOne(e => e.CurrentJob)
-                .WithMany(j => j.TbEmployees)
+                .WithMany(j => j.Employees)
                 .HasForeignKey(e => e.JobID)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Employees_Jobs");

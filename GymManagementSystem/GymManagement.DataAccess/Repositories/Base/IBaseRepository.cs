@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
-namespace Jym_Management_DataAccessLayer.Repositories.Base
+namespace GymManagement.DataAccess.Repositories.Base
 {
     public interface IBaseRepository<T> where T : class
     {

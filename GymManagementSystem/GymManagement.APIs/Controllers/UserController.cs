@@ -1,13 +1,12 @@
-﻿using Jym_Management_APIs.Authentication;
-using Jym_Management_APIs.DTO_modules;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_BussinessLayer.Services;
-using Jym_Management_BussinessLayer.Services.Base;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using GymManagement.APIs.DTOs;
+using GymManagement.BusinessCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using GymManagement.BusinessCore.Contracts.Services;
+using Microsoft.AspNetCore.Authorization;
+using GymManagement.APIs.Authentication;
+using GymManagement.BusinessCore.Services;
 
-namespace Jym_Management_APIs.Controllers
+namespace GymManagement.APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -40,15 +39,14 @@ namespace Jym_Management_APIs.Controllers
                 {
                     return BadRequest("this Employee is not Receptionist!!");
                 }
-                var user = new User();
+                var user = new AppUser();
 
                 user.PersonId = createUserDTO.PersonId;
                 user.UserName = createUserDTO.UserName;
-                user.Password = createUserDTO.Password;
                 user.IsActive = createUserDTO.IsActive;
 
 
-                _userService.Register(user);
+                _userService.Register(user, createUserDTO.Password);
                 return Ok();
             }
             else
@@ -69,7 +67,7 @@ namespace Jym_Management_APIs.Controllers
                 return NotFound();
 
             existingUser.UserName = updateUserDTO.UserName;
-            existingUser.Password = updateUserDTO.Password;
+            //existingUser.Password = updateUserDTO.Password;
             existingUser.IsActive = updateUserDTO.IsActive;
             _userService.Update(existingUser);
             return Ok();
@@ -92,7 +90,7 @@ namespace Jym_Management_APIs.Controllers
         [Route("[action]/{Username}")]
         public ActionResult Delete(string Username)
         {
-            User user = _userService.GetByUserName(Username);
+            AppUser user = _userService.GetByUserName(Username);
 
             if (user is null)
                 return NotFound();

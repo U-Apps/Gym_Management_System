@@ -1,12 +1,12 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Jym_Management_DataAccessLayer.Data.Config
+namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbJobHistoryConfiguration : IEntityTypeConfiguration<TbJobHistory>
+    internal class TbJobHistoryConfiguration : IEntityTypeConfiguration<JobHistory>
     {
-        public void Configure(EntityTypeBuilder<TbJobHistory> builder)
+        public void Configure(EntityTypeBuilder<JobHistory> builder)
         {
             builder.ToTable("tbJobHistories");
 
@@ -25,7 +25,7 @@ namespace Jym_Management_DataAccessLayer.Data.Config
             builder.Property(e => e.StartDate).HasColumnType("date");
 
             builder.HasOne(d => d.Job)
-                .WithMany(p => p.TbJobHistories)
+                .WithMany(p => p.JobHistories)
                 .HasForeignKey(d => d.JobId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tbJobHistories_tbJobs");

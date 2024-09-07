@@ -1,8 +1,8 @@
 using AutoMapper;
-using Jym_Management_APIs.Authentication;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_BussinessLayer.Services;
-using Jym_Management_BussinessLayer.Services.Base;
+using GymManagement.APIs.Authentication;
+using GymManagement.BusinessCore.Models;
+using GymManagement.BusinessCore.Services;
+using GymManagement.BusinessCore.Contracts.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -50,7 +50,7 @@ var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>(
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 builder.Services.AddSingleton<JwtOptions>();
 builder.Services.AddScoped<AuthenticationService>();
-builder.Services.AddScoped<User>();
+builder.Services.AddScoped<AppUser>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<LoginManager>();
 

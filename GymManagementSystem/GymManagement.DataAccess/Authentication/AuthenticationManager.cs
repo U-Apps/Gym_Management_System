@@ -1,13 +1,8 @@
-﻿using Jym_Management_DataAccessLayer.Entities.Authentication;
-using Jym_Management_DataAccessLayer.Repositories;
+﻿using GymManagement.BusinessCore.Models;
+using GymManagement.DataAccess.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jym_Management_DataAccessLayer.Authentication
+namespace GymManagement.DataAccess.Authentication
 {
     public class AuthenticationManager
     {

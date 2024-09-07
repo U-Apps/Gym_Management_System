@@ -1,8 +1,8 @@
-﻿using Jym_Management_APIs.Authentication;
-using Jym_Management_APIs.DTO_modules;
+﻿using GymManagement.APIs.Authentication;
+using GymManagement.APIs.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jym_Management_APIs.Controllers
+namespace GymManagement.APIs.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

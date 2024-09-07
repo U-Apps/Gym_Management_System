@@ -1,27 +1,22 @@
-﻿using Jym_Management_BussinessLayer.AutoMapper;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_DataAccessLayer;
-using Jym_Management_DataAccessLayer.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GymManagement.BusinessCore.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace Jym_Management_BussinessLayer.Services
+namespace GymManagement.BusinessCore.Services
 {
     public class AuthenticationService
     {
-        AuthenticationManager Manager { get; }
+        private readonly UserManager<AppUser> _userManager;
 
-        public AuthenticationService()
+        public AuthenticationService(UserManager<AppUser> userManager)
         {
-            Manager = ServiceConfiguration.GetService<AuthenticationManager>();
+            this._userManager = userManager;
         }
+
 
         public bool Login(string UserName, string Password)
         {
-            return Manager.Login(UserName, Password);
+            var User = _userManager.FindByNameAsync(UserName).Result;
+            return User == null ? false : _userManager.CheckPasswordAsync(User, Password).Result ? true : false;
         }
     }
 }

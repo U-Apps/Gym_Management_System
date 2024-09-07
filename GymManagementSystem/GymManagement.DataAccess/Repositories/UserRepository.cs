@@ -1,17 +1,13 @@
-﻿using Jym_Management_DataAccessLayer.Entities.Authentication;
+﻿using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.BusinessCore.Models;
+using GymManagement.DataAccess.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jym_Management_DataAccessLayer.Repositories
+namespace GymManagement.DataAccess.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
-        private UserManager<AppUser> _UserManager { get;}
+        private UserManager<AppUser> _UserManager { get; }
         public UserRepository()
         {
             _UserManager = ServiceConfiguration.GetService<UserManager<AppUser>>();
@@ -25,7 +21,7 @@ namespace Jym_Management_DataAccessLayer.Repositories
         {
             _UserManager.DeleteAsync(user);
         }
-        
+
         public void Update(AppUser user)
         {
             _UserManager.UpdateAsync(user);
@@ -45,7 +41,7 @@ namespace Jym_Management_DataAccessLayer.Repositories
         {
             _UserManager.AddToRoleAsync(user, role);
         }
-        
+
         public void AddUserToRoles(AppUser user, IEnumerable<string> roles)
         {
             _UserManager.AddToRolesAsync(user, roles);

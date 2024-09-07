@@ -1,17 +1,12 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jym_Management_DataAccessLayer.Data.Config
+namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbPeriodConfigration : IEntityTypeConfiguration<TbPeriod>
+    internal class TbPeriodConfigration : IEntityTypeConfiguration<Period>
     {
-        public void Configure(EntityTypeBuilder<TbPeriod> builder)
+        public void Configure(EntityTypeBuilder<Period> builder)
         {
             builder.HasKey(e => e.PeriodId);
 

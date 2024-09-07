@@ -1,102 +1,67 @@
-﻿using Jym_Management_BussinessLayer.AutoMapper;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_BussinessLayer.Services.Base;
-using Jym_Management_DataAccessLayer.Data;
-using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Repositories;
-using Jym_Management_DataAccessLayer.Repositories.Base;
-using System;
-using System.Collections.Generic;
+﻿using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.BusinessCore.Contracts.Services;
+using GymManagement.BusinessCore.Models;
 using System.Linq.Expressions;
 
-namespace Jym_Management_BussinessLayer.Services
+namespace GymManagement.BusinessCore.Services
 {
     public class JobService : IBaseServices<Job>
     {
-
-       
-        public int Add(Job module)
+        protected readonly IBaseRepository<Job> _Repository;
+        public JobService(IBaseRepository<Job> repository)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-
-            var tbJob = Mapping.Mapper.Map<TbJob>(module);
-           repo.Add(tbJob);
-            repo.SaveChanges();
-            repo.Dispose();
-            return tbJob.JobId;
+            _Repository = repository;
         }
 
-        public void AddRange(IEnumerable<Job> module)
+        public int Add(Job model)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            var tbJob = Mapping.Mapper.Map<IEnumerable<TbJob>>(module);
-           repo.AddRange(tbJob);
-            
+            _Repository.Add(model);
+            return model.JobId;
         }
 
-        public void Delete(Job module)
+        public void AddRange(IEnumerable<Job> model)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            var tbJob = Mapping.Mapper.Map<TbJob>(module);
-           repo.Delete(tbJob);
-            repo.SaveChanges();
-            repo.Dispose();
-            
+            _Repository.AddRange(model);
+        }
+
+        public void Delete(Job model)
+        {
+            _Repository.Delete(model);
         }
         public void DeleteById(int id)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            repo.DeleteById(c=>c.JobId==id);
-            repo.SaveChanges();
-          repo.Dispose();
-
+            _Repository.DeleteById(c=>c.JobId==id);
         }
 
-        public void DeleteRange(IEnumerable<Job> modules)
+        public void DeleteRange(IEnumerable<Job> model)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            var tbJob = Mapping.Mapper.Map<IEnumerable<TbJob>>(modules);
-           repo.DeleteRange(tbJob);
-            repo.SaveChanges();
-            repo.Dispose();
-
+            _Repository.DeleteRange(model);
         }
 
         public Job Find(Expression<Func<Job, bool>> predicate)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            var exp = Mapping.Mapper.Map< Expression<Func<TbJob, bool>>>(predicate);
-            return Mapping.Mapper.Map<Job>(repo.Find(exp));
+            return _Repository.Find(predicate);
         }
 
         public IEnumerable<Job> FindAll(Func<Job, bool> predicate)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbJob, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<Job>>(repo.FindAll(exp));
+            return _Repository.FindAll(predicate);
         }
 
         public IEnumerable<Job> GetAll()
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<Job>>(repo.GetAll());
+            return _Repository.GetAll();
         }
 
         public Job GetById(int id)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            return Mapping.Mapper.Map<Job>(repo.GetById(c => c.JobId == id));
+            return _Repository.GetById(c => c.JobId == id);
 
         }
 
-        public void Update(Job module)
+        public void Update(Job model)
         {
-            IBaseRepository<TbJob> repo = new BaseRepository<TbJob>(new AppDbContext());
-            TbJob tbJob = Mapping.Mapper.Map<TbJob>(module);
-           repo.Update(tbJob);
-            repo.SaveChanges();
-            repo.Dispose();
-            
+           _Repository.Update(model);            
         }
     }
 

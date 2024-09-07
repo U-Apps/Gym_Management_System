@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Jym_Management_DataAccessLayer.Entities;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Jym_Management_DataAccessLayer.Entities.Authentication;
-using Jym_Management_DataAccessLayer.Data.Config;
 using Microsoft.AspNetCore.Identity;
-using Jym_Management_DataAccessLayer.Data.Config;
+using GymManagement.BusinessCore.Models;
+using GymManagement.DataAccess.Data.Config;
 
-namespace Jym_Management_DataAccessLayer.Data
+namespace GymManagement.DataAccess.Data
 {
     public partial class AppDbContext : IdentityDbContext<AppUser,IdentityRole<int>,int>
     {
@@ -24,19 +18,19 @@ namespace Jym_Management_DataAccessLayer.Data
         {
         }
 
-        public virtual DbSet<TbEmployee> TbEmployees { get; set; } = null!;
-        public virtual DbSet<TbExerciseType> TbExerciseTypes { get; set; } = null!;
-        public virtual DbSet<TbJob> TbJobs { get; set; } = null!;
-        public virtual DbSet<TbJobHistory> TbJobHistories { get; set; } = null!;
-        public virtual DbSet<TbMember> TbMembers { get; set; } = null!;
-        public virtual DbSet<TbPayrollPayment> TbPayrollPayments { get; set; } = null!;
-        public virtual DbSet<TbPeriod> TbPeriods { get; set; } = null!;
+        public virtual DbSet<Employee> TbEmployees { get; set; } = null!;
+        public virtual DbSet<ExerciseType> TbExerciseTypes { get; set; } = null!;
+        public virtual DbSet<Job> TbJobs { get; set; } = null!;
+        public virtual DbSet<JobHistory> TbJobHistories { get; set; } = null!;
+        public virtual DbSet<Member> TbMembers { get; set; } = null!;
+        public virtual DbSet<PayrollPayment> TbPayrollPayments { get; set; } = null!;
+        public virtual DbSet<Period> TbPeriods { get; set; } = null!;
         //public virtual DbSet<TbPermssion> TbPermssions { get; set; } = null!;
-        public virtual DbSet<TbPerson> TbPeople { get; set; } = null!;
+        public virtual DbSet<Person> TbPeople { get; set; } = null!;
         //public virtual DbSet<TbRole> TbRoles { get; set; } = null!;
-        public virtual DbSet<TbSubsciptionPeriod> TbSubsciptionPeriods { get; set; } = null!;
-        public virtual DbSet<TbSubscription> TbSubscriptions { get; set; } = null!;
-        public virtual DbSet<TbSubscriptionPayment> TbSubscriptionPayments { get; set; } = null!;
+        public virtual DbSet<SubscriptionPeriod> TbSubsciptionPeriods { get; set; } = null!;
+        public virtual DbSet<Subscription> TbSubscriptions { get; set; } = null!;
+        public virtual DbSet<SubscriptionPayment> TbSubscriptionPayments { get; set; } = null!;
         //public virtual DbSet<TbUser> TbUsers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

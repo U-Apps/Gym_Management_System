@@ -1,11 +1,5 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Jym_Management_DataAccessLayer.Repositories.Base
+﻿
+namespace GymManagement.DataAccess.Repositories.Base
 {
     public interface IUnitOfWork
     {

@@ -1,8 +1,6 @@
-﻿using Jym_Management_DataAccessLayer.Entities.Authentication;
-using System;
-using System.Collections.Generic;
+﻿using GymManagement.DataAccess.Entities.Authentication;
 
-namespace Jym_Management_DataAccessLayer.Entities
+namespace GymManagement.DataAccess.Entities
 {
     public partial class TbSubscriptionPayment
     {

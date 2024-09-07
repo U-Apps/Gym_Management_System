@@ -1,102 +1,67 @@
-﻿using Jym_Management_BussinessLayer.AutoMapper;
-using Jym_Management_BussinessLayer.Modules;
-using Jym_Management_BussinessLayer.Services.Base;
-using Jym_Management_DataAccessLayer.Data;
-using Jym_Management_DataAccessLayer.Entities;
-using Jym_Management_DataAccessLayer.Repositories;
-using Jym_Management_DataAccessLayer.Repositories.Base;
-using System;
-using System.Collections.Generic;
+﻿using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.BusinessCore.Contracts.Services;
+using GymManagement.BusinessCore.Models;
 using System.Linq.Expressions;
 
-namespace Jym_Management_BussinessLayer.Services
+namespace GymManagement.BusinessCore.Services
 {
     public class SubscriptionPeriodServices : IBaseServices<SubscriptionPeriod>
     {
-        
-
-        public int Add(SubscriptionPeriod module)
+        protected readonly IBaseRepository<SubscriptionPeriod> _Repository;
+        public SubscriptionPeriodServices(IBaseRepository<SubscriptionPeriod> repository)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
-            repo.Add(tbSubsciptionPeriod);
-            repo.SaveChanges(); 
-            repo.Dispose();
-            return tbSubsciptionPeriod.Id;
+            _Repository = repository;
         }
 
-        public void AddRange(IEnumerable<SubscriptionPeriod> module)
+        public int Add(SubscriptionPeriod model)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            var tbSubsciptionPeriod = Mapping.Mapper.Map<IEnumerable<TbSubsciptionPeriod>>(module);
-            repo.AddRange(tbSubsciptionPeriod);
-            repo.SaveChanges();
-            repo.Dispose();
-            
+            _Repository.Add(model);
+            return model.Id;
         }
 
-        public void Delete(SubscriptionPeriod module)
+        public void AddRange(IEnumerable<SubscriptionPeriod> model)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
-            repo.Delete(tbSubsciptionPeriod);
-            repo.SaveChanges();
-            repo.Dispose();
+            _Repository.AddRange(model);
+        }
+
+        public void Delete(SubscriptionPeriod model)
+        {
+            _Repository.Delete(model);
         }
 
         public void DeleteById(int id)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-           repo.DeleteById(c => c.Id == id);
-            repo.SaveChanges();
-            repo.Dispose();
-            
+           _Repository.DeleteById(c => c.Id == id);            
         }
 
-        public void DeleteRange(IEnumerable<SubscriptionPeriod> modules)
+        public void DeleteRange(IEnumerable<SubscriptionPeriod> model)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            var tbSubsciptionPeriod = Mapping.Mapper.Map<IEnumerable<TbSubsciptionPeriod>>(modules);
-           repo.DeleteRange(tbSubsciptionPeriod);
-            repo.SaveChanges(); 
-            repo.Dispose();
-            
+           _Repository.DeleteRange(model);            
         }
 
         public SubscriptionPeriod Find(Expression<Func<SubscriptionPeriod, bool>> predicate)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            var exp = Mapping.Mapper.Map< Expression<Func<TbSubsciptionPeriod, bool>>>(predicate);
-            return Mapping.Mapper.Map<SubscriptionPeriod>(repo.Find(exp));
+            return _Repository.Find(predicate);
         }
 
         public IEnumerable<SubscriptionPeriod> FindAll(Func<SubscriptionPeriod, bool> predicate)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            var exp = Mapping.Mapper.Map<Func<TbSubsciptionPeriod, bool>>(predicate);
-            return Mapping.Mapper.Map<IEnumerable<SubscriptionPeriod>>(repo.FindAll(exp));
+            return _Repository.FindAll(predicate);
         }
 
         public IEnumerable<SubscriptionPeriod> GetAll()
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            return Mapping.Mapper.Map<IEnumerable<SubscriptionPeriod>>(repo.GetAll());
+            return _Repository.GetAll();
         }
 
         public SubscriptionPeriod GetById(int id)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            return Mapping.Mapper.Map<SubscriptionPeriod>(repo.GetById(c => c.Id == id));
+            return _Repository.GetById(c => c.Id == id);
         }
 
-        public void Update(SubscriptionPeriod module)
+        public void Update(SubscriptionPeriod model)
         {
-            IBaseRepository<TbSubsciptionPeriod> repo = new BaseRepository<TbSubsciptionPeriod>(new AppDbContext());
-            var tbSubsciptionPeriod = Mapping.Mapper.Map<TbSubsciptionPeriod>(module);
-           repo.Update(tbSubsciptionPeriod);
-            repo.SaveChanges();
-            repo.Dispose();
-           
+           _Repository.Update(model);           
         }
     }
 }

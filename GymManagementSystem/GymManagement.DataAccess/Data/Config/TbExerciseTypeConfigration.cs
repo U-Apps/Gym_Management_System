@@ -1,18 +1,13 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jym_Management_DataAccessLayer.Data.Config
+
+namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbExerciseTypeConfigration : IEntityTypeConfiguration<TbExerciseType>
+    internal class TbExerciseTypeConfigration : IEntityTypeConfiguration<ExerciseType>
     {
-        public void Configure(EntityTypeBuilder<TbExerciseType> builder)
+        public void Configure(EntityTypeBuilder<ExerciseType> builder)
         {
 
 

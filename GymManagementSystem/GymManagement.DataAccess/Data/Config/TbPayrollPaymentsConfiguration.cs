@@ -1,17 +1,13 @@
-﻿using Jym_Management_DataAccessLayer.Entities;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jym_Management_DataAccessLayer.Data.Config
+
+namespace GymManagement.DataAccess.Data.Config
 {
-    internal class TbPayrollPaymentsConfiguration : IEntityTypeConfiguration<TbPayrollPayment>
+    internal class TbPayrollPaymentsConfiguration : IEntityTypeConfiguration<PayrollPayment>
     {
-        public void Configure(EntityTypeBuilder<TbPayrollPayment> builder)
+        public void Configure(EntityTypeBuilder<PayrollPayment> builder)
         {
             builder.HasKey(e => e.PaymentId);
 
@@ -28,7 +24,7 @@ namespace Jym_Management_DataAccessLayer.Data.Config
                 .HasColumnName("paymentDate");
 
             builder.HasOne(d => d.Employee)
-                .WithMany(p => p.TbPayrollPayments)
+                .WithMany(p => p.PayrollPayments)
                 .HasForeignKey(d => d.EmployeeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Payroll_payments");
