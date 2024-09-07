@@ -49,9 +49,6 @@ var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>(
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 builder.Services.AddSingleton<JwtOptions>();
-builder.Services.AddScoped<AuthenticationService>();
-builder.Services.AddScoped<AppUser>();
-builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<LoginManager>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -72,20 +69,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     }
     );
 
-builder.Services.AddScoped<IBaseServices<Employee>,EmployeeService>();
-builder.Services.AddScoped<IBaseServices<Person>, PersonService>();
-builder.Services.AddScoped<IBaseServices<Member>, MemberService>();
-//builder.Services.AddScoped<IBaseServices<User>, UserService>();
-//builder.Services.AddScoped<IBaseServices<Permssion>, PermssionService>();
-builder.Services.AddScoped<RoleService>();
-builder.Services.AddScoped<IBaseServices<Job>, JobService>();
-builder.Services.AddScoped<IBaseServices<JobHistory>, JobHistoryService>();
-builder.Services.AddScoped<IBaseServices<Period>, PeriodService>();
-builder.Services.AddScoped<IBaseServices<SubscriptionPeriod>, SubscriptionPeriodServices>();
-builder.Services.AddScoped<IBaseServices<SubscriptionPayment>, SubscriptionPaymentServices>();
-builder.Services.AddScoped<IBaseServices<Subscription>, SubscriptionServices>();
-builder.Services.AddScoped<IBaseServices<ExerciseType>, ExerciseTypeService>();
-builder.Services.AddScoped<IBaseServices<PayrollPayment>, PayrollPaymentService>();
 builder.Services.AddCors(option => option.AddDefaultPolicy(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
 
