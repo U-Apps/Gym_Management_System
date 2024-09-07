@@ -1,14 +1,16 @@
-﻿using GymManagement.DataAccess.DependencyInjection;
+﻿using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.BusinessCore.Contracts.Services;
+using GymManagement.DataAccess.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 
 namespace GymManagement.DataAccess.Repositories
 {
-    public class RoleRepository
+    public class RoleRepository : IRoleRepository
     {
-        private RoleManager<IdentityRole<int>> _RoleManager { get;}
-        public RoleRepository()
+        private readonly RoleManager<IdentityRole<int>> _RoleManager;
+        public RoleRepository(RoleManager<IdentityRole<int>> roleManager)
         {
-            _RoleManager = ServiceConfiguration.GetService<RoleManager<IdentityRole<int>>>();
+            _RoleManager = roleManager;
         }
 
         public void Add(IdentityRole<int> Role)

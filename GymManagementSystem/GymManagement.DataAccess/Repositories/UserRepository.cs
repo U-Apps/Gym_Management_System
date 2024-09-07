@@ -7,10 +7,10 @@ namespace GymManagement.DataAccess.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private UserManager<AppUser> _UserManager { get; }
-        public UserRepository()
+        private readonly UserManager<AppUser> _UserManager;
+        public UserRepository(UserManager<AppUser> userManager)
         {
-            _UserManager = ServiceConfiguration.GetService<UserManager<AppUser>>();
+            _UserManager = userManager;
         }
 
         public void Register(AppUser user, string password)

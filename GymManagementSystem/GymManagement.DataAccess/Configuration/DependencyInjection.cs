@@ -1,4 +1,5 @@
-﻿using GymManagement.BusinessCore.Models;
+﻿using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.BusinessCore.Models;
 using GymManagement.DataAccess.Data;
 using GymManagement.DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -48,7 +49,8 @@ namespace GymManagement.DataAccess.Configuration
 
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             return services;
         }
