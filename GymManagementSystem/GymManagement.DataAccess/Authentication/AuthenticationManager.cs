@@ -6,11 +6,11 @@ namespace GymManagement.DataAccess.Authentication
 {
     public class AuthenticationManager
     {
-        private UserManager<AppUser> _UserManager { get; }
+        private readonly UserManager<AppUser> _UserManager;
 
-        public AuthenticationManager()
+        public AuthenticationManager(UserManager<AppUser> userManager)
         {
-            _UserManager = ServiceConfiguration.GetService<UserManager<AppUser>>();
+            _UserManager = userManager;
         }
 
         public bool Login(string UserName, string Password)
