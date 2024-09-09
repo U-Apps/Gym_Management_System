@@ -26,7 +26,7 @@ namespace GymManagement.DataAccess.Data.Config
 
             builder.Property(e => e.ResignationDate)
                 .HasColumnType("date")
-                .IsRequired(false)
+                .IsRequired(true)
                 .HasColumnName("resignationDate");
 
             builder.Property(e => e.Salary).HasColumnType("money");

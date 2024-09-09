@@ -14,7 +14,7 @@ namespace GymManagement.DataAccess.Entities
         public int EmployeeId { get; set; }
         public int PersonId { get; set; }
         public DateTime HireDate { get; set; }
-        public DateTime? ResignationDate { get; set; }
+        public DateTime ResignationDate { get; set; }
         public decimal Salary { get; set; }
         public byte? JobID { get; set; }
 

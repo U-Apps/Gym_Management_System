@@ -23,7 +23,7 @@ namespace GymManagement.APIs.DTOs
              [Required]
              decimal? PaymentAmount,
              [Required]
-             short? CreatedByUserId
+             int? CreatedByUserId
 
        );
 
