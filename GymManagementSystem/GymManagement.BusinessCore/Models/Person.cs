@@ -11,10 +11,10 @@ namespace GymManagement.BusinessCore.Models
         public string? NationalNumber { get; set; }
         public string? PhoneNumber { get; set; }
         public DateTime? BirthDate { get; set; }
-        public short Age  => (short)(DateTime.Now.Subtract(BirthDate.Value).TotalDays/365);
         public string? Email { get; set; }
         public string? Address { get; set; }
         public DateTime RegisterationDate { get; set; }
+        
 
         //public Person()
         //{

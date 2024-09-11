@@ -8,7 +8,7 @@ namespace GymManagement.BusinessCore.Models
         public byte? JobID { get; set; }
 
         public virtual Job CurrentJob { get; set; }
-        public virtual ICollection<PayrollPayment> PayrollPayments { get; set; }
+        public virtual ICollection<PayrollPayment>? PayrollPayments { get; set; }
         public virtual ICollection<JobHistory> EmployeementHistory { get; set; }
 
         //public Employee()
