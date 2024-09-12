@@ -9,15 +9,20 @@ namespace GymManagement.DataAccess.Data.Config
     {
         public void Configure(EntityTypeBuilder<PayrollPayment> builder)
         {
-            builder.HasKey(e => e.PaymentId);
-
             builder.ToTable("tbPayroll_payments");
+            
+            builder.HasKey(e => e.PaymentId);
 
             builder.Property(e => e.PaymentId)
                 .UseIdentityColumn(1)
                 .HasColumnName("paymentID");
 
             builder.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+            
+            builder.Property(e => e.Amount)
+                .HasColumnName("Amount")
+                .HasColumnType("money")
+                .IsRequired(true);
 
             builder.Property(e => e.PaymentDate)
                 .HasColumnType("date")
@@ -26,7 +31,7 @@ namespace GymManagement.DataAccess.Data.Config
             builder.HasOne(d => d.Employee)
                 .WithMany(p => p.PayrollPayments)
                 .HasForeignKey(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Payroll_payments");
         }
     }
