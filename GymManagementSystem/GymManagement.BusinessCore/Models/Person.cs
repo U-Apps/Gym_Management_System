@@ -1,7 +1,7 @@
 ﻿
 namespace GymManagement.BusinessCore.Models
 {
-    public abstract class Person
+    public class Person
     {
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;
