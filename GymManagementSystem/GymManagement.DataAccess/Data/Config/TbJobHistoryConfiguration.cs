@@ -16,18 +16,26 @@ namespace GymManagement.DataAccess.Data.Config
                 .UseIdentityColumn(1)
                 .HasColumnName("ID");
 
-            builder.Property(e => e.EmpoyeeId).HasColumnName("EmpoyeeID");
+            builder.Property(e => e.EmpoyeeId)
+                .HasColumnName("EmpoyeeID")
+                .IsRequired(true);
 
-            builder.Property(e => e.EndDate).HasColumnType("date");
+            builder.Property(e => e.JobId)
+                .HasColumnName("JobID")
+                .IsRequired(true);
 
-            builder.Property(e => e.JobId).HasColumnName("JobID");
+            builder.Property(e => e.StartDate)
+                .HasColumnType("date")
+                .IsRequired(true);
 
-            builder.Property(e => e.StartDate).HasColumnType("date");
+            builder.Property(e => e.EndDate)
+                .HasColumnType("date")
+                .IsRequired(false);
 
             builder.HasOne(d => d.Job)
                 .WithMany(p => p.JobHistories)
                 .HasForeignKey(d => d.JobId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_tbJobHistories_tbJobs");
 
             builder.HasOne(d => d.Employee)
