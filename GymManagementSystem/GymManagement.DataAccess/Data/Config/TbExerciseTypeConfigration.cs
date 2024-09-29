@@ -9,20 +9,19 @@ namespace GymManagement.DataAccess.Data.Config
     {
         public void Configure(EntityTypeBuilder<ExerciseType> builder)
         {
-
-
+            builder.ToTable("tbExerciseTypes");
 
             builder.HasKey(e => e.ExerciseTypeId);
 
             builder.Property(e => e.ExerciseTypeId)
-                .UseIdentityColumn(1);
+                .UseIdentityColumn(1)
+                .HasColumnType("tinyint")
+                .HasColumnName("ExerciseTypeID");
 
-
-            builder.ToTable("tbExerciseTypes");
-
-            builder.Property(e => e.ExerciseTypeId).HasColumnName("ExerciseTypeID");
-
-            builder.Property(e => e.Name).HasMaxLength(50);
+            builder.Property(e => e.Name)
+                .HasMaxLength(50)
+                .IsUnicode(true)
+                .IsRequired(true);
 
         }
     }
