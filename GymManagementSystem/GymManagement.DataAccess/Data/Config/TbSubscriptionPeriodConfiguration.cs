@@ -15,11 +15,17 @@ namespace GymManagement.DataAccess.Data.Config
 
             builder.Property(e => e.Id)
                 .UseIdentityColumn(1)
+                .HasColumnType("tinyint")
                 .HasColumnName("ID");
 
-            builder.Property(e => e.Name).HasMaxLength(50);
+            builder.Property(e => e.Name)
+                .HasMaxLength(50)
+                .IsUnicode(true)
+                .IsRequired(true);
 
-            builder.Property(e => e.Price).HasColumnType("smallmoney");
+            builder.Property(e => e.Price)
+                .HasColumnType("smallmoney")
+                .IsRequired(true);
         }
     }
 }
