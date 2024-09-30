@@ -9,32 +9,48 @@ namespace GymManagement.DataAccess.Data.Config
     {
         public void Configure(EntityTypeBuilder<SubscriptionPayment> builder)
         {
+            builder.ToTable("tbSubscriptionPayments");
+            
             builder.HasKey(e => e.PaymentId);
 
             builder.Property(e => e.PaymentId)
-                .UseIdentityColumn(1);
+                .UseIdentityColumn(1)
+                .HasColumnName("PaymentID");
 
-            builder.ToTable("tbSubscriptionPayments");
+            builder.Property(e => e.SubscriptionId)
+                .HasColumnName("SubscriptionID");
 
-            builder.Property(e => e.CreatedByUserId).HasColumnName("CreatedByUserID");
+            builder.Property(e => e.PaymentAmount)
+                .HasColumnType("smallmoney")
+                .IsRequired(true);
 
-            builder.Property(e => e.PaymentAmount).HasColumnType("smallmoney");
-
-            builder.Property(e => e.PaymentDate).HasColumnType("date");
-
-            builder.Property(e => e.PaymentId).HasColumnName("PaymentID");
-
-            builder.Property(e => e.SubscriptionId).HasColumnName("SubscriptionID");
+            builder.Property(e => e.PaymentDate)
+                .HasColumnType("date")
+                .IsRequired(true);
+            
+            builder.Property(e => e.CreatedByUserId)
+                .HasColumnName("CreatedByUserID");
 
             builder.HasOne(d => d.CreatedByUser)
                 .WithMany()
                 .HasForeignKey(d => d.CreatedByUserId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired(true)
                 .HasConstraintName("FK_tbSubscriptionPayments_AspNetUsers");
 
+
             builder.HasOne(d => d.Subscription)
-                .WithMany()
-                .HasForeignKey(d => d.SubscriptionId)
-                .HasConstraintName("FK_tbSubscriptionPayments_tbSubscriptions");
+                .WithOne(p => p.SubscriptionPayment)
+                .HasForeignKey<SubscriptionPayment>(d => d.SubscriptionId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired(true)
+                .HasConstraintName("FK_tbSubscriptions_tbSubscriptionPayments");
+
+            //builder.Property(e => e.PaymentId).HasColumnName("PaymentID");
+            //builder.HasOne(d => d.Subscription)
+            //    .WithMany()
+            //    .HasForeignKey(d => d.SubscriptionId)
+            //    .HasConstraintName("FK_tbSubscriptionPayments_tbSubscriptions");
         }
     }
 }
