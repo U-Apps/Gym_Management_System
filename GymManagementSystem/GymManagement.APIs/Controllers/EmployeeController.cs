@@ -32,28 +32,32 @@ namespace GymManagement.APIs.Controllers
 
         public ActionResult CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
-            var person = new Person()
+            var Employee = new Employee()
             {
-                Name = createEmployeeDTO.Name,
-                Idcard = createEmployeeDTO.Idcard,
+                FirstName = createEmployeeDTO.Name,
+                NationalNumber = createEmployeeDTO.Idcard,
                 PhoneNumber = createEmployeeDTO.PhoneNumber,
                 Email = createEmployeeDTO.Email,
-                BirthDate = createEmployeeDTO.BirthDate
+                BirthDate = createEmployeeDTO.BirthDate,
+                RegisterationDate = DateTime.Now,
+                Salary = createEmployeeDTO.Salary,
+                JobID = createEmployeeDTO.CurrentJop
+
             };
 
             var employee = new Employee();
 
-            employee.PersonId = _personService.Add(person);
+            //employee.PersonId = _personService.Add(Employee);
             //employee.ResignationDate = createEmployeeDTO.ResignationDate;
-            employee.HireDate = createEmployeeDTO.HireDate;
-            employee.Salary = createEmployeeDTO.Salary;
-            employee.JobID = createEmployeeDTO.CurrentJop;
+            //employee.HireDate = createEmployeeDTO.HireDate;
+            //employee.Salary = createEmployeeDTO.Salary;
+            //employee.JobID = createEmployeeDTO.CurrentJop;
 
             var History = new JobHistory()
             {
                 EmpoyeeId = _employeeService.Add(employee),
                 JobId = employee.JobID.Value,
-                StartDate = employee.HireDate
+                StartDate = employee.RegisterationDate
             };
 
             _HistoryService.Add(History);
@@ -71,17 +75,17 @@ namespace GymManagement.APIs.Controllers
                 return NotFound();
 
 
-            var existingPerson = _personService.GetById(existingEmployee.PersonId);
+            //var existingPerson = _personService.GetById(existingEmployee.PersonId);
 
-            existingPerson.Name = updateEmployeeDTO.Name;
-            existingPerson.PhoneNumber = updateEmployeeDTO.PhoneNumber;
-            existingPerson.BirthDate = updateEmployeeDTO.BirthDate;
-            existingPerson.Email = updateEmployeeDTO.Email;
-            _personService.Update(existingPerson);
+            existingEmployee.FirstName = updateEmployeeDTO.Name;
+            existingEmployee.PhoneNumber = updateEmployeeDTO.PhoneNumber;
+            existingEmployee.BirthDate = updateEmployeeDTO.BirthDate;
+            existingEmployee.Email = updateEmployeeDTO.Email;
+            //_personService.Update(existingPerson);
 
-            existingEmployee.Person = existingPerson;
+            //existingEmployee.Person = existingPerson;
 
-            existingEmployee.HireDate = updateEmployeeDTO.HireDate;
+            existingEmployee.RegisterationDate = updateEmployeeDTO.HireDate;
             existingEmployee.ResignationDate = updateEmployeeDTO.ResignationDate;
             existingEmployee.Salary = updateEmployeeDTO.Salary;
             existingEmployee.JobID = updateEmployeeDTO.CurrentJop;
@@ -127,7 +131,7 @@ namespace GymManagement.APIs.Controllers
             if (employee is null)
                 return NotFound();
 
-            _employeeService.DeleteById(employee.EmployeeId);
+            _employeeService.DeleteById(employee.Id);
             //_employeeService.Delete(employee);
             return Ok();
         }

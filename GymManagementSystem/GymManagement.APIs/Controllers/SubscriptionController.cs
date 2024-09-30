@@ -56,9 +56,9 @@ namespace GymManagement.APIs.Controllers
                 return NotFound();
 
             if (_jobHistoryService.GetById(updateSubscriptionDTO.CoachId)?.Job.JobTitle!="Coach")
-                return BadRequest($"this employee {existingSubscription.Coach.Employee.Person.Name} not Coach");
+                return BadRequest($"this employee {existingSubscription.Coach.Employee.FirstName} not Coach");
             if (_jobHistoryService.GetById(updateSubscriptionDTO.CreatedByReceptionistId)?.Job.JobTitle != "Receptionist")
-                return BadRequest($"this employee {existingSubscription.Coach.Employee.Person.Name} not Receptionist");
+                return BadRequest($"this employee {existingSubscription.Coach.Employee.FirstName} not Receptionist");
 
             existingSubscription.MemberId = updateSubscriptionDTO.MemberId;
             existingSubscription.PeriodId = updateSubscriptionDTO.PeriodId;

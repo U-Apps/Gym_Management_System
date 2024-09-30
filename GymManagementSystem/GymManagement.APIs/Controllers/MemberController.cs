@@ -29,20 +29,20 @@ namespace GymManagement.APIs.Controllers
 
         public ActionResult CreateMember(CreateMemberDTO createMemberDTO)
         {
-            var person = new Person()
-            {
-                Name = createMemberDTO.Name,
-                Idcard = createMemberDTO.Idcard,
-                PhoneNumber = createMemberDTO.PhoneNumber,
-                Email = createMemberDTO.Email,
-                BirthDate = createMemberDTO.BirthDate
-            };
+            //var person = new Person()
+            //{
+            //    Name = createMemberDTO.Name,
+            //    NationalNumber = createMemberDTO.Idcard,
+            //    PhoneNumber = createMemberDTO.PhoneNumber,
+            //    Email = createMemberDTO.Email,
+            //    BirthDate = createMemberDTO.BirthDate
+            //};
 
             
 
             var member = new Member();
 
-            member.PersonId = _personService.Add(person);
+            //member.PersonId = _personService.Add(person);
             member.MemberWeight = createMemberDTO.MemberWeight;
             member.IsActive = createMemberDTO.IsActive;
 
@@ -59,15 +59,15 @@ namespace GymManagement.APIs.Controllers
             if (existingMember == null)
                 return NotFound();
 
-            var existingPerson = _personService.GetById(existingMember.PersonId);
+            //var existingPerson = _personService.GetById(existingMember.PersonId);
 
-            existingPerson.Name = updateMemberDTO.Name;
-            existingPerson.PhoneNumber = updateMemberDTO.PhoneNumber;
-            existingPerson.BirthDate = updateMemberDTO.BirthDate;
-            existingPerson.Email = updateMemberDTO.Email;
-            _personService.Update(existingPerson);
+            //existingPerson.Name = updateMemberDTO.Name;
+            existingMember.PhoneNumber = updateMemberDTO.PhoneNumber;
+            existingMember.BirthDate = updateMemberDTO.BirthDate;
+            existingMember.Email = updateMemberDTO.Email;
+            //_personService.Update(existingPerson);
 
-            existingMember.Person = existingPerson;
+            //existingMember.Person = existingPerson;
             existingMember.MemberWeight = updateMemberDTO.MemberWeight;
             existingMember.IsActive = updateMemberDTO.IsActive;
 
@@ -103,7 +103,7 @@ namespace GymManagement.APIs.Controllers
             if (member is null)
                 return NotFound();
 
-            _memberService.DeleteById(member.MemberId);
+            _memberService.DeleteById(member.Id);
 
             return Ok();
         }

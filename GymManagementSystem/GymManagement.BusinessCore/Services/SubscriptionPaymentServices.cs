@@ -17,7 +17,7 @@ namespace GymManagement.BusinessCore.Services
         {
             model.PaymentDate = DateTime.Now;
             _Repository.Add(model);
-            return model.PaymentId??0;
+            return model.PaymentId;
         }
 
         public void AddRange(IEnumerable<SubscriptionPayment> model)
@@ -62,7 +62,7 @@ namespace GymManagement.BusinessCore.Services
                     sp => sp.Subscription.CreatedByReceptionist.Job,
                     sp => sp.Subscription.ExcerciseType,
                     sp => sp.Subscription.Member,
-                    sp => sp.Subscription.Member.Person,
+                    //sp => sp.Subscription.Member.Person,
                     sp => sp.Subscription.Period,
                     sp => sp.Subscription.SubscriptionPeriod
                 );
@@ -81,7 +81,7 @@ namespace GymManagement.BusinessCore.Services
                     sp => sp.Subscription.CreatedByReceptionist.Job,
                     sp => sp.Subscription.ExcerciseType,
                     sp => sp.Subscription.Member,
-                    sp => sp.Subscription.Member.Person,
+                    //sp => sp.Subscription.Member.Person,
                     sp => sp.Subscription.Period,
                     sp => sp.Subscription.SubscriptionPeriod
                     );

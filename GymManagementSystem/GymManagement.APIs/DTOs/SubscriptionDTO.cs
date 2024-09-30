@@ -5,8 +5,8 @@ namespace GymManagement.APIs.DTOs
     public record ReadSubscriptionDTO
         (
              int SubscriptionId,
-             DateTime? StartDate ,
-             DateTime? EndDate ,
+             DateTime StartDate ,
+             DateTime EndDate ,
 
              ReadJobHistoryDTO Coach ,
              ReadJobHistoryDTO CreatedByReceptionist ,
@@ -31,9 +31,9 @@ namespace GymManagement.APIs.DTOs
             byte PeriodId,
             [Required]
             [DataType(DataType.DateTime)]
-            DateTime? StartDate,
+            DateTime StartDate,
             [DataType(DataType.DateTime)]
-            DateTime? EndDate,
+            DateTime EndDate,
 
             [Required]
             byte SubscriptionPeriodId
@@ -57,8 +57,8 @@ namespace GymManagement.APIs.DTOs
             
             [Required]
             [DataType(DataType.DateTime)]
-            DateTime? StartDate,
-            DateTime? EndDate,
+            DateTime StartDate,
+            DateTime EndDate,
 
             [Required]
             byte SubscriptionPeriodId

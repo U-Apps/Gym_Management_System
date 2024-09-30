@@ -50,12 +50,12 @@ namespace GymManagement.BusinessCore.Services
 
         public IEnumerable<JobHistory> GetAll()
         {
-            return _Repository.GetAll(jH => jH.Job, jH => jH.Employee, jH => jH.Employee.Person);
+            return _Repository.GetAll(jH => jH.Job, jH => jH.Employee/*, jH => jH.Employee.Person*/);
         }
 
         public JobHistory GetById(int id)
         {
-            return _Repository.GetById(c=>c.Id==id, jH => jH.Job,jH=>jH.Employee,jH=>jH.Employee.Person);
+            return _Repository.GetById(c=>c.Id==id, jH => jH.Job,jH=>jH.Employee/*,jH=>jH.Employee.Person*/);
         }
 
         public void Update(JobHistory module)

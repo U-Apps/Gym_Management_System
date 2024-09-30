@@ -82,7 +82,7 @@ namespace GymManagement.APIs.Controllers
             if (subscriptionPayment is null)
                 return NotFound();
 
-            _subscriptionPaymentService.DeleteById(subscriptionPayment.PaymentId.Value);
+            _subscriptionPaymentService.DeleteById(subscriptionPayment.PaymentId);
 
             return Ok();
         }

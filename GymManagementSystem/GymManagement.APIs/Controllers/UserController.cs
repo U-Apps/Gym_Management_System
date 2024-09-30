@@ -34,7 +34,7 @@ namespace GymManagement.APIs.Controllers
             {
                 if (_jobHistoryService.GetAll().Where(
 
-                    j=>j.Employee.PersonId==createUserDTO.PersonId).FirstOrDefault()?
+                    j=>j.Employee.Id==createUserDTO.PersonId).FirstOrDefault()?
                     .Job.JobTitle!= "Receptionist")
                 {
                     return BadRequest("this Employee is not Receptionist!!");

@@ -5,11 +5,11 @@ namespace GymManagement.APIs.DTOs
     public record ReadMemberDTO 
         (
               int MemberId,
-              int PersonId ,
+              //int PersonId ,
               decimal? MemberWeight ,
-              bool? IsActive ,
+              bool IsActive 
 
-              ReadPersonDTO Person
+              //ReadPersonDTO Person
         
         );
 
@@ -32,7 +32,7 @@ namespace GymManagement.APIs.DTOs
             string? Email,
              [Range(1,200)]
              decimal? MemberWeight,
-             bool? IsActive
+             bool IsActive
 
        );
 
@@ -57,7 +57,7 @@ namespace GymManagement.APIs.DTOs
              int MemberId,
             [Range(1,200)]
              decimal? MemberWeight,
-            bool? IsActive
+            bool IsActive
 
       );
 }

@@ -18,7 +18,7 @@ namespace GymManagement.APIs.DTOs
 
               [Required]
               [DataType(DataType.Currency)]
-              decimal? Price
+              decimal Price
 
        );
 
@@ -32,7 +32,7 @@ namespace GymManagement.APIs.DTOs
 
             [Required]
             [DataType(DataType.Currency)]
-            decimal? Price
+            decimal Price
 
 
       );
