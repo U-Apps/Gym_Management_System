@@ -8,19 +8,27 @@ namespace GymManagement.DataAccess.Data.Config
     {
         public void Configure(EntityTypeBuilder<Period> builder)
         {
-            builder.HasKey(e => e.PeriodId);
-
             builder.ToTable("tbPeriods");
+
+            builder.HasKey(e => e.PeriodId);
 
             builder.Property(e => e.PeriodId)
                 .UseIdentityColumn(1)
+                .HasColumnType("tinyint")
                 .HasColumnName("PeriodID");
 
-            builder.Property(e => e.EndTime).HasColumnType("time(0)");
+            builder.Property(e => e.PeriodName)
+                .HasMaxLength(50)
+                .IsUnicode(true)
+                .IsRequired(true);
 
-            builder.Property(e => e.PeriodName).HasMaxLength(50);
+            builder.Property(e => e.StartTime)
+                .HasColumnType("time(0)")
+                .IsRequired(true);
 
-            builder.Property(e => e.StartTime).HasColumnType("time(0)");
+            builder.Property(e => e.EndTime)
+                .HasColumnType("time(0)")
+                .IsRequired(true);
         }
     }
 }
