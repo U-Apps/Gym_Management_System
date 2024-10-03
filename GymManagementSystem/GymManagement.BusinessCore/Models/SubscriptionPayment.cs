@@ -7,7 +7,7 @@ namespace GymManagement.BusinessCore.Models
         public int SubscriptionId { get; set; }
         public decimal PaymentAmount { get; set; }
         public DateTime PaymentDate { get; set; }
-        public short CreatedByUserId { get; set; }
+        public int CreatedByUserId { get; set; }
 
         public virtual AppUser CreatedByUser { get; set; }
         public virtual Subscription Subscription { get; set; }
