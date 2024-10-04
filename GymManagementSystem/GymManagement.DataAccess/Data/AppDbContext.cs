@@ -8,16 +8,21 @@ namespace GymManagement.DataAccess.Data
 {
     public partial class AppDbContext : IdentityDbContext<AppUser,IdentityRole<int>,int>
     {
+
         public AppDbContext()
         {
             
         }
-
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=.;Database=JymManagementSystem; TrustServerCertificate=true;user id=sa ; password =sa123456;");
+            base.OnConfiguring(optionsBuilder);
+        }
+        public virtual DbSet<Person> tbPerson { get; set; } = null!;
         public virtual DbSet<Employee> TbEmployees { get; set; } = null!;
         public virtual DbSet<ExerciseType> TbExerciseTypes { get; set; } = null!;
         public virtual DbSet<Job> TbJobs { get; set; } = null!;
@@ -33,20 +38,13 @@ namespace GymManagement.DataAccess.Data
         public virtual DbSet<SubscriptionPayment> TbSubscriptionPayments { get; set; } = null!;
         //public virtual DbSet<TbUser> TbUsers { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(@"Server=FMSI\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
 
+            modelBuilder.Entity<Person>().UseTptMappingStrategy().ToTable("People");
 
             // modelBuilder.Entity<TbPermssion>(entity =>
             // {

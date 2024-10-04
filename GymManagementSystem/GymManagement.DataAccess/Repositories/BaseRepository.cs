@@ -8,10 +8,11 @@ namespace GymManagement.DataAccess.Repositories
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly AppDbContext _context;
+ 
 
-        public BaseRepository(AppDbContext context)
+        public BaseRepository(AppDbContext _context)
         {
-            _context = context;
+            _context = _context;
         }
         public void Add(T entity)
         {
@@ -54,9 +55,8 @@ namespace GymManagement.DataAccess.Repositories
         public virtual IEnumerable<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
-            using (var context = new AppDbContext())
-            {
-                IQueryable<T> dbQuery = context.Set<T>();
+
+                IQueryable<T> dbQuery = _context.Set<T>();
 
                 
                 foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
@@ -65,7 +65,7 @@ namespace GymManagement.DataAccess.Repositories
                 list = dbQuery
                     .AsNoTracking()
                     .ToList<T>();
-            }
+            
             return list; 
             
         }
@@ -73,9 +73,8 @@ namespace GymManagement.DataAccess.Repositories
         public T GetById(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties)
         {
             T item;
-            using (var context = new AppDbContext())
-            {
-                IQueryable<T> dbQuery = context.Set<T>();
+
+                IQueryable<T> dbQuery = _context.Set<T>();
 
                 //Apply eager loading
                 foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
@@ -84,7 +83,7 @@ namespace GymManagement.DataAccess.Repositories
                 item = dbQuery
                     .AsNoTracking()
                     .FirstOrDefault(where); 
-            }
+            
             return item;
         }
 

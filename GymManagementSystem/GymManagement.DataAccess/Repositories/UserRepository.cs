@@ -1,6 +1,6 @@
 ﻿using GymManagement.BusinessCore.Contracts.Repositories;
 using GymManagement.BusinessCore.Models;
-using GymManagement.DataAccess.DependencyInjection;
+
 using Microsoft.AspNetCore.Identity;
 
 namespace GymManagement.DataAccess.Repositories

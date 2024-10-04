@@ -1,4 +1,5 @@
 ﻿using GymManagement.APIs.DTOs;
+using GymManagement.BusinessCore.helper;
 using GymManagement.BusinessCore.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -47,9 +48,9 @@ namespace GymManagement.APIs.Authentication
             var TokenHandler = new JwtSecurityTokenHandler();
             var TokenDescriptor = new SecurityTokenDescriptor
             {
-                Issuer = _JwtOptions.Issuer,
+                Issuer = _JwtOptions.Issure,
                 Audience = _JwtOptions.Audience,
-                Expires = DateTime.Now.AddHours(_JwtOptions.Lifetime),
+                Expires = DateTime.Now.AddHours(_JwtOptions.LifeTime),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_JwtOptions.SigningKey))
                     , SecurityAlgorithms.HmacSha256),

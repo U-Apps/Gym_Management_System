@@ -7,6 +7,6 @@ namespace GymManagement.BusinessCore.Models
     {
         public int PersonId { get; set; }
         public bool IsActive { get; set; }
-        public virtual Person Person { get; set; } = null!;
+        public Person Person { get; set; } = null!;
     }
 }

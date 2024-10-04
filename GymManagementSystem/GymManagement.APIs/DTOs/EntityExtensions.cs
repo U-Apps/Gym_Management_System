@@ -149,7 +149,7 @@ namespace GymManagement.APIs.DTOs
 
 
                Name = subscriptionPayment.CreatedByUser.Person.FirstName,
-               PersonId = subscriptionPayment.CreatedByUser.PersonId,
+               PersonId = (int)subscriptionPayment.CreatedByUser.PersonId,
                Email = subscriptionPayment.CreatedByUser.Person.Email,
                PhoneNumber = subscriptionPayment.CreatedByUser.Person.PhoneNumber,
                BirthDate = subscriptionPayment.CreatedByUser.Person.BirthDate,
