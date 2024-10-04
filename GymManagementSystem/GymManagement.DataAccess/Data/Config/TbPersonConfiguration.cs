@@ -65,6 +65,8 @@ namespace GymManagement.DataAccess.Data.Config
             builder.HasIndex(e => e.Email, "UniqueEmail")
                 .IsUnique();
 
+            builder.UseTptMappingStrategy();
+
             //builder.Property(e => e.Id).HasColumnName("PersonID");
 
 

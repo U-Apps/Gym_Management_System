@@ -9,7 +9,7 @@ namespace GymManagement.DataAccess.Data.Config
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
 
-            builder.ToTable("tbEmployees").HasBaseType<Person>();
+            builder.ToTable("tbEmployees");
             
             builder.Property(e => e.Salary).HasColumnType("money");
             

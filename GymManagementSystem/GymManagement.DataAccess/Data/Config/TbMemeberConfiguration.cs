@@ -8,7 +8,7 @@ namespace GymManagement.DataAccess.Data.Config
     {
         public void Configure(EntityTypeBuilder<Member> builder)
         {
-            builder.ToTable("tbMembers").HasBaseType<Person>();
+            builder.ToTable("tbMembers");
 
             builder.Property(e => e.MemberWeight)
                 .HasColumnType("decimal(5, 2)")
