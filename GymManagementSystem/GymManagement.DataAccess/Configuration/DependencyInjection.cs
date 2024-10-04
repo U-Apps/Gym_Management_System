@@ -23,7 +23,7 @@ namespace GymManagement.DataAccess.Configuration
         {
             services.AddDbContext<AppDbContext>((options) =>
             {
-                options.UseSqlServer(@"Server=MSI\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;");
+                options.UseSqlServer(@"Server=MSI\SQLEXPRESS;Database=JymManagementSystem;Integrated Security=SSPI;TrustServerCertificate=True;");
             });
 
             return services;
