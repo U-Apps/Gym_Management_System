@@ -9,7 +9,7 @@ namespace GymManagement.DataAccess.Data.Config
         public void Configure(EntityTypeBuilder<Job> builder)
         {
             builder.ToTable("tbJobs");
-            
+
             builder.HasKey(e => e.JobId);
 
 
@@ -23,7 +23,7 @@ namespace GymManagement.DataAccess.Data.Config
                 .IsUnicode(true)
                 .IsRequired(true)
                 .HasColumnName("jobTitle");
-            
+
         }
     }
 }

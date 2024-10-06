@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Jym_Management_DataAccessLayer.Migrations
+namespace GymManagement.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -287,7 +287,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id")
-                        .HasName("PersonID");
+                        .HasName("ID");
 
                     b.HasIndex(new[] { "Email" }, "UniqueEmail")
                         .IsUnique()

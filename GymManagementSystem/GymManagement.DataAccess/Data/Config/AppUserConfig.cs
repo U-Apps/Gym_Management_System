@@ -14,8 +14,8 @@ namespace GymManagement.DataAccess.Data.Config
                     .IsRequired(true);
 
             builder.HasIndex(p => p.PersonId).IsUnique();
-            
-            
+
+
         }
     }
 }

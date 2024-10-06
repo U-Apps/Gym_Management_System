@@ -11,8 +11,8 @@ namespace GymManagement.DataAccess.Data.Config
         {
             builder.ToTable("tbPerson");
 
-            builder.HasKey(e => e.Id).HasName("PersonID");
-            
+            builder.HasKey(e => e.Id).HasName("ID");
+
             builder.Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .IsUnicode(true)
@@ -41,9 +41,9 @@ namespace GymManagement.DataAccess.Data.Config
             builder.Property(e => e.PhoneNumber)
                 .HasMaxLength(20)
                 .IsUnicode(false);
-            
+
             builder.Property(e => e.BirthDate).HasColumnType("date");
-            
+
             builder.Property(e => e.Email)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -58,19 +58,16 @@ namespace GymManagement.DataAccess.Data.Config
             builder.HasIndex(e => e.NationalNumber, "UniqueNationalNumber")
                 .IsUnique();
 
-            
+
             builder.HasIndex(e => e.PhoneNumber, "UniquePhoneNumber")
                 .IsUnique();
-            
+
             builder.HasIndex(e => e.Email, "UniqueEmail")
                 .IsUnique();
 
             builder.UseTptMappingStrategy();
 
-            //builder.Property(e => e.Id).HasColumnName("PersonID");
 
-
-            //builder.Property(e => e.Name).HasMaxLength(255);
 
 
         }

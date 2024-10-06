@@ -28,7 +28,7 @@ namespace GymManagement.DataAccess.Data.Config
             builder.Property(e => e.ExcerciseTypeId)
                 .HasColumnName("ExcerciseTypeID")
                 .HasColumnType("tinyint");
-            
+
             builder.Property(e => e.PeriodId)
                 .HasColumnName("PeriodID")
                 .HasColumnType("tinyint");
@@ -40,7 +40,7 @@ namespace GymManagement.DataAccess.Data.Config
             builder.Property(e => e.StartDate)
                 .HasColumnType("date")
                 .IsRequired(true);
-            
+
             builder.Property(e => e.EndDate)
                 .HasColumnType("date")
                 .IsRequired(true);
@@ -51,7 +51,7 @@ namespace GymManagement.DataAccess.Data.Config
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired(true)
                 .HasConstraintName("FK_tbSubscriptions_tbMember");
-            
+
             builder.HasOne(d => d.Coach)
                 .WithMany(p => p.SubscriptionCoaches)
                 .HasForeignKey(d => d.CoachId)

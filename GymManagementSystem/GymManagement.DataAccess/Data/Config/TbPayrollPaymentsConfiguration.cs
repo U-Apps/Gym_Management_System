@@ -10,7 +10,7 @@ namespace GymManagement.DataAccess.Data.Config
         public void Configure(EntityTypeBuilder<PayrollPayment> builder)
         {
             builder.ToTable("tbPayroll_payments");
-            
+
             builder.HasKey(e => e.PaymentId);
 
             builder.Property(e => e.PaymentId)
@@ -18,7 +18,7 @@ namespace GymManagement.DataAccess.Data.Config
                 .HasColumnName("paymentID");
 
             builder.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
-            
+
             builder.Property(e => e.Amount)
                 .HasColumnName("Amount")
                 .HasColumnType("money")

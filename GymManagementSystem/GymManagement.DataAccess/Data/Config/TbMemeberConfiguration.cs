@@ -19,17 +19,6 @@ namespace GymManagement.DataAccess.Data.Config
                 .IsRequired(true);
 
 
-
-            //builder.HasKey(e => e.MemberId);
-            //builder.Property(e => e.MemberId).HasColumnName("MemberID");
-            //builder.Property(e => e.PersonId).HasColumnName("PersonID");
-
-            //builder.HasOne(d => d.Person)
-            //    .WithOne(p => p.Member)
-            //    .HasForeignKey<Member>(d => d.PersonId)
-            //    .OnDelete(DeleteBehavior.Restrict)
-            //    .IsRequired()
-            //    .HasConstraintName("FK_Members");
         }
     }
 }

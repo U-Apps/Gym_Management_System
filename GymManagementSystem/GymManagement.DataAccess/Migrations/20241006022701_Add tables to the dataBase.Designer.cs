@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Jym_Management_DataAccessLayer.Migrations
+namespace GymManagement.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241003210520_Refactoring")]
-    partial class Refactoring
+    [Migration("20241006022701_Add tables to the dataBase")]
+    partial class AddtablestothedataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -290,7 +290,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id")
-                        .HasName("PersonID");
+                        .HasName("ID");
 
                     b.HasIndex(new[] { "Email" }, "UniqueEmail")
                         .IsUnique()
