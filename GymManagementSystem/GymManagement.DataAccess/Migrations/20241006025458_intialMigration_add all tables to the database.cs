@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymManagement.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddtablestothedataBase : Migration
+    public partial class intialMigration_addalltablestothedatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,7 +86,7 @@ namespace GymManagement.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("ID", x => x.Id);
+                    table.PrimaryKey("PK_tbPerson", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,7 +169,7 @@ namespace GymManagement.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("EmployeeID", x => x.Id);
+                    table.PrimaryKey("PK_tbEmployees", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Employees_Jobs",
                         column: x => x.CurrentJob,
@@ -194,7 +194,7 @@ namespace GymManagement.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("MembersID", x => x.Id);
+                    table.PrimaryKey("PK_tbMembers", x => x.Id);
                     table.ForeignKey(
                         name: "FK_tbMembers_tbPerson_Id",
                         column: x => x.Id,

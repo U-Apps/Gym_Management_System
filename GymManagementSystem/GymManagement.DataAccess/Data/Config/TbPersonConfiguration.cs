@@ -11,7 +11,7 @@ namespace GymManagement.DataAccess.Data.Config
         {
             builder.ToTable("tbPerson");
 
-            builder.HasKey(e => e.Id).HasName("ID");
+            builder.HasKey(e => e.Id);
 
             builder.Property(e => e.FirstName)
                 .HasMaxLength(50)

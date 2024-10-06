@@ -286,8 +286,7 @@ namespace GymManagement.DataAccess.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id")
-                        .HasName("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex(new[] { "Email" }, "UniqueEmail")
                         .IsUnique()

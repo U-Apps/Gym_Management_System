@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManagement.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241006022701_Add tables to the dataBase")]
-    partial class AddtablestothedataBase
+    [Migration("20241006025458_intialMigration_add all tables to the database")]
+    partial class intialMigration_addalltablestothedatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -289,8 +289,7 @@ namespace GymManagement.DataAccess.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id")
-                        .HasName("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex(new[] { "Email" }, "UniqueEmail")
                         .IsUnique()
