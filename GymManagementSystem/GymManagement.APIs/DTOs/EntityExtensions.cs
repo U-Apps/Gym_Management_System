@@ -9,10 +9,10 @@ namespace GymManagement.APIs.DTOs
         public static ReadEmployeeDTO AsDTO(this Employee employee)
             => new ReadEmployeeDTO()
             {
-                EmployeeId = employee.EmployeeId,
+                EmployeeId = employee.Id,
                 Salary = employee.Salary,
                 ResignationDate = employee.ResignationDate,
-                HireDate = employee.HireDate,
+                HireDate = employee.RegisterationDate,
                
                  CurrentJob=new ReadJobDTO(
 
@@ -20,15 +20,15 @@ namespace GymManagement.APIs.DTOs
                       employee.CurrentJob.JobTitle
                     ) ,
 
-                person = new ReadPersonDTO()
-                {
-                    Name = employee.Person.Name,
-                    PersonId = employee.PersonId,
-                    Email = employee.Person.Email,
-                    PhoneNumber = employee.Person.PhoneNumber,
-                    BirthDate = employee.Person.BirthDate,
-                    Idcard = employee.Person.Idcard
-                },
+                //person = new ReadPersonDTO()
+                //{
+                //    Name = employee.Person.Name,
+                //    PersonId = employee.PersonId,
+                //    Email = employee.Person.Email,
+                //    PhoneNumber = employee.Person.PhoneNumber,
+                //    BirthDate = employee.Person.BirthDate,
+                //    Idcard = employee.Person.NationalNumber
+                //},
                 payments = employee.PayrollPayments.Select(employee => new ReadPaymnetsForEmployee { PaymentId = employee.PaymentId, PaymentDate = employee.PaymentDate }).ToList()
 
             };
@@ -36,20 +36,20 @@ namespace GymManagement.APIs.DTOs
         public static ReadMemberDTO AsDTO(this Member member)
             => new ReadMemberDTO
             (
-                member.MemberId,
-                member.PersonId,
+                member.Id,
+                //member.PersonId,
                 member.MemberWeight,
-                member.IsActive,
+                member.IsActive
 
-                new ReadPersonDTO()
-                {
-                    Name = member.Person.Name,
-                    PersonId = member.PersonId,
-                    Email = member.Person.Email,
-                    PhoneNumber = member.Person.PhoneNumber,
-                    BirthDate = member.Person.BirthDate,
-                    Idcard = member.Person.Idcard
-                }
+                //new ReadPersonDTO()
+                //{
+                //    Name = member.FirstName,
+                //    PersonId = member.PersonId,
+                //    Email = member.Person.Email,
+                //    PhoneNumber = member.Person.PhoneNumber,
+                //    //BirthDate = member.Person.BirthDate,
+                //    Idcard = member.Person.NationalNumber
+                //}
             );
 
         public static ReadUserDTO AsDTO(this AppUser user,Person person)
@@ -62,12 +62,12 @@ namespace GymManagement.APIs.DTOs
                 
                Person: new ReadPersonDTO()
                {
-                   Name = person.Name,
-                   PersonId = person.PersonId,
+                   Name = person.FirstName,
+                   PersonId = person.Id,
                    Email = person.Email,
                    PhoneNumber = person.PhoneNumber,
                    BirthDate = person.BirthDate,
-                   Idcard = person.Idcard
+                   Idcard = person.NationalNumber
                }
             );
 
@@ -137,7 +137,7 @@ namespace GymManagement.APIs.DTOs
            )
           => new ReadSubscriptionPaymentDTO
           (
-                PaymentId: subscriptionPayment.PaymentId.Value,
+                PaymentId: subscriptionPayment.PaymentId,
                 PaymentDate: subscriptionPayment.PaymentDate,
                 PaymentAmount: subscriptionPayment.PaymentAmount,
         CreatedByUser: new ReadUserDTO
@@ -148,12 +148,12 @@ namespace GymManagement.APIs.DTOs
            {
 
 
-               Name = subscriptionPayment.CreatedByUser.Person.Name,
+               Name = subscriptionPayment.CreatedByUser.Person.FirstName,
                PersonId = subscriptionPayment.CreatedByUser.PersonId,
                Email = subscriptionPayment.CreatedByUser.Person.Email,
                PhoneNumber = subscriptionPayment.CreatedByUser.Person.PhoneNumber,
                BirthDate = subscriptionPayment.CreatedByUser.Person.BirthDate,
-               Idcard = subscriptionPayment.CreatedByUser.Person.Idcard
+               Idcard = subscriptionPayment.CreatedByUser.Person.NationalNumber
 
            }
 
@@ -161,7 +161,7 @@ namespace GymManagement.APIs.DTOs
 
          Subscription: new ReadSubscriptionDTO
              (
-                 SubscriptionId: subscriptionPayment.PaymentId.Value,
+                 SubscriptionId: subscriptionPayment.PaymentId,
                  StartDate: subscriptionPayment.Subscription.StartDate,
                  EndDate: subscriptionPayment.Subscription.EndDate,
                  Coach: new ReadJobHistoryDTO
@@ -195,20 +195,20 @@ namespace GymManagement.APIs.DTOs
                      ),
                  Member: new ReadMemberDTO
                  (
-                      subscriptionPayment.Subscription.Member.MemberId,
-                      subscriptionPayment.Subscription.Member.PersonId,
+                      subscriptionPayment.Subscription.Member.Id,
+                      //subscriptionPayment.Subscription.Member.PersonId,
                       subscriptionPayment.Subscription.Member.MemberWeight,
-                      subscriptionPayment.Subscription.Member.IsActive,
+                      subscriptionPayment.Subscription.Member.IsActive
 
-                      new ReadPersonDTO()
-                      {
-                          Name = subscriptionPayment.Subscription.Member.Person.Name,
-                          PersonId = subscriptionPayment.Subscription.Member.PersonId,
-                          Email = subscriptionPayment.Subscription.Member.Person.Email,
-                          PhoneNumber = subscriptionPayment.Subscription.Member.Person.PhoneNumber,
-                          BirthDate = subscriptionPayment.Subscription.Member.Person.BirthDate,
-                          Idcard = subscriptionPayment.Subscription.Member.Person.Idcard
-                      }
+                      //new ReadPersonDTO()
+                      //{
+                      //    Name = subscriptionPayment.Subscription.Member.Person.FirstName,
+                      //    PersonId = subscriptionPayment.Subscription.Member.PersonId,
+                      //    Email = subscriptionPayment.Subscription.Member.Person.Email,
+                      //    PhoneNumber = subscriptionPayment.Subscription.Member.Person.PhoneNumber,
+                      //    BirthDate = subscriptionPayment.Subscription.Member.Person.BirthDate,
+                      //    Idcard = subscriptionPayment.Subscription.Member.Person.NationalNumber
+                      //}
                      ),
                  Period: new ReadPeriodDTO
                  (
@@ -267,20 +267,20 @@ namespace GymManagement.APIs.DTOs
                             ),
                         Member: new ReadMemberDTO
                         (
-                             subscription.Member.MemberId,
-                             subscription.Member.PersonId,
+                             subscription.Member.Id,
+                             //subscription.Member.PersonId,
                              subscription.Member.MemberWeight,
-                             subscription.Member.IsActive,
+                             subscription.Member.IsActive
 
-                             new ReadPersonDTO()
-                             {
-                                 Name = subscription.Member.Person.Name,
-                                 PersonId = subscription.Member.PersonId,
-                                 Email = subscription.Member.Person.Email,
-                                 PhoneNumber = subscription.Member.Person.PhoneNumber,
-                                 BirthDate = subscription.Member.Person.BirthDate,
-                                 Idcard = subscription.Member.Person.Idcard
-                             }
+                             //new ReadPersonDTO()
+                             //{
+                             //    Name = subscription.Member.Person.FirstName,
+                             //    PersonId = subscription.Member.PersonId,
+                             //    Email = subscription.Member.Person.Email,
+                             //    PhoneNumber = subscription.Member.Person.PhoneNumber,
+                             //    BirthDate = subscription.Member.Person.BirthDate,
+                             //    Idcard = subscription.Member.Person.NationalNumber
+                             //}
                             ),
                         Period: new ReadPeriodDTO
                         (
@@ -312,20 +312,20 @@ namespace GymManagement.APIs.DTOs
            payrollPayment.PaymentDate,
            Employee: new ReadEmployeeDTO
            {
-               EmployeeId = payrollPayment.Employee.EmployeeId,
+               EmployeeId = payrollPayment.Employee.Id,
                Salary = payrollPayment.Employee.Salary,
                ResignationDate = payrollPayment.Employee.ResignationDate,
-               HireDate = payrollPayment.Employee.HireDate,
+               HireDate = payrollPayment.Employee.RegisterationDate,
             
 
                person = new ReadPersonDTO()
                {
-                   Name = payrollPayment.Employee.Person.Name,
-                   PersonId = payrollPayment.Employee.PersonId,
-                   Email = payrollPayment.Employee.Person.Email,
-                   PhoneNumber = payrollPayment.Employee.Person.PhoneNumber,
-                   BirthDate = payrollPayment.Employee.Person.BirthDate,
-                   Idcard = payrollPayment.Employee.Person.Idcard
+                   Name = payrollPayment.Employee.FirstName,
+                   PersonId = payrollPayment.EmployeeId,
+                   Email = payrollPayment.Employee.Email,
+                   PhoneNumber = payrollPayment.Employee.PhoneNumber,
+                   BirthDate = payrollPayment.Employee.BirthDate,
+                   Idcard = payrollPayment.Employee.NationalNumber
                },
                payments = payrollPayment.Employee.PayrollPayments.Select(employee => new ReadPaymnetsForEmployee { PaymentId = employee.PaymentId, PaymentDate = employee.PaymentDate }).ToList()
 

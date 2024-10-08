@@ -23,9 +23,9 @@ namespace GymManagement.APIs.DTOs
              [Required]
              byte JobId,
              [DataType(DataType.Date)]
-             DateTime? StartDate,
+             DateTime StartDate,
              [DataType(DataType.Date)]
-             DateTime? EndDate
+             DateTime EndDate
 
        );
 
@@ -40,9 +40,9 @@ namespace GymManagement.APIs.DTOs
             [Required]
             byte JobId,
             [DataType(DataType.Date)]
-            DateTime? StartDate,
+            DateTime StartDate,
             [DataType(DataType.Date)]
-            DateTime? EndDate
+            DateTime EndDate
 
       );
 }

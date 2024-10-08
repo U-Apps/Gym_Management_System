@@ -51,12 +51,12 @@ namespace GymManagement.BusinessCore.Services
 
         public IEnumerable<PayrollPayment> GetAll()
         {
-            return _Repository.GetAll(prP=>prP.Employee,p=>p.Employee.Person);
+            return _Repository.GetAll(prP=>prP.Employee/*,p=>p.Employee.Person*/);
         }
 
         public PayrollPayment GetById(int id)
         {
-            return _Repository.GetById(c => c.PaymentId == id, prP => prP.Employee,person=>person.Employee.Person);
+            return null;// _Repository.GetById(c => c.PaymentId == id, prP => prP.EmployeeB,person=>person.Employee.Person);
         }
 
         public void Update(PayrollPayment model)

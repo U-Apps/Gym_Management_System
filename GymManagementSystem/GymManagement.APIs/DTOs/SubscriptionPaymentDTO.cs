@@ -5,8 +5,8 @@ namespace GymManagement.APIs.DTOs
     public record ReadSubscriptionPaymentDTO
         (
              int PaymentId ,
-             DateTime? PaymentDate,
-             decimal? PaymentAmount,
+             DateTime PaymentDate,
+             decimal PaymentAmount,
 
             ReadUserDTO CreatedByUser ,
             ReadSubscriptionDTO Subscription
@@ -21,9 +21,9 @@ namespace GymManagement.APIs.DTOs
              [Required]
              int SubscriptionId,
              [Required]
-             decimal? PaymentAmount,
+             decimal PaymentAmount,
              [Required]
-             int? CreatedByUserId
+             short CreatedByUserId
 
        );
 
@@ -33,12 +33,12 @@ namespace GymManagement.APIs.DTOs
              int PaymentId,
 
              [Required]
-             int? SubscriptionId,
+             int SubscriptionId,
 
              [Required]
-             decimal? PaymentAmount,
+             decimal PaymentAmount,
              [Required]
-             short? CreatedByUserId
+             short CreatedByUserId
 
       );
 }

@@ -8,19 +8,22 @@ namespace GymManagement.DataAccess.Data.Config
     {
         public void Configure(EntityTypeBuilder<Job> builder)
         {
+            builder.ToTable("tbJobs");
 
-                builder.HasKey(e => e.JobId);
+            builder.HasKey(e => e.JobId);
 
-                builder.ToTable("tbJobs");
 
-                builder.Property(e => e.JobId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("JobID");
+            builder.Property(e => e.JobId)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("tinyint")
+                .HasColumnName("JobID");
 
-                builder.Property(e => e.JobTitle)
-                    .HasMaxLength(50)
-                    .HasColumnName("jobTitle");
-            
+            builder.Property(e => e.JobTitle)
+                .HasMaxLength(50)
+                .IsUnicode(true)
+                .IsRequired(true)
+                .HasColumnName("jobTitle");
+
         }
     }
 }

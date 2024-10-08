@@ -24,17 +24,17 @@ namespace GymManagement.APIs.Controllers
         [Route("[action]")]
         public ActionResult CreatePerson(CreatePersonDTO person)
         {
-            var emp = new Person
-            {
-             Idcard = person.Idcard,
-             Email = person.Email,
-             PhoneNumber = person.PhoneNumber,
-             BirthDate = person.BirthDate,
-             Name = person.Name,
-            };
+            //var emp = new Person
+            //{
+            // NationalNumber = person.Idcard,
+            // Email = person.Email,
+            // PhoneNumber = person.PhoneNumber,
+            // BirthDate = person.BirthDate,
+            // Name = person.Name,
+            //};
 
 
-            _personService.Add(emp);
+            //_personService.Add(emp);
             return Ok();
         }
         [HttpPut]
@@ -46,7 +46,7 @@ namespace GymManagement.APIs.Controllers
             if (existingPerson == null)
                 return NotFound();
 
-            existingPerson.Name = person.Name ;
+            //existingPerson.Name = person.Name ;
             existingPerson.PhoneNumber = person.PhoneNumber;
             existingPerson.BirthDate = person.BirthDate;
             existingPerson.Email = person.Email;
@@ -78,7 +78,7 @@ namespace GymManagement.APIs.Controllers
             if (person is null)
                 return NotFound();
 
-            _personService.DeleteById(person.PersonId);
+            _personService.DeleteById(person.Id);
             //_employeeService.Delete(employee);
             return Ok();
         }

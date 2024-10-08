@@ -15,7 +15,7 @@ namespace GymManagement.BusinessCore.Services
         public int Add(Member model)
         {
             _Repository.Add(model);
-            return model.MemberId;
+            return model.Id;
         }
 
         public void AddRange(IEnumerable<Member> model)
@@ -29,7 +29,7 @@ namespace GymManagement.BusinessCore.Services
         }
         public void DeleteById(int id)
         {
-            _Repository.DeleteById(c => c.MemberId == id);
+            _Repository.DeleteById(c => c.Id == id);
         }
 
         public void DeleteRange(IEnumerable<Member> model)
@@ -49,12 +49,12 @@ namespace GymManagement.BusinessCore.Services
 
         public IEnumerable<Member> GetAll()
         {
-            return _Repository.GetAll(p=> p.Person);
+            return _Repository.GetAll();
         }
 
         public Member GetById(int id)
         {
-            return _Repository.GetById(c => c.MemberId == id,p=>p.Person);
+            return _Repository.GetById(c => c.Id == id);
 
         }
 

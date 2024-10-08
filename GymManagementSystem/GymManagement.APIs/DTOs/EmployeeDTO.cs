@@ -13,7 +13,7 @@ namespace GymManagement.APIs.DTOs
 
         public int EmployeeId { get; set; }
         public DateTime HireDate { get; set; }
-        public DateTime ResignationDate { get; set; }
+        public DateTime? ResignationDate { get; set; }
         public decimal Salary { get; set; }
         public virtual ReadJobDTO CurrentJob { get; set; }
 

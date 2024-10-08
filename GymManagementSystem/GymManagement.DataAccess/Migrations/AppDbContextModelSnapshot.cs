@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Jym_Management_DataAccessLayer.Migrations
+namespace GymManagement.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -18,18 +18,18 @@ namespace Jym_Management_DataAccessLayer.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS")
-                .HasAnnotation("ProductVersion", "6.0.28")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.Authentication.AppUser", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.AppUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -100,55 +100,19 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbEmployee", b =>
-                {
-                    b.Property<int>("EmployeeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("EmployeeID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"), 1L, 1);
-
-                    b.Property<DateTime>("HireDate")
-                        .HasColumnType("date");
-
-                    b.Property<byte?>("JobID")
-                        .HasColumnType("tinyint")
-                        .HasColumnName("CurrentJob");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int")
-                        .HasColumnName("PersonID");
-
-                    b.Property<DateTime?>("ResignationDate")
-                        .HasColumnType("date")
-                        .HasColumnName("resignationDate");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("money");
-
-                    b.HasKey("EmployeeId")
-                        .HasName("PK_tbk");
-
-                    b.HasIndex("JobID");
-
-                    b.HasIndex("PersonId")
-                        .IsUnique();
-
-                    b.ToTable("tbEmployees", (string)null);
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbExerciseType", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.ExerciseType", b =>
                 {
                     b.Property<byte>("ExerciseTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint")
                         .HasColumnName("ExerciseTypeID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("ExerciseTypeId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("ExerciseTypeId"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(50)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ExerciseTypeId");
@@ -156,18 +120,19 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.ToTable("tbExerciseTypes", (string)null);
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbJob", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Job", b =>
                 {
                     b.Property<byte>("JobId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint")
                         .HasColumnName("JobID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("JobId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("JobId"));
 
                     b.Property<string>("JobTitle")
                         .IsRequired()
                         .HasMaxLength(50)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("jobTitle");
 
@@ -176,14 +141,14 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.ToTable("tbJobs", (string)null);
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbJobHistory", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.JobHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("EmpoyeeId")
                         .HasColumnType("int")
@@ -196,7 +161,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .HasColumnType("tinyint")
                         .HasColumnName("JobID");
 
-                    b.Property<DateTime?>("StartDate")
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("date");
 
                     b.HasKey("Id");
@@ -208,42 +173,18 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.ToTable("tbJobHistories", (string)null);
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbMember", b =>
-                {
-                    b.Property<int>("MemberId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("MemberID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MemberId"), 1L, 1);
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit")
-                        .HasColumnName("isActive");
-
-                    b.Property<decimal?>("MemberWeight")
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int")
-                        .HasColumnName("PersonID");
-
-                    b.HasKey("MemberId");
-
-                    b.HasIndex("PersonId")
-                        .IsUnique();
-
-                    b.ToTable("tbMembers", (string)null);
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbPayrollPayment", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.PayrollPayment", b =>
                 {
                     b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("paymentID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("money")
+                        .HasColumnName("Amount");
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int")
@@ -260,14 +201,14 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.ToTable("tbPayroll_payments", (string)null);
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbPeriod", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Period", b =>
                 {
                     b.Property<byte>("PeriodId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint")
                         .HasColumnName("PeriodID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("PeriodId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("PeriodId"));
 
                     b.Property<TimeSpan>("EndTime")
                         .HasColumnType("time(0)");
@@ -275,6 +216,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.Property<string>("PeriodName")
                         .IsRequired()
                         .HasMaxLength(50)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<TimeSpan>("StartTime")
@@ -285,16 +227,20 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.ToTable("tbPeriods", (string)null);
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbPerson", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Person", b =>
                 {
-                    b.Property<int>("PersonId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("PersonID");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<string>("Address")
+                        .HasMaxLength(255)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Email")
@@ -302,62 +248,73 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Idcard")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("NationalNumber")
                         .HasMaxLength(15)
                         .IsUnicode(false)
                         .HasColumnType("varchar(15)")
-                        .HasColumnName("IDCard");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnName("NationalNumber");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(20)
                         .IsUnicode(false)
                         .HasColumnType("varchar(20)");
 
-                    b.HasKey("PersonId");
+                    b.Property<DateTime>("RegisterationDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("SecondName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ThirdName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Email" }, "UniqueEmail")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
+                    b.HasIndex(new[] { "NationalNumber" }, "UniqueNationalNumber")
+                        .IsUnique()
+                        .HasFilter("[NationalNumber] IS NOT NULL");
 
                     b.HasIndex(new[] { "PhoneNumber" }, "UniquePhoneNumber")
                         .IsUnique()
                         .HasFilter("[PhoneNumber] IS NOT NULL");
 
                     b.ToTable("tbPerson", (string)null);
+
+                    b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbSubsciptionPeriod", b =>
-                {
-                    b.Property<byte>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint")
-                        .HasColumnName("ID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("smallmoney");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tbSubsciptionPeriods", (string)null);
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbSubscription", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Subscription", b =>
                 {
                     b.Property<int>("SubscriptionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("SubscriptionID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionId"));
 
-                    b.Property<int>("CoachId")
+                    b.Property<int?>("CoachId")
                         .HasColumnType("int")
                         .HasColumnName("CoachID");
 
@@ -365,7 +322,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("CreatedByReceptionistID");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("date");
 
                     b.Property<byte>("ExcerciseTypeId")
@@ -380,7 +337,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .HasColumnType("tinyint")
                         .HasColumnName("PeriodID");
 
-                    b.Property<DateTime?>("StartDate")
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("date");
 
                     b.Property<byte>("SubscriptionPeriodId")
@@ -404,26 +361,26 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.ToTable("tbSubscriptions", (string)null);
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbSubscriptionPayment", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.SubscriptionPayment", b =>
                 {
-                    b.Property<int?>("PaymentId")
+                    b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("PaymentID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("PaymentId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
 
-                    b.Property<int?>("CreatedByUserId")
+                    b.Property<int>("CreatedByUserId")
                         .HasColumnType("int")
                         .HasColumnName("CreatedByUserID");
 
-                    b.Property<decimal?>("PaymentAmount")
+                    b.Property<decimal>("PaymentAmount")
                         .HasColumnType("smallmoney");
 
-                    b.Property<DateTime?>("PaymentDate")
+                    b.Property<DateTime>("PaymentDate")
                         .HasColumnType("date");
 
-                    b.Property<int?>("SubscriptionId")
+                    b.Property<int>("SubscriptionId")
                         .HasColumnType("int")
                         .HasColumnName("SubscriptionID");
 
@@ -431,9 +388,33 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
                     b.HasIndex("CreatedByUserId");
 
-                    b.HasIndex("SubscriptionId");
+                    b.HasIndex("SubscriptionId")
+                        .IsUnique();
 
                     b.ToTable("tbSubscriptionPayments", (string)null);
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.SubscriptionPeriod", b =>
+                {
+                    b.Property<byte>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint")
+                        .HasColumnName("ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("smallmoney");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbSubsciptionPeriods", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -442,7 +423,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -472,7 +453,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -496,7 +477,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -569,48 +550,64 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.Authentication.AppUser", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Employee", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbPerson", "Person")
-                        .WithOne("User")
-                        .HasForeignKey("Jym_Management_DataAccessLayer.Entities.Authentication.AppUser", "PersonId")
+                    b.HasBaseType("GymManagement.BusinessCore.Models.Person");
+
+                    b.Property<byte?>("JobID")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("CurrentJob");
+
+                    b.Property<DateTime?>("ResignationDate")
+                        .HasColumnType("date")
+                        .HasColumnName("ResignationDate");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("money");
+
+                    b.HasIndex("JobID");
+
+                    b.ToTable("tbEmployees", (string)null);
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Member", b =>
+                {
+                    b.HasBaseType("GymManagement.BusinessCore.Models.Person");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasColumnName("isActive");
+
+                    b.Property<decimal?>("MemberWeight")
+                        .HasColumnType("decimal(5, 2)");
+
+                    b.ToTable("tbMembers", (string)null);
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.AppUser", b =>
+                {
+                    b.HasOne("GymManagement.BusinessCore.Models.Person", "Person")
+                        .WithOne()
+                        .HasForeignKey("GymManagement.BusinessCore.Models.AppUser", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbEmployee", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.JobHistory", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbJob", "CurrentJob")
-                        .WithMany("TbEmployees")
-                        .HasForeignKey("JobID")
-                        .HasConstraintName("FK_Employees_Jobs");
-
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbPerson", "Person")
-                        .WithOne("Employee")
-                        .HasForeignKey("Jym_Management_DataAccessLayer.Entities.TbEmployee", "PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_Employees");
-
-                    b.Navigation("CurrentJob");
-
-                    b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbJobHistory", b =>
-                {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbEmployee", "Employee")
+                    b.HasOne("GymManagement.BusinessCore.Models.Employee", "Employee")
                         .WithMany("EmployeementHistory")
                         .HasForeignKey("EmpoyeeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_tbJobHistories_tbEmployees");
 
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbJob", "Job")
-                        .WithMany("TbJobHistories")
+                    b.HasOne("GymManagement.BusinessCore.Models.Job", "Job")
+                        .WithMany("JobHistories")
                         .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_tbJobHistories_tbJobs");
 
@@ -619,64 +616,58 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.Navigation("Job");
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbMember", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.PayrollPayment", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbPerson", "Person")
-                        .WithOne("Member")
-                        .HasForeignKey("Jym_Management_DataAccessLayer.Entities.TbMember", "PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_Members");
-
-                    b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbPayrollPayment", b =>
-                {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbEmployee", "Employee")
-                        .WithMany("TbPayrollPayments")
+                    b.HasOne("GymManagement.BusinessCore.Models.Employee", "Employee")
+                        .WithMany("PayrollPayments")
                         .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Payroll_payments");
 
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbSubscription", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Subscription", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbJobHistory", "Coach")
-                        .WithMany("TbSubscriptionCoaches")
+                    b.HasOne("GymManagement.BusinessCore.Models.JobHistory", "Coach")
+                        .WithMany("SubscriptionCoaches")
                         .HasForeignKey("CoachId")
-                        .IsRequired()
+                        .OnDelete(DeleteBehavior.Restrict)
                         .HasConstraintName("FK_tbSubscriptions_tbJobHistories_Coach");
 
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbJobHistory", "CreatedByReceptionist")
-                        .WithMany("TbSubscriptionCreatedByReceptionists")
+                    b.HasOne("GymManagement.BusinessCore.Models.JobHistory", "CreatedByReceptionist")
+                        .WithMany("SubscriptionCreatedByReceptionists")
                         .HasForeignKey("CreatedByReceptionistId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_tbSubscriptions_tbJobHistoriesRecep");
 
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbExerciseType", "ExcerciseType")
-                        .WithMany("TbSubscriptions")
+                    b.HasOne("GymManagement.BusinessCore.Models.ExerciseType", "ExcerciseType")
+                        .WithMany("Subscriptions")
                         .HasForeignKey("ExcerciseTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_tbSubscriptions_tbExerciseType");
 
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbMember", "Member")
-                        .WithMany("TbSubscriptions")
+                    b.HasOne("GymManagement.BusinessCore.Models.Member", "Member")
+                        .WithMany("Subscriptions")
                         .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_tbSubscriptions_tbMember");
 
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbPeriod", "Period")
-                        .WithMany("TbSubscriptions")
+                    b.HasOne("GymManagement.BusinessCore.Models.Period", "Period")
+                        .WithMany("Subscriptions")
                         .HasForeignKey("PeriodId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_tbSubscriptions_tbPeriod");
 
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbSubsciptionPeriod", "SubscriptionPeriod")
-                        .WithMany("TbSubscriptions")
+                    b.HasOne("GymManagement.BusinessCore.Models.SubscriptionPeriod", "SubscriptionPeriod")
+                        .WithMany("Subscriptions")
                         .HasForeignKey("SubscriptionPeriodId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_tbSubscriptions_tbSubscriptionPeriod");
 
@@ -693,17 +684,21 @@ namespace Jym_Management_DataAccessLayer.Migrations
                     b.Navigation("SubscriptionPeriod");
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbSubscriptionPayment", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.SubscriptionPayment", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.Authentication.AppUser", "CreatedByUser")
+                    b.HasOne("GymManagement.BusinessCore.Models.AppUser", "CreatedByUser")
                         .WithMany()
                         .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
                         .HasConstraintName("FK_tbSubscriptionPayments_AspNetUsers");
 
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.TbSubscription", "Subscription")
-                        .WithMany()
-                        .HasForeignKey("SubscriptionId")
-                        .HasConstraintName("FK_tbSubscriptionPayments_tbSubscriptions");
+                    b.HasOne("GymManagement.BusinessCore.Models.Subscription", "Subscription")
+                        .WithOne("SubscriptionPayment")
+                        .HasForeignKey("GymManagement.BusinessCore.Models.SubscriptionPayment", "SubscriptionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_tbSubscriptions_tbSubscriptionPayments");
 
                     b.Navigation("CreatedByUser");
 
@@ -721,7 +716,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.Authentication.AppUser", null)
+                    b.HasOne("GymManagement.BusinessCore.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -730,7 +725,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.Authentication.AppUser", null)
+                    b.HasOne("GymManagement.BusinessCore.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -745,7 +740,7 @@ namespace Jym_Management_DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.Authentication.AppUser", null)
+                    b.HasOne("GymManagement.BusinessCore.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -754,63 +749,83 @@ namespace Jym_Management_DataAccessLayer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Jym_Management_DataAccessLayer.Entities.Authentication.AppUser", null)
+                    b.HasOne("GymManagement.BusinessCore.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbEmployee", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Employee", b =>
+                {
+                    b.HasOne("GymManagement.BusinessCore.Models.Person", null)
+                        .WithOne()
+                        .HasForeignKey("GymManagement.BusinessCore.Models.Employee", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GymManagement.BusinessCore.Models.Job", "CurrentJob")
+                        .WithMany("Employees")
+                        .HasForeignKey("JobID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("FK_Employees_Jobs");
+
+                    b.Navigation("CurrentJob");
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Member", b =>
+                {
+                    b.HasOne("GymManagement.BusinessCore.Models.Person", null)
+                        .WithOne()
+                        .HasForeignKey("GymManagement.BusinessCore.Models.Member", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.ExerciseType", b =>
+                {
+                    b.Navigation("Subscriptions");
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Job", b =>
+                {
+                    b.Navigation("Employees");
+
+                    b.Navigation("JobHistories");
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.JobHistory", b =>
+                {
+                    b.Navigation("SubscriptionCoaches");
+
+                    b.Navigation("SubscriptionCreatedByReceptionists");
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Period", b =>
+                {
+                    b.Navigation("Subscriptions");
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Subscription", b =>
+                {
+                    b.Navigation("SubscriptionPayment");
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.SubscriptionPeriod", b =>
+                {
+                    b.Navigation("Subscriptions");
+                });
+
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Employee", b =>
                 {
                     b.Navigation("EmployeementHistory");
 
-                    b.Navigation("TbPayrollPayments");
+                    b.Navigation("PayrollPayments");
                 });
 
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbExerciseType", b =>
+            modelBuilder.Entity("GymManagement.BusinessCore.Models.Member", b =>
                 {
-                    b.Navigation("TbSubscriptions");
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbJob", b =>
-                {
-                    b.Navigation("TbEmployees");
-
-                    b.Navigation("TbJobHistories");
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbJobHistory", b =>
-                {
-                    b.Navigation("TbSubscriptionCoaches");
-
-                    b.Navigation("TbSubscriptionCreatedByReceptionists");
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbMember", b =>
-                {
-                    b.Navigation("TbSubscriptions");
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbPeriod", b =>
-                {
-                    b.Navigation("TbSubscriptions");
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbPerson", b =>
-                {
-                    b.Navigation("Employee")
-                        .IsRequired();
-
-                    b.Navigation("Member")
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Jym_Management_DataAccessLayer.Entities.TbSubsciptionPeriod", b =>
-                {
-                    b.Navigation("TbSubscriptions");
+                    b.Navigation("Subscriptions");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,14 +9,38 @@ namespace GymManagement.DataAccess.Data.Config
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {
-            builder.HasKey(e => e.PersonId);
-
             builder.ToTable("tbPerson");
 
-            builder.HasIndex(e => e.PhoneNumber, "UniquePhoneNumber")
-                .IsUnique();
+            builder.HasKey(e => e.Id);
 
-            builder.Property(e => e.PersonId).HasColumnName("PersonID");
+            builder.Property(e => e.FirstName)
+                .HasMaxLength(50)
+                .IsUnicode(true)
+                .IsRequired(true);
+
+            builder.Property(e => e.SecondName)
+                .HasMaxLength(50)
+                .IsUnicode(true)
+                .IsRequired(true);
+
+            builder.Property(e => e.ThirdName)
+                .HasMaxLength(50)
+                .IsUnicode(true)
+                .IsRequired(true);
+
+            builder.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .IsUnicode(true)
+                .IsRequired(true);
+
+            builder.Property(e => e.NationalNumber)
+                .HasColumnName("NationalNumber")
+                .HasMaxLength(15)
+                .IsUnicode(false);
+
+            builder.Property(e => e.PhoneNumber)
+                .HasMaxLength(20)
+                .IsUnicode(false);
 
             builder.Property(e => e.BirthDate).HasColumnType("date");
 
@@ -24,16 +48,28 @@ namespace GymManagement.DataAccess.Data.Config
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Idcard)
-                .HasMaxLength(15)
-                .IsUnicode(false)
-                .HasColumnName("IDCard");
+            builder.Property(e => e.Address)
+                .HasMaxLength(255)
+                .IsUnicode(true);
 
-            builder.Property(e => e.Name).HasMaxLength(255);
+            builder.Property(e => e.RegisterationDate).HasColumnType("date");
 
-            builder.Property(e => e.PhoneNumber)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+
+            builder.HasIndex(e => e.NationalNumber, "UniqueNationalNumber")
+                .IsUnique();
+
+
+            builder.HasIndex(e => e.PhoneNumber, "UniquePhoneNumber")
+                .IsUnique();
+
+            builder.HasIndex(e => e.Email, "UniqueEmail")
+                .IsUnique();
+
+            builder.UseTptMappingStrategy();
+
+
+
+
         }
     }
 }

@@ -9,13 +9,13 @@ namespace GymManagement.DataAccess.Data.Config
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.HasOne(p => p.Person)
-                    .WithOne(u => u.User)
+                    .WithOne()
                     .HasForeignKey<AppUser>(u => u.PersonId)
                     .IsRequired(true);
 
             builder.HasIndex(p => p.PersonId).IsUnique();
-            
-            
+
+
         }
     }
 }

@@ -18,7 +18,7 @@ namespace GymManagement.BusinessCore.Services
         {
 
             _Repository.Add(model);
-            return model.EmployeeId;
+            return model.Id;
         }
         
         public void AddRange(IEnumerable<Employee> model)
@@ -32,7 +32,7 @@ namespace GymManagement.BusinessCore.Services
         }
         public void DeleteById(int id)
         {
-            _Repository.DeleteById(c=>c.EmployeeId==id);
+            _Repository.DeleteById(c=>c.Id==id);
         }
 
         public void DeleteRange(IEnumerable<Employee> model)
@@ -52,12 +52,12 @@ namespace GymManagement.BusinessCore.Services
 
         public IEnumerable<Employee> GetAll()
         {
-            return _Repository.GetAll(d => d.Person,d=>d.PayrollPayments ,d=>d.CurrentJob);
+            return _Repository.GetAll(/*d => d.Person,*/d=>d.PayrollPayments ,d=>d.CurrentJob);
         }   
 
         public Employee GetById(int id)
         {
-            return _Repository.GetById(c=>c.EmployeeId==id,c=>c.Person,c=>c.PayrollPayments,c=>c.CurrentJob);
+            return _Repository.GetById(c=>c.Id==id/*,c=>c.Person*/,c=>c.PayrollPayments,c=>c.CurrentJob);
        
         }
 

@@ -57,7 +57,7 @@ namespace GymManagement.BusinessCore.Services
                     s => s.CreatedByReceptionist.Job,
                     s =>s.ExcerciseType,
                     s=>s.Member,
-                    s=>s.Member.Person,
+                    //s=>s.Member.Person,
                     s =>s.Period,
                     s=>s.SubscriptionPeriod
                 );
@@ -69,13 +69,13 @@ namespace GymManagement.BusinessCore.Services
                     c=>c.SubscriptionId==id,
                     s => s.Coach,
                     s=>s.Coach.Employee,
-                    s=>s.Coach.Employee.Person,
+                    //s=>s.Coach.Employee.Person,
                     s => s.Coach.Job,
                     s => s.CreatedByReceptionist,
                     s => s.CreatedByReceptionist.Job,
                     s => s.ExcerciseType,
                     s => s.Member,
-                    s => s.Member.Person,
+                    //s => s.Member.Person,
                     s => s.Period,
                     s => s.SubscriptionPeriod
                 );
