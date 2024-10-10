@@ -26,6 +26,10 @@ namespace GymManagement.DataAccess.Data.Config
             builder.Property(e => e.Price)
                 .HasColumnType("smallmoney")
                 .IsRequired(true);
+
+            builder.Property(e => e.PeriodDays)
+                .HasColumnType("tinyint")
+                .IsRequired(true);
         }
     }
 }
