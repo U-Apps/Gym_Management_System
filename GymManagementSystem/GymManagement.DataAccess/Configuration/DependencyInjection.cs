@@ -50,6 +50,9 @@ namespace GymManagement.DataAccess.Configuration
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>))
+                    .AddScoped<ISubscriptionRepo, SubscriptionRepo>()
+                    .AddScoped<IMemberRepo, MemberRepo>()
+                    .AddScoped<ISubscriptionPeriodRepo, SubscriptionPeriodRepo>()
                     .AddScoped<IUserRepository, UserRepository>()
                     .AddScoped<IRoleRepository, RoleRepository>();
 
