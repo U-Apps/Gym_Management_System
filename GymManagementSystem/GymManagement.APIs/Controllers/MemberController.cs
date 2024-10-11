@@ -5,6 +5,7 @@ using GymManagement.BusinessCore.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using GymManagement.APIs.Authentication;
 using GymManagement.APIs.DTOs.Mappers;
+using GymManagement.BusinessCore.DTOs;
 
 namespace GymManagement.APIs.Controllers
 {
@@ -25,6 +26,16 @@ namespace GymManagement.APIs.Controllers
                 createMemberDTO.SubscriptionInfo.AsSubscription());
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public ActionResult<IEnumerable<MemberResponse>> GetMembers()
+        {
+
+            var members = _memberService.GetAllMembers();
+
+            return Ok(members);
         }
 
         //[HttpPut]
@@ -53,15 +64,6 @@ namespace GymManagement.APIs.Controllers
         //}
 
 
-        //[HttpGet]
-        //[Route("[action]")]
-        //public ActionResult<IEnumerable<ReadMemberDTO>> GetMembers()
-        //{
-
-        //    var members = _memberService.GetAll().Select(member => member.AsDTO());
-
-        //    return Ok(members);
-        //}
 
         //[HttpGet]
         //[Route("[action]/{id}")]

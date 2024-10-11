@@ -1,5 +1,7 @@
 ﻿using GymManagement.BusinessCore.Contracts.Repositories;
 using GymManagement.BusinessCore.Contracts.Services;
+using GymManagement.BusinessCore.DTOs;
+using GymManagement.BusinessCore.DTOs.Mappers;
 using GymManagement.BusinessCore.Models;
 using System.Linq.Expressions;
 
@@ -22,6 +24,11 @@ namespace GymManagement.BusinessCore.Services
             subscriptionInfo.MemberId = member.Id;
             _subscriptionService.AddNewSubscription(subscriptionInfo);
             return true;
+        }
+
+        public IEnumerable<MemberResponse> GetAllMembers()
+        {
+            return _memberRepository.GetMembers().Select(m => m.ToResponse());
         }
 
         //public void AddRange(IEnumerable<Member> model)

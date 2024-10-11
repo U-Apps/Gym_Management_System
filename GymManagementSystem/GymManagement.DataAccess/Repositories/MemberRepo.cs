@@ -1,6 +1,7 @@
 ﻿using GymManagement.BusinessCore.Contracts.Repositories;
 using GymManagement.BusinessCore.Models;
 using GymManagement.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,10 @@ namespace GymManagement.DataAccess.Repositories
             _appDbContext.Set<Member>().Add(member);
             _appDbContext.SaveChanges();
         }
+
+        public IEnumerable<Member> GetMembers()
+        {
+            return _appDbContext.Set<Member>().AsNoTracking().ToList();
+        }                    
     }
 }

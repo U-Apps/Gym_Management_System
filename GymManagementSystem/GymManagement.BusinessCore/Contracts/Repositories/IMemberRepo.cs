@@ -10,5 +10,6 @@ namespace GymManagement.BusinessCore.Contracts.Repositories
     public interface IMemberRepo
     {
         void AddNewMember(Member member);
+        IEnumerable<Member> GetMembers();
     }
 }
