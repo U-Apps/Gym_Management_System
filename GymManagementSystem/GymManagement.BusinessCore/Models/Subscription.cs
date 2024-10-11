@@ -6,7 +6,7 @@ namespace GymManagement.BusinessCore.Models
         public int SubscriptionId { get; set; }
         public int MemberId { get; set; }
         public int? CoachId { get; set; }
-        public int CreatedByReceptionistId { get; set; }
+        public int? CreatedByReceptionistId { get; set; }
         public byte ExcerciseTypeId { get; set; }
         public byte PeriodId { get; set; }
         public byte SubscriptionPeriodId { get; set; }
@@ -15,10 +15,12 @@ namespace GymManagement.BusinessCore.Models
 
         public virtual Member Member { get; set; } = null!;
         public virtual JobHistory? Coach { get; set; }
-        public virtual JobHistory CreatedByReceptionist { get; set; } = null!;
+        public virtual JobHistory? CreatedByReceptionist { get; set; } = null!;
         public virtual ExerciseType ExcerciseType { get; set; }
         public virtual Period Period { get; set; } = null!;
         public virtual SubscriptionPeriod SubscriptionPeriod { get; set; } = null!;
         public virtual SubscriptionPayment? SubscriptionPayment { get; set; }
+
+        
     }
 }

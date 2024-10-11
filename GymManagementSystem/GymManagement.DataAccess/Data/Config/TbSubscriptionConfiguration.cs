@@ -63,7 +63,7 @@ namespace GymManagement.DataAccess.Data.Config
                 .WithMany(p => p.SubscriptionCreatedByReceptionists)
                 .HasForeignKey(d => d.CreatedByReceptionistId)
                 .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired(true)
+                .IsRequired(false)
                 .HasConstraintName("FK_tbSubscriptions_tbJobHistoriesRecep");
 
             builder.HasOne(d => d.ExcerciseType)
