@@ -37,10 +37,20 @@ namespace GymManagement.APIs.DTOs
             => new ReadMemberDTO
             (
                 member.Id,
-                //member.PersonId,
-                member.MemberWeight,
-                member.IsActive
-
+                 member.FirstName,
+        member.SecondName,
+            member.ThirdName,
+            member.LastName,
+            member.NationalNumber,
+            member.PhoneNumber,
+            member.BirthDate,
+            member.Address,
+            member.Email,
+            member.MemberWeight,
+            member.IsActive,
+            member.RegisterationDate
+                
+                
                 //new ReadPersonDTO()
                 //{
                 //    Name = member.FirstName,
@@ -196,9 +206,19 @@ namespace GymManagement.APIs.DTOs
                  Member: new ReadMemberDTO
                  (
                       subscriptionPayment.Subscription.Member.Id,
+                      subscriptionPayment.Subscription.Member.FirstName,
+                      subscriptionPayment.Subscription.Member.SecondName,
+                      subscriptionPayment.Subscription.Member.ThirdName,
+                      subscriptionPayment.Subscription.Member.LastName,
+                      subscriptionPayment.Subscription.Member.NationalNumber,
+                      subscriptionPayment.Subscription.Member.PhoneNumber,
+                      subscriptionPayment.Subscription.Member.BirthDate,
+                      subscriptionPayment.Subscription.Member.Address,
+                      subscriptionPayment.Subscription.Member.Email,
                       //subscriptionPayment.Subscription.Member.PersonId,
                       subscriptionPayment.Subscription.Member.MemberWeight,
-                      subscriptionPayment.Subscription.Member.IsActive
+                      subscriptionPayment.Subscription.Member.IsActive,
+                      subscriptionPayment.Subscription.Member.RegisterationDate
 
                       //new ReadPersonDTO()
                       //{
@@ -267,20 +287,30 @@ namespace GymManagement.APIs.DTOs
                             ),
                         Member: new ReadMemberDTO
                         (
-                             subscription.Member.Id,
-                             //subscription.Member.PersonId,
-                             subscription.Member.MemberWeight,
-                             subscription.Member.IsActive
+                              subscription.Member.Id,
+                              subscription.Member.FirstName,
+                              subscription.Member.SecondName,
+                              subscription.Member.ThirdName,
+                              subscription.Member.LastName,
+                              subscription.Member.NationalNumber,
+                              subscription.Member.PhoneNumber,
+                              subscription.Member.BirthDate,
+                              subscription.Member.Address,
+                              subscription.Member.Email,
+                              //subscriptionPayment.Subscription.Member.PersonId,
+                              subscription.Member.MemberWeight,
+                              subscription.Member.IsActive,
+                              subscription.Member.RegisterationDate
 
-                             //new ReadPersonDTO()
-                             //{
-                             //    Name = subscription.Member.Person.FirstName,
-                             //    PersonId = subscription.Member.PersonId,
-                             //    Email = subscription.Member.Person.Email,
-                             //    PhoneNumber = subscription.Member.Person.PhoneNumber,
-                             //    BirthDate = subscription.Member.Person.BirthDate,
-                             //    Idcard = subscription.Member.Person.NationalNumber
-                             //}
+                            //new ReadPersonDTO()
+                            //{
+                            //    Name = subscription.Member.Person.FirstName,
+                            //    PersonId = subscription.Member.PersonId,
+                            //    Email = subscription.Member.Person.Email,
+                            //    PhoneNumber = subscription.Member.Person.PhoneNumber,
+                            //    BirthDate = subscription.Member.Person.BirthDate,
+                            //    Idcard = subscription.Member.Person.NationalNumber
+                            //}
                             ),
                         Period: new ReadPeriodDTO
                         (

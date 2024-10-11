@@ -32,12 +32,12 @@ namespace GymManagement.APIs.Controllers
             subscription.MemberId = createSubscriptionDTO.MemberId;
             subscription.PeriodId = createSubscriptionDTO.PeriodId;
             subscription.CoachId = createSubscriptionDTO.CoachId;
-            subscription.CreatedByReceptionistId = createSubscriptionDTO.CreatedByReceptionistId;
+            //subscription.CreatedByReceptionistId = createSubscriptionDTO.CreatedByReceptionistId;
             subscription.ExcerciseTypeId = createSubscriptionDTO.ExcerciseTypeId;
             subscription.SubscriptionPeriodId = createSubscriptionDTO.SubscriptionPeriodId;
 
             subscription.StartDate = createSubscriptionDTO.StartDate;
-            subscription.EndDate = createSubscriptionDTO.EndDate;
+            //subscription.EndDate = createSubscriptionDTO.EndDate;
 
 
 
@@ -70,7 +70,7 @@ namespace GymManagement.APIs.Controllers
             existingSubscription.SubscriptionPeriodId = updateSubscriptionDTO.SubscriptionPeriodId;
 
             existingSubscription.StartDate = updateSubscriptionDTO.StartDate;
-            existingSubscription.EndDate = updateSubscriptionDTO.EndDate;
+            //existingSubscription.EndDate = updateSubscriptionDTO.EndDate;
 
 
             _subscriptionService.Update(existingSubscription);
