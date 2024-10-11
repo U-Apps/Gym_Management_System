@@ -20,7 +20,7 @@ namespace GymManagement.BusinessCore.DTOs
         public string? Address { get; init; }
         public string? Email { get; init; }
         public decimal? MemberWeight { get; init; }
-        public string IsActive { get; init; }
+        public bool IsActive { get; init; }
         public DateTime RegisterationDate { get; init; }
     }
 

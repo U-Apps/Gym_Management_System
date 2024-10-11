@@ -12,5 +12,6 @@ namespace GymManagement.BusinessCore.Contracts.Services
     {
         bool AddNewMember(Member member, Subscription subscriptionInfo);
         IEnumerable<MemberResponse> GetAllMembers();
+        MemberResponse GetMemberById(int id);
     }
 }

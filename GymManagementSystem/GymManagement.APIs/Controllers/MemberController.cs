@@ -38,6 +38,14 @@ namespace GymManagement.APIs.Controllers
             return Ok(members);
         }
 
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public ActionResult<MemberResponse> GetById(int id)
+        {
+            var member = _memberService.GetMemberById(id);
+            return member is null ? NotFound($"Member with id = {id} is not found") : Ok(member);
+        }
+
         //[HttpPut]
         //[Route("[action]")]
 
@@ -65,13 +73,6 @@ namespace GymManagement.APIs.Controllers
 
 
 
-        //[HttpGet]
-        //[Route("[action]/{id}")]
-        //public ActionResult<ReadMemberDTO> GetById(int id)
-        //{
-        //    Member member = _memberService.GetById(id);
-        //    return member is null ? NotFound() : Ok(member.AsDTO());
-        //}
 
         //[HttpDelete]
         //[Route("[action]/{id}")]

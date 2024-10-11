@@ -11,5 +11,6 @@ namespace GymManagement.BusinessCore.Contracts.Repositories
     {
         void AddNewMember(Member member);
         IEnumerable<Member> GetMembers();
+        Member GetMemberById(int id);
     }
 }

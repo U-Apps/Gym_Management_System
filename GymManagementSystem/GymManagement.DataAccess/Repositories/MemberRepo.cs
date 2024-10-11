@@ -18,6 +18,11 @@ namespace GymManagement.DataAccess.Repositories
             _appDbContext.SaveChanges();
         }
 
+        public Member GetMemberById(int id)
+        {
+            return _appDbContext.Set<Member>().AsNoTracking().FirstOrDefault(m => m.Id == id);
+        }
+
         public IEnumerable<Member> GetMembers()
         {
             return _appDbContext.Set<Member>().AsNoTracking().ToList();

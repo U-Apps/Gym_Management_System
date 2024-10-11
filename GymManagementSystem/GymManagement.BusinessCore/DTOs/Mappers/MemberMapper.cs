@@ -24,7 +24,7 @@ namespace GymManagement.BusinessCore.DTOs.Mappers
                 Address = member.Address,
                 BirthDate = member.BirthDate,
                 MemberWeight = member.MemberWeight,
-                IsActive = member.IsActive ? "نشط" : "موقف",
+                IsActive = member.IsActive,
                 RegisterationDate = member.RegisterationDate
             };
         }

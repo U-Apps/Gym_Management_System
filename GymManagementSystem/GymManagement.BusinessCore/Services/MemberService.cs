@@ -31,6 +31,11 @@ namespace GymManagement.BusinessCore.Services
             return _memberRepository.GetMembers().Select(m => m.ToResponse());
         }
 
+        public MemberResponse GetMemberById(int id)
+        {
+            return _memberRepository.GetMemberById(id)?.ToResponse();
+        }
+
         //public void AddRange(IEnumerable<Member> model)
         //{
         //    _memberRepository.AddRange(model);
@@ -65,11 +70,7 @@ namespace GymManagement.BusinessCore.Services
         //    return _memberRepository.GetAll();
         //}
 
-        //public Member GetById(int id)
-        //{
-        //    return _memberRepository.GetById(c => c.Id == id);
 
-        //}
 
         //public void Update(Member model)
         //{
