@@ -5,63 +5,69 @@ using System.Linq.Expressions;
 
 namespace GymManagement.BusinessCore.Services
 {
-    public class MemberService : IBaseServices<Member>
+    public class MemberService(IMemberRepo _memberRepository,
+                               ISubscriptionService _subscriptionService,
+                               ISubscriptionPeriodRepo _subscriptionPeriodRepo)
+                               : IMemberService
     {
-        protected readonly IBaseRepository<Member> _Repository;
-        public MemberService(IBaseRepository<Member> repository)
+        
+        public bool AddNewMember(Member member, Subscription subscriptionInfo)
         {
-            _Repository = repository;
-        }
-        public int Add(Member model)
-        {
-            _Repository.Add(model);
-            return model.Id;
+            // Manipulating Member
+            member.RegisterationDate = DateTime.Now;
+            member.IsActive = true;
+            _memberRepository.AddNewMember(member);
+
+            // Adding new subscription for the member
+            subscriptionInfo.MemberId = member.Id;
+            _subscriptionService.AddNewSubscription(subscriptionInfo);
+            return true;
         }
 
-        public void AddRange(IEnumerable<Member> model)
-        {
-            _Repository.AddRange(model);
-        }
+        //public void AddRange(IEnumerable<Member> model)
+        //{
+        //    _memberRepository.AddRange(model);
+        //}
 
-        public void Delete(Member model)
-        {
-            _Repository.Delete(model);            
-        }
-        public void DeleteById(int id)
-        {
-            _Repository.DeleteById(c => c.Id == id);
-        }
+        //public void Delete(Member model)
+        //{
+        //    _memberRepository.Delete(model);            
+        //}
+        //public void DeleteById(int id)
+        //{
+        //    _memberRepository.DeleteById(c => c.Id == id);
+        //}
 
-        public void DeleteRange(IEnumerable<Member> model)
-        {
-            _Repository.DeleteRange(model);
-        }
+        //public void DeleteRange(IEnumerable<Member> model)
+        //{
+        //    _memberRepository.DeleteRange(model);
+        //}
 
-        public Member Find(Expression<Func<Member, bool>> predicate)
-        {
-            return _Repository.Find(predicate);
-        }
+        //public Member Find(Expression<Func<Member, bool>> predicate)
+        //{
+        //    return _memberRepository.Find(predicate);
+        //}
 
-        public IEnumerable<Member> FindAll(Func<Member, bool> predicate)
-        {
-            return _Repository.FindAll(predicate);
-        }
+        //public IEnumerable<Member> FindAll(Func<Member, bool> predicate)
+        //{
+        //    return _memberRepository.FindAll(predicate);
+        //}
 
-        public IEnumerable<Member> GetAll()
-        {
-            return _Repository.GetAll();
-        }
+        //public IEnumerable<Member> GetAll()
+        //{
+        //    return _memberRepository.GetAll();
+        //}
 
-        public Member GetById(int id)
-        {
-            return _Repository.GetById(c => c.Id == id);
+        //public Member GetById(int id)
+        //{
+        //    return _memberRepository.GetById(c => c.Id == id);
 
-        }
+        //}
 
-        public void Update(Member model)
-        {
-            _Repository.Update(model);
-        }
+        //public void Update(Member model)
+        //{
+        //    _memberRepository.Update(model);
+        //}
 
     }
 }
