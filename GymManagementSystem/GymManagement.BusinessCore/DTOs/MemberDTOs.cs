@@ -1,6 +1,7 @@
 ﻿using GymManagement.BusinessCore.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,24 @@ namespace GymManagement.BusinessCore.DTOs
         public DateTime RegisterationDate { get; init; }
     }
 
-        
+    public record UpdateMemberDTO
+      (
+            string? FirstName,
+            string? SecondName,
+            string? ThirdName,
+            string? LastName,
+            string? NationalNumber,
+            [DataType(DataType.PhoneNumber)]
+            string? PhoneNumber,
+            [DataType(DataType.Date)]
+            DateTime? BirthDate,
+            string? Address,
+            [EmailAddress]
+            string? Email,
+            [Range(1,200)]
+            decimal? MemberWeight,
+            bool? IsActive
+      );
+
+
 }

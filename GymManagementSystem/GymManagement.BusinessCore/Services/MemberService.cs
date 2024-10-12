@@ -36,6 +36,20 @@ namespace GymManagement.BusinessCore.Services
             return _memberRepository.GetMemberById(id)?.ToResponse();
         }
 
+        public bool updateMember(int id, UpdateMemberDTO memberInfo)
+        {
+            var ExsistMember = _memberRepository.GetMemberById(id, track: true);
+
+            if (ExsistMember == null)
+                return false;
+
+            memberInfo.MapUpdatedPropertiesToMember(ref ExsistMember);
+
+            _memberRepository.UpdateMember(ExsistMember);
+
+            return true;
+        }
+
         //public void AddRange(IEnumerable<Member> model)
         //{
         //    _memberRepository.AddRange(model);

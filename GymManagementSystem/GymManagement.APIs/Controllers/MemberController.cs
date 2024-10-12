@@ -46,30 +46,18 @@ namespace GymManagement.APIs.Controllers
             return member is null ? NotFound($"Member with id = {id} is not found") : Ok(member);
         }
 
-        //[HttpPut]
-        //[Route("[action]")]
+        [HttpPut]
+        [Route("[action]/{id:int}")]
 
-        //public ActionResult UpdateMember(UpdateMemberDTO updateMemberDTO)
-        //{
-        //    var existingMember = _memberService.GetById(updateMemberDTO.MemberId);
-        //    if (existingMember == null)
-        //        return NotFound();
+        public ActionResult UpdateMember([FromRoute]int id,[FromBody] UpdateMemberDTO updateMemberDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        //    //var existingPerson = _personService.GetById(existingMember.PersonId);
-
-        //    //existingPerson.Name = updateMemberDTO.Name;
-        //    existingMember.PhoneNumber = updateMemberDTO.PhoneNumber;
-        //    existingMember.BirthDate = updateMemberDTO.BirthDate;
-        //    existingMember.Email = updateMemberDTO.Email;
-        //    //_personService.Update(existingPerson);
-
-        //    //existingMember.Person = existingPerson;
-        //    existingMember.MemberWeight = updateMemberDTO.MemberWeight;
-        //    existingMember.IsActive = updateMemberDTO.IsActive;
-
-        //    _memberService.Update(existingMember);
-        //    return Ok();
-        //}
+            if (!_memberService.updateMember(id, updateMemberDTO))
+                return NotFound($"member with id = {id} is no longer exist");
+            return Ok();
+        }
 
 
 
