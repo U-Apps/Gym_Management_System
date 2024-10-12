@@ -4,6 +4,8 @@ using GymManagement.APIs.Authentication;
 using GymManagement.BusinessCore.Contracts.Services;
 using GymManagement.BusinessCore.Models;
 using GymManagement.APIs.DTOs;
+using GymManagement.BusinessCore.Contracts.Repositories;
+using GymManagement.BusinessCore.Services;
 
 namespace GymManagement.APIs.Controllers
 {
@@ -12,14 +14,14 @@ namespace GymManagement.APIs.Controllers
     [Authorize(Roles = clsSystemRoles.Admin)]
     public class EmployeeController : ControllerBase
     {
-        private readonly IBaseServices<Employee> _employeeService;
-        private readonly IBaseServices<Person> _personService;
+        private readonly IBaseRepository<Employee> _employeeService;
+        private readonly IBaseRepository<Person> _personService;
 
-        public IBaseServices<JobHistory> _HistoryService { get; }
+        public IBaseRepository<JobHistory> _HistoryService { get; }
 
-        public EmployeeController(IBaseServices<Employee> employeeService, 
-            IBaseServices<Person> personService,
-            IBaseServices<JobHistory> historyService)
+        public EmployeeController(IBaseRepository<Employee> employeeService, 
+            IBaseRepository<Person> personService,
+            IBaseRepository<JobHistory> historyService)
         {
             _employeeService = employeeService;
             _personService = personService;
@@ -30,7 +32,7 @@ namespace GymManagement.APIs.Controllers
         [HttpPost]
         [Route("[action]")]
 
-        public ActionResult CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
+        public async Task<IActionResult> CreateEmployee(CreateEmployeeDTO createEmployeeDTO)
         {
             var Employee = new Employee()
             {
@@ -44,33 +46,26 @@ namespace GymManagement.APIs.Controllers
                 JobID = createEmployeeDTO.CurrentJop
 
             };
-
-            var employee = new Employee();
-
-            //employee.PersonId = _personService.Add(Employee);
-            //employee.ResignationDate = createEmployeeDTO.ResignationDate;
-            //employee.HireDate = createEmployeeDTO.HireDate;
-            //employee.Salary = createEmployeeDTO.Salary;
-            //employee.JobID = createEmployeeDTO.CurrentJop;
-
+            await  _employeeService.Add(Employee);
+            await _employeeService.SaveChanges();
             var History = new JobHistory()
             {
-                EmpoyeeId = _employeeService.Add(employee),
-                JobId = employee.JobID.Value,
-                StartDate = employee.RegisterationDate
+                EmpoyeeId = Employee.Id,
+                JobId = Employee.JobID.Value,
+                StartDate = Employee.RegisterationDate
             };
 
-            _HistoryService.Add(History);
+            await _HistoryService.Add(History);
             
-            return Ok();
+            return Ok(Employee.Id);
         }
 
         [HttpPut]
         [Route("[action]")]
 
-        public ActionResult UpdateEmployee(UpdateEmployeeDTO updateEmployeeDTO)
+        public async Task<ActionResult> UpdateEmployee(UpdateEmployeeDTO updateEmployeeDTO)
         {
-            var existingEmployee = _employeeService.GetById(updateEmployeeDTO.EmployeeId);
+            var existingEmployee = _employeeService.GetById(x=>x.Id==updateEmployeeDTO.EmployeeId,nav=>nav.CurrentJob);
             if (existingEmployee == null)
                 return NotFound();
 
@@ -90,49 +85,52 @@ namespace GymManagement.APIs.Controllers
             existingEmployee.Salary = updateEmployeeDTO.Salary;
             existingEmployee.JobID = updateEmployeeDTO.CurrentJop;
             _employeeService.Update(existingEmployee);
+            await _employeeService.SaveChanges();
             return Ok();
         }
 
 
         [HttpGet]
         [Route("[action]")]
-        public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<ReadEmployeeDTO>>> GetEmployees()
         {
 
-            var employees = _employeeService.GetAll().Select(employee => employee.AsDTO());
+            var employees = await _employeeService.GetAll(x=>x.CurrentJob);
+             var  employeesDTO=employees.Select(employee => employee.AsDTO());
 
-            return Ok(employees);
+            return Ok(employeesDTO);
         }
 
         [HttpGet]
         [Route("[action]/{jobTitle}")]
-        public ActionResult<IEnumerable<ReadEmployeeDTO>> GetEmployeesBy(string jobTitle)
+        public async Task<ActionResult<IEnumerable<ReadEmployeeDTO>>> GetEmployeesBy(string jobTitle)
         {
 
-            var employees = _employeeService.GetAll().Where(emp=>emp.CurrentJob.JobTitle==jobTitle).Select(employee => employee.AsDTO());
+            var employees = await _employeeService.GetAll();
+                var employeesDTO =employees.Where(emp=>emp.CurrentJob.JobTitle==jobTitle).Select(employee => employee.AsDTO());
 
-            return Ok(employees);
+            return Ok(employeesDTO);
         }
 
         [HttpGet]
         [Route("[action]/{id}")]
         public ActionResult<ReadEmployeeDTO> GetById(int id)
         {
-            Employee employee = _employeeService.GetById(id);
+            Employee employee = _employeeService.GetById(x=>x.Id==id,includes=>includes.CurrentJob);
             return employee is null ? NotFound() : Ok(employee.AsDTO());
         }
 
         [HttpDelete]
         [Route("[action]/{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            Employee employee = _employeeService.GetById(id);
+            Employee employee = _employeeService.GetById(x => x.Id == id, includes => includes.CurrentJob);
 
             if (employee is null)
                 return NotFound();
 
-            _employeeService.DeleteById(employee.Id);
-            //_employeeService.Delete(employee);
+            _employeeService.DeleteById(employee);
+            await _employeeService.SaveChanges();
             return Ok();
         }
     }

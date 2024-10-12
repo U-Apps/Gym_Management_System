@@ -13,14 +13,14 @@ namespace GymManagement.DataAccess.Repositories
         {
             _context = context;
         }
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            _context.Set<T>().Add(entity);
+            await _context.Set<T>().AddAsync(entity);
             
         }
-        public void AddRange(IEnumerable<T> entities)
+        public async Task AddRange(IEnumerable<T> entities)
         {
-           _context.AddRange(entities);
+          await _context.Set<T>().AddRangeAsync(entities);
         }
 
         public void Delete(T entity)
@@ -35,14 +35,14 @@ namespace GymManagement.DataAccess.Repositories
 
         }
 
-        public void DeleteById(Func<T, bool> where)
+        public void DeleteById(T element)
         {
-            _context.Set<T>().Remove(GetById(where));
+            _context.Set<T>().Remove(element);
         }
 
-        public T Find(Expression<Func<T, bool>> predicate)
+        public async Task<T> Find(Expression<Func<T, bool>> predicate)
         {
-           return _context.Set<T>().Find(predicate);
+           return await _context.Set<T>().FindAsync(predicate);
         }
 
         public IEnumerable<T> FindAll(Func<T, bool> predicate)
@@ -51,7 +51,7 @@ namespace GymManagement.DataAccess.Repositories
 
         }
 
-        public virtual IEnumerable<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
+        public virtual async Task <IEnumerable<T>> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
             using (var context = new AppDbContext())
@@ -62,9 +62,9 @@ namespace GymManagement.DataAccess.Repositories
                 foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
                     dbQuery = dbQuery.Include<T, object>(navigationProperty);
 
-                list = dbQuery
+                list = await dbQuery
                     .AsNoTracking()
-                    .ToList<T>();
+                    .ToListAsync<T>();
             }
             return list; 
             
@@ -81,9 +81,9 @@ namespace GymManagement.DataAccess.Repositories
                 foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
                     dbQuery = dbQuery.Include<T, object>(navigationProperty);
 
-                item = dbQuery
+                item =  dbQuery
                     .AsNoTracking()
-                    .FirstOrDefault(where); 
+                    .FirstOrDefault<T>(where); 
             }
             return item;
         }
@@ -95,14 +95,14 @@ namespace GymManagement.DataAccess.Repositories
             
         }
 
-        public int SaveChanges()
+        public async Task<int> SaveChanges()
         {
-           return _context.SaveChanges();
+           return await _context.SaveChangesAsync();
         }
 
-        public void Dispose()
+        public async Task Dispose()
         {
-          _context.Dispose();
+          await _context.DisposeAsync();
         }
     }
 }

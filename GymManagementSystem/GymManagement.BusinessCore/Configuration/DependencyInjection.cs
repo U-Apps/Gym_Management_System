@@ -15,21 +15,21 @@ namespace GymManagement.BusinessCore.Configuration
 
         private static IServiceCollection AddBusinessCoreServices(this IServiceCollection services)
         {
-            services.AddScoped<AuthenticationService>()
-                    .AddScoped<AppUser>()
-                    .AddScoped<UserService>()
-                    .AddScoped<IBaseServices<Employee>, EmployeeService>()
-                    .AddScoped<IBaseServices<Person>, PersonService>()
-                    .AddScoped<IBaseServices<Member>, MemberService>()
-                    .AddScoped<RoleService>()
-                    .AddScoped<IBaseServices<Job>, JobService>()
-                    .AddScoped<IBaseServices<JobHistory>, JobHistoryService>()
-                    .AddScoped<IBaseServices<Period>, PeriodService>()
-                    .AddScoped<IBaseServices<SubscriptionPeriod>, SubscriptionPeriodServices>()
-                    .AddScoped<IBaseServices<SubscriptionPayment>, SubscriptionPaymentServices>()
-                    .AddScoped<IBaseServices<Subscription>, SubscriptionServices>()
-                    .AddScoped<IBaseServices<ExerciseType>, ExerciseTypeService>()
-                    .AddScoped<IBaseServices<PayrollPayment>, PayrollPaymentService>();
+            //services.AddScoped<AuthenticationService>()
+                    //.AddScoped<AppUser>()
+                    //.AddScoped<UserService>()
+                    //.AddScoped<IBaseServices<Employee>, EmployeeService>()
+                    //.AddScoped<IBaseServices<Person>, PersonService>()
+                    //.AddScoped<IBaseServices<Member>, MemberService>()
+                    //.AddScoped<RoleService>()
+                    //.AddScoped<IBaseServices<Job>, JobService>()
+                    //.AddScoped<IBaseServices<JobHistory>, JobHistoryService>()
+                    //.AddScoped<IBaseServices<Period>, PeriodService>()
+                    //.AddScoped<IBaseServices<SubscriptionPeriod>, SubscriptionPeriodServices>()
+                    //.AddScoped<IBaseServices<SubscriptionPayment>, SubscriptionPaymentServices>()
+                    //.AddScoped<IBaseServices<Subscription>, SubscriptionServices>()
+                    //.AddScoped<IBaseServices<ExerciseType>, ExerciseTypeService>()
+                    //.AddScoped<IBaseServices<PayrollPayment>, PayrollPaymentService>();
 
             return services;
         }
