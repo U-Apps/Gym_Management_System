@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GymManagement.BusinessCore.DTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace GymManagement.APIs.DTOs
 {
@@ -11,7 +12,7 @@ namespace GymManagement.APIs.DTOs
              ReadJobHistoryDTO Coach ,
              ReadJobHistoryDTO CreatedByReceptionist ,
              ReadExerciseTypeDTO ExcerciseType ,
-             ReadMemberDTO Member ,
+             MemberResponse Member ,
              ReadPeriodDTO Period ,
              ReadSubscriptionPeriodDTO SubscriptionPeriod 
         

@@ -55,23 +55,23 @@ namespace GymManagement.APIs.Controllers
         }
 
 
-        [HttpGet]
-        [Route("")]
-        public ActionResult<IEnumerable<ReadSubscriptionPaymentDTO>> Get()
-        {
+        //[HttpGet]
+        //[Route("")]
+        //public ActionResult<IEnumerable<ReadSubscriptionPaymentDTO>> Get()
+        //{
 
-            var subscriptionPayments = _subscriptionPaymentService.GetAll().Select(subscriptionPayments => subscriptionPayments.AsDTO());
+        //    var subscriptionPayments = _subscriptionPaymentService.GetAll().Select(subscriptionPayments => subscriptionPayments.AsDTO());
 
-            return Ok(subscriptionPayments);
-        }
+        //    return Ok(subscriptionPayments);
+        //}
 
-        [HttpGet]
-        [Route("{id}")]
-        public ActionResult<ReadSubscriptionPaymentDTO> GetById(int id)
-        {
-            SubscriptionPayment subscriptionPayment = _subscriptionPaymentService.GetById(id);
-            return subscriptionPayment is null ? NotFound() : Ok(subscriptionPayment.AsDTO());
-        }
+        //[HttpGet]
+        //[Route("{id}")]
+        //public ActionResult<ReadSubscriptionPaymentDTO> GetById(int id)
+        //{
+        //    SubscriptionPayment subscriptionPayment = _subscriptionPaymentService.GetById(id);
+        //    return subscriptionPayment is null ? NotFound() : Ok(subscriptionPayment.AsDTO());
+        //}
 
         [HttpDelete]
         [Route("{id}")]

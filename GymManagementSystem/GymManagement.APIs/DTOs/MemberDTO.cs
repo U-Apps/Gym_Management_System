@@ -2,23 +2,6 @@
 
 namespace GymManagement.APIs.DTOs
 {
-    public record ReadMemberDTO 
-        (
-            int MemberId,
-            string FirstName,
-            string SecondName,
-            string ThirdName,
-            string LastName,
-            string? NationalNumber,
-            string? PhoneNumber,
-            DateTime? BirthDate,
-            string? Address,
-            string? Email,
-            decimal? MemberWeight,
-            bool IsActive,
-            DateTime RegisterationDate
-        );
-
     public record CreateMemberDTO
        (
             [Required]
@@ -29,7 +12,6 @@ namespace GymManagement.APIs.DTOs
              [Required]
              string LastName,
             [Required]
-            [DataType(DataType.CreditCard)]
              string? NationalNumber,
 
             [DataType(DataType.PhoneNumber)]
@@ -46,29 +28,4 @@ namespace GymManagement.APIs.DTOs
             CreateSubscriptionInfo SubscriptionInfo
 
        );
-
-    public record UpdateMemberDTO
-      (
-            [Required]
-            [DataType(DataType.CreditCard)]
-             string? Idcard,
-            [Required]
-            [StringLength(50, MinimumLength = 6)]
-            string Name,
-            [Required]
-            [DataType(DataType.PhoneNumber)]
-            string? PhoneNumber,
-            [Required]
-            [DataType(DataType.Date)]
-            DateTime BirthDate,
-            [Required]
-            [EmailAddress]
-            string? Email,
-            [Required]
-             int MemberId,
-            [Range(1,200)]
-             decimal? MemberWeight,
-            bool IsActive
-
-      );
 }

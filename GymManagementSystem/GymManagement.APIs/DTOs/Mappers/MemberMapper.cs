@@ -21,5 +21,6 @@ namespace GymManagement.APIs.DTOs.Mappers
 
             return member;
         }
+
     }
 }
