@@ -11,7 +11,6 @@ namespace GymManagement.APIs.DTOs
              string ThirdName,
              [Required]
              string LastName,
-            [Required]
              string? NationalNumber,
 
             [DataType(DataType.PhoneNumber)]
@@ -19,7 +18,6 @@ namespace GymManagement.APIs.DTOs
             [DataType(DataType.Date)]
             DateTime? BirthDate,
             string? Address,
-            [Required]
             [EmailAddress]
             string? Email,
             [Range(1,200)]
