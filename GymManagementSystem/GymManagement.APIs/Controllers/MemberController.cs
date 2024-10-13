@@ -56,7 +56,7 @@ namespace GymManagement.APIs.Controllers
 
             if (!_memberService.updateMember(id, updateMemberDTO))
                 return NotFound($"member with id = {id} is no longer exist");
-            return Ok();
+            return NoContent();
         }
 
 
