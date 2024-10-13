@@ -10,7 +10,7 @@ namespace GymManagement.BusinessCore.Contracts.Services
 {
     public interface IMemberService
     {
-        bool AddNewMember(Member member, Subscription subscriptionInfo);
+        MemberResponse AddNewMember(Member member, Subscription subscriptionInfo);
         IEnumerable<MemberResponse> GetAllMembers();
         MemberResponse GetMemberById(int id);
         public bool updateMember(int id, UpdateMemberDTO memberInfo);

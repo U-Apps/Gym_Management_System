@@ -22,10 +22,10 @@ namespace GymManagement.APIs.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            _memberService.AddNewMember(createMemberDTO.AsMember(),
+            var NewMember = _memberService.AddNewMember(createMemberDTO.AsMember(),
                 createMemberDTO.SubscriptionInfo.AsSubscription());
 
-            return Ok();
+            return Created(Url.Link("GetMemberByIdRoute", new {id = NewMember.MemberId}), NewMember);
         }
 
         [HttpGet]
@@ -39,8 +39,8 @@ namespace GymManagement.APIs.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
-        public ActionResult<MemberResponse> GetById(int id)
+        [Route("[action]/{id}", Name = "GetMemberByIdRoute")]
+        public ActionResult<MemberResponse> GetMemberById(int id)
         {
             var member = _memberService.GetMemberById(id);
             return member is null ? NotFound($"Member with id = {id} is not found") : Ok(member);

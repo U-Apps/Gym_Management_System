@@ -13,7 +13,7 @@ namespace GymManagement.BusinessCore.Services
                                : IMemberService
     {
         
-        public bool AddNewMember(Member member, Subscription subscriptionInfo)
+        public MemberResponse AddNewMember(Member member, Subscription subscriptionInfo)
         {
             // Manipulating Member
             member.RegisterationDate = DateTime.Now;
@@ -23,7 +23,7 @@ namespace GymManagement.BusinessCore.Services
             // Adding new subscription for the member
             subscriptionInfo.MemberId = member.Id;
             _subscriptionService.AddNewSubscription(subscriptionInfo);
-            return true;
+            return member.ToResponse();
         }
 
         public IEnumerable<MemberResponse> GetAllMembers()
