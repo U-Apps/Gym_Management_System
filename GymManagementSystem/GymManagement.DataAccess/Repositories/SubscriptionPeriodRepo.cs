@@ -12,9 +12,14 @@ namespace GymManagement.DataAccess.Repositories
 {
     class SubscriptionPeriodRepo(AppDbContext _appDbContext) : ISubscriptionPeriodRepo
     {
-        public SubscriptionPeriod GetPeriodById(int periodId)
+        public SubscriptionPeriod? GetPeriodById(int periodId)
         {
-            return _appDbContext.Set<SubscriptionPeriod>().FirstOrDefault(s => s.Id == periodId);
+            return _appDbContext.Set<SubscriptionPeriod>().AsNoTracking().FirstOrDefault(s => s.Id == periodId);
+        }
+
+        public IEnumerable<SubscriptionPeriod> GetPeriods()
+        {
+            return _appDbContext.Set<SubscriptionPeriod>().AsNoTracking().ToList();
         }
     }
 }

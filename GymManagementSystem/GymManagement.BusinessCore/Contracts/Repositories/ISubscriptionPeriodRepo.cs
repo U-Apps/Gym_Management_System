@@ -9,6 +9,7 @@ namespace GymManagement.BusinessCore.Contracts.Repositories
 {
     public interface ISubscriptionPeriodRepo
     {
-        SubscriptionPeriod GetPeriodById(int periodId);
+        SubscriptionPeriod? GetPeriodById(int periodId);
+        IEnumerable<SubscriptionPeriod> GetPeriods();
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace GymManagement.BusinessCore.Models
 {
     public class SubscriptionPeriod
@@ -10,6 +12,7 @@ namespace GymManagement.BusinessCore.Models
         public decimal Price { get; set; }
         public byte PeriodDays { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Subscription> Subscriptions { get; set; }
     }
 }
