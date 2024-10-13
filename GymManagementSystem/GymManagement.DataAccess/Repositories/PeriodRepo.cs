@@ -16,5 +16,10 @@ namespace GymManagement.DataAccess.Repositories
         {
             return _appDbContext.Set<Period>().AsNoTracking().ToList();
         }
+
+        public Period? GetPeriodById (int id)
+        {
+            return _appDbContext.Set<Period>().AsNoTracking().FirstOrDefault(p => p.PeriodId == id);
+        }
     }
 }

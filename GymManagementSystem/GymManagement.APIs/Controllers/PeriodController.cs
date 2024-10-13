@@ -18,5 +18,12 @@ namespace GymManagement.APIs.Controllers
         {
             return Ok(_PeriodRepo.GetPeriods());
         }
+
+        [HttpGet("{id:int}")]
+        public ActionResult<Period> GetPeriods(int id)
+        {
+            var result = _PeriodRepo.GetPeriodById(id);
+            return result is null? NotFound($"Period with id = {id} not found") : Ok(result);
+        }
     }
 }
