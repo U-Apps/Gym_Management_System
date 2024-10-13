@@ -25,7 +25,6 @@ namespace GymManagement.BusinessCore.Configuration
                     .AddScoped<RoleService>()
                     .AddScoped<IBaseServices<Job>, JobService>()
                     .AddScoped<IBaseServices<JobHistory>, JobHistoryService>()
-                    .AddScoped<IBaseServices<Period>, PeriodService>()
                     .AddScoped<IBaseServices<SubscriptionPeriod>, SubscriptionPeriodServices>()
                     .AddScoped<IBaseServices<SubscriptionPayment>, SubscriptionPaymentServices>()
                     .AddScoped<IBaseServices<ExerciseType>, ExerciseTypeService>()
