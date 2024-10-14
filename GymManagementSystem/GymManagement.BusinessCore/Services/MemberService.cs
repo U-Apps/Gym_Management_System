@@ -8,21 +8,21 @@ using System.Linq.Expressions;
 namespace GymManagement.BusinessCore.Services
 {
     public class MemberService(IMemberRepo _memberRepository,
-                               ISubscriptionService _subscriptionService,
-                               ISubscriptionPeriodRepo _subscriptionPeriodRepo)
+                               ISubscriptionService _subscriptionService)
                                : IMemberService
     {
         
-        public MemberResponse AddNewMember(Member member, Subscription subscriptionInfo)
+        public MemberResponse AddNewMember(CreateMemberDTO dto)
         {
+            var member = dto.AsMember();
             // Manipulating Member
             member.RegisterationDate = DateTime.Now;
             member.IsActive = true;
             _memberRepository.AddNewMember(member);
 
             // Adding new subscription for the member
-            subscriptionInfo.MemberId = member.Id;
-            _subscriptionService.AddNewSubscription(subscriptionInfo);
+            _subscriptionService.AddNewSubscription(dto.SubscriptionInfo.AsCreateSubscriptionDTO(member.Id));
+
             return member.ToResponse();
         }
 
@@ -31,7 +31,7 @@ namespace GymManagement.BusinessCore.Services
             return _memberRepository.GetMembers().Select(m => m.ToResponse());
         }
 
-        public MemberResponse GetMemberById(int id)
+        public MemberResponse? GetMemberById(int id)
         {
             return _memberRepository.GetMemberById(id)?.ToResponse();
         }

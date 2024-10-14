@@ -1,4 +1,5 @@
-﻿using GymManagement.BusinessCore.Models;
+﻿using GymManagement.BusinessCore.DTOs;
+using GymManagement.BusinessCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace GymManagement.BusinessCore.Contracts.Services
 {
     public interface ISubscriptionService
     {
-        bool AddNewSubscription(Subscription model);
+        bool AddNewSubscription(CreateSubscriptionDTO info);
     }
 }

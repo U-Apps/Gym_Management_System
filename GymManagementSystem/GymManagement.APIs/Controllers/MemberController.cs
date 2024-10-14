@@ -1,10 +1,7 @@
-﻿using GymManagement.APIs.DTOs;
-using GymManagement.BusinessCore.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using GymManagement.BusinessCore.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
 using GymManagement.APIs.Authentication;
-using GymManagement.APIs.DTOs.Mappers;
 using GymManagement.BusinessCore.DTOs;
 
 namespace GymManagement.APIs.Controllers
@@ -22,8 +19,7 @@ namespace GymManagement.APIs.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var NewMember = _memberService.AddNewMember(createMemberDTO.AsMember(),
-                createMemberDTO.SubscriptionInfo.AsSubscription());
+            var NewMember = _memberService.AddNewMember(createMemberDTO);
 
             return Created(Url.Link("GetMemberByIdRoute", new {id = NewMember.MemberId}), NewMember);
         }
@@ -54,9 +50,7 @@ namespace GymManagement.APIs.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!_memberService.updateMember(id, updateMemberDTO))
-                return NotFound($"member with id = {id} is no longer exist");
-            return NoContent();
+            return !_memberService.updateMember(id, updateMemberDTO)? NotFound($"member with id = {id} is no longer exist"): NoContent();
         }
 
 

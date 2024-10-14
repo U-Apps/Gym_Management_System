@@ -13,7 +13,7 @@ namespace GymManagement.BusinessCore.DTOs
         public int MemberId { get; init; }
         public string FirstName { get; init; }
         public string SecondName { get; init; }
-        public string ThirdName { get; init; }
+        public string? ThirdName { get; init; }
         public string LastName { get; init; }
         public string? NationalNumber { get; init; }
         public string? PhoneNumber { get; init; }
@@ -44,5 +44,28 @@ namespace GymManagement.BusinessCore.DTOs
             bool? IsActive
       );
 
+    public record CreateMemberDTO
+       (
+            [Required]
+             string FirstName,
+            [Required]
+             string SecondName,
+             string? ThirdName,
+             [Required]
+             string LastName,
+             string? NationalNumber,
 
+            [DataType(DataType.PhoneNumber)]
+            string? PhoneNumber,
+            [DataType(DataType.Date)]
+            DateTime? BirthDate,
+            string? Address,
+            [EmailAddress]
+            string? Email,
+            [Range(1,200)]
+            decimal? MemberWeight,
+            [Required]
+            CreateSubscriptionInfo SubscriptionInfo
+
+       );
 }
