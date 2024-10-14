@@ -79,9 +79,9 @@ namespace GymManagement.APIs.Controllers
         public ActionResult<IEnumerable<ReadUserDTO>> Get()
         {
 
-            var users = _userService.GetAll().Select(user => user.AsDTO(_personService.GetById(user.PersonId)));
+            //var users = _userService.GetAll().Select(user => user.AsDTO(_personService.GetById(user.PersonId)));
 
-            return Ok(users);
+            return Ok();
         }
 
         

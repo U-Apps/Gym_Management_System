@@ -8,8 +8,7 @@ namespace GymManagement.APIs.DTOs
              DateTime PaymentDate,
              decimal PaymentAmount,
 
-            ReadUserDTO CreatedByUser ,
-            ReadSubscriptionDTO Subscription
+            ReadUserDTO CreatedByUser 
 
 
         

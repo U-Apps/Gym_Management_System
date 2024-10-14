@@ -5,8 +5,7 @@ namespace GymManagement.APIs.DTOs
     public record ReadUserDTO 
         (
              string UserName,
-             bool IsActive,
-              ReadPersonDTO Person
+             bool IsActive
 
         );
 

@@ -17,7 +17,7 @@ namespace GymManagement.APIs.DTOs
         public decimal Salary { get; set; }
         public virtual ReadJobDTO CurrentJob { get; set; }
 
-        public ReadPersonDTO person { get; set; }
+        //public ReadPersonDTO person { get; set; }
 
        
        public List<ReadPaymnetsForEmployee> payments { get; set; }
