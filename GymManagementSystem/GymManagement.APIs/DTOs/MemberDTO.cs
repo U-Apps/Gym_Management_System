@@ -8,7 +8,7 @@ namespace GymManagement.APIs.DTOs
              string FirstName,
             [Required]
              string SecondName,
-             string ThirdName,
+             string? ThirdName,
              [Required]
              string LastName,
              string? NationalNumber,
