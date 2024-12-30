@@ -1,5 +1,4 @@
-﻿using GymManagement.APIs.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -10,39 +9,13 @@ namespace GymManagement.APIs.Configuration
     {
         public static IServiceCollection AddAPIsServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddJwtBearerToken(configuration)
-                    .AddSwagger()
-                    .AddCorsServices()
-                    .AddLoginManager();
+            services.AddSwagger()
+                    .AddCorsServices();
 
             return services;
         }
 
-        private static IServiceCollection AddJwtBearerToken(this IServiceCollection services, IConfiguration configuration)
-        {
-            var jwtOptions = configuration.GetSection("JwtOptions").Get<JwtOptions>();
-
-            services.Configure<JwtOptions>(configuration.GetSection("JwtOptions"));
-            services.AddSingleton<JwtOptions>()
-                    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
-                    {
-                        options.SaveToken = true;
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateLifetime = true,
-                            ClockSkew = TimeSpan.Zero,
-                            ValidateIssuer = true,
-                            ValidIssuer = jwtOptions.Issuer,
-                            ValidateAudience = true,
-                            ValidAudience = jwtOptions.Audience,
-                            ValidateIssuerSigningKey = true,
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SigningKey))
-                        };
-                    });
-
-            return services;
-        }
+        
 
         private static IServiceCollection AddSwagger(this IServiceCollection services)
         {
@@ -76,13 +49,6 @@ namespace GymManagement.APIs.Configuration
                             }
                         });
                     });
-
-            return services;
-        }
-
-        private static IServiceCollection AddLoginManager(this IServiceCollection services)
-        {
-            services.AddScoped<LoginManager>();
 
             return services;
         }

@@ -14,12 +14,9 @@ namespace GymManagement.BusinessCore.Models
         public DateTime EndDate { get; set; }
 
         public virtual Member Member { get; set; } = null!;
-        public virtual JobHistory? Coach { get; set; }
-        public virtual JobHistory? CreatedByReceptionist { get; set; } = null!;
         public virtual ExerciseType ExcerciseType { get; set; }
         public virtual Period Period { get; set; } = null!;
         public virtual SubscriptionPeriod SubscriptionPeriod { get; set; } = null!;
-        public virtual SubscriptionPayment? SubscriptionPayment { get; set; }
 
         
     }

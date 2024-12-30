@@ -1,9 +1,5 @@
-﻿using GymManagement.APIs.DTOs;
-using GymManagement.BusinessCore.Models;
+﻿using GymManagement.BusinessCore.Models;
 using Microsoft.AspNetCore.Mvc;
-using GymManagement.BusinessCore.Contracts.Services;
-using Microsoft.AspNetCore.Authorization;
-using GymManagement.APIs.Authentication;
 using GymManagement.BusinessCore.Contracts.Repositories;
 
 namespace GymManagement.APIs.Controllers

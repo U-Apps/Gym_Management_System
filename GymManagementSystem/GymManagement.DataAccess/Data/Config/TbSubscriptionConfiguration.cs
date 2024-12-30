@@ -52,19 +52,6 @@ namespace GymManagement.DataAccess.Data.Config
                 .IsRequired(true)
                 .HasConstraintName("FK_tbSubscriptions_tbMember");
 
-            builder.HasOne(d => d.Coach)
-                .WithMany(p => p.SubscriptionCoaches)
-                .HasForeignKey(d => d.CoachId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired(false)
-                .HasConstraintName("FK_tbSubscriptions_tbJobHistories_Coach");
-
-            builder.HasOne(d => d.CreatedByReceptionist)
-                .WithMany(p => p.SubscriptionCreatedByReceptionists)
-                .HasForeignKey(d => d.CreatedByReceptionistId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired(false)
-                .HasConstraintName("FK_tbSubscriptions_tbJobHistoriesRecep");
 
             builder.HasOne(d => d.ExcerciseType)
                 .WithMany(p => p.Subscriptions)

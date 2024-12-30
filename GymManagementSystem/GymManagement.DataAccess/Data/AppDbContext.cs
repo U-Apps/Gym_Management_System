@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using GymManagement.BusinessCore.Models;
 using GymManagement.DataAccess.Data.Config;
 
 namespace GymManagement.DataAccess.Data
 {
-    public partial class AppDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
+    public partial class AppDbContext : DbContext
     {
         public AppDbContext()
         {
