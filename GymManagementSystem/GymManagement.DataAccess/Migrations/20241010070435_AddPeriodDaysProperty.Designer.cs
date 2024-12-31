@@ -4,6 +4,7 @@ using GymManagement.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManagement.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241010070435_AddPeriodDaysProperty")]
+    partial class AddPeriodDaysProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,28 +121,6 @@ namespace GymManagement.DataAccess.Migrations
                     b.HasKey("ExerciseTypeId");
 
                     b.ToTable("tbExerciseTypes", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ExerciseTypeId = (byte)1,
-                            Name = "تمارين الصدر"
-                        },
-                        new
-                        {
-                            ExerciseTypeId = (byte)2,
-                            Name = "تمارين البطن"
-                        },
-                        new
-                        {
-                            ExerciseTypeId = (byte)3,
-                            Name = "تمارين الذراعين"
-                        },
-                        new
-                        {
-                            ExerciseTypeId = (byte)4,
-                            Name = "تمارين الأرجل"
-                        });
                 });
 
             modelBuilder.Entity("GymManagement.BusinessCore.Models.Job", b =>
@@ -247,43 +228,6 @@ namespace GymManagement.DataAccess.Migrations
                     b.HasKey("PeriodId");
 
                     b.ToTable("tbPeriods", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            PeriodId = (byte)1,
-                            EndTime = new TimeSpan(0, 9, 0, 0, 0),
-                            PeriodName = "الصباحية",
-                            StartTime = new TimeSpan(0, 6, 0, 0, 0)
-                        },
-                        new
-                        {
-                            PeriodId = (byte)2,
-                            EndTime = new TimeSpan(0, 12, 0, 0, 0),
-                            PeriodName = "الصباحية المتأخرة",
-                            StartTime = new TimeSpan(0, 9, 0, 0, 0)
-                        },
-                        new
-                        {
-                            PeriodId = (byte)3,
-                            EndTime = new TimeSpan(0, 15, 0, 0, 0),
-                            PeriodName = "الظهيرة",
-                            StartTime = new TimeSpan(0, 12, 0, 0, 0)
-                        },
-                        new
-                        {
-                            PeriodId = (byte)4,
-                            EndTime = new TimeSpan(0, 18, 0, 0, 0),
-                            PeriodName = "المسائية",
-                            StartTime = new TimeSpan(0, 15, 0, 0, 0)
-                        },
-                        new
-                        {
-                            PeriodId = (byte)5,
-                            EndTime = new TimeSpan(0, 21, 0, 0, 0),
-                            PeriodName = "الليلية",
-                            StartTime = new TimeSpan(0, 18, 0, 0, 0)
-                        });
                 });
 
             modelBuilder.Entity("GymManagement.BusinessCore.Models.Person", b =>
@@ -340,6 +284,7 @@ namespace GymManagement.DataAccess.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ThirdName")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(50)");
@@ -376,7 +321,7 @@ namespace GymManagement.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasColumnName("CoachID");
 
-                    b.Property<int?>("CreatedByReceptionistId")
+                    b.Property<int>("CreatedByReceptionistId")
                         .HasColumnType("int")
                         .HasColumnName("CreatedByReceptionistID");
 
@@ -476,29 +421,6 @@ namespace GymManagement.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbSubsciptionPeriods", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = (byte)1,
-                            Name = "يومي",
-                            PeriodDays = (byte)1,
-                            Price = 1000.00m
-                        },
-                        new
-                        {
-                            Id = (byte)2,
-                            Name = "أسبوعي",
-                            PeriodDays = (byte)7,
-                            Price = 5000.00m
-                        },
-                        new
-                        {
-                            Id = (byte)3,
-                            Name = "شهري",
-                            PeriodDays = (byte)30,
-                            Price = 15000.00m
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -724,6 +646,7 @@ namespace GymManagement.DataAccess.Migrations
                         .WithMany("SubscriptionCreatedByReceptionists")
                         .HasForeignKey("CreatedByReceptionistId")
                         .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
                         .HasConstraintName("FK_tbSubscriptions_tbJobHistoriesRecep");
 
                     b.HasOne("GymManagement.BusinessCore.Models.ExerciseType", "ExcerciseType")

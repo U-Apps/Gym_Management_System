@@ -26,7 +26,7 @@ namespace GymManagement.DataAccess.Data.Config
             builder.Property(e => e.ThirdName)
                 .HasMaxLength(50)
                 .IsUnicode(true)
-                .IsRequired(true);
+                .IsRequired(false);
 
             builder.Property(e => e.LastName)
                 .HasMaxLength(50)

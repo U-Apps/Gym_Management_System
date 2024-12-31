@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace GymManagement.BusinessCore.Models
 {
     public class Period
@@ -10,6 +12,7 @@ namespace GymManagement.BusinessCore.Models
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Subscription> Subscriptions { get; set; }
     }
 }

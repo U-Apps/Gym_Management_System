@@ -1,67 +1,95 @@
 ﻿using GymManagement.BusinessCore.Contracts.Repositories;
 using GymManagement.BusinessCore.Contracts.Services;
+using GymManagement.BusinessCore.DTOs;
+using GymManagement.BusinessCore.DTOs.Mappers;
 using GymManagement.BusinessCore.Models;
 using System.Linq.Expressions;
 
 namespace GymManagement.BusinessCore.Services
 {
-    public class MemberService : IBaseServices<Member>
+    public class MemberService(IMemberRepo _memberRepository,
+                               ISubscriptionService _subscriptionService)
+                               : IMemberService
     {
-        protected readonly IBaseRepository<Member> _Repository;
-        public MemberService(IBaseRepository<Member> repository)
+        
+        public MemberResponse AddNewMember(CreateMemberDTO dto)
         {
-            _Repository = repository;
-        }
-        public int Add(Member model)
-        {
-            _Repository.Add(model);
-            return model.Id;
+            var member = dto.AsMember();
+            // Manipulating Member
+            member.RegisterationDate = DateTime.Now;
+            member.IsActive = true;
+            _memberRepository.AddNewMember(member);
+
+            // Adding new subscription for the member
+            _subscriptionService.AddNewSubscription(dto.SubscriptionInfo.AsCreateSubscriptionDTO(member.Id));
+
+            return member.ToResponse();
         }
 
-        public void AddRange(IEnumerable<Member> model)
+        public IEnumerable<MemberResponse> GetAllMembers()
         {
-            _Repository.AddRange(model);
+            return _memberRepository.GetMembers().Select(m => m.ToResponse());
         }
 
-        public void Delete(Member model)
+        public MemberResponse? GetMemberById(int id)
         {
-            _Repository.Delete(model);            
-        }
-        public void DeleteById(int id)
-        {
-            _Repository.DeleteById(c => c.Id == id);
+            return _memberRepository.GetMemberById(id)?.ToResponse();
         }
 
-        public void DeleteRange(IEnumerable<Member> model)
+        public bool updateMember(int id, UpdateMemberDTO memberInfo)
         {
-            _Repository.DeleteRange(model);
+            var ExsistMember = _memberRepository.GetMemberById(id, track: true);
+
+            if (ExsistMember == null)
+                return false;
+
+            memberInfo.MapUpdatedPropertiesToMember(ref ExsistMember);
+
+            _memberRepository.UpdateMember(ExsistMember);
+
+            return true;
         }
 
-        public Member Find(Expression<Func<Member, bool>> predicate)
-        {
-            return _Repository.Find(predicate);
-        }
+        //public void AddRange(IEnumerable<Member> model)
+        //{
+        //    _memberRepository.AddRange(model);
+        //}
 
-        public IEnumerable<Member> FindAll(Func<Member, bool> predicate)
-        {
-            return _Repository.FindAll(predicate);
-        }
+        //public void Delete(Member model)
+        //{
+        //    _memberRepository.Delete(model);            
+        //}
+        //public void DeleteById(int id)
+        //{
+        //    _memberRepository.DeleteById(c => c.Id == id);
+        //}
 
-        public IEnumerable<Member> GetAll()
-        {
-            return _Repository.GetAll();
-        }
+        //public void DeleteRange(IEnumerable<Member> model)
+        //{
+        //    _memberRepository.DeleteRange(model);
+        //}
 
-        public Member GetById(int id)
-        {
-            return _Repository.GetById(c => c.Id == id);
+        //public Member Find(Expression<Func<Member, bool>> predicate)
+        //{
+        //    return _memberRepository.Find(predicate);
+        //}
 
-        }
+        //public IEnumerable<Member> FindAll(Func<Member, bool> predicate)
+        //{
+        //    return _memberRepository.FindAll(predicate);
+        //}
 
-        public void Update(Member model)
-        {
-            _Repository.Update(model);
-        }
+        //public IEnumerable<Member> GetAll()
+        //{
+        //    return _memberRepository.GetAll();
+        //}
+
+
+
+        //public void Update(Member model)
+        //{
+        //    _memberRepository.Update(model);
+        //}
 
     }
 }

@@ -1,111 +1,71 @@
-﻿using GymManagement.APIs.DTOs;
-using GymManagement.BusinessCore.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using GymManagement.BusinessCore.Contracts.Services;
-using Microsoft.AspNetCore.Authorization;
-using GymManagement.APIs.Authentication;
+using GymManagement.BusinessCore.DTOs;
 
 namespace GymManagement.APIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = (clsSystemRoles.User + "," + clsSystemRoles.Admin))]
-    public class MemberController : ControllerBase
+    //[Authorize(Roles = (clsSystemRoles.User + "," + clsSystemRoles.Admin))]
+    public class MemberController(IMemberService _memberService) : ControllerBase
     {
-        private readonly IBaseServices<Member> _memberService;
-        private readonly IBaseServices<Person> _personService;
-
-
-        public MemberController(IBaseServices<Member> memberService, IBaseServices<Person> personService)
-        {
-            _memberService = memberService;
-            _personService = personService;
-
-        }
-
-
         [HttpPost]
         [Route("[action]")]
 
         public ActionResult CreateMember(CreateMemberDTO createMemberDTO)
         {
-            //var person = new Person()
-            //{
-            //    Name = createMemberDTO.Name,
-            //    NationalNumber = createMemberDTO.Idcard,
-            //    PhoneNumber = createMemberDTO.PhoneNumber,
-            //    Email = createMemberDTO.Email,
-            //    BirthDate = createMemberDTO.BirthDate
-            //};
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            
+            var NewMember = _memberService.AddNewMember(createMemberDTO);
 
-            var member = new Member();
-
-            //member.PersonId = _personService.Add(person);
-            member.MemberWeight = createMemberDTO.MemberWeight;
-            member.IsActive = createMemberDTO.IsActive;
-
-            _memberService.Add(member);
-            return Ok();
+            return Created(Url.Link("GetMemberByIdRoute", new {id = NewMember.MemberId}), NewMember);
         }
-
-        [HttpPut]
-        [Route("[action]")]
-
-        public ActionResult UpdateMember(UpdateMemberDTO updateMemberDTO)
-        {
-            var existingMember = _memberService.GetById(updateMemberDTO.MemberId);
-            if (existingMember == null)
-                return NotFound();
-
-            //var existingPerson = _personService.GetById(existingMember.PersonId);
-
-            //existingPerson.Name = updateMemberDTO.Name;
-            existingMember.PhoneNumber = updateMemberDTO.PhoneNumber;
-            existingMember.BirthDate = updateMemberDTO.BirthDate;
-            existingMember.Email = updateMemberDTO.Email;
-            //_personService.Update(existingPerson);
-
-            //existingMember.Person = existingPerson;
-            existingMember.MemberWeight = updateMemberDTO.MemberWeight;
-            existingMember.IsActive = updateMemberDTO.IsActive;
-
-            _memberService.Update(existingMember);
-            return Ok();
-        }
-
 
         [HttpGet]
         [Route("[action]")]
-        public ActionResult<IEnumerable<ReadMemberDTO>> GetMembers()
+        public ActionResult<IEnumerable<MemberResponse>> GetMembers()
         {
 
-            var members = _memberService.GetAll().Select(member => member.AsDTO());
+            var members = _memberService.GetAllMembers();
 
             return Ok(members);
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
-        public ActionResult<ReadMemberDTO> GetById(int id)
+        [Route("[action]/{id}", Name = "GetMemberByIdRoute")]
+        public ActionResult<MemberResponse> GetMemberById(int id)
         {
-            Member member = _memberService.GetById(id);
-            return member is null ? NotFound() : Ok(member.AsDTO());
+            var member = _memberService.GetMemberById(id);
+            return member is null ? NotFound($"Member with id = {id} is not found") : Ok(member);
         }
 
-        [HttpDelete]
-        [Route("[action]/{id}")]
-        public ActionResult Delete(int id)
+        [HttpPut]
+        [Route("[action]/{id:int}")]
+
+        public ActionResult UpdateMember([FromRoute]int id,[FromBody] UpdateMemberDTO updateMemberDTO)
         {
-            Member member = _memberService.GetById(id);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            if (member is null)
-                return NotFound();
-
-            _memberService.DeleteById(member.Id);
-
-            return Ok();
+            return !_memberService.updateMember(id, updateMemberDTO)? NotFound($"member with id = {id} is no longer exist"): NoContent();
         }
+
+
+
+
+        //[HttpDelete]
+        //[Route("[action]/{id}")]
+        //public ActionResult Delete(int id)
+        //{
+        //    Member member = _memberService.GetById(id);
+
+        //    if (member is null)
+        //        return NotFound();
+
+        //    _memberService.DeleteById(member.Id);
+
+        //    return Ok();
+        //}
     }
 }
