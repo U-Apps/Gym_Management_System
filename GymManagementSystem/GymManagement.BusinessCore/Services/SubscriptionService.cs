@@ -10,7 +10,7 @@ namespace GymManagement.BusinessCore.Services
     public class SubscriptionService(ISubscriptionRepo _subscriptionRepo
                                     ,ISubscriptionPeriodRepo _subscriptionPeriodRepo
                                     ,IPeriodRepo _periodRepo
-                                    ,IExerciseTypeRepo _exerciseTypeRepo)
+                                    ,IBaseRepository<ExerciseType, byte> _exerciseTypeRepo)
                                     : ISubscriptionService
     {
         
@@ -24,7 +24,7 @@ namespace GymManagement.BusinessCore.Services
             if (Period is null)
                 return false;
 
-            var exerciseType = _exerciseTypeRepo.GetTypeById(info.PeriodId);
+            var exerciseType = _exerciseTypeRepo.GetById(info.ExcerciseTypeId);
             if (exerciseType is null)
                 return false;
 

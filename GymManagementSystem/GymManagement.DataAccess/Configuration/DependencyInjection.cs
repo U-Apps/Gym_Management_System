@@ -34,8 +34,7 @@ namespace GymManagement.DataAccess.Configuration
                     .AddScoped<ISubscriptionRepo, SubscriptionRepo>()
                     .AddScoped<IMemberRepo, MemberRepo>()
                     .AddScoped<IPeriodRepo, PeriodRepo>()
-                    .AddScoped<ISubscriptionPeriodRepo, SubscriptionPeriodRepo>()
-                    .AddScoped<IExerciseTypeRepo, ExerciseTypeRepo>();
+                    .AddScoped<ISubscriptionPeriodRepo, SubscriptionPeriodRepo>();
 
             return services;
         }
