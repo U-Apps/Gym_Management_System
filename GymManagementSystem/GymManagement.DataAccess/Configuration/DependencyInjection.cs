@@ -33,7 +33,6 @@ namespace GymManagement.DataAccess.Configuration
             services.AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>))
                     .AddScoped<ISubscriptionRepo, SubscriptionRepo>()
                     .AddScoped<IMemberRepo, MemberRepo>()
-                    .AddScoped<IPeriodRepo, PeriodRepo>()
                     .AddScoped<ISubscriptionPeriodRepo, SubscriptionPeriodRepo>();
 
             return services;
