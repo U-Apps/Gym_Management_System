@@ -30,7 +30,7 @@ namespace GymManagement.DataAccess.Configuration
 
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>))
+            services.AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>))
                     .AddScoped<ISubscriptionRepo, SubscriptionRepo>()
                     .AddScoped<IMemberRepo, MemberRepo>()
                     .AddScoped<IPeriodRepo, PeriodRepo>()

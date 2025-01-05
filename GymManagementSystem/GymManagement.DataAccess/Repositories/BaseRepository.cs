@@ -5,104 +5,43 @@ using System.Linq.Expressions;
 
 namespace GymManagement.DataAccess.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey> where TEntity : class
     {
-        private readonly AppDbContext _context;
+        protected AppDbContext _context;
 
         public BaseRepository(AppDbContext context)
         {
             _context = context;
         }
-        public void Add(T entity)
+
+        public IEnumerable<TEntity> GetAll()
         {
-            _context.Set<T>().Add(entity);
-            
-        }
-        public void AddRange(IEnumerable<T> entities)
-        {
-           _context.AddRange(entities);
+            return _context.Set<TEntity>().ToList();
         }
 
-        public void Delete(T entity)
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            _context.Set<T>().Remove(entity);
-           
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public void DeleteRange(IEnumerable<T> entities)
+        public TEntity? GetById(TKey id)
         {
-            _context.Set<T>().RemoveRange(entities);
-
+            return _context.Set<TEntity>().Find(id);
         }
 
-        public void DeleteById(Func<T, bool> where)
+        public async Task<TEntity?> GetByIdAsync(TKey id)
         {
-            _context.Set<T>().Remove(GetById(where));
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public T Find(Expression<Func<T, bool>> predicate)
-        {
-           return _context.Set<T>().Find(predicate);
-        }
-
-        public IEnumerable<T> FindAll(Func<T, bool> predicate)
-        {
-           return _context.Set<T>().Where(predicate);
-
-        }
-
-        public virtual IEnumerable<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
-        {
-            List<T> list;
-            using (var context = new AppDbContext())
-            {
-                IQueryable<T> dbQuery = context.Set<T>();
-
-                
-                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
-
-                list = dbQuery
-                    .AsNoTracking()
-                    .ToList<T>();
-            }
-            return list; 
-            
-        }
-
-        public T GetById(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties)
-        {
-            T item;
-            using (var context = new AppDbContext())
-            {
-                IQueryable<T> dbQuery = context.Set<T>();
-
-                //Apply eager loading
-                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
-
-                item = dbQuery
-                    .AsNoTracking()
-                    .FirstOrDefault(where); 
-            }
-            return item;
-        }
-
-        public void Update(T entity)
-        {
-            _context.Update(entity);
-         
-            
-        }
-
-        public int SaveChanges()
-        {
-           return _context.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-          _context.Dispose();
-        }
+        //public int SaveChanges()
+        //{
+        //   return _context.SaveChanges();
+        //}
+        
+        //public Task<int> SaveChangesAsync()
+        //{
+        //   return _context.SaveChangesAsync();
+        //}
     }
 }
