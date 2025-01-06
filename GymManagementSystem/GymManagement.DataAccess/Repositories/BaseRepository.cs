@@ -34,11 +34,23 @@ namespace GymManagement.DataAccess.Repositories
             return await _context.Set<TEntity>().FindAsync(id);
         }
 
+        public bool IsExists(Expression<Func<TEntity, bool>> criteria)
+        {
+            return _context.Set<TEntity>().Any(criteria);
+        }
+
+        public async Task<bool> IsExistsAsync(Expression<Func<TEntity, bool>> criteria)
+        {
+            return await _context.Set<TEntity>().AnyAsync(criteria);
+        }
+
+
+
         //public int SaveChanges()
         //{
         //   return _context.SaveChanges();
         //}
-        
+
         //public Task<int> SaveChangesAsync()
         //{
         //   return _context.SaveChangesAsync();

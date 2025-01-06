@@ -9,6 +9,9 @@ namespace GymManagement.BusinessCore.Contracts.Repositories
         Task<TEntity?> GetByIdAsync(TKey id);
         IEnumerable<TEntity> GetAll();
         Task<IEnumerable<TEntity>> GetAllAsync();
+        bool IsExists(Expression<Func<TEntity, bool>> criteria);
+        Task<bool> IsExistsAsync(Expression<Func<TEntity, bool>> criteria);
+
         //int SaveChanges();
         //Task<int> SaveChangesAsync();
     }
