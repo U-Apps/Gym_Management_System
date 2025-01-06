@@ -16,16 +16,14 @@ namespace GymManagement.BusinessCore.Services
         
         public bool AddNewSubscription(CreateSubscriptionDTO info)
         {
+            if (!_periodRepo.IsExists(p => p.PeriodId == info.PeriodId))
+                return false;
+
+            if (!_exerciseTypeRepo.IsExists(e => e.ExerciseTypeId == info.ExcerciseTypeId))
+                return false;
+
             var SubscriptionPeriod = _subscriptionPeriodRepo.GetById(info.SubscriptionPeriodId);
             if (SubscriptionPeriod is null)
-                return false;
-
-            var Period = _periodRepo.GetById(info.PeriodId);
-            if (Period is null)
-                return false;
-
-            var exerciseType = _exerciseTypeRepo.GetById(info.ExcerciseTypeId);
-            if (exerciseType is null)
                 return false;
 
             var subscription = info.AsSubscription();
