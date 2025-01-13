@@ -1,18 +1,22 @@
-﻿using System.Linq.Expressions;
+﻿using GymManagement.BusinessCore.Models;
+using System.Linq.Expressions;
 
 
 namespace GymManagement.BusinessCore.Contracts.Repositories
 {
-    public interface IBaseRepository<TEntity, TKey> where TEntity : class
+    public interface IBaseRepository<TEntity, TKey> where TEntity : Entity<TKey>
     {
-        TEntity? GetById(TKey id);
-        Task<TEntity?> GetByIdAsync(TKey id);
-        IEnumerable<TEntity> GetAll();
-        Task<IEnumerable<TEntity>> GetAllAsync();
+        TEntity? GetById(TKey id, bool track = false);
+        Task<TEntity?> GetByIdAsync(TKey id, bool track = false);
+        List<TEntity> GetAll();
+        Task<List<TEntity>> GetAllAsync();
         bool IsExists(Expression<Func<TEntity, bool>> criteria);
+        bool IsExists(TKey Id);
         Task<bool> IsExistsAsync(Expression<Func<TEntity, bool>> criteria);
-
-        //int SaveChanges();
-        //Task<int> SaveChangesAsync();
+        void Delete(TEntity entity);
+        void Add(TEntity entity);
+        void Update(TEntity entity);
+        int SaveChanges();
+        Task SaveChangesAsync();
     }
 }
