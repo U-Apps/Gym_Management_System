@@ -18,7 +18,8 @@ namespace GymManagement.BusinessCore.Services
             // Manipulating Member
             member.RegisterationDate = DateTime.Now;
             member.IsActive = true;
-            _memberRepository.AddNewMember(member);
+            _memberRepository.Add(member);
+            _memberRepository.SaveChanges();
 
             // Adding new subscription for the member
             _subscriptionService.AddNewSubscription(dto.SubscriptionInfo.AsCreateSubscriptionDTO(member.Id));
@@ -28,24 +29,25 @@ namespace GymManagement.BusinessCore.Services
 
         public IEnumerable<MemberResponse> GetAllMembers()
         {
-            return _memberRepository.GetMembers().Select(m => m.ToResponse());
+            return _memberRepository.GetAll().Select(m => m.ToResponse());
         }
 
         public MemberResponse? GetMemberById(int id)
         {
-            return _memberRepository.GetMemberById(id)?.ToResponse();
+            return _memberRepository.GetById(id)?.ToResponse();
         }
 
         public bool updateMember(int id, UpdateMemberDTO memberInfo)
         {
-            var ExsistMember = _memberRepository.GetMemberById(id, track: true);
+            var ExsistMember = _memberRepository.GetById(id, track: true);
 
             if (ExsistMember == null)
                 return false;
 
             memberInfo.MapUpdatedPropertiesToMember(ref ExsistMember);
 
-            _memberRepository.UpdateMember(ExsistMember);
+            _memberRepository.Update(ExsistMember);
+            _memberRepository.SaveChanges();
 
             return true;
         }
