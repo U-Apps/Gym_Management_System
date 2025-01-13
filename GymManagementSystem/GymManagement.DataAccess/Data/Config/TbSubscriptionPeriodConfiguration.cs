@@ -38,9 +38,9 @@ namespace GymManagement.DataAccess.Data.Config
         {
             return new SubscriptionPeriod[]
             {
-                new SubscriptionPeriod { Id = 1, Name = "يومي", Price = 1000.00m, PeriodDays = 1 },
-                new SubscriptionPeriod { Id = 2, Name = "أسبوعي", Price = 5000.00m, PeriodDays = 7 },
-                new SubscriptionPeriod { Id = 3, Name = "شهري", Price = 15000.00m, PeriodDays = 30 },
+                new SubscriptionPeriod (1,"يومي", 1000.00m, 1   ),
+                new SubscriptionPeriod (2,"أسبوعي", 5000.00m, 7 ),
+                new SubscriptionPeriod (3,"شهري", 15000.00m, 30 ),
             };
         }
     }

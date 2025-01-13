@@ -10,9 +10,9 @@ namespace GymManagement.DataAccess.Data.Config
         {
             builder.ToTable("tbExerciseTypes");
 
-            builder.HasKey(e => e.ExerciseTypeId);
+            builder.HasKey(e => e.Id);
 
-            builder.Property(e => e.ExerciseTypeId)
+            builder.Property(e => e.Id)
                 .UseIdentityColumn(1)
                 .HasColumnType("tinyint")
                 .HasColumnName("ExerciseTypeID");
@@ -29,10 +29,10 @@ namespace GymManagement.DataAccess.Data.Config
         {
             return new ExerciseType[]
             {
-                new ExerciseType { ExerciseTypeId = 1, Name = "تمارين الصدر" },
-                new ExerciseType { ExerciseTypeId = 2, Name = "تمارين البطن" },
-                new ExerciseType { ExerciseTypeId = 3, Name = "تمارين الذراعين" },
-                new ExerciseType { ExerciseTypeId = 4, Name = "تمارين الأرجل" }
+                new ExerciseType (1,"تمارين الصدر"),
+                new ExerciseType (2,"تمارين البطن" ),
+                new ExerciseType (3,"تمارين الذراعين"),
+                new ExerciseType (4,"تمارين الأرجل")
             };
         }
     }
