@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace GymManagement.BusinessCore.Contracts.Repositories
 {
-    public interface IMemberRepo
+    public interface IMemberRepo : IBaseRepository<Member, int>
     {
-        void AddNewMember(Member member);
-        IEnumerable<Member> GetMembers();
-        public Member? GetMemberById(int id, bool track = false);
-        public void UpdateMember(Member member);
-
+        bool IsEmailUniqueAsync(string email);
+        bool IsPhoneNumberUniqueAsync(string phoneNumber);
+        bool AreEmailAndPhoneNumberUniqueAsync(string email, string phoneNumber);
     }
 }

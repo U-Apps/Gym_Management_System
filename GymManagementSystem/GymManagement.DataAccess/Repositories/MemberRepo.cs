@@ -10,35 +10,25 @@ using System.Threading.Tasks;
 
 namespace GymManagement.DataAccess.Repositories
 {
-    class MemberRepo(AppDbContext _appDbContext) : IMemberRepo
+    class MemberRepo : BaseRepository<Member, int>, IMemberRepo
     {
-        public void AddNewMember(Member member)
+        public MemberRepo(AppDbContext context) : base(context)
         {
-            _appDbContext.Set<Member>().Add(member);
-            _appDbContext.SaveChanges();
         }
 
-        public Member? GetMemberById(int id, bool track = false)
+        public bool AreEmailAndPhoneNumberUniqueAsync(string email, string phoneNumber)
         {
-            IQueryable<Member> Query = _appDbContext.Set<Member>();
-
-            if (!track)
-            {
-                Query.AsNoTracking();
-            }
-
-            return Query.FirstOrDefault(m => m.Id == id);
+            return !_context.Set<Member>().Any(m => m.Email == email || m.PhoneNumber == phoneNumber);
         }
 
-        public IEnumerable<Member> GetMembers()
+        public bool IsEmailUniqueAsync(string email)
         {
-            return _appDbContext.Set<Member>().AsNoTracking().ToList();
+            return !_context.Set<Member>().Any(m => m.Email == email);
         }
 
-        public void UpdateMember(Member member)
+        public bool IsPhoneNumberUniqueAsync(string phoneNumber)
         {
-            _appDbContext.Set<Member>().Update(member);
-            _appDbContext.SaveChanges();
+            return !_context.Set<Member>().Any(m => m.PhoneNumber == phoneNumber);
         }
     }
 }

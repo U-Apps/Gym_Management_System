@@ -2,107 +2,97 @@
 using GymManagement.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using GymManagement.BusinessCore.Models;
 
 namespace GymManagement.DataAccess.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey>
+        where TEntity : Entity<TKey>
     {
-        private readonly AppDbContext _context;
+        protected AppDbContext _context;
 
         public BaseRepository(AppDbContext context)
         {
             _context = context;
         }
-        public void Add(T entity)
+
+
+        public virtual List<TEntity> GetAll()
         {
-            _context.Set<T>().Add(entity);
-            
-        }
-        public void AddRange(IEnumerable<T> entities)
-        {
-           _context.AddRange(entities);
+            return _context.Set<TEntity>().AsNoTracking().ToList();
         }
 
-        public void Delete(T entity)
+        public virtual async Task<List<TEntity>> GetAllAsync()
         {
-            _context.Set<T>().Remove(entity);
-           
+            return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
-        public void DeleteRange(IEnumerable<T> entities)
+        public virtual TEntity? GetById(TKey id, bool track = false)
         {
-            _context.Set<T>().RemoveRange(entities);
+            IQueryable<TEntity> Query = _context.Set<TEntity>();
 
-        }
-
-        public void DeleteById(Func<T, bool> where)
-        {
-            _context.Set<T>().Remove(GetById(where));
-        }
-
-        public T Find(Expression<Func<T, bool>> predicate)
-        {
-           return _context.Set<T>().Find(predicate);
-        }
-
-        public IEnumerable<T> FindAll(Func<T, bool> predicate)
-        {
-           return _context.Set<T>().Where(predicate);
-
-        }
-
-        public virtual IEnumerable<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
-        {
-            List<T> list;
-            using (var context = new AppDbContext())
+            if (!track)
             {
-                IQueryable<T> dbQuery = context.Set<T>();
-
-                
-                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
-
-                list = dbQuery
-                    .AsNoTracking()
-                    .ToList<T>();
+                Query.AsNoTracking();
             }
-            return list; 
-            
+
+            return Query.FirstOrDefault(e => e.Id.Equals(id));
         }
 
-        public T GetById(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties)
+        public virtual async Task<TEntity?> GetByIdAsync(TKey id, bool track = false)
         {
-            T item;
-            using (var context = new AppDbContext())
+            IQueryable<TEntity> Query = _context.Set<TEntity>();
+
+            if (!track)
             {
-                IQueryable<T> dbQuery = context.Set<T>();
-
-                //Apply eager loading
-                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
-
-                item = dbQuery
-                    .AsNoTracking()
-                    .FirstOrDefault(where); 
+                Query.AsNoTracking();
             }
-            return item;
+
+            return await Query.FirstOrDefaultAsync(e => e.Id.Equals(id));
         }
 
-        public void Update(T entity)
+        public virtual bool IsExists(Expression<Func<TEntity, bool>> criteria)
         {
-            _context.Update(entity);
-         
-            
+            return _context.Set<TEntity>().Any(criteria);
+        }
+        public virtual bool IsExists(TKey Id)
+        {
+            return IsExists(e => e.Id.Equals(Id));
         }
 
-        public int SaveChanges()
+        public virtual async Task<bool> IsExistsAsync(Expression<Func<TEntity, bool>> criteria)
         {
-           return _context.SaveChanges();
+            return await _context.Set<TEntity>().AnyAsync(criteria);
         }
 
-        public void Dispose()
+        public async virtual Task<bool> IsExistsAsync(TKey Id)
         {
-          _context.Dispose();
+            return await IsExistsAsync(e => e.Id.Equals(Id));
         }
+
+        public virtual void Add(TEntity entity)
+        {
+            _context.Set<TEntity>().Add(entity);
+        }
+
+        public virtual void Delete(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
+        }
+        public virtual void Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Update(entity);
+        }
+
+        public virtual int SaveChanges()
+        {
+            return _context.SaveChanges();
+        }
+
+        public virtual Task SaveChangesAsync()
+        {
+            return _context.SaveChangesAsync();
+        }
+
     }
 }

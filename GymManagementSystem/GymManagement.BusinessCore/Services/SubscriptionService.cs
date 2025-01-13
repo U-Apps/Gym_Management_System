@@ -8,24 +8,22 @@ using GymManagement.BusinessCore.Models;
 namespace GymManagement.BusinessCore.Services
 {
     public class SubscriptionService(ISubscriptionRepo _subscriptionRepo
-                                    ,ISubscriptionPeriodRepo _subscriptionPeriodRepo
-                                    ,IPeriodRepo _periodRepo
-                                    ,IExerciseTypeRepo _exerciseTypeRepo)
+                                    , IBaseRepository<SubscriptionPeriod, byte> _subscriptionPeriodRepo
+                                    ,IBaseRepository<Period, byte> _periodRepo
+                                    ,IBaseRepository<ExerciseType, byte> _exerciseTypeRepo)
                                     : ISubscriptionService
     {
         
         public bool AddNewSubscription(CreateSubscriptionDTO info)
         {
-            var SubscriptionPeriod = _subscriptionPeriodRepo.GetPeriodById(info.SubscriptionPeriodId);
+            if (!_periodRepo.IsExists(p => p.Id == info.PeriodId))
+                return false;
+
+            if (!_exerciseTypeRepo.IsExists(e => e.Id == info.ExcerciseTypeId))
+                return false;
+
+            var SubscriptionPeriod = _subscriptionPeriodRepo.GetById(info.SubscriptionPeriodId);
             if (SubscriptionPeriod is null)
-                return false;
-
-            var Period = _periodRepo.GetPeriodById(info.PeriodId);
-            if (Period is null)
-                return false;
-
-            var exerciseType = _exerciseTypeRepo.GetTypeById(info.PeriodId);
-            if (exerciseType is null)
                 return false;
 
             var subscription = info.AsSubscription();

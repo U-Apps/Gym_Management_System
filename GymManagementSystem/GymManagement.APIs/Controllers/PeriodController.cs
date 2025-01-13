@@ -7,18 +7,18 @@ namespace GymManagement.APIs.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Roles = clsSystemRoles.Admin)]
-    public class PeriodController(IPeriodRepo _PeriodRepo) : ControllerBase
+    public class PeriodController(IBaseRepository<Period, byte> _PeriodRepo) : ControllerBase
     {
         [HttpGet]
         public IActionResult GetPeriods()
         {
-            return Ok(_PeriodRepo.GetPeriods());
+            return Ok(_PeriodRepo.GetAll());
         }
 
         [HttpGet("{id:int}")]
-        public ActionResult<Period> GetPeriods(int id)
+        public ActionResult<Period> GetPeriods(byte id)
         {
-            var result = _PeriodRepo.GetPeriodById(id);
+            var result = _PeriodRepo.GetById(id);
             return result is null? NotFound($"Period with id = {id} not found") : Ok(result);
         }
     }

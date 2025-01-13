@@ -10,9 +10,9 @@ namespace GymManagement.DataAccess.Data.Config
         {
             builder.ToTable("tbPeriods");
 
-            builder.HasKey(e => e.PeriodId);
+            builder.HasKey(e => e.Id);
 
-            builder.Property(e => e.PeriodId)
+            builder.Property(e => e.Id)
                 .UseIdentityColumn(1)
                 .HasColumnType("tinyint")
                 .HasColumnName("PeriodID");
@@ -37,11 +37,11 @@ namespace GymManagement.DataAccess.Data.Config
         {
             return new Period[]
             {
-                new Period { PeriodId = 1, PeriodName = "الصباحية", StartTime = new TimeSpan(6, 0, 0), EndTime = new TimeSpan(9, 0, 0) },
-                new Period { PeriodId = 2, PeriodName = "الصباحية المتأخرة", StartTime = new TimeSpan(9, 0, 0), EndTime = new TimeSpan(12, 0, 0) },
-                new Period { PeriodId = 3, PeriodName = "الظهيرة", StartTime = new TimeSpan(12, 0, 0), EndTime = new TimeSpan(15, 0, 0) },
-                new Period { PeriodId = 4, PeriodName = "المسائية", StartTime = new TimeSpan(15, 0, 0), EndTime = new TimeSpan(18, 0, 0) },
-                new Period { PeriodId = 5, PeriodName = "الليلية", StartTime = new TimeSpan(18, 0, 0), EndTime = new TimeSpan(21, 0, 0) }
+                new Period (1, "الصباحية", new TimeSpan(6, 0, 0), new TimeSpan(9, 0, 0) ),
+                new Period (2, "الصباحية المتأخرة", new TimeSpan(9, 0, 0), new TimeSpan(12, 0, 0) ),
+                new Period (3, "الظهيرة", new TimeSpan(12, 0, 0), new TimeSpan(15, 0, 0) ),
+                new Period (4, "المسائية", new TimeSpan(15, 0, 0), new TimeSpan(18, 0, 0) ),
+                new Period (5, "الليلية", new TimeSpan(18, 0, 0), new TimeSpan(21, 0, 0) )
             };
         }
     }
